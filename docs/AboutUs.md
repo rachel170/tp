@@ -19,12 +19,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jacob Chia Chu You
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuyouchia.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/chuyouchia)]
+[[portfolio](team/chuyouchia.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
