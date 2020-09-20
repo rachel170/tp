@@ -236,13 +236,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS FASS student who likes to write down lecture notes
+* practices active learning techniques via flash cards
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage and create flashcards faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -252,26 +253,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | add a new card                 |                                                                        |
+| `* * *`  | user                                       | delete a card                  | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a card by keyword         | locate certain cards without having to go through the entire list      |
+| `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
+| `*`      | user with many related cards in the app    | nest the card decks by category| locate a old cards easily when reviewing                               |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FlashNotes` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a card**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list cards
+2.  Flashnotes shows a list of cards
+3.  User requests to delete a specific card in the list
+4.  Flashnotes deletes the card
 
     Use case ends.
 
@@ -283,7 +284,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Flashnotes shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add a card**
+
+**MSS**
+
+1.  User add card
+2.  Flashnotes adds the card
+    Use case ends.
+
+**Extensions**
+
+* 2a. There is a duplicate question.
+    
+    * 2a1. Flashnotes shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Edit a card**
+
+**MSS**
+
+1.  User requests to list cards
+2.  Flashnotes shows a list of cards
+3.  User requests to edit a specific card in the list
+4.  Flashnotes edits the card
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Flashnotes shows an error message.
 
       Use case resumes at step 2.
 
@@ -330,17 +370,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a card
 
-1. Deleting a person while all persons are being shown
+1. Deleting a card while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
