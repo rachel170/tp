@@ -256,7 +256,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new card                 |                                                                        |
 | `* * *`  | user                                       | delete a card                  | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a card by keyword         | locate certain cards without having to go through the entire list      |
-| `* *`    | user                                       | hide old cards                 | minimize chance of someone else seeing them by accident                |
+| `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
 | `*`      | user with many related cards in the app    | nest the card decks by category| locate a old cards easily when reviewing                               |
 
 *{More to be added}*
