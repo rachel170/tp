@@ -105,22 +105,20 @@ Format: `edit INDEX [q/QUESTION] [a/ANSWER]`
 Examples:
 *  `edit 2 a/Lee Kuan Yew` Edits the answer of the 2nd flashcard to be `Lee Kuan Yew`
 
-### Locating persons by name: `find`
+### Finding flashcards: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds flashcards which contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `test` will match `Test`
+* Only full words will be matched e.g. `Art` will not match `Artifact`
+* Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find history` returns `History of WWII` and `History of Cuban war of Independence`
+* `find Business` returns `Business Management`
+* `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
