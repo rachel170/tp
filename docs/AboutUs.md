@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/foongsq.png" width="200px">
 
-[[github](http://github.com/foondsq)]
+[[github](http://github.com/foongsq)]
 [[portfolio](team/foongsq.md)]
 
 * Role: Deliverables and Deadlines
