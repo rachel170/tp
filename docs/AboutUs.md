@@ -39,15 +39,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Deliverables and Deadlines
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Jean Doe
+### Sruthi Saravanan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sruthisarav.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Sruthisarav)]
+[[portfolio](team/sruthisarav.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
 ### James Doe
 
