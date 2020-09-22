@@ -33,28 +33,29 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/foongsq.png" width="200px">
 
-[[github](http://github.com/foondsq)]
+[[github](http://github.com/foongsq)]
 [[portfolio](team/foongsq.md)]
 
 * Role: Deliverables and Deadlines
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Jean Doe
+### Sruthi Saravanan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sruthisarav.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Sruthisarav)]
+[[portfolio](team/sruthisarav.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
-### James Doe
+### Peng Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pengxiangg.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://https://github.com/pengxiangg)]
+[[portfolio](team/pengxiangg.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, 
+integrating various parts of the software to create a whole.
