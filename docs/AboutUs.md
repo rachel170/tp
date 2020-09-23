@@ -52,10 +52,10 @@ integrating various parts of the software to create a whole.
 
 ### Rachel Ho
 
-<img src="images/rachelho.png" width="200px">
+<img src="images/rachel170.png" width="200px">
 
 [[github](http://github.com/rachel170)]
-[[portfolio](team/rachelho.md)]
+[[portfolio](team/rachel170.md)]
 
 * Role: Testing
 * Responsibilities: Ensures the testing of the project is done properly and on time.
