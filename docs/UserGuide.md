@@ -26,9 +26,9 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
    
    * **`add`**`q/What is a question? a/Something that elicits thought.`: create new card
    
-   * **`delete`**`3` : Deletes the 3rd card shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd card shown in the currently displayed list.
    
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all cards.
    
    * **`find`**`question`: Returns all cards with description matching question.
    
@@ -62,7 +62,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a card: `add`
+### Adding a flashcard : `add`
 
 Adds a card to the currently stored notes.
 
@@ -71,13 +71,13 @@ Format: `add n/QUESTION a/ANSWER`
 Examples:
 * `add q/When did Singapore gain independence? a/9th August 1965`
 
-### Listing all persons : `list`
+### Listing all flashcards : `list`
 
 Shows a list of all flashcards.
 
 Format: `list`
 
-### Opening a flashcard: `open`
+### Opening a flashcard : `open`
 
 Shows the answer to the specific flashcard from the flashcard deck.
 
@@ -92,7 +92,7 @@ Examples:
 * `find Macroeconomics` followed by `open 1` opens the 1st flashcard in the results of the find command.
 
 
-### Editing a person : `edit`
+### Editing a flashcard : `edit`
 
 Edits an existing flashcard in the flashcard deck.
 
@@ -105,7 +105,7 @@ Format: `edit INDEX [q/QUESTION] [a/ANSWER]`
 Examples:
 *  `edit 2 a/Lee Kuan Yew` Edits the answer of the 2nd flashcard to be `Lee Kuan Yew`
 
-### Finding flashcards: `find`
+### Finding flashcards : `find`
 
 Finds flashcards which contain any of the given keywords.
 
@@ -121,19 +121,19 @@ Examples:
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a flashcard : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified flashcard from the flashcard deck.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the flashcard at the specified `INDEX`.
+* The index refers to the index number shown in the currently displayed list of flashcards 
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd flashcard from the flashcard deck.
+* `find English` followed by `delete 1` deletes the 1st flashcard shown in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -149,7 +149,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FlashNotes data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Archiving data files `[coming in v2.0]`
 
