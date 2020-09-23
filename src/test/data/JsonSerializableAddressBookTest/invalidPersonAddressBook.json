@@ -1,7 +1,9 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e"
+    "phone": "9482424"
+  }, {
+    "name": "Hans Muster",
+    "phone": "9482424"
   } ]
 }
