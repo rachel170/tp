@@ -14,16 +14,16 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Question;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_QUESTION = "why@";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_QUESTION = "Why?";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -51,26 +51,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+    public void parseQuestion_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseQuestion((String) null));
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+    public void parseQuestion_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseQuestion(INVALID_QUESTION));
     }
 
     @Test
-    public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+    public void parseQuestion_validValueWithoutWhitespace_returnsQuestion() throws Exception {
+        Question expectedQuestion = new Question(VALID_QUESTION);
+        assertEquals(expectedQuestion, ParserUtil.parseQuestion(VALID_QUESTION));
     }
 
     @Test
-    public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    public void parseQuestion_validValueWithWhitespace_returnsTrimmedQuestion() throws Exception {
+        String questionWithWhitespace = WHITESPACE + VALID_QUESTION + WHITESPACE;
+        Question expectedQuestion = new Question(VALID_QUESTION);
+        assertEquals(expectedQuestion, ParserUtil.parseQuestion(questionWithWhitespace));
     }
 
     @Test

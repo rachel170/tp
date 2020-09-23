@@ -1,12 +1,10 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
+    "question": "What can you do today that you were not capable of a year ago?",
     "phone": "94351253",
-    "email": "alice@example.com",
     "tagged": [ "friends" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com"
+    "question": "What can you do today that you were not capable of a year ago?",
+    "phone": "94351253"
   } ]
 }

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Question;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -22,7 +22,7 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
-    private final String name;
+    private final String question;
     private final String phone;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -30,9 +30,9 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("question") String question, @JsonProperty("phone") String phone,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        this.name = name;
+        this.question = question;
         this.phone = phone;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -43,7 +43,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
+        question = source.getQuestion().question;
         phone = source.getPhone().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -61,13 +61,13 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (question == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Question.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!Question.isValidQuestion(question)) {
+            throw new IllegalValueException(Question.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Question modelQuestion = new Question(question);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -78,7 +78,7 @@ class JsonAdaptedPerson {
         final Phone modelPhone = new Phone(phone);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelTags);
+        return new Person(modelQuestion, modelPhone, modelTags);
     }
 
 }
