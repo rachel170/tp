@@ -26,7 +26,7 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
    
    * **`add`**`q/What is a question? a/Something that elicits thought.`: create new card
    
-   * **`delete`**`3` : Deletes the 3rd card shown in the currently displayed list.
+   * **`delete`**`3` : Deletes the 3rd card shown in the current list.
    
    * **`clear`** : Deletes all cards.
    
