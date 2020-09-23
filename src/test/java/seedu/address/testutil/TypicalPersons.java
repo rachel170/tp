@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -32,8 +32,10 @@ public class TypicalPersons {
     public static final Person HOWMUCH = new PersonBuilder().withQuestion("How much").withPhone("9482442").build();
 
     // Manually added
-    public static final Person WHOMEIER = new PersonBuilder().withQuestion("who is meier").withPhone("8482424").build();
-    public static final Person WHATMEIER = new PersonBuilder().withQuestion("what is meier").withPhone("8482131").build();
+    public static final Person WHOMEIER = new PersonBuilder().withQuestion("who is meier")
+            .withPhone("8482424").build();
+    public static final Person WHATMEIER = new PersonBuilder().withQuestion("what is meier")
+            .withPhone("8482131").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withQuestion(VALID_QUESTION_AMY).withPhone(VALID_PHONE_AMY)
