@@ -1,15 +1,14 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import seedu.address.testutil.PersonBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class QuestionContainsKeywordsPredicateTest {
 
@@ -71,9 +70,9 @@ public class QuestionContainsKeywordsPredicateTest {
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Who"));
         assertFalse(predicate.test(new PersonBuilder().withQuestion("Why How").build()));
 
-        // Keywords match phone and address, but does not match question
+        // Keywords match answer and address, but does not match question
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withQuestion("Why").withPhone("12345")
+        assertFalse(predicate.test(new PersonBuilder().withQuestion("Why").withAnswer("12345")
                 .build()));
     }
 }
