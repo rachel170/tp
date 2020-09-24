@@ -20,16 +20,16 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person WHO = new PersonBuilder().withQuestion("Who")
-            .withAnswer("94351253")
+            .withAnswer("me")
             .withTags("friends").build();
     public static final Person WHAT = new PersonBuilder().withQuestion("What")
-            .withAnswer("98765432").withTags("owesMoney", "friends").build();
-    public static final Person WHY = new PersonBuilder().withQuestion("Why").withAnswer("95352563").build();
-    public static final Person HOW = new PersonBuilder().withQuestion("How").withAnswer("87652533")
+            .withAnswer("idk").withTags("owesMoney", "friends").build();
+    public static final Person WHY = new PersonBuilder().withQuestion("Why").withAnswer("because someone has to").build();
+    public static final Person HOW = new PersonBuilder().withQuestion("How").withAnswer("use your hands")
             .withTags("friends").build();
-    public static final Person WHEN = new PersonBuilder().withQuestion("When").withAnswer("9482224").build();
-    public static final Person WHERE = new PersonBuilder().withQuestion("Where").withAnswer("9482427").build();
-    public static final Person HOWMUCH = new PersonBuilder().withQuestion("How much").withAnswer("9482442").build();
+    public static final Person WHEN = new PersonBuilder().withQuestion("When").withAnswer("at 2pm").build();
+    public static final Person WHERE = new PersonBuilder().withQuestion("Where").withAnswer("at home").build();
+    public static final Person HOWMUCH = new PersonBuilder().withQuestion("How much").withAnswer("300 apples").build();
 
     // Manually added
     public static final Person WHOMEIER = new PersonBuilder().withQuestion("who is meier")
