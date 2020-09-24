@@ -24,7 +24,8 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Person WHAT = new PersonBuilder().withQuestion("What")
             .withAnswer("idk").withTags("owesMoney", "friends").build();
-    public static final Person WHY = new PersonBuilder().withQuestion("Why").withAnswer("because someone has to").build();
+    public static final Person WHY = new PersonBuilder().withQuestion("Why")
+            .withAnswer("because someone has to").build();
     public static final Person HOW = new PersonBuilder().withQuestion("How").withAnswer("use your hands")
             .withTags("friends").build();
     public static final Person WHEN = new PersonBuilder().withQuestion("When").withAnswer("at 2pm").build();
