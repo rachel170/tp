@@ -1,9 +1,9 @@
 {
   "persons": [ {
     "question": "invalid question &",
-    "phone": "9482424"
+    "answer": "a"
   }, {
     "question": "valid question",
-    "phone": "9482424"
+    "answer": "valid answer"
   } ]
 }

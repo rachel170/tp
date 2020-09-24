@@ -1,14 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Answer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Question;
 import seedu.address.model.tag.Tag;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

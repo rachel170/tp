@@ -1,15 +1,15 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Answer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Question;
 import seedu.address.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
