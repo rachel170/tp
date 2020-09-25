@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Answer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Question;
 import seedu.address.model.tag.Tag;
 
@@ -18,16 +18,16 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Question("When was the last time you tried something new?"),
-                    new Phone("87438807"), getTagSet("friends")),
+                    new Answer("yesterday"), getTagSet("friends")),
             new Person(new Question("What’s the most sensible thing you’ve ever heard someone say?"),
-                    new Phone("99272758"), getTagSet("colleagues", "friends")),
+                    new Answer("YOLO"), getTagSet("colleagues", "friends")),
             new Person(new Question("What gets you excited about life?"),
-                    new Phone("93210283"), getTagSet("neighbours")),
+                    new Answer("My phone"), getTagSet("neighbours")),
             new Person(new Question("What do you wish you spent more time doing five years ago?"),
-                    new Phone("91031282"), getTagSet("family")),
+                    new Answer("Watching drama"), getTagSet("family")),
             new Person(new Question("Do you ask enough questions or do you settle for what you know?"),
-                    new Phone("92492021"), getTagSet("classmates")),
-            new Person(new Question("Who do you love and what are you doing about it?"), new Phone("92624417"),
+                    new Answer("nope, too lazy"), getTagSet("classmates")),
+            new Person(new Question("Who do you love and what are you doing about it?"), new Answer("Drama XD"),
                     getTagSet("colleagues"))
         };
     }

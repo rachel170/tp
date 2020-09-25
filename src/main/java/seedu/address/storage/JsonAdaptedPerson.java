@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Answer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Question;
 import seedu.address.model.tag.Tag;
 
@@ -23,17 +23,17 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String question;
-    private final String phone;
+    private final String answer;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("question") String question, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.question = question;
-        this.phone = phone;
+        this.answer = answer;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         question = source.getQuestion().question;
-        phone = source.getPhone().value;
+        answer = source.getAnswer().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,16 +70,16 @@ class JsonAdaptedPerson {
         }
         final Question modelQuestion = new Question(question);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (answer == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Answer.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Answer.isValidAnswer(answer)) {
+            throw new IllegalValueException(Answer.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Answer modelAnswer = new Answer(answer);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelQuestion, modelPhone, modelTags);
+        return new Person(modelQuestion, modelAnswer, modelTags);
     }
 
 }

@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -29,15 +29,15 @@ public class PersonTest {
         // null -> returns false
         assertFalse(WHAT.isSamePerson(null));
 
-        // different phone -> returns false
-        Person editedAlice = new PersonBuilder(WHAT).withPhone(VALID_PHONE_BOB).build();
+        // different answer -> returns false
+        Person editedAlice = new PersonBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).build();
         assertFalse(WHAT.isSamePerson(editedAlice));
 
         // different question -> returns false
         editedAlice = new PersonBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).build();
         assertFalse(WHAT.isSamePerson(editedAlice));
 
-        // same question, same phone, different attributes -> returns true
+        // same question, same answer, different attributes -> returns true
         editedAlice = new PersonBuilder(WHAT)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(WHAT.isSamePerson(editedAlice));
@@ -65,8 +65,8 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).build();
         assertFalse(WHAT.equals(editedAlice));
 
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(WHAT).withPhone(VALID_PHONE_BOB).build();
+        // different answer -> returns false
+        editedAlice = new PersonBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).build();
         assertFalse(WHAT.equals(editedAlice));
 
 

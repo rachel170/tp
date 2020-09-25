@@ -17,17 +17,17 @@ public class Person {
 
     // Identity fields
     private final Question question;
-    private final Phone phone;
+    private final Answer answer;
 
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Question question, Phone phone, Set<Tag> tags) {
-        requireAllNonNull(question, phone, tags);
+    public Person(Question question, Answer answer, Set<Tag> tags) {
+        requireAllNonNull(question, answer, tags);
         this.question = question;
-        this.phone = phone;
+        this.answer = answer;
         this.tags.addAll(tags);
     }
 
@@ -35,8 +35,8 @@ public class Person {
         return question;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Answer getAnswer() {
+        return answer;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getQuestion().equals(getQuestion())
-                && (otherPerson.getPhone().equals(getPhone()));
+                && (otherPerson.getAnswer().equals(getAnswer()));
     }
 
     /**
@@ -77,22 +77,22 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getQuestion().equals(getQuestion())
-                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getAnswer().equals(getAnswer())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(question, phone, tags);
+        return Objects.hash(question, answer, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getQuestion())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Answer: ")
+                .append(getAnswer())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

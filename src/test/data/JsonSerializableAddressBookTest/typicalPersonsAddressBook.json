@@ -2,31 +2,31 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "question" : "Who",
-    "phone" : "94351253",
+    "answer" : "me",
     "tagged" : [ "friends" ]
   }, {
     "question" : "What",
-    "phone" : "98765432",
+    "answer" : "idk",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "question" : "Why",
-    "phone" : "95352563",
+    "answer" : "because someone has to",
     "tagged" : [ ]
   }, {
     "question" : "How",
-    "phone" : "87652533",
+    "answer" : "use your hands",
     "tagged" : [ "friends" ]
   }, {
     "question" : "When",
-    "phone" : "9482224",
+    "answer" : "at 2pm",
     "tagged" : [ ]
   }, {
     "question" : "Where",
-    "phone" : "9482427",
+    "answer" : "at home",
     "tagged" : [ ]
   }, {
     "question" : "How much",
-    "phone" : "9482442",
+    "answer" : "300 apples",
     "tagged" : [ ]
   } ]
 }

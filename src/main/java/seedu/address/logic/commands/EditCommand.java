@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -17,8 +17,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Answer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Question;
 import seedu.address.model.tag.Tag;
 
@@ -34,10 +34,10 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_ANSWER + "ANSWER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 ";
+            + PREFIX_ANSWER + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -87,10 +87,10 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Question updatedQuestion = editPersonDescriptor.getQuestion().orElse(personToEdit.getQuestion());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Answer updatedAnswer = editPersonDescriptor.getAnswer().orElse(personToEdit.getAnswer());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedQuestion, updatedPhone, updatedTags);
+        return new Person(updatedQuestion, updatedAnswer, updatedTags);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Question question;
-        private Phone phone;
+        private Answer answer;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setQuestion(toCopy.question);
-            setPhone(toCopy.phone);
+            setAnswer(toCopy.answer);
             setTags(toCopy.tags);
         }
 
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(question, phone, tags);
+            return CollectionUtil.isAnyNonNull(question, answer, tags);
         }
 
         public void setQuestion(Question question) {
@@ -147,12 +147,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(question);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setAnswer(Answer answer) {
+            this.answer = answer;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Answer> getAnswer() {
+            return Optional.ofNullable(answer);
         }
 
         /**
@@ -188,7 +188,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getQuestion().equals(e.getQuestion())
-                    && getPhone().equals(e.getPhone())
+                    && getAnswer().equals(e.getAnswer())
                     && getTags().equals(e.getTags());
         }
     }
