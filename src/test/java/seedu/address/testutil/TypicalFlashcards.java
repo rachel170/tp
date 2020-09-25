@@ -52,7 +52,7 @@ public class TypicalFlashcards {
     private TypicalFlashcards() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical flashcards.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

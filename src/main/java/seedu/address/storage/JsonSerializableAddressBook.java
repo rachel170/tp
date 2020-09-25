@@ -19,16 +19,16 @@ import seedu.address.model.flashcard.Flashcard;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate flashcard(s).";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "Flashcards list contains duplicate flashcard(s).";
 
-    private final List<JsonAdaptedFlashcard> persons = new ArrayList<>();
+    private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given flashcards.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedFlashcard> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards) {
+        this.flashcards.addAll(flashcards);
     }
 
     /**
@@ -37,7 +37,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getFlashcardList().stream().map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
+        flashcards.addAll(source.getFlashcardList().stream()
+                .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,10 +48,10 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedFlashcard jsonAdaptedFlashcard : persons) {
+        for (JsonAdaptedFlashcard jsonAdaptedFlashcard : flashcards) {
             Flashcard flashcard = jsonAdaptedFlashcard.toModelType();
             if (addressBook.hasFlashcard(flashcard)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_FLASHCARD);
             }
             addressBook.addFlashcard(flashcard);
         }

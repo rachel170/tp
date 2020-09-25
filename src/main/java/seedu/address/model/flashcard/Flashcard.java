@@ -49,7 +49,7 @@ public class Flashcard {
 
     /**
      * Returns true if both flashcards have the same question have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two flashcards.
      */
     public boolean isSameFlashcard(Flashcard otherFlashcard) {
         if (otherFlashcard == this) {

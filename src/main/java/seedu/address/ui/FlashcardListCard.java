@@ -38,7 +38,7 @@ public class FlashcardListCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Flashcard} and index to display.
+     * Creates a {@code FlashcardListCard} with the given {@code Flashcard} and index to display.
      */
     public FlashcardListCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);

@@ -163,7 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public FlashcardListPanel getPersonListPanel() {
+    public FlashcardListPanel getFlashcardListPanel() {
         return flashcardListPanel;
     }
 

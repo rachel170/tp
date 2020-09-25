@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.flashcard.Flashcard;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of flashcards.
  */
 public class FlashcardListPanel extends UiPart<Region> {
     private static final String FXML = "FlashcardListPanel.fxml";

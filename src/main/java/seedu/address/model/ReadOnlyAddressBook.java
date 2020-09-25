@@ -9,7 +9,7 @@ import seedu.address.model.flashcard.Flashcard;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
+     * Returns an unmodifiable view of the flashcards list.
      * This list will not contain any duplicate persons.
      */
     ObservableList<Flashcard> getFlashcardList();
