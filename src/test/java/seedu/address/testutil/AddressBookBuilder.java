@@ -24,7 +24,7 @@ public class AddressBookBuilder {
      * Adds a new {@code Flashcard} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Flashcard flashcard) {
-        addressBook.addPerson(flashcard);
+        addressBook.addFlashcard(flashcard);
         return this;
     }
 

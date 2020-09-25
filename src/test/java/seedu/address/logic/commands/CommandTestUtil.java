@@ -93,24 +93,24 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Flashcard> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Flashcard> expectedFilteredList = new ArrayList<>(actualModel.getFilteredFlashcardList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredFlashcardList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the flashcard at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredFlashcardList().size());
 
-        Flashcard flashcard = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Flashcard flashcard = model.getFilteredFlashcardList().get(targetIndex.getZeroBased());
         final String[] splitQuestion = flashcard.getQuestion().question.split("\\s+");
-        model.updateFilteredPersonList(new QuestionContainsKeywordsPredicate(Arrays.asList(splitQuestion[0])));
+        model.updateFilteredFlashcardList(new QuestionContainsKeywordsPredicate(Arrays.asList(splitQuestion[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredFlashcardList().size());
     }
 
 }

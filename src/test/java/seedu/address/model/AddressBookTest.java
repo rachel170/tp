@@ -27,7 +27,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getFlashcardList());
     }
 
     @Test
@@ -55,31 +55,31 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasFlashcard(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(WHAT));
+        assertFalse(addressBook.hasFlashcard(WHAT));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(WHAT);
-        assertTrue(addressBook.hasPerson(WHAT));
+        addressBook.addFlashcard(WHAT);
+        assertTrue(addressBook.hasFlashcard(WHAT));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(WHAT);
+        addressBook.addFlashcard(WHAT);
         Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasFlashcard(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getFlashcardList().remove(0));
     }
 
     /**
@@ -93,7 +93,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Flashcard> getPersonList() {
+        public ObservableList<Flashcard> getFlashcardList() {
             return flashcards;
         }
     }

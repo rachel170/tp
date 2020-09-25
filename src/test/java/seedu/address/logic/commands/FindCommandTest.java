@@ -59,9 +59,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         QuestionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredFlashcardList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredFlashcardList());
     }
 
     @Test
@@ -69,9 +69,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         QuestionContainsKeywordsPredicate predicate = preparePredicate("why what when");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredFlashcardList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(WHAT, WHY, WHEN), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(WHAT, WHY, WHEN), model.getFilteredFlashcardList());
     }
 
     /**

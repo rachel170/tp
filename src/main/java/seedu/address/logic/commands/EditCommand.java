@@ -61,7 +61,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Flashcard> lastShownList = model.getFilteredPersonList();
+        List<Flashcard> lastShownList = model.getFilteredFlashcardList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -70,12 +70,12 @@ public class EditCommand extends Command {
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
         Flashcard editedFlashcard = createEditedPerson(flashcardToEdit, editPersonDescriptor);
 
-        if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasPerson(editedFlashcard)) {
+        if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasFlashcard(editedFlashcard)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(flashcardToEdit, editedFlashcard);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setFlashcard(flashcardToEdit, editedFlashcard);
+        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedFlashcard));
     }
 

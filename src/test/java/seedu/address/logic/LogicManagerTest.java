@@ -80,7 +80,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + QUESTION_DESC_AMY + ANSWER_DESC_AMY;
         Flashcard expectedFlashcard = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedFlashcard);
+        expectedModel.addFlashcard(expectedFlashcard);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

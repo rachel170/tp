@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFlashcards = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFlashcards = new FilteredList<>(this.addressBook.getFlashcardList());
     }
 
     public ModelManager() {
@@ -89,27 +89,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Flashcard flashcard) {
+    public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
-        return addressBook.hasPerson(flashcard);
+        return addressBook.hasFlashcard(flashcard);
     }
 
     @Override
-    public void deletePerson(Flashcard target) {
-        addressBook.removePerson(target);
+    public void deleteFlashcard(Flashcard target) {
+        addressBook.removeFlashcard(target);
     }
 
     @Override
-    public void addPerson(Flashcard flashcard) {
-        addressBook.addPerson(flashcard);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addFlashcard(Flashcard flashcard) {
+        addressBook.addFlashcard(flashcard);
+        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Flashcard target, Flashcard editedFlashcard) {
+    public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
-        addressBook.setPerson(target, editedFlashcard);
+        addressBook.setFlashcard(target, editedFlashcard);
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================
@@ -119,12 +119,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Flashcard> getFilteredPersonList() {
+    public ObservableList<Flashcard> getFilteredFlashcardList() {
         return filteredFlashcards;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Flashcard> predicate) {
+    public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
     }

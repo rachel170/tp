@@ -33,14 +33,14 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Flashcard> lastShownList = model.getFilteredPersonList();
+        List<Flashcard> lastShownList = model.getFilteredFlashcardList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Flashcard flashcardToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(flashcardToDelete);
+        model.deleteFlashcard(flashcardToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, flashcardToDelete));
     }
 
