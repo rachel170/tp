@@ -19,7 +19,7 @@ public class SampleDataUtil {
         return new Flashcard[] {
             new Flashcard(new Question("When was the last time you tried something new?"),
                     new Answer("yesterday"), getTagSet("friends")),
-            new Flashcard(new Question("What’s the most sensible thing you’ve ever heard someone say?"),
+            new Flashcard(new Question("What is the most sensible thing you have ever heard someone say?"),
                     new Answer("YOLO"), getTagSet("colleagues", "friends")),
             new Flashcard(new Question("What gets you excited about life?"),
                     new Answer("My phone"), getTagSet("neighbours")),
@@ -27,8 +27,8 @@ public class SampleDataUtil {
                     new Answer("Watching drama"), getTagSet("family")),
             new Flashcard(new Question("Do you ask enough questions or do you settle for what you know?"),
                     new Answer("nope, too lazy"), getTagSet("classmates")),
-            new Flashcard(new Question("Who do you love and what are you doing about it?"), new Answer("Drama XD"),
-                    getTagSet("colleagues"))
+            new Flashcard(new Question("Who do you love and what are you doing about it?"),
+                    new Answer("Drama XD"), getTagSet("colleagues"))
         };
     }
 
