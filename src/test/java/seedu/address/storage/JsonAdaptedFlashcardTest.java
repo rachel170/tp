@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.WHO;
+import static seedu.address.testutil.TypicalFlashcards.WHO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.flashcard.Answer;
 import seedu.address.model.flashcard.Question;
 
-public class JsonAdaptedPersonTest {
+public class JsonAdaptedFlashcardTest {
     private static final String INVALID_QUESTION = "wh@";
     private static final String INVALID_ANSWER = "a";
     private static final String INVALID_TAG = "#friend";

@@ -4,13 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.flashcard.Answer;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Flashcard objects.
  */
 public class PersonBuilder {
 
@@ -31,16 +31,16 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PersonBuilder with the data of {@code flashcardToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        question = personToCopy.getQuestion();
-        answer = personToCopy.getAnswer();
-        tags = new HashSet<>(personToCopy.getTags());
+    public PersonBuilder(Flashcard flashcardToCopy) {
+        question = flashcardToCopy.getQuestion();
+        answer = flashcardToCopy.getAnswer();
+        tags = new HashSet<>(flashcardToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Question} of the {@code Person} that we are building.
+     * Sets the {@code Question} of the {@code Flashcard} that we are building.
      */
     public PersonBuilder withQuestion(String question) {
         this.question = new Question(question);
@@ -48,7 +48,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Flashcard} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -56,15 +56,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Answer} of the {@code Person} that we are building.
+     * Sets the {@code Answer} of the {@code Flashcard} that we are building.
      */
     public PersonBuilder withAnswer(String answer) {
         this.answer = new Answer(answer);
         return this;
     }
 
-    public Person build() {
-        return new Person(question, answer, tags);
+    public Flashcard build() {
+        return new Flashcard(question, answer, tags);
     }
 
 }

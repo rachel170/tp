@@ -8,29 +8,29 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Flashcard.
  */
-public class PersonUtil {
+public class FlashcardUtil {
 
     /**
      * Returns an add command string for adding the {@code flashcard}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Flashcard flashcard) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(flashcard);
     }
 
     /**
      * Returns the part of command string for the given {@code flashcard}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Flashcard flashcard) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_QUESTION + person.getQuestion().question + " ");
-        sb.append(PREFIX_ANSWER + person.getAnswer().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_QUESTION + flashcard.getQuestion().question + " ");
+        sb.append(PREFIX_ANSWER + flashcard.getAnswer().value + " ");
+        flashcard.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

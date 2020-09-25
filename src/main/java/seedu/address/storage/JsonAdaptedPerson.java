@@ -11,16 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.flashcard.Answer;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Flashcard}.
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Flashcard's %s field is missing!";
 
     private final String question;
     private final String answer;
@@ -40,9 +40,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Flashcard} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Flashcard source) {
         question = source.getQuestion().question;
         answer = source.getAnswer().value;
         tagged.addAll(source.getTags().stream()
@@ -51,11 +51,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted flashcard object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Flashcard toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -79,7 +79,7 @@ class JsonAdaptedPerson {
         final Answer modelAnswer = new Answer(answer);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelQuestion, modelAnswer, modelTags);
+        return new Flashcard(modelQuestion, modelAnswer, modelTags);
     }
 
 }

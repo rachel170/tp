@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.WHAT;
+import static seedu.address.testutil.TypicalFlashcards.BOB;
+import static seedu.address.testutil.TypicalFlashcards.WHAT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import seedu.address.model.flashcard.exceptions.DuplicatePersonException;
 import seedu.address.model.flashcard.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
-public class UniquePersonListTest {
+public class UniqueFlashcardListTest {
 
     private final UniquePersonList uniquePersonList = new UniquePersonList();
 
@@ -41,7 +41,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(WHAT);
-        Person editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(WHAT);
-        Person editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(WHAT, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -142,14 +142,14 @@ public class UniquePersonListTest {
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((List<Person>) null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.setPersons((List<Flashcard>) null));
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniquePersonList.add(WHAT);
-        List<Person> personList = Collections.singletonList(BOB);
-        uniquePersonList.setPersons(personList);
+        List<Flashcard> flashcardList = Collections.singletonList(BOB);
+        uniquePersonList.setPersons(flashcardList);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -157,8 +157,8 @@ public class UniquePersonListTest {
 
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Person> listWithDuplicatePersons = Arrays.asList(WHAT, WHAT);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+        List<Flashcard> listWithDuplicateFlashcards = Arrays.asList(WHAT, WHAT);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateFlashcards));
     }
 
     @Test

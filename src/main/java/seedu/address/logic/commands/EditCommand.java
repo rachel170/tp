@@ -18,7 +18,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.flashcard.Answer;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
 
@@ -39,7 +39,7 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ANSWER + "91234567 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Flashcard: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This flashcard already exists in the address book.";
 
@@ -61,36 +61,36 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Flashcard> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
+        Flashcard editedFlashcard = createEditedPerson(flashcardToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasPerson(editedFlashcard)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(flashcardToEdit, editedFlashcard);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedFlashcard));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Flashcard} with the details of {@code flashcardToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Flashcard createEditedPerson(Flashcard flashcardToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert flashcardToEdit != null;
 
-        Question updatedQuestion = editPersonDescriptor.getQuestion().orElse(personToEdit.getQuestion());
-        Answer updatedAnswer = editPersonDescriptor.getAnswer().orElse(personToEdit.getAnswer());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Question updatedQuestion = editPersonDescriptor.getQuestion().orElse(flashcardToEdit.getQuestion());
+        Answer updatedAnswer = editPersonDescriptor.getAnswer().orElse(flashcardToEdit.getAnswer());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(flashcardToEdit.getTags());
 
-        return new Person(updatedQuestion, updatedAnswer, updatedTags);
+        return new Flashcard(updatedQuestion, updatedAnswer, updatedTags);
     }
 
     @Override

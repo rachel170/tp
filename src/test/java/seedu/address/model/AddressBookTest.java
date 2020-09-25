@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.WHAT;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.WHAT;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -44,11 +44,11 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        // Two flashcards with the same identity fields
+        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(WHAT, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Flashcard> newFlashcards = Arrays.asList(WHAT, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newFlashcards);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -72,7 +72,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(WHAT);
-        Person editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -83,18 +83,18 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose flashcards list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Flashcard> flashcards = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Flashcard> flashcards) {
+            this.flashcards.setAll(flashcards);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Flashcard> getPersonList() {
+            return flashcards;
         }
     }
 

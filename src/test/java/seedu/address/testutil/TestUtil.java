@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 
 /**
  * A utility class for test cases.
@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the flashcard in the {@code model}'s flashcard list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
+    public static Flashcard getFlashcard(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
     }
 }

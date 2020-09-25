@@ -6,19 +6,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.WHAT;
+import static seedu.address.testutil.TypicalFlashcards.BOB;
+import static seedu.address.testutil.TypicalFlashcards.WHAT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-public class PersonTest {
+public class FlashcardTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Flashcard flashcard = new PersonBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> flashcard.getTags().remove(0));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class PersonTest {
         assertFalse(WHAT.isSamePerson(null));
 
         // different answer -> returns false
-        Person editedAlice = new PersonBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).build();
+        Flashcard editedAlice = new PersonBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).build();
         assertFalse(WHAT.isSamePerson(editedAlice));
 
         // different question -> returns false
@@ -46,7 +46,7 @@ public class PersonTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(WHAT).build();
+        Flashcard aliceCopy = new PersonBuilder(WHAT).build();
         assertTrue(WHAT.equals(aliceCopy));
 
         // same object -> returns true
@@ -62,7 +62,7 @@ public class PersonTest {
         assertFalse(WHAT.equals(BOB));
 
         // different question -> returns false
-        Person editedAlice = new PersonBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).build();
+        Flashcard editedAlice = new PersonBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).build();
         assertFalse(WHAT.equals(editedAlice));
 
         // different answer -> returns false

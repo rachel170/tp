@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.flashcard.Answer;
-import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
 
@@ -28,11 +28,11 @@ public class EditPersonDescriptorBuilder {
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code flashcard}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Flashcard flashcard) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setQuestion(person.getQuestion());
-        descriptor.setAnswer(person.getAnswer());
-        descriptor.setTags(person.getTags());
+        descriptor.setQuestion(flashcard.getQuestion());
+        descriptor.setAnswer(flashcard.getAnswer());
+        descriptor.setTags(flashcard.getTags());
     }
 
     /**
