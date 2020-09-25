@@ -102,7 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void addFlashcard(Flashcard flashcard) {
         addressBook.addFlashcard(flashcard);
-        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override

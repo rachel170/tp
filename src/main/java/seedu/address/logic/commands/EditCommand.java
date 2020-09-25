@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -64,7 +64,7 @@ public class EditCommand extends Command {
         List<Flashcard> lastShownList = model.getFilteredFlashcardList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
@@ -75,7 +75,7 @@ public class EditCommand extends Command {
         }
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
-        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedFlashcard));
     }
 
