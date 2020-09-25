@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.exceptions.DuplicateFlashcardException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.FlashcardBuilder;
 
 public class AddressBookTest {
 
@@ -43,9 +43,9 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateFlashcards_throwsDuplicateFlashcardException() {
         // Two flashcards with the same identity fields
-        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Flashcard> newFlashcards = Arrays.asList(WHAT, editedAlice);
         AddressBookStub newData = new AddressBookStub(newFlashcards);
@@ -54,31 +54,31 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasFlashcard_nullFlashcard_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasFlashcard(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasFlashcard_flashcardNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasFlashcard(WHAT));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasFlashcard_flashcardInAddressBook_returnsTrue() {
         addressBook.addFlashcard(WHAT);
         assertTrue(addressBook.hasFlashcard(WHAT));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasFlashcard_flashcardWithSameDetailFieldsInAddressBook_returnsTrue() {
         addressBook.addFlashcard(WHAT);
-        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasFlashcard(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFlashcardList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getFlashcardList().remove(0));
     }
 

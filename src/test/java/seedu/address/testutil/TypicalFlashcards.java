@@ -19,31 +19,31 @@ import seedu.address.model.flashcard.Flashcard;
  */
 public class TypicalFlashcards {
 
-    public static final Flashcard WHO = new PersonBuilder().withQuestion("Who")
+    public static final Flashcard WHO = new FlashcardBuilder().withQuestion("Who")
             .withAnswer("me")
             .withTags("friends").build();
-    public static final Flashcard WHAT = new PersonBuilder().withQuestion("What")
+    public static final Flashcard WHAT = new FlashcardBuilder().withQuestion("What")
             .withAnswer("idk").withTags("owesMoney", "friends").build();
-    public static final Flashcard WHY = new PersonBuilder().withQuestion("Why")
+    public static final Flashcard WHY = new FlashcardBuilder().withQuestion("Why")
             .withAnswer("because someone has to").build();
-    public static final Flashcard HOW = new PersonBuilder().withQuestion("How").withAnswer("use your hands")
+    public static final Flashcard HOW = new FlashcardBuilder().withQuestion("How").withAnswer("use your hands")
             .withTags("friends").build();
-    public static final Flashcard WHEN = new PersonBuilder().withQuestion("When").withAnswer("at 2pm").build();
-    public static final Flashcard WHERE = new PersonBuilder().withQuestion("Where").withAnswer("at home").build();
-    public static final Flashcard HOWMUCH = new PersonBuilder().withQuestion("How much")
+    public static final Flashcard WHEN = new FlashcardBuilder().withQuestion("When").withAnswer("at 2pm").build();
+    public static final Flashcard WHERE = new FlashcardBuilder().withQuestion("Where").withAnswer("at home").build();
+    public static final Flashcard HOW_MUCH = new FlashcardBuilder().withQuestion("How much")
             .withAnswer("300 apples").build();
 
     // Manually added
-    public static final Flashcard WHOMEIER = new PersonBuilder().withQuestion("who is meier")
+    public static final Flashcard WHO_IS_MEIER = new FlashcardBuilder().withQuestion("who is meier")
             .withAnswer("8482424").build();
-    public static final Flashcard WHATMEIER = new PersonBuilder().withQuestion("what is meier")
+    public static final Flashcard WHAT_IS_MEIER = new FlashcardBuilder().withQuestion("what is meier")
             .withAnswer("8482131").build();
 
     // Manually added - Flashcard's details found in {@code CommandTestUtil}
-    public static final Flashcard AMY = new PersonBuilder().withQuestion(VALID_QUESTION_AMY)
+    public static final Flashcard AMY = new FlashcardBuilder().withQuestion(VALID_QUESTION_AMY)
             .withAnswer(VALID_ANSWER_AMY)
             .withTags(VALID_TAG_FRIEND).build();
-    public static final Flashcard BOB = new PersonBuilder().withQuestion(VALID_QUESTION_BOB)
+    public static final Flashcard BOB = new FlashcardBuilder().withQuestion(VALID_QUESTION_BOB)
             .withAnswer(VALID_ANSWER_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
@@ -63,6 +63,6 @@ public class TypicalFlashcards {
     }
 
     public static List<Flashcard> getTypicalFlashcards() {
-        return new ArrayList<>(Arrays.asList(WHO, WHAT, WHY, HOW, WHEN, WHERE, HOWMUCH));
+        return new ArrayList<>(Arrays.asList(WHO, WHAT, WHY, HOW, WHEN, WHERE, HOW_MUCH));
     }
 }

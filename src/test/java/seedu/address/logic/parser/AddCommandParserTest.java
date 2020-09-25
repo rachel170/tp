@@ -28,14 +28,14 @@ import seedu.address.model.flashcard.Answer;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.FlashcardBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Flashcard expectedFlashcard = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Flashcard expectedFlashcard = new FlashcardBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + QUESTION_DESC_BOB + ANSWER_DESC_BOB
@@ -49,12 +49,10 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, QUESTION_DESC_BOB + ANSWER_DESC_AMY + ANSWER_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedFlashcard));
 
-        // multiple addresses - last address accepted
-        assertParseSuccess(parser, QUESTION_DESC_BOB + ANSWER_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedFlashcard));
 
         // multiple tags - all accepted
-        Flashcard expectedFlashcardMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Flashcard expectedFlashcardMultipleTags = new FlashcardBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, QUESTION_DESC_BOB + ANSWER_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedFlashcardMultipleTags));
@@ -63,7 +61,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Flashcard expectedFlashcard = new PersonBuilder(AMY).withTags().build();
+        Flashcard expectedFlashcard = new FlashcardBuilder(AMY).withTags().build();
         assertParseSuccess(parser, QUESTION_DESC_AMY + ANSWER_DESC_AMY,
                 new AddCommand(expectedFlashcard));
     }

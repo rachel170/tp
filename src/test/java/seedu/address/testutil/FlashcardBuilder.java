@@ -12,7 +12,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Flashcard objects.
  */
-public class PersonBuilder {
+public class FlashcardBuilder {
 
     public static final String DEFAULT_QUESTION = "Who am I?";
     public static final String DEFAULT_ANSWER = "85355255";
@@ -22,18 +22,18 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code FlashcardBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public FlashcardBuilder() {
         question = new Question(DEFAULT_QUESTION);
         answer = new Answer(DEFAULT_ANSWER);
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code flashcardToCopy}.
+     * Initializes the FlashcardBuilder with the data of {@code flashcardToCopy}.
      */
-    public PersonBuilder(Flashcard flashcardToCopy) {
+    public FlashcardBuilder(Flashcard flashcardToCopy) {
         question = flashcardToCopy.getQuestion();
         answer = flashcardToCopy.getAnswer();
         tags = new HashSet<>(flashcardToCopy.getTags());
@@ -42,7 +42,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Question} of the {@code Flashcard} that we are building.
      */
-    public PersonBuilder withQuestion(String question) {
+    public FlashcardBuilder withQuestion(String question) {
         this.question = new Question(question);
         return this;
     }
@@ -50,7 +50,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Flashcard} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public FlashcardBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -58,7 +58,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Answer} of the {@code Flashcard} that we are building.
      */
-    public PersonBuilder withAnswer(String answer) {
+    public FlashcardBuilder withAnswer(String answer) {
         this.answer = new Answer(answer);
         return this;
     }

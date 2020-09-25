@@ -73,29 +73,30 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasFlashcard_nullFlashcard_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasFlashcard(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasFlashcard_flashcardNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasFlashcard(WHAT));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasFlashcard_flashcardInAddressBook_returnsTrue() {
         modelManager.addFlashcard(WHAT);
         assertTrue(modelManager.hasFlashcard(WHAT));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFlashcardList().remove(0));
+    public void getFilteredFlashcardList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+                .getFilteredFlashcardList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(WHAT).withPerson(WHO).build();
+        AddressBook addressBook = new AddressBookBuilder().withFlashcard(WHAT).withFlashcard(WHO).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

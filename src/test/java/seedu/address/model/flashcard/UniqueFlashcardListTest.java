@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.flashcard.exceptions.DuplicateFlashcardException;
 import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.FlashcardBuilder;
 
 public class UniqueFlashcardListTest {
 
@@ -41,7 +41,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFlashcardList.add(WHAT);
-        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueFlashcardList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueFlashcardList.add(WHAT);
-        Flashcard editedAlice = new PersonBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueFlashcardList.setFlashcard(WHAT, editedAlice);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();
