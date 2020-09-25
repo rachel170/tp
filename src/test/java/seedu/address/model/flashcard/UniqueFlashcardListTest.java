@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.flashcard.exceptions.DuplicatePersonException;
-import seedu.address.model.flashcard.exceptions.PersonNotFoundException;
+import seedu.address.model.flashcard.exceptions.DuplicateFlashcardException;
+import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueFlashcardListTest {
@@ -54,7 +54,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniqueFlashcardList.add(WHAT);
-        assertThrows(DuplicatePersonException.class, () -> uniqueFlashcardList.add(WHAT));
+        assertThrows(DuplicateFlashcardException.class, () -> uniqueFlashcardList.add(WHAT));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class UniqueFlashcardListTest {
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueFlashcardList.setPerson(WHAT, WHAT));
+        assertThrows(FlashcardNotFoundException.class, () -> uniqueFlashcardList.setPerson(WHAT, WHAT));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class UniqueFlashcardListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueFlashcardList.add(WHAT);
         uniqueFlashcardList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueFlashcardList.setPerson(WHAT, BOB));
+        assertThrows(DuplicateFlashcardException.class, () -> uniqueFlashcardList.setPerson(WHAT, BOB));
     }
 
     @Test
@@ -115,7 +115,7 @@ public class UniqueFlashcardListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueFlashcardList.remove(WHAT));
+        assertThrows(FlashcardNotFoundException.class, () -> uniqueFlashcardList.remove(WHAT));
     }
 
     @Test
@@ -158,7 +158,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Flashcard> listWithDuplicateFlashcards = Arrays.asList(WHAT, WHAT);
-        assertThrows(DuplicatePersonException.class, () -> uniqueFlashcardList
+        assertThrows(DuplicateFlashcardException.class, () -> uniqueFlashcardList
                 .setFlashcards(listWithDuplicateFlashcards));
     }
 

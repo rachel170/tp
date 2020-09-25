@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.flashcard.exceptions.DuplicatePersonException;
-import seedu.address.model.flashcard.exceptions.PersonNotFoundException;
+import seedu.address.model.flashcard.exceptions.DuplicateFlashcardException;
+import seedu.address.model.flashcard.exceptions.FlashcardNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -44,7 +44,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
     public void add(Flashcard toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateFlashcardException();
         }
         internalList.add(toAdd);
     }
@@ -59,11 +59,11 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new FlashcardNotFoundException();
         }
 
         if (!target.isSameFlashcard(editedFlashcard) && contains(editedFlashcard)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateFlashcardException();
         }
 
         internalList.set(index, editedFlashcard);
@@ -76,7 +76,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
     public void remove(Flashcard toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new FlashcardNotFoundException();
         }
     }
 
@@ -92,7 +92,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
     public void setFlashcards(List<Flashcard> flashcards) {
         requireAllNonNull(flashcards);
         if (!flashcardsAreUnique(flashcards)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateFlashcardException();
         }
 
         internalList.setAll(flashcards);
