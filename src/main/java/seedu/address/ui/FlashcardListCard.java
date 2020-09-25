@@ -12,9 +12,9 @@ import seedu.address.model.flashcard.Flashcard;
 /**
  * An UI component that displays information of a {@code Flashcard}.
  */
-public class PersonCard extends UiPart<Region> {
+public class FlashcardListCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "FlashcardListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Flashcard} and index to display.
      */
-    public PersonCard(Flashcard flashcard, int displayedIndex) {
+    public FlashcardListCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
@@ -59,12 +59,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof FlashcardListCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        FlashcardListCard card = (FlashcardListCard) other;
         return id.getText().equals(card.id.getText())
                 && flashcard.equals(card.flashcard);
     }
