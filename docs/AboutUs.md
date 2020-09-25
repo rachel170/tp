@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Jacob Chia Chu You
 
 <img src="images/chuyouchia.png" width="200px">
@@ -59,3 +49,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, 
 integrating various parts of the software to create a whole.
+
+### Rachel Ho
+
+<img src="images/rachel170.png" width="200px">
+
+[[github](http://github.com/rachel170)]
+[[portfolio](team/rachel170.md)]
+
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
