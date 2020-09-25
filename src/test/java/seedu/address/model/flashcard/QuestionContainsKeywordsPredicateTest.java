@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.FlashcardBuilder;
 
 public class QuestionContainsKeywordsPredicateTest {
 
@@ -37,7 +37,7 @@ public class QuestionContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different flashcard -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -46,34 +46,34 @@ public class QuestionContainsKeywordsPredicateTest {
         // One keyword
         QuestionContainsKeywordsPredicate predicate =
                 new QuestionContainsKeywordsPredicate(Collections.singletonList("Why"));
-        assertTrue(predicate.test(new PersonBuilder().withQuestion("Why How").build()));
+        assertTrue(predicate.test(new FlashcardBuilder().withQuestion("Why How").build()));
 
         // Multiple keywords
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Why", "How"));
-        assertTrue(predicate.test(new PersonBuilder().withQuestion("Why How").build()));
+        assertTrue(predicate.test(new FlashcardBuilder().withQuestion("Why How").build()));
 
         // Only one matching keyword
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("How", "Who"));
-        assertTrue(predicate.test(new PersonBuilder().withQuestion("Why Who").build()));
+        assertTrue(predicate.test(new FlashcardBuilder().withQuestion("Why Who").build()));
 
         // Mixed-case keywords
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("wHy", "hOw"));
-        assertTrue(predicate.test(new PersonBuilder().withQuestion("Why How").build()));
+        assertTrue(predicate.test(new FlashcardBuilder().withQuestion("Why How").build()));
     }
 
     @Test
     public void test_questionDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         QuestionContainsKeywordsPredicate predicate = new QuestionContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withQuestion("Why").build()));
+        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why").build()));
 
         // Non-matching keyword
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Who"));
-        assertFalse(predicate.test(new PersonBuilder().withQuestion("Why How").build()));
+        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why How").build()));
 
         // Keywords match answer and address, but does not match question
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withQuestion("Why").withAnswer("12345")
+        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why").withAnswer("12345")
                 .build()));
     }
 }

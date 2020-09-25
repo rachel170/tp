@@ -1,5 +1,5 @@
 {
-  "persons": [ {
+  "flashcards": [ {
     "question": "invalid question &",
     "answer": "a"
   }, {

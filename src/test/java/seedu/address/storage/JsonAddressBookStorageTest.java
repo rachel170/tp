@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.WHAT;
-import static seedu.address.testutil.TypicalPersons.WHATMEIER;
-import static seedu.address.testutil.TypicalPersons.WHOMEIER;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFlashcards.WHAT;
+import static seedu.address.testutil.TypicalFlashcards.WHAT_IS_MEIER;
+import static seedu.address.testutil.TypicalFlashcards.WHO_IS_MEIER;
+import static seedu.address.testutil.TypicalFlashcards.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -20,7 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
 public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test",
+            "data", "JsonAddressBookStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -51,13 +52,14 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidFlashcardAddressBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidFlashcardAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidFlashcardAddressBook_throwDataConversionException() {
+        assertThrows(DataConversionException
+                .class, () -> readAddressBook("invalidAndValidFlashcardAddressBook.json"));
     }
 
     @Test
@@ -72,14 +74,14 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(WHOMEIER);
-        original.removePerson(WHAT);
+        original.addFlashcard(WHO_IS_MEIER);
+        original.removeFlashcard(WHAT);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(WHATMEIER);
+        original.addFlashcard(WHAT_IS_MEIER);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));

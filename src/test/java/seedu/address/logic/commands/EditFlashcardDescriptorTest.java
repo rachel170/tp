@@ -10,15 +10,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.EditCommand.EditFlashcardDescriptor;
+import seedu.address.testutil.EditFlashcardDescriptorBuilder;
 
-public class EditPersonDescriptorTest {
+public class EditFlashcardDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditFlashcardDescriptor descriptorWithSameValues = new EditFlashcardDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -34,16 +34,16 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different question -> returns false
-        EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
+        EditFlashcardDescriptor editedAmy = new EditFlashcardDescriptorBuilder(DESC_AMY)
                 .withQuestion(VALID_QUESTION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different answer -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAnswer(VALID_ANSWER_BOB).build();
+        editedAmy = new EditFlashcardDescriptorBuilder(DESC_AMY).withAnswer(VALID_ANSWER_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditFlashcardDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
