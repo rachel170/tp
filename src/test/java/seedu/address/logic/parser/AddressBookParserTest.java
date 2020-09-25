@@ -26,8 +26,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.flashcard.Flashcard;
 import seedu.address.model.flashcard.QuestionContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.FlashcardUtil;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookParserTest {
 
