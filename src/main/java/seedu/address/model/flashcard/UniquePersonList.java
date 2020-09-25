@@ -13,15 +13,15 @@ import seedu.address.model.flashcard.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A flashcard is considered unique by comparing using {@code Flashcard#isSamePerson(Flashcard)}.
- * As such, adding and updating of persons uses Flashcard#isSamePerson(Flashcard) for equality so as to ensure that
+ * A flashcard is considered unique by comparing using {@code Flashcard#isSameFlashcard(Flashcard)}.
+ * As such, adding and updating of persons uses Flashcard#isSameFlashcard(Flashcard) for equality so as to ensure that
  * the flashcard being added or updated is unique in terms of identity in the UniquePersonList.
  * However, the removal of a flashcard uses Flashcard#equals(Object) so
  * as to ensure that the flashcard with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Flashcard#isSamePerson(Flashcard)
+ * @see Flashcard#isSameFlashcard(Flashcard)
  */
 public class UniquePersonList implements Iterable<Flashcard> {
 
@@ -34,7 +34,7 @@ public class UniquePersonList implements Iterable<Flashcard> {
      */
     public boolean contains(Flashcard toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameFlashcard);
     }
 
     /**
@@ -62,7 +62,7 @@ public class UniquePersonList implements Iterable<Flashcard> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedFlashcard) && contains(editedFlashcard)) {
+        if (!target.isSameFlashcard(editedFlashcard) && contains(editedFlashcard)) {
             throw new DuplicatePersonException();
         }
 
@@ -128,7 +128,7 @@ public class UniquePersonList implements Iterable<Flashcard> {
     private boolean personsAreUnique(List<Flashcard> flashcards) {
         for (int i = 0; i < flashcards.size() - 1; i++) {
             for (int j = i + 1; j < flashcards.size(); j++) {
-                if (flashcards.get(i).isSamePerson(flashcards.get(j))) {
+                if (flashcards.get(i).isSameFlashcard(flashcards.get(j))) {
                     return false;
                 }
             }

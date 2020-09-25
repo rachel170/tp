@@ -24,23 +24,23 @@ public class FlashcardTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(WHAT.isSamePerson(WHAT));
+        assertTrue(WHAT.isSameFlashcard(WHAT));
 
         // null -> returns false
-        assertFalse(WHAT.isSamePerson(null));
+        assertFalse(WHAT.isSameFlashcard(null));
 
         // different answer -> returns false
         Flashcard editedAlice = new PersonBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).build();
-        assertFalse(WHAT.isSamePerson(editedAlice));
+        assertFalse(WHAT.isSameFlashcard(editedAlice));
 
         // different question -> returns false
         editedAlice = new PersonBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).build();
-        assertFalse(WHAT.isSamePerson(editedAlice));
+        assertFalse(WHAT.isSameFlashcard(editedAlice));
 
         // same question, same answer, different attributes -> returns true
         editedAlice = new PersonBuilder(WHAT)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(WHAT.isSamePerson(editedAlice));
+        assertTrue(WHAT.isSameFlashcard(editedAlice));
     }
 
     @Test
