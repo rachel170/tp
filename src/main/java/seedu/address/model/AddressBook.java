@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.flashcard.Flashcard;
-import seedu.address.model.flashcard.UniquePersonList;
+import seedu.address.model.flashcard.UniqueFlashcardList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +14,7 @@ import seedu.address.model.flashcard.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueFlashcardList persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueFlashcardList();
     }
 
     public AddressBook() {}
@@ -44,7 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code flashcards} must not contain duplicate flashcards.
      */
     public void setPersons(List<Flashcard> flashcards) {
-        this.persons.setPersons(flashcards);
+        this.persons.setFlashcards(flashcards);
     }
 
     /**
