@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.QuestionContainsKeywordsPredicate;
+import seedu.address.model.flashcard.QuestionContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book which has question matching any of the argument keywords.

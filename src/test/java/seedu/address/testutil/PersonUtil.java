@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.model.flashcard.Person;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,14 +17,14 @@ import seedu.address.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code flashcard}.
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code flashcard}'s details.
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();

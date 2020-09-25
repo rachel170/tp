@@ -15,8 +15,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.QuestionContainsKeywordsPredicate;
+import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.QuestionContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -87,7 +87,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered flashcard list and selected flashcard in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -100,7 +100,7 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the flashcard at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {

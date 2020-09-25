@@ -14,8 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Answer;
-import seedu.address.model.person.Question;
+import seedu.address.model.flashcard.Answer;
+import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {

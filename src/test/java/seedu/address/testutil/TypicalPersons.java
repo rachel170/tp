@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.flashcard.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

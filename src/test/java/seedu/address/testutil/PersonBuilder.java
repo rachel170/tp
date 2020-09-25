@@ -3,9 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Answer;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Question;
+import seedu.address.model.flashcard.Answer;
+import seedu.address.model.flashcard.Person;
+import seedu.address.model.flashcard.Question;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

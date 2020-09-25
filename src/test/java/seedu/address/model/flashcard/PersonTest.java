@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -58,7 +58,7 @@ public class PersonTest {
         // different type -> returns false
         assertFalse(WHAT.equals(5));
 
-        // different person -> returns false
+        // different flashcard -> returns false
         assertFalse(WHAT.equals(BOB));
 
         // different question -> returns false
