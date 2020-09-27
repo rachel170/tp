@@ -1,9 +1,0 @@
-{
-  "persons": [ {
-    "question": "invalid question &",
-    "answer": "a"
-  }, {
-    "question": "valid question",
-    "answer": "valid answer"
-  } ]
-}

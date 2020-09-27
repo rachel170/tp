@@ -1,0 +1,32 @@
+{
+  "_comment": "AddressBook save file which contains the same Flashcard values as in TypicalFlashcards#getTypicalAddressBook()",
+  "flashcards" : [ {
+    "question" : "Who",
+    "answer" : "me",
+    "tagged" : [ "friends" ]
+  }, {
+    "question" : "What",
+    "answer" : "idk",
+    "tagged" : [ "owesMoney", "friends" ]
+  }, {
+    "question" : "Why",
+    "answer" : "because someone has to",
+    "tagged" : [ ]
+  }, {
+    "question" : "How",
+    "answer" : "use your hands",
+    "tagged" : [ "friends" ]
+  }, {
+    "question" : "When",
+    "answer" : "at 2pm",
+    "tagged" : [ ]
+  }, {
+    "question" : "Where",
+    "answer" : "at home",
+    "tagged" : [ ]
+  }, {
+    "question" : "How much",
+    "answer" : "300 apples",
+    "tagged" : [ ]
+  } ]
+}
