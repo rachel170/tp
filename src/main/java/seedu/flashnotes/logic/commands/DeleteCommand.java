@@ -11,7 +11,7 @@ import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
- * Deletes a flashcard identified using it's displayed index from the flashnotes book.
+ * Deletes a flashcard identified using it's displayed index from the flashnotes.
  */
 public class DeleteCommand extends Command {
 

@@ -14,7 +14,7 @@ import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
- * Represents the in-memory model of the flashnotes book data.
+ * Represents the in-memory model of the flashnotes data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -30,7 +30,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(flashNotes, userPrefs);
 
-        logger.fine("Initializing with flashnotes book: " + flashNotes + " and user prefs " + userPrefs);
+        logger.fine("Initializing with flashnotes: " + flashNotes + " and user prefs " + userPrefs);
 
         this.flashNotes = new FlashNotes(flashNotes);
         this.userPrefs = new UserPrefs(userPrefs);

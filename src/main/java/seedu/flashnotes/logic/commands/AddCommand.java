@@ -10,13 +10,13 @@ import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
- * Adds a flashcard to the flashnotes book.
+ * Adds a flashcard to the flashnotes.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to the flashnotes book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to the flashnotes. "
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes book";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes";
 
     private final Flashcard toAdd;
 
