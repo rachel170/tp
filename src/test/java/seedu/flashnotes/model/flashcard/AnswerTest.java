@@ -27,10 +27,6 @@ public class AnswerTest {
         // invalid answers
         assertFalse(Answer.isValidAnswer("")); // empty string
         assertFalse(Answer.isValidAnswer(" ")); // space only
-        assertFalse(Answer.isValidAnswer("a")); // 1 character
-        assertFalse(Answer.isValidAnswer("b")); // 1 character
-        assertFalse(Answer.isValidAnswer("c")); // 1 character
-        assertFalse(Answer.isValidAnswer("d")); // 1 character
 
         // valid answers
         assertTrue(Answer.isValidAnswer("red"));

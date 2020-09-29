@@ -27,14 +27,12 @@ public class QuestionTest {
         // invalid question
         assertFalse(Question.isValidQuestion("")); // empty string
         assertFalse(Question.isValidQuestion(" ")); // spaces only
-        assertFalse(Question.isValidQuestion("^")); // only non-alphanumeric characters
-        assertFalse(Question.isValidQuestion("Why am I like this*")); // contains non-alphanumeric characters
 
         // valid question
         assertTrue(Question.isValidQuestion("who am I")); // alphabets only
         assertTrue(Question.isValidQuestion("12345")); // numbers only
         assertTrue(Question.isValidQuestion("where is peter the 2nd")); // alphanumeric characters
         assertTrue(Question.isValidQuestion("What is life")); // with capital letters
-        assertTrue(Question.isValidQuestion("What is the definition of macroeconomics?")); // long questions
+        assertTrue(Question.isValidQuestion("What's the definition of macroeconomics?")); // non alphanumeric characters
     }
 }

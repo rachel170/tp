@@ -11,13 +11,13 @@ public class Answer {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Answers should be at least 2 characters long";
+            "Answers should not be blank";
     public final String value;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Answer}.
      *
-     * @param answer A valid answer number.
+     * @param answer A valid answer.
      */
     public Answer(String answer) {
         requireNonNull(answer);
@@ -26,11 +26,10 @@ public class Answer {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid answer.
      */
     public static boolean isValidAnswer(String test) {
-
-        return test.length() >= 2;
+        return !test.isBlank();
     }
 
     @Override
