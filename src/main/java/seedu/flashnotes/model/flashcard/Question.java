@@ -10,13 +10,7 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
 public class Question {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Questions should only contain alphanumeric characters and spaces, and it should not be blank";
-
-    /*
-     * The first character of the flashnotes must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\?\\,\\. ]*";
+            "Questions should not be blank";
 
     public final String question;
 
@@ -32,10 +26,10 @@ public class Question {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid question.
      */
     public static boolean isValidQuestion(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.isBlank();
     }
 
 

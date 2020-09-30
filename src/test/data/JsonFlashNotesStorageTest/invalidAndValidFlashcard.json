@@ -1,9 +1,9 @@
 {
   "flashcards": [ {
-    "question": "Valid Person",
-    "phone": "9482424"
+    "question": "Valid card",
+    "answer": "9482424"
   }, {
-    "question": "Person With Invalid Phone Field",
-    "phone": "948asdf2424"
+    "question": "Card With Invalid answer Field",
+    "answer": ""
   } ]
 }

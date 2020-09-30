@@ -19,8 +19,8 @@ import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_QUESTION = "why@";
-    private static final String INVALID_ANSWER = "a";
+    private static final String INVALID_QUESTION = "";
+    private static final String INVALID_ANSWER = "";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_QUESTION = "Why?";

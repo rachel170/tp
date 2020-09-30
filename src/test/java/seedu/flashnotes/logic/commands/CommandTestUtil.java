@@ -38,8 +38,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + "Why&"; // '&' not allowed in questions
-    public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + "a"; // less than 2 characters not allowed
+    public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // question cannot be blank
+    public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + ""; // answer cannot be blank
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
