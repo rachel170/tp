@@ -18,7 +18,7 @@ import seedu.flashnotes.model.flashcard.Question;
 public class JsonAdaptedFlashcardTest {
     private static final String INVALID_QUESTION = "";
     private static final String INVALID_ANSWER = "";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "";
 
     private static final String VALID_QUESTION = WHO.getQuestion().toString();
     private static final String VALID_ANSWER = WHO.getAnswer().toString();

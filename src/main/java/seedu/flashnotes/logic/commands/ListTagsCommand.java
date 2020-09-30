@@ -34,6 +34,6 @@ public class ListTagsCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ListTagsCommand // instanceof handles nulls
-                && predicate.equals(((ListTagsCommand) other).predicate));  // state check
+                && predicate.equals(((ListTagsCommand) other).predicate)); // state check
     }
 }

@@ -1,15 +1,20 @@
 package seedu.flashnotes.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashnotes.testutil.TypicalFlashcards.*;
-import static seedu.flashnotes.testutil.TypicalFlashcards.WHEN;
+import static seedu.flashnotes.testutil.TypicalFlashcards.HOW;
+import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
+import static seedu.flashnotes.testutil.TypicalFlashcards.WHO;
+import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;

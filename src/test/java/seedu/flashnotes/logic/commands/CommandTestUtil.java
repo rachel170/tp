@@ -40,7 +40,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // question cannot be blank
     public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + ""; // answer cannot be blank
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + ""; // blank tag not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

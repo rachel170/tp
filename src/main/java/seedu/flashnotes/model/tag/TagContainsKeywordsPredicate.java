@@ -10,7 +10,10 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 public class TagContainsKeywordsPredicate implements Predicate<Flashcard> {
     private final List<String> keywords;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) { this.keywords = keywords; }
+    public TagContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
     @Override
     public boolean test(Flashcard flashcard) {
         Set<String> tags = flashcard.getTags().stream()

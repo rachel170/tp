@@ -2,12 +2,13 @@ package seedu.flashnotes.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
+
 import seedu.flashnotes.testutil.FlashcardBuilder;
 
 public class TagContainsKeywordsPredicateTest {
@@ -26,7 +27,7 @@ public class TagContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-       TagContainsKeywordsPredicate firstPredicateCopy =
+        TagContainsKeywordsPredicate firstPredicateCopy =
                 new TagContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 

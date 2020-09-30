@@ -51,6 +51,8 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
-    public String toStringWithSpace() { return tagName;}
+    public String toStringWithSpace() {
+        return tagName;
+    }
 
 }
