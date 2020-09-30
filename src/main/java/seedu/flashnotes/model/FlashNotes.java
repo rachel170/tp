@@ -9,7 +9,7 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.UniqueFlashcardList;
 
 /**
- * Wraps all data at the flashnotes-book level
+ * Wraps all data at the flashnotes level
  * Duplicates are not allowed (by .isSameFlashcard comparison)
  */
 public class FlashNotes implements ReadOnlyFlashNotes {
@@ -59,7 +59,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     //// flashcard-level operations
 
     /**
-     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes.
      */
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
@@ -67,8 +67,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     }
 
     /**
-     * Adds a flashcard to the flashnotes book.
-     * The flashcard must not already exist in the flashnotes book.
+     * Adds a flashcard to the flashnotes.
+     * The flashcard must not already exist in the flashnotes.
      */
     public void addFlashcard(Flashcard card) {
         flashcards.add(card);
@@ -76,9 +76,9 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     /**
      * Replaces the given flashcard {@code target} in the list with {@code editedFlashcard}.
-     * {@code target} must exist in the flashnotes book.
+     * {@code target} must exist in the flashnotes.
      * The flashcard identity of {@code editedFlashcard} must not be the same
-     * as another existing flashcard in the flashnotes book.
+     * as another existing flashcard in the flashnotes.
      */
     public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireNonNull(editedFlashcard);
@@ -88,7 +88,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     /**
      * Removes {@code key} from this {@code FlashNotes}.
-     * {@code key} must exist in the flashnotes book.
+     * {@code key} must exist in the flashnotes.
      */
     public void removeFlashcard(Flashcard key) {
         flashcards.remove(key);

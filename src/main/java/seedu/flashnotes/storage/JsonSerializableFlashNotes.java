@@ -42,7 +42,7 @@ class JsonSerializableFlashNotes {
     }
 
     /**
-     * Converts this flashnotes book into the model's {@code FlashNotes} object.
+     * Converts this flashnotes into the model's {@code FlashNotes} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setFlashNotesFilePath(Paths.get("flashnotes/book/file/path"));
+        userPrefs.setFlashNotesFilePath(Paths.get("flashnotes/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setFlashNotesFilePath(Paths.get("new/flashnotes/book/file/path"));
+        userPrefs.setFlashNotesFilePath(Paths.get("new/flashnotes/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -67,7 +67,7 @@ public class ModelManagerTest {
 
     @Test
     public void setFlashNotesFilePath_validPath_setsFlashNotesFilePath() {
-        Path path = Paths.get("flashnotes/book/file/path");
+        Path path = Paths.get("flashnotes/file/path");
         modelManager.setFlashNotesFilePath(path);
         assertEquals(path, modelManager.getFlashNotesFilePath());
     }

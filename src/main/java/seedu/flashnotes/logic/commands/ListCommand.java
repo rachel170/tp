@@ -6,7 +6,7 @@ import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import seedu.flashnotes.model.Model;
 
 /**
- * Lists all flashcards in the flashnotes book to the user.
+ * Lists all flashcards in the flashnotes to the user.
  */
 public class ListCommand extends Command {
 

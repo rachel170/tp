@@ -7,7 +7,7 @@ import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
 
 /**
- * Finds and lists all flashcards in flashnotes book which has question matching any of the argument keywords.
+ * Finds and lists all flashcards in flashnotes which has question matching any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {

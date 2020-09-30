@@ -23,7 +23,7 @@ import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
 
 /**
- * Edits the details of an existing flashcard in the flashnotes book.
+ * Edits the details of an existing flashcard in the flashnotes.
  */
 public class EditCommand extends Command {
 
@@ -41,7 +41,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_FLASHCARD_SUCCESS = "Edited Flashcard: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes book.";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes.";
 
     private final Index index;
     private final EditFlashcardDescriptor editFlashcardDescriptor;

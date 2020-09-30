@@ -34,7 +34,7 @@ public interface Logic {
     ObservableList<Flashcard> getFilteredFlashcardList();
 
     /**
-     * Returns the user prefs' flashnotes book file path.
+     * Returns the user prefs' flashnotes file path.
      */
     Path getFlashNotesFilePath();
 

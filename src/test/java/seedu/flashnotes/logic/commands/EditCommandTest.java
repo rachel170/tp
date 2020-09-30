@@ -114,7 +114,7 @@ public class EditCommandTest {
     public void execute_duplicateFlashcardFilteredList_failure() {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
-        // edit flashcard in filtered list into a duplicate in flashnotes book
+        // edit flashcard in filtered list into a duplicate in flashnotes
         Flashcard flashcardInList = model.getFlashNotes().getFlashcardList()
                 .get(INDEX_SECOND_FLASHCARD.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
@@ -135,13 +135,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of flashnotes book
+     * but smaller than size of flashnotes
      */
     @Test
     public void execute_invalidFlashcardIndexFilteredList_failure() {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
         Index outOfBoundIndex = INDEX_SECOND_FLASHCARD;
-        // ensures that outOfBoundIndex is still in bounds of flashnotes book list
+        // ensures that outOfBoundIndex is still in bounds of flashnotes list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashNotes().getFlashcardList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,

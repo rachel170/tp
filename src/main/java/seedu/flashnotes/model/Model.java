@@ -35,17 +35,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' flashnotes book file path.
+     * Returns the user prefs' flashnotes file path.
      */
     Path getFlashNotesFilePath();
 
     /**
-     * Sets the user prefs' flashnotes book file path.
+     * Sets the user prefs' flashnotes file path.
      */
     void setFlashNotesFilePath(Path flashNotesFilePath);
 
     /**
-     * Replaces flashnotes book data with the data in {@code flashNotes}.
+     * Replaces flashnotes data with the data in {@code flashNotes}.
      */
     void setFlashNotes(ReadOnlyFlashNotes flashNotes);
 
@@ -53,27 +53,27 @@ public interface Model {
     ReadOnlyFlashNotes getFlashNotes();
 
     /**
-     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes.
      */
     boolean hasFlashcard(Flashcard flashcard);
 
     /**
      * Deletes the given flashcard.
-     * The flashcard must exist in the flashnotes book.
+     * The flashcard must exist in the flashnotes.
      */
     void deleteFlashcard(Flashcard target);
 
     /**
      * Adds the given flashcard.
-     * {@code flashcard} must not already exist in the flashnotes book.
+     * {@code flashcard} must not already exist in the flashnotes.
      */
     void addFlashcard(Flashcard flashcard);
 
     /**
      * Replaces the given flashcard {@code target} with {@code editedFlashcard}.
-     * {@code target} must exist in the flashnotes book.
+     * {@code target} must exist in the flashnotes.
      * The flashcard identity of {@code editedFlashcard} must not be the same
-     * as another existing flashcard in the flashnotes book.
+     * as another existing flashcard in the flashnotes.
      */
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
