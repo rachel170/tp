@@ -6,6 +6,11 @@ import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
+
+/**
+ * Finds and lists all flashcards in flashnotes which has tags matching any of the argument keywords.
+ * Keyword matching is case sensitive.
+ */
 public class ListTagsCommand extends Command {
 
     public static final String COMMAND_WORD = "listTags";

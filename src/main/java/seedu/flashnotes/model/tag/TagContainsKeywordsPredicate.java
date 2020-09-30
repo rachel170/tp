@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 import seedu.flashnotes.model.flashcard.Flashcard;
 
+/**
+ * Tests that a {@code Flashcard}'s {@code Tag} matches any of the keywords given.
+ */
 public class TagContainsKeywordsPredicate implements Predicate<Flashcard> {
     private final List<String> keywords;
 
