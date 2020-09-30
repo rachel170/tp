@@ -1,9 +1,10 @@
 package seedu.flashnotes.model.tag;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-import seedu.flashnotes.commons.util.StringUtil;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 public class TagContainsKeywordsPredicate implements Predicate<Flashcard> {
@@ -12,9 +13,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Flashcard> {
     public TagContainsKeywordsPredicate(List<String> keywords) { this.keywords = keywords; }
     @Override
     public boolean test(Flashcard flashcard) {
-        String test = flashcard.getTags().toString();
+        Set<String> tags = flashcard.getTags().stream()
+                .map(t -> t.toStringWithSpace()).collect(Collectors.toSet());
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(test, keyword));
+                .anyMatch(keyword -> tags.contains(keyword));
     }
 
     @Override
