@@ -71,9 +71,9 @@ public class QuestionContainsKeywordsPredicateTest {
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("Who"));
         assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why How").build()));
 
-        // Keywords match answer and flashnotes, but does not match question
+        // Keywords match answer and tags, but does not match question
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why").withAnswer("12345")
+        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why").withAnswer("12345").withTags("Main")
                 .build()));
     }
 }

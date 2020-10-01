@@ -5,7 +5,6 @@ import static seedu.flashnotes.logic.commands.CommandTestUtil.ANSWER_DESC_AMY;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.ANSWER_DESC_BOB;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.INVALID_ANSWER_DESC;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.INVALID_QUESTION_DESC;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.QUESTION_DESC_AMY;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -71,9 +70,9 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_QUESTION_DESC, Question.MESSAGE_CONSTRAINTS); // invalid question
         assertParseFailure(parser, "1" + INVALID_ANSWER_DESC, Answer.MESSAGE_CONSTRAINTS); // invalid answer
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // valid answer followed by invalid answer. The test case for invalid answer followed by valid answer
+
+        /// valid answer followed by invalid answer. The test case for invalid answer followed by valid answer
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + ANSWER_DESC_BOB + INVALID_ANSWER_DESC, Answer.MESSAGE_CONSTRAINTS);
 

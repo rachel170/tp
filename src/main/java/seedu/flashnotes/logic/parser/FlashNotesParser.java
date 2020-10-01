@@ -15,6 +15,7 @@ import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
 import seedu.flashnotes.logic.commands.ListCommand;
+import seedu.flashnotes.logic.commands.ListTagsCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
@@ -58,6 +59,9 @@ public class FlashNotesParser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case ListTagsCommand.COMMAND_WORD:
+            return new ListTagsCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

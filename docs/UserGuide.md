@@ -32,6 +32,8 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
    
    * **`find`**`question`: Returns all cards with description matching question.
    
+   * **`listTags`**`Singapore`: Returns all cards with the tag 'Singapore'.
+   
    * **`exit`** : Exits the app.
 
 
@@ -120,6 +122,19 @@ Examples:
 * `find Business` returns `Business Management`
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+### Listing flashcards with tag(s) : `listTags`
+
+Lists flashcards with the given tag keywords.
+
+Format: `listTags KEYWORD [MORE_KEYWORDS`
+
+* The search is case-sensitive. e.g. `GET1025` will not match `get1025`
+* only full words will be matched e.g. `GE` will not match `GET1025`
+* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
+
+Examples:
+* `listTags Singapore` return cards with Tags `Singapore`
 
 ### Deleting a flashcard : `delete`
 
