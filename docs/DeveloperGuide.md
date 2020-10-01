@@ -108,8 +108,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 cards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Searching for a flashcard should not take more than 2 seconds.
+5.  The user can directly edit the data file to add or edit flashcards.
+6.  The user can import or export the flashcards by adding/copying a new json file with the same name.
 
 *{More to be added}*
 
