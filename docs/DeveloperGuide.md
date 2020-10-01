@@ -33,7 +33,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a card                  | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a card by keyword         | locate certain cards without having to go through the entire list      |
 | `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
-| `*`      | user with many related cards in the app    | nest the card decks by category| locate a old cards easily when reviewing                               |
+| `*`      | user with many related cards in the app    | nest the card decks by tags    | locate a cards of the same group easily when reviewing                               |
 
 *{More to be added}*
 
@@ -102,6 +102,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Flashnotes shows an error message.
 
       Use case resumes at step 2.
+      
+      
+**Use case: Filtering cards by a certain tag**
+
+**MSS**
+1. User filters all cards using a certain tag.
+2. Flashnotes shows a list of cards that contain the tag.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters a tag that is not found
+
+    * 1a1. Flashnotes returns no cards.
+
+    Use case ends.
 
 *{More to be added}*
 
@@ -140,7 +157,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample flashcards. The window size may not be optimum.
 
 1. Saving window preferences
 
