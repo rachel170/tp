@@ -21,7 +21,7 @@ import seedu.flashnotes.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_QUESTION = "";
     private static final String INVALID_ANSWER = "";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "";
 
     private static final String VALID_QUESTION = "Why?";
     private static final String VALID_ANSWER = "Idk";

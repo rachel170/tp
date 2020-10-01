@@ -95,7 +95,7 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, QUESTION_DESC_BOB + ANSWER_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + QUESTION_DESC_BOB + ANSWER_DESC_BOB

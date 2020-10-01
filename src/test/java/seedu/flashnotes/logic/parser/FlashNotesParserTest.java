@@ -21,9 +21,11 @@ import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
 import seedu.flashnotes.logic.commands.ListCommand;
+import seedu.flashnotes.logic.commands.ListTagsCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
+import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
 import seedu.flashnotes.testutil.FlashcardBuilder;
 import seedu.flashnotes.testutil.FlashcardUtil;
@@ -74,6 +76,14 @@ public class FlashNotesParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new QuestionContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_listTags() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        ListTagsCommand command = (ListTagsCommand) parser.parseCommand(
+                ListTagsCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new ListTagsCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
