@@ -119,7 +119,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Flashcard**: A card with a question and answer, and may contain a tag.
+* **Flashnotes**: The software that stores flashcards.
+* **Tag**: A note to group cards of a certain category together.
 
 --------------------------------------------------------------------------------------------------------------------
 
