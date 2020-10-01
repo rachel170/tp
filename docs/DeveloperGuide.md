@@ -33,7 +33,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a card                  | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a card by keyword         | locate certain cards without having to go through the entire list      |
 | `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
-| `*`      | user with many related cards in the app    | nest the card decks by category| locate a old cards easily when reviewing                               |
+| `*`      | user with many related cards in the app    | nest the card decks by tags    | locate a cards of the same group easily when reviewing                               |
 
 *{More to be added}*
 
@@ -102,21 +102,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Flashnotes shows an error message.
 
       Use case resumes at step 2.
+      
+      
+**Use case: Filtering cards by a certain tag**
+
+**MSS**
+1. User filters all cards using a certain tag.
+2. Flashnotes shows a list of cards that contain the tag.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters a tag that is not found
+
+    * 1a1. Flashnotes returns no cards.
+
+    Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 cards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Searching for a flashcard should not take more than 2 seconds.
+5.  The user can directly edit the data file to add or edit flashcards.
+6.  The user can import or export the flashcards by adding/copying a new json file with the same name.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Flashcard**: A card with a question and answer, and may contain a tag.
+* **Flashnotes**: The software that stores flashcards.
+* **Tag**: A note to group cards of a certain category together.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -135,7 +157,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample flashcards. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -163,10 +185,20 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
+### Finding cards by tag
+1. Finding cards via a specific tag
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Flashnotes have cards containing tag 'Singapore' and 'Malaysia'
+    
+    1. Test case: `listTags Singapore` <br>
+       Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.
+       
+    1. Test case: `listTags singapore` <br>
+       Expected: None of the cards are shown (as the keyword is case sensitive)
+       
+    1. Test case: `listTags Singapore Malaysia` <br>
+       Expected: All cards with the tag 'Singapore' and cards with the tag 'Malaysia' will be shown.
+
 
 1. _{ more test cases …​ }_
