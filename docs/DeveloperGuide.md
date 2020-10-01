@@ -185,10 +185,20 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
+### Finding cards by tag
+1. Finding cards via a specific tag
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Flashnotes have cards containing tag 'Singapore' and 'Malaysia'
+    
+    1. Test case: `listTags Singapore` <br>
+       Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.
+       
+    1. Test case: `listTags singapore` <br>
+       Expected: None of the cards are shown (as the keyword is case sensitive)
+       
+    1. Test case: `listTags Singapore Malaysia` <br>
+       Expected: All cards with the tag 'Singapore' and cards with the tag 'Malaysia' will be shown.
+
 
 1. _{ more test cases …​ }_
