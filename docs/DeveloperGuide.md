@@ -19,7 +19,7 @@ title: Developer Guide
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage and create flashcards faster than a typical mouse/GUI driven app
+**Value proposition**: manage, read and create flashcards faster than a typical mouse/GUI driven app
 
 
 ### User stories
