@@ -1,0 +1,9 @@
+{
+  "flashcards": [ {
+    "question": "Valid card",
+    "answer": "9482424"
+  }, {
+    "question": "Card With Invalid answer Field",
+    "answer": ""
+  } ]
+}
