@@ -127,7 +127,7 @@ Examples:
 
 Lists flashcards with the given tag keywords.
 
-Format: `listTags KEYWORD [MORE_KEYWORDS`
+Format: `listTags KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-sensitive. e.g. `GET1025` will not match `get1025`
 * only full words will be matched e.g. `GE` will not match `GET1025`
