@@ -18,17 +18,16 @@ public class Flashcard {
     // Identity fields
     private final Question question;
     private final Answer answer;
-
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag tag;
 
     /**
      * Every field must be present and not null.
      */
-    public Flashcard(Question question, Answer answer, Set<Tag> tags) {
-        requireAllNonNull(question, answer, tags);
+    public Flashcard(Question question, Answer answer, Tag tag) {
+        requireAllNonNull(question, answer, tag);
         this.question = question;
         this.answer = answer;
-        this.tags.addAll(tags);
+        this.tag = tag;
     }
 
     public Question getQuestion() {
@@ -43,8 +42,8 @@ public class Flashcard {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Tag getTag() {
+        return tag;
     }
 
     /**
@@ -58,7 +57,8 @@ public class Flashcard {
 
         return otherFlashcard != null
                 && otherFlashcard.getQuestion().equals(getQuestion())
-                && (otherFlashcard.getAnswer().equals(getAnswer()));
+                && (otherFlashcard.getAnswer().equals(getAnswer()))
+                && otherFlashcard.getTag().equals(getTag());
     }
 
     /**
@@ -78,13 +78,13 @@ public class Flashcard {
         Flashcard otherFlashcard = (Flashcard) other;
         return otherFlashcard.getQuestion().equals(getQuestion())
                 && otherFlashcard.getAnswer().equals(getAnswer())
-                && otherFlashcard.getTags().equals(getTags());
+                && otherFlashcard.getTag().equals(getTag());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(question, answer, tags);
+        return Objects.hash(question, answer, tag);
     }
 
     @Override
@@ -93,8 +93,8 @@ public class Flashcard {
         builder.append(getQuestion())
                 .append(" Answer: ")
                 .append(getAnswer())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Tag: ")
+                .append(getTag());
         return builder.toString();
     }
 
