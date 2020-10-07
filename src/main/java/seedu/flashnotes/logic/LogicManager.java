@@ -65,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Flashcard> getFlashcardsToReview() {
+        return model.getFlashcardsToReview();
+    }
+
+    @Override
     public Path getFlashNotesFilePath() {
         return model.getFlashNotesFilePath();
     }

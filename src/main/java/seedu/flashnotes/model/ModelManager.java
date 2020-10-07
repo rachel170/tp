@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.flashnotes.commons.core.GuiSettings;
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final FlashNotes flashNotes;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
+    private final FilteredList<Flashcard> flashcardsToReview;
 
     /**
      * Initializes a ModelManager with the given flashNotes and userPrefs.
@@ -35,6 +39,7 @@ public class ModelManager implements Model {
         this.flashNotes = new FlashNotes(flashNotes);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.flashNotes.getFlashcardList());
+        flashcardsToReview = new FilteredList<>(this.flashNotes.getFlashcardList());
     }
 
     public ModelManager() {
@@ -127,6 +132,25 @@ public class ModelManager implements Model {
     public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
+    }
+
+    //=========== Shuffled Flashcard List Operations =============================================================
+    public void shuffleReviewFlashcards() {
+//        System.out.println("BEFORE: " + flashcardsToReview);
+//        ObservableList<? extends Flashcard> flashcardsToReviewList = flashcardsToReview.getSource();
+//        FXCollections.shuffle(flashcardsToReviewList);
+//        System.out.println("After: "+ flashcardsToReview);
+        // apply shuffling algorithm
+        // trim using user preferences
+        // store shuffled result into this.flashcardsToReview
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Flashcard} to review.
+     */
+    @Override
+    public ObservableList<Flashcard> getFlashcardsToReview() {
+        return flashcardsToReview;
     }
 
     @Override

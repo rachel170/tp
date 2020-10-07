@@ -34,6 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReviewWindow reviewWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        reviewWindow = new ReviewWindow(logic, primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -119,7 +122,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getFlashNotesFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -147,6 +150,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the review window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReview() {
+        if (!reviewWindow.isShowing()) {
+            disableCommandBox();
+            reviewWindow.show();
+            reviewWindow.fillInnerParts();
+        } else {
+            reviewWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,7 +177,16 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reviewWindow.hide();
         primaryStage.hide();
+    }
+
+    private void disableCommandBox() {
+        this.commandBox.disable();
+    }
+
+    private void enableCommandBox() {
+        this.commandBox.enable();
     }
 
     public FlashcardListPanel getFlashcardListPanel() {
@@ -180,6 +206,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isStartReview()) {
+                handleReview();
             }
 
             if (commandResult.isExit()) {

@@ -35,6 +35,11 @@ public interface Logic {
     ObservableList<Flashcard> getFilteredFlashcardList();
 
     /**
+     * Returns an unmodifiable view of the flashcards to review.
+     */
+    ObservableList<Flashcard> getFlashcardsToReview();
+
+    /**
      * Returns the user prefs' flashnotes file path.
      */
     Path getFlashNotesFilePath();
