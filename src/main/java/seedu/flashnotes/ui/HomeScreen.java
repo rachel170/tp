@@ -1,10 +1,7 @@
 package seedu.flashnotes.ui;
 
-import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -18,21 +15,17 @@ import seedu.flashnotes.logic.commands.CommandResult;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
-/**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
- */
-public class MainWindow extends UiPart<Stage> {
+import java.util.logging.Logger;
 
-    private static final String FXML = "MainWindow.fxml";
+public class HomeScreen extends UiPart<Stage> {
+    private static final String FXML = "HomeScreen.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
 
-    // Independent Ui parts residing in this Ui container
-    private FlashcardListPanel flashcardListPanel;
+    private DeckCardListPanel deckCardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane flashcardListPanelPlaceholder;
+    private StackPane deckListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -51,10 +44,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+
+    //handle moving from Home Screen to the main window view (card based)
+
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public HomeScreen(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -111,8 +108,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashcardList());
-        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+        deckCardListPanel = new DeckCardListPanel(logic.getFilteredCardDeckList());
+        deckListPanelPlaceholder.getChildren().add(deckCardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -164,8 +161,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public FlashcardListPanel getFlashcardListPanel() {
-        return flashcardListPanel;
+    public DeckCardListPanel getDeckCardListPanel() {
+        return deckCardListPanel;
     }
 
     /**

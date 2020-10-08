@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.flashnotes.model.deck.Deck;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.UniqueFlashcardList;
 
@@ -15,6 +17,7 @@ import seedu.flashnotes.model.flashcard.UniqueFlashcardList;
 public class FlashNotes implements ReadOnlyFlashNotes {
 
     private final UniqueFlashcardList flashcards;
+    private final UniqueDeckList decks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      */
     {
         flashcards = new UniqueFlashcardList();
+        decks = new UniqueDeckList();
     }
 
     public FlashNotes() {}
@@ -94,6 +98,44 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         flashcards.remove(key);
     }
 
+
+    //// Deck-level operations
+
+    /**
+     * Returns true if a deck with the same identity as {@code deck} exists in the flashnotes.
+     */
+    public boolean hasDeck(Deck deck) {
+        requireNonNull(deck);
+        return decks.contains(deck);
+    }
+
+    /**
+     * Adds a deck to the flashnotes.
+     * The deck must not already exist in the flashnotes.
+     */
+    public void addDeck(Deck card) {
+        decks.add(card);
+    }
+
+    /**
+     * Replaces the given deck {@code target} in the list with {@code editedDeck}.
+     * {@code target} must exist in the flashnotes.
+     * The deck identity of {@code editedDeck} must not be the same
+     * as another existing deck in the flashnotes.
+     */
+    public void setDeck(Deck target, Deck editedDeck) {
+        requireNonNull(editedDeck);
+
+        decks.setDeck(target, editedDeck);
+    }
+
+    /**
+     * Removes {@code keyDeck} from this {@code FlashNotes}.
+     * {@code keyDeck} must exist in the flashnotes.
+     */
+    public void removeDeck(Deck keyDeck) {
+        decks.remove(keyDeck);
+    }
     //// util methods
 
     @Override
@@ -109,10 +151,18 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     }
 
     @Override
+    public ObservableList<Deck> getDeckList() {
+        //todo read the tags and update
+        //todo change when we have decklist implementation up
+        return decks.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FlashNotes // instanceof handles nulls
-                && flashcards.equals(((FlashNotes) other).flashcards));
+                && flashcards.equals(((FlashNotes) other).flashcards))
+                && decks.equals(((FlashNotes) other).decks);
     }
 
     @Override

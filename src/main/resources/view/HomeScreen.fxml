@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@DarkTheme.css">
+         <children>
+            <MenuBar stylesheets="@DarkTheme.css">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+               <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+               </padding>
+            </StackPane>
+            <StackPane fx:id="resultDisplayPlaceholder" prefHeight="114.0" prefWidth="445.0" styleClass="pane-with-border">
+               <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+               </padding>
+            </StackPane>
+            <VBox fx:id="deckList" styleClass="pane-with-border">
+               <padding>
+                  <Insets bottom="10" left="10" right="10" top="10" />
+               </padding>
+               <children>
+                  <StackPane fx:id="deckListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <StackPane fx:id="statusbarPlaceholder" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
