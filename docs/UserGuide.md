@@ -55,6 +55,8 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
 </div>
 
+## Main Mode
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -170,6 +172,42 @@ FlashNotes data are saved in the hard disk automatically after any command that 
 
 _{explain the feature here}_
 
+## Review Mode
+
+### Flip a flashcard
+
+Flips the flashcard which is being reviewed so that the user can view the answer to the question.
+
+Format: `flip`
+
+* Flips the flashcard that is being reviewed to reveal the answer.
+
+Examples:
+* `flip` returns `The sea is blue because water absorbs colors in the red part of the light spectrum` 
+and `WW11 took place from 1939 to 1945`.
+
+### Mark a flashcard as correct
+
+Marks the flashcard that is being reviewed as correct and proceeds to show the next flashcard.
+
+Format: `c`
+
+* Marks flashcard as correct before moving on to show the question of the next flashcard.
+
+Examples:
+* `c` returns `Why is the sea blue in color?` and `When did WWII occur?`
+
+### Mark a flashcard as wrong
+
+Marks the flashcard that is being reviewed as wrong and proceeds to show the next flashcard.
+
+Format: `w`
+
+* Marks flashcard as wrong before moving on to show the question of the next flashcard.
+
+Examples:
+* `w` returns `What is macroeconomics?` and `Who is Hitler?`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -181,6 +219,8 @@ _{explain the feature here}_
 
 ## Command summary
 
+### Main Mode
+
 Action | Format, Examples
 --------|------------------
 **Add** | `Format: add q/QUESTION a/ANSWER `
@@ -190,3 +230,11 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+
+### Review Mode
+
+Action | Format
+--------|------------------
+**Flip** | `flip`
+**Correct** | `c`
+**Wrong** | `w`
