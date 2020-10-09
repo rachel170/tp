@@ -41,9 +41,9 @@ public class DeckCard extends UiPart<Region> {
     public DeckCard(Deck cardDeck, int displayedIndex) {
         super(FXML);
         this.cardDeck = cardDeck;
-        this.deckName = new Label(cardDeck.getDeckName());
+        deckName.setText(cardDeck.getDeckName());
         id.setText(displayedIndex + ". ");
-        resultStatistics = new Label(cardDeck.getResultStatistics());
+        resultStatistics.setText(cardDeck.getResultStatistics());
     }
 
     @Override

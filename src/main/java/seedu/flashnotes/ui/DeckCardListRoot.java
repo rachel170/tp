@@ -6,6 +6,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.flashnotes.commons.core.GuiSettings;
@@ -17,8 +18,8 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 import java.util.logging.Logger;
 
-public class HomeScreen extends UiPart<Stage> {
-    private static final String FXML = "HomeScreen.fxml";
+public class DeckCardListRoot extends UiPart<Region> {
+    private static final String FXML = "DeckCardListRoot.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -51,8 +52,8 @@ public class HomeScreen extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public HomeScreen(Stage primaryStage, Logic logic) {
-        super(FXML, primaryStage);
+    public DeckCardListRoot(Stage primaryStage, Logic logic) {
+        super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -61,9 +62,9 @@ public class HomeScreen extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
 
         helpWindow = new HelpWindow();
+        setAccelerators();
     }
 
     public Stage getPrimaryStage() {

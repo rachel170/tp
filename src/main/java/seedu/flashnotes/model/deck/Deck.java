@@ -11,10 +11,10 @@ public class Deck {
     private String deckName;
     private String resultStatistics;
 
-    Deck (String name) {
+    public Deck (String name) {
         requireNonNull(name);
         this.deckName = name;
-        this.resultStatistics = null;
+        this.resultStatistics = "";
     }
 
     public String getDeckName() {

@@ -15,15 +15,15 @@ public class DeckCardListPanel extends UiPart<Region>{
     private final Logger logger = LogsCenter.getLogger(DeckCardListPanel.class);
 
     @FXML
-    private ListView<Deck> flashcardListView;
+    private ListView<Deck> deckCardListView;
 
     /**
      * Creates a {@code DeckCardListPanel} with the given {@code ObservableList}.
      */
     public DeckCardListPanel(ObservableList<Deck> deckList) {
         super(FXML);
-        flashcardListView.setItems(deckList);
-        flashcardListView.setCellFactory(listView -> new DeckCardListViewCell());
+        deckCardListView.setItems(deckList);
+        deckCardListView.setCellFactory(listView -> new DeckCardListViewCell());
     }
 
     /**

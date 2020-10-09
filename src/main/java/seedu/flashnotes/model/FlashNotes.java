@@ -2,13 +2,16 @@ package seedu.flashnotes.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.UniqueFlashcardList;
+import seedu.flashnotes.model.tag.Tag;
 
 /**
  * Wraps all data at the flashnotes level
@@ -52,12 +55,43 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     }
 
     /**
+     * Replaces the contents of the deck list with {@code decks}.
+     * {@code decks} must not contain duplicate decks.
+     */
+    public void setDecks(List<Deck> decks) {
+        this.decks.setDecks(decks);
+    }
+
+    /**
      * Resets the existing data of this {@code FlashNotes} with {@code newData}.
      */
     public void resetData(ReadOnlyFlashNotes newData) {
         requireNonNull(newData);
 
         setFlashcards(newData.getFlashcardList());
+
+
+        //TODO eventually to be changed to read directly from list - PX
+        List<Deck> newDeckData = new ArrayList<>();
+        List<String> uniqueDeckNames = new ArrayList<>();
+        uniqueDeckNames.add("Default");
+        List<String> finalDeckNames = new ArrayList<>();
+        finalDeckNames.add("Default");
+        for (Flashcard card : newData.getFlashcardList()) {
+            Set<Tag> tags = card.getTags();
+            for (Tag tag: tags) {
+                for (String deckName: uniqueDeckNames) {
+                    if (!tag.tagName.equals(deckName)) {
+                        finalDeckNames.add(tag.tagName);
+                    }
+                }
+            }
+        }
+        for (String s : uniqueDeckNames) {
+            Deck newDeck = new Deck(s);
+            newDeckData.add(newDeck);
+        }
+        setDecks(newDeckData);
     }
 
     //// flashcard-level operations
