@@ -75,15 +75,17 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         List<Deck> newDeckData = new ArrayList<>();
         List<String> uniqueDeckNames = new ArrayList<>();
         uniqueDeckNames.add("Default");
-        List<String> finalDeckNames = new ArrayList<>();
-        finalDeckNames.add("Default");
         for (Flashcard card : newData.getFlashcardList()) {
             Set<Tag> tags = card.getTags();
             for (Tag tag: tags) {
+                int size = uniqueDeckNames.size();
                 for (String deckName: uniqueDeckNames) {
                     if (!tag.tagName.equals(deckName)) {
-                        finalDeckNames.add(tag.tagName);
+                        size--;
                     }
+                }
+                if (size == 0) {
+                    uniqueDeckNames.add(tag.tagName);
                 }
             }
         }
@@ -176,7 +178,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     public String toString() {
         //return flashcards.asUnmodifiableObservableList().size() + " flashcards";
         // TODO: refine later
-        return flashcards.asUnmodifiableObservableList().toString();
+        return flashcards.asUnmodifiableObservableList().toString() + decks.asUnmodifiableObservableList().toString();
     }
 
     @Override

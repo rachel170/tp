@@ -172,7 +172,7 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode{
             }
             if (commandResult.isDeck()) {
                 throw new CommandException("Already in the Deck Screen! Navigate back to Home screen first!");
-
+                //rationale is that you need to access the decks from the home screen (to be discussed)
             }
 
             return commandResult;

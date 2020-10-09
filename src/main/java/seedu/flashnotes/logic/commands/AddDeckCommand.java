@@ -47,7 +47,8 @@ public class AddDeckCommand extends Command{
         //todo change the dummy initialisation of flashcards - PX
         Set<Tag> set = new HashSet<>();
         set.add(new Tag(toAdd.getDeckName()));
-        model.addFlashcard(new Flashcard(new Question("dummy qn"), new Answer("dummy answer"), set));
+        model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s",toAdd.getDeckName())),
+                new Answer(String.format("dummy answer in %s",toAdd.getDeckName())), set));
         model.addDeck(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

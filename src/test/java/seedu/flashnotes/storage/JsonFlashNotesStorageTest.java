@@ -2,6 +2,7 @@ package seedu.flashnotes.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT_IS_MEIER;
@@ -76,12 +77,14 @@ public class JsonFlashNotesStorageTest {
         // Modify data, overwrite exiting file, and read back
         original.addFlashcard(WHO_IS_MEIER);
         original.removeFlashcard(WHAT);
+        original = new FlashNotes(original); //todo remove this line when proper deck impl is up - PX
         jsonFlashNotesStorage.saveFlashNotes(original, filePath);
         readBack = jsonFlashNotesStorage.readFlashNotes(filePath).get();
         assertEquals(original, new FlashNotes(readBack));
 
         // Save and read without specifying file path
         original.addFlashcard(WHAT_IS_MEIER);
+        original = new FlashNotes(original); //todo remove this line when proper deck impl is up - PX
         jsonFlashNotesStorage.saveFlashNotes(original); // file path not specified
         readBack = jsonFlashNotesStorage.readFlashNotes().get(); // file path not specified
         assertEquals(original, new FlashNotes(readBack));
