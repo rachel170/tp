@@ -7,6 +7,8 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 
 public class Deck {
+    public static final String MESSAGE_CONSTRAINTS =
+            "DeckName should not be blank";
     // Identity fields
     private String deckName;
     private String resultStatistics;
@@ -33,6 +35,12 @@ public class Deck {
         this.resultStatistics = resultStatistics;
     }
 
+    /**
+     * Returns true if a given string is a valid deck name.
+     */
+    public static boolean isValidDeck(String test) {
+        return !test.isBlank();
+    }
     /**
      * Returns true if both Decks have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two decks.

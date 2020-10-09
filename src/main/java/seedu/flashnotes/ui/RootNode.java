@@ -6,4 +6,6 @@ public interface RootNode {
 
     void fillInnerParts();
     FXMLLoader getFxmlLoader();
+
+    void setFeedbackToUser(String s);
 }

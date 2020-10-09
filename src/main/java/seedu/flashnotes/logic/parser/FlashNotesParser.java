@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddDeckCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.DeleteCommand;
@@ -75,6 +76,9 @@ public class FlashNotesParser {
 
         case HomeCommand.COMMAND_WORD:
             return new HomeCommandParser().parse(arguments);
+
+        case AddDeckCommand.COMMAND_WORD:
+            return new AddDeckCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

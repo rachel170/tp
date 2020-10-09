@@ -122,6 +122,11 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode{
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    @Override
+    public void setFeedbackToUser(String s) {
+        resultDisplay.setFeedbackToUser(s);
+    }
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -174,8 +179,7 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode{
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -196,8 +200,11 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode{
                 primaryStage.show();
 
                 rootNode.fillInnerParts();
+                rootNode.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             }
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

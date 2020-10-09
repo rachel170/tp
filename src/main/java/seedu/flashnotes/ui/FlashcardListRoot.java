@@ -108,6 +108,12 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode{
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+
+    @Override
+    public void setFeedbackToUser(String s) {
+        resultDisplay.setFeedbackToUser(s);
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -162,6 +168,7 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode{
                 primaryStage.show();
 
                 rootNode.fillInnerParts();
+                rootNode.setFeedbackToUser(commandResult.getFeedbackToUser());
             }
             if (commandResult.isDeck()) {
                 throw new CommandException("Already in the Deck Screen! Navigate back to Home screen first!");
