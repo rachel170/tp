@@ -20,7 +20,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private DeckCardListRoot rootNode;
+    private RootNode rootNode;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.

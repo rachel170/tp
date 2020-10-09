@@ -18,7 +18,7 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 import java.util.logging.Logger;
 
-public class FlashcardListRoot extends UiPart<Region> {
+public class FlashcardListRoot extends UiPart<Region> implements RootNode{
     private static final String FXML = "FlashcardListRoot.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -94,7 +94,7 @@ public class FlashcardListRoot extends UiPart<Region> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashcardList());
         cardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 

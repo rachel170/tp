@@ -18,7 +18,7 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 import java.util.logging.Logger;
 
-public class DeckCardListRoot extends UiPart<Region> {
+public class DeckCardListRoot extends UiPart<Region> implements RootNode{
     private static final String FXML = "DeckCardListRoot.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -108,7 +108,7 @@ public class DeckCardListRoot extends UiPart<Region> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
         deckCardListPanel = new DeckCardListPanel(logic.getFilteredCardDeckList());
         deckListPanelPlaceholder.getChildren().add(deckCardListPanel.getRoot());
 
