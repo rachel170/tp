@@ -2,6 +2,7 @@ package seedu.flashnotes.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -151,6 +152,20 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode{
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isHome()) {
+                RootNode rootNode = new DeckCardListRoot(primaryStage, logic);
+
+                Region root = rootNode.getFxmlLoader().getRoot();
+                primaryStage.setScene(new Scene(root));
+                primaryStage.show();
+
+                rootNode.fillInnerParts();
+            }
+            if (commandResult.isDeck()) {
+                throw new CommandException("Already in the Deck Screen! Navigate back to Home screen first!");
+
             }
 
             return commandResult;

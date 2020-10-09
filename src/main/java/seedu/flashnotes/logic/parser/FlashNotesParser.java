@@ -14,6 +14,7 @@ import seedu.flashnotes.logic.commands.EditCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
+import seedu.flashnotes.logic.commands.HomeCommand;
 import seedu.flashnotes.logic.commands.ListCommand;
 import seedu.flashnotes.logic.commands.ListTagsCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
@@ -71,6 +72,9 @@ public class FlashNotesParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case HomeCommand.COMMAND_WORD:
+            return new HomeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

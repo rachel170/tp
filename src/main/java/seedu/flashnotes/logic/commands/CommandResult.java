@@ -46,6 +46,14 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isHome() {
+        return feedbackToUser.startsWith("Back Home.");
+    }
+
+    public boolean isDeck() {
+        return feedbackToUser.startsWith("Inside Deck.");
+    }
+
     @Override
     public String toString() {
         return this.feedbackToUser;

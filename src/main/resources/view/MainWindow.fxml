@@ -10,6 +10,4 @@
   <icons>
     <Image url="@/images/flash_notes_32.png" />
   </icons>
-  <scene>
-  </scene>
 </fx:root>

@@ -6,9 +6,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.logic.Logic;
-import seedu.flashnotes.model.deck.Deck;
 
-import java.io.IOException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,7 +30,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        //initialize the flashcard list root node as the primary scene
+        //initialize the deck list root node as the primary scene
         rootNode = new DeckCardListRoot(primaryStage,logic);
 
         Region root = rootNode.getFxmlLoader().getRoot();
@@ -52,8 +50,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         rootNode.fillInnerParts();
     }
-
-    //TODO switch scenes command
 
     /**
      * Sets the default size based on {@code guiSettings}.

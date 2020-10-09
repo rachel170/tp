@@ -2,6 +2,7 @@ package seedu.flashnotes.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -61,7 +62,6 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode{
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
 
         helpWindow = new HelpWindow();
         setAccelerators();
@@ -185,6 +185,20 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode{
                 handleExit();
             }
 
+            if (commandResult.isHome()) {
+                throw new CommandException("Already in the Home Screen!");
+            }
+            if (commandResult.isDeck()) {
+                RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
+
+                Region root = rootNode.getFxmlLoader().getRoot();
+                primaryStage.setScene(new Scene(root));
+                primaryStage.show();
+
+                rootNode.fillInnerParts();
+
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
@@ -192,4 +206,5 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode{
             throw e;
         }
     }
+
 }
