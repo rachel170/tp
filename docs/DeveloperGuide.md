@@ -55,13 +55,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. Flashnotes shows an error message.
-
       Use case resumes at step 2.
 
 **Use case: Add a card**
@@ -75,9 +72,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. There is a duplicate question.
-    
     * 2a1. Flashnotes shows an error message.
-
       Use case resumes at step 2.
 
 **Use case: Edit a card**
@@ -94,13 +89,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. Flashnotes shows an error message.
-
       Use case resumes at step 2.
       
       
@@ -115,9 +107,7 @@ Use case ends.
 **Extensions**
 
 * 1a. User enters a tag that is not found
-
     * 1a1. Flashnotes returns no cards.
-
     Use case ends.
 
 *{More to be added}*
@@ -166,7 +156,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases …​ }
 
 ### Deleting a card
 
@@ -183,7 +173,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases …​ }
 
 
 ### Finding cards by tag
@@ -195,10 +185,9 @@ testers are expected to do more *exploratory* testing.
        Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.
        
     1. Test case: `listTags singapore` <br>
-       Expected: None of the cards are shown (as the keyword is case sensitive)
+       Expected: None of the cards are shown (as the keyword is case-sensitive)
        
     1. Test case: `listTags Singapore Malaysia` <br>
        Expected: All cards with the tag 'Singapore' and cards with the tag 'Malaysia' will be shown.
 
-
-1. _{ more test cases …​ }_
+1. _{ more test cases …​ }
