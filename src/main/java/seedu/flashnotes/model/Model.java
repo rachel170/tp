@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.flashnotes.commons.core.GuiSettings;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -13,6 +14,8 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Deck> PREDICATE_SHOW_ALL_DECKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -51,6 +54,40 @@ public interface Model {
 
     /** Returns the FlashNotes */
     ReadOnlyFlashNotes getFlashNotes();
+
+    /**
+     * Returns true if a deck with the same identity as {@code deck} exists in the flashnotes.
+     */
+    boolean hasDeck(Deck deck);
+
+    /**
+     * Deletes the given Deck.
+     * The Deck must exist in the flashnotes.
+     */
+    void deleteDeck(Deck target);
+
+    /**
+     * Adds the given deck.
+     * {@code deck} must not already exist in the flashnotes.
+     */
+    void addDeck(Deck deck);
+
+    /**
+     * Replaces the given deck {@code target} with {@code editedDeck}.
+     * {@code target} must exist in the flashnotes.
+     * The flashcard identity of {@code editedDeck} must not be the same
+     * as another existing deck in the flashnotes.
+     */
+    void setDeck(Deck target, Deck editedDeck);
+
+    /** Returns an unmodifiable view of the filtered deck list */
+    ObservableList<Deck> getFilteredDeckList();
+
+    /**
+     * Updates the filter of the filtered deck list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredDeckList(Predicate<Deck> predicate);
 
     /**
      * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes.
