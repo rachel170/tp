@@ -14,6 +14,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Flashcard> {
         this.keyword = keyword;
     }
 
+    public String getKeyword() {
+        return keyword;
+    }
+
     @Override
     public boolean test(Flashcard flashcard) {
         return flashcard.getTag().tagName.equals(keyword);

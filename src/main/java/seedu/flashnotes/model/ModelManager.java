@@ -117,6 +117,31 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean getIsInDeck() {
+        return flashNotes.getIsInDeck();
+    }
+
+    @Override
+    public void setIsInDeckTrue() {
+        flashNotes.setIsInDeckTrue();
+    }
+
+    @Override
+    public void setIsInDeckFalse() {
+        flashNotes.setIsInDeckFalse();
+    }
+
+    @Override
+    public void setCurrentDeckName(String deckName) {
+        flashNotes.setCurrentDeckName(deckName);
+    }
+
+    @Override
+    public String getCurrentDeckName() {
+        return flashNotes.getCurrentDeckName();
+    }
+
+    @Override
     public ObservableList<Deck> getFilteredDeckList() {
         return flashNotes.getDeckList();
     }
@@ -141,7 +166,7 @@ public class ModelManager implements Model {
     @Override
     public void addFlashcard(Flashcard flashcard) {
         flashNotes.addFlashcard(flashcard);
-        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        //updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override

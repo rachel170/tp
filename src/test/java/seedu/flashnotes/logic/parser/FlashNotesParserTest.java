@@ -33,24 +33,25 @@ import seedu.flashnotes.testutil.FlashcardUtil;
 public class FlashNotesParserTest {
 
     private final FlashNotesParser parser = new FlashNotesParser();
+    private boolean isInDeck = true;
 
     @Test
     public void parseCommand_add() throws Exception {
         Flashcard flashcard = new FlashcardBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(FlashcardUtil.getAddCommand(flashcard));
+        AddCommand command = (AddCommand) parser.parseCommand(FlashcardUtil.getAddCommand(flashcard),isInDeck);
         assertEquals(new AddCommand(flashcard), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, !isInDeck) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", !isInDeck) instanceof ClearCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased());
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased(), isInDeck);
         assertEquals(new DeleteCommand(INDEX_FIRST_FLASHCARD), command);
     }
 
@@ -60,52 +61,53 @@ public class FlashNotesParserTest {
         EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(flashcard).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FLASHCARD.getOneBased() + " "
-                + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor));
+                + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor), isInDeck);
         assertEquals(new EditCommand(INDEX_FIRST_FLASHCARD, descriptor), command);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, isInDeck) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", isInDeck) instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")), isInDeck);
         assertEquals(new FindCommand(new QuestionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
-    public void parseCommand_listTags() throws Exception {
+    public void parseCommand_enterTag() throws Exception {
         String keyword = "foo";
         EnterTagCommand command = (EnterTagCommand) parser.parseCommand(
-                EnterTagCommand.COMMAND_WORD + " " + keyword);
+                EnterTagCommand.COMMAND_WORD + " " + keyword, !isInDeck);
         assertEquals(new EnterTagCommand(new TagContainsKeywordsPredicate(keyword)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, isInDeck) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", isInDeck) instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, !isInDeck) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", !isInDeck) instanceof ListCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+            -> parser.parseCommand("", isInDeck));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", isInDeck));
     }
 }

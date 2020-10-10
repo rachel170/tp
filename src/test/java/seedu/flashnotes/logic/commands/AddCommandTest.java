@@ -146,6 +146,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getIsInDeck() {
+            return false;
+        }
+
+        @Override
+        public void setIsInDeckTrue() {
+
+        }
+
+        @Override
+        public void setIsInDeckFalse() {
+
+        }
+
+        @Override
         public ObservableList<Deck> getFilteredDeckList() {
             return null;
         }

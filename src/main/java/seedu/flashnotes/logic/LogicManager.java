@@ -43,7 +43,12 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = flashNotesParser.parseCommand(commandText);
+        boolean isInDeck = model.getIsInDeck();
+        String deckName = model.getCurrentDeckName();
+        if (deckName == null) {
+            deckName = "Default";
+        }
+        Command command = flashNotesParser.parseCommand(commandText, isInDeck, deckName);
         commandResult = command.execute(model);
 
         try {

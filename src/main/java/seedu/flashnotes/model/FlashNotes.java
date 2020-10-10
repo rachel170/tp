@@ -20,6 +20,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     private final UniqueFlashcardList flashcards;
     private final UniqueDeckList decks;
+    private boolean isInDeck;
+    private String currentDeckName;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,6 +33,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     {
         flashcards = new UniqueFlashcardList();
         decks = new UniqueDeckList();
+        isInDeck = false;
+        currentDeckName = null;
     }
 
     public FlashNotes() {}
@@ -177,6 +181,31 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         removeFlashcardByTag(new Tag(keyDeck.getDeckName()));
         decks.remove(keyDeck);
     }
+
+    public boolean getIsInDeck() {
+        return isInDeck;
+    }
+
+    public void setIsInDeckTrue() {
+        isInDeck = true;
+    }
+
+    public void setIsInDeckFalse() {
+        isInDeck = false;
+    }
+
+    public void setCurrentDeckName(String deckName) {
+        this.currentDeckName = deckName;
+    }
+
+    public String getCurrentDeckName() {
+        if (!isInDeck) {
+            return null;
+        }
+        return currentDeckName;
+    }
+
+
     //// util methods
 
     @Override

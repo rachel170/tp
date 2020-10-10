@@ -31,6 +31,8 @@ public class EnterTagCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFlashcardList(predicate);
+        model.setIsInDeckTrue();
+        model.setCurrentDeckName(predicate.getKeyword());
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
     }
