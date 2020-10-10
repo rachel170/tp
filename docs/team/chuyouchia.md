@@ -10,31 +10,27 @@ FlashNotes is a desktop address book application used for creating and accessing
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: 
+  * What it does:
   * Justification:
-  * Highlights: 
-  * Credits: 
+  * Highlights:
+  * Credits:
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
-  * 
+
 
 * **Enhancements to existing features**:
-  * 
 
 * **Documentation**:
   * User Guide:
-    * 
+
   * Developer Guide:
-    * 
 
 * **Community**:
-  * 
 
 * **Tools**:
-  * 
 
-* _{you can add/remove categories in the list above}_
+* _{you can add/remove categories in the list above}

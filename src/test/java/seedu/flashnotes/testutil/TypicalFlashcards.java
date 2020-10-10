@@ -59,7 +59,10 @@ public class TypicalFlashcards {
         for (Flashcard flashcard : getTypicalFlashcards()) {
             ab.addFlashcard(flashcard);
         }
-        return ab;
+
+        //TODO used to set the Deck, remove after proper deck impl done - PX
+        FlashNotes a = new FlashNotes(ab);
+        return a;
     }
 
     public static List<Flashcard> getTypicalFlashcards() {

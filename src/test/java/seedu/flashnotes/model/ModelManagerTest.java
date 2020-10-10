@@ -26,7 +26,11 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new FlashNotes(), new FlashNotes(modelManager.getFlashNotes()));
+        FlashNotes fn = new FlashNotes(new FlashNotes());
+        FlashNotes modelFN = new FlashNotes(modelManager.getFlashNotes());
+        System.out.println(fn);
+        System.out.println(modelFN);
+        assertEquals(fn, modelFN);
     }
 
     @Test

@@ -8,6 +8,7 @@ import seedu.flashnotes.logic.commands.CommandResult;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -16,6 +17,7 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -32,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<Flashcard> getFilteredFlashcardList();
+
+    /** Returns an unmodifiable view of the filtered list of decks */
+    ObservableList<Deck> getFilteredCardDeckList();
 
     /**
      * Returns the user prefs' flashnotes file path.

@@ -9,7 +9,7 @@ FlashNotes is a desktop address book application used for creating and accessing
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 

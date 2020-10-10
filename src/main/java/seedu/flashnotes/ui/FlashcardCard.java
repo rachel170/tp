@@ -12,9 +12,9 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 /**
  * An UI component that displays information of a {@code Flashcard}.
  */
-public class FlashcardListCard extends UiPart<Region> {
+public class FlashcardCard extends UiPart<Region> {
 
-    private static final String FXML = "FlashcardListCard.fxml";
+    private static final String FXML = "FlashcardCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,9 +39,9 @@ public class FlashcardListCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code FlashcardListCard} with the given {@code Flashcard} and index to display.
+     * Creates a {@code FlashcardCard} with the given {@code Flashcard} and index to display.
      */
-    public FlashcardListCard(Flashcard flashcard, int displayedIndex) {
+    public FlashcardCard(Flashcard flashcard, int displayedIndex) {
         super(FXML);
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
@@ -60,12 +60,12 @@ public class FlashcardListCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FlashcardListCard)) {
+        if (!(other instanceof FlashcardCard)) {
             return false;
         }
 
         // state check
-        FlashcardListCard card = (FlashcardListCard) other;
+        FlashcardCard card = (FlashcardCard) other;
         return id.getText().equals(card.id.getText())
                 && flashcard.equals(card.flashcard);
     }
