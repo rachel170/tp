@@ -38,8 +38,8 @@
     </VBox>
 
     <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-   <stylesheets>
-      <URL value="@DarkTheme.css" />
-      <URL value="@Extensions.css" />
-   </stylesheets>
+    <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+    </stylesheets>
 </VBox>
