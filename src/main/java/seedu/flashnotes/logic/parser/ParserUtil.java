@@ -96,7 +96,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code deckName} is invalid.
      */
-    public static Deck parseDeckName(String deckName) throws ParseException{
+    public static Deck parseDeckName(String deckName) throws ParseException {
         requireNonNull(deckName);
         String trimmedDeckName = deckName.trim();
         if (!Deck.isValidDeck(trimmedDeckName)) {

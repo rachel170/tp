@@ -1,8 +1,8 @@
 package seedu.flashnotes.ui;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -17,35 +17,34 @@ import seedu.flashnotes.logic.commands.CommandResult;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
-import java.util.logging.Logger;
 
-public class FlashcardListRoot extends UiPart<Region> implements RootNode{
+public class FlashcardListRoot extends UiPart<Region> implements RootNode {
     private static final String FXML = "FlashcardListRoot.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    protected final Stage primaryStage;
-    protected final Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    protected FlashcardListPanel flashcardListPanel;
-    protected ResultDisplay resultDisplay;
-    protected HelpWindow helpWindow;
+    private FlashcardListPanel flashcardListPanel;
+    private ResultDisplay resultDisplay;
+    private HelpWindow helpWindow;
 
     @FXML
-    protected StackPane commandBoxPlaceholder;
+    private StackPane commandBoxPlaceholder;
 
     @FXML
-    protected MenuItem helpMenuItem;
+    private MenuItem helpMenuItem;
 
     @FXML
-    protected StackPane cardListPanelPlaceholder;
+    private StackPane cardListPanelPlaceholder;
 
     @FXML
-    protected StackPane resultDisplayPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
-    protected StackPane statusbarPlaceholder;
+    private StackPane statusbarPlaceholder;
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */

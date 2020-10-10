@@ -1,5 +1,11 @@
 package seedu.flashnotes.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
@@ -8,16 +14,9 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
-public class AddDeckCommand extends Command{
+public class AddDeckCommand extends Command {
     public static final String COMMAND_WORD = "addDeck";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Deck to flashnotes. "
@@ -47,8 +46,8 @@ public class AddDeckCommand extends Command{
         //todo change the dummy initialisation of flashcards - PX
         Set<Tag> set = new HashSet<>();
         set.add(new Tag(toAdd.getDeckName()));
-        model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s",toAdd.getDeckName())),
-                new Answer(String.format("dummy answer in %s",toAdd.getDeckName())), set));
+        model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
+                new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), set));
         model.addDeck(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

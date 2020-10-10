@@ -1,15 +1,12 @@
 package seedu.flashnotes.ui;
+import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -19,11 +16,8 @@ import seedu.flashnotes.logic.Logic;
 import seedu.flashnotes.logic.commands.CommandResult;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
-import seedu.flashnotes.model.deck.Deck;
 
-import java.util.logging.Logger;
-
-public class DeckCardListRoot extends UiPart<Region> implements RootNode{
+public class DeckCardListRoot extends UiPart<Region> implements RootNode {
     private static final String FXML = "DeckCardListRoot.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());

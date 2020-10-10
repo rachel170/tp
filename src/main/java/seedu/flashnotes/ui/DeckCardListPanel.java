@@ -1,4 +1,5 @@
 package seedu.flashnotes.ui;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,9 +9,8 @@ import javafx.scene.layout.Region;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.model.deck.Deck;
 
-import java.util.logging.Logger;
 
-public class DeckCardListPanel extends UiPart<Region>{
+public class DeckCardListPanel extends UiPart<Region> {
     private static final String FXML = "DeckCardListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(DeckCardListPanel.class);
 

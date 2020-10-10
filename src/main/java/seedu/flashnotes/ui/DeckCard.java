@@ -2,13 +2,10 @@ package seedu.flashnotes.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.flashnotes.model.deck.Deck;
-import seedu.flashnotes.model.flashcard.Flashcard;
 
-import java.util.Comparator;
 
 public class DeckCard extends UiPart<Region> {
     private static final String FXML = "DeckCard.fxml";

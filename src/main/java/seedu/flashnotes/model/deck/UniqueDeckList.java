@@ -1,15 +1,14 @@
 package seedu.flashnotes.model.deck;
+import static java.util.Objects.requireNonNull;
+import static seedu.flashnotes.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.flashnotes.model.deck.exceptions.DeckNotFoundException;
 import seedu.flashnotes.model.deck.exceptions.DuplicateDeckException;
-
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.flashnotes.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * A list of decks that enforces uniqueness between its elements and does not allow nulls.

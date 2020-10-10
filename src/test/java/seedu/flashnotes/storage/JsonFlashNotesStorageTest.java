@@ -2,7 +2,6 @@ package seedu.flashnotes.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT_IS_MEIER;

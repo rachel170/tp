@@ -1,13 +1,13 @@
 package seedu.flashnotes.logic.parser;
 
-import seedu.flashnotes.logic.commands.AddDeckCommand;
-import seedu.flashnotes.logic.parser.exceptions.ParseException;
-import seedu.flashnotes.model.deck.Deck;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 
 import java.util.stream.Stream;
 
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
+import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.parser.exceptions.ParseException;
+import seedu.flashnotes.model.deck.Deck;
 
 public class AddDeckCommandParser implements Parser<AddDeckCommand> {
     /**

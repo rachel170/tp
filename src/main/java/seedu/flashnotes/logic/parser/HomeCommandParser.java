@@ -1,13 +1,9 @@
 package seedu.flashnotes.logic.parser;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.flashnotes.logic.commands.HomeCommand;
-import seedu.flashnotes.logic.commands.ListTagsCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
-import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
-import java.util.Arrays;
-
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class HomeCommandParser implements Parser<HomeCommand> {
     @Override

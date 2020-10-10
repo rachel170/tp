@@ -1,10 +1,8 @@
 package seedu.flashnotes.model.deck;
-
-import seedu.flashnotes.model.flashcard.Flashcard;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
 
 public class Deck {
     public static final String MESSAGE_CONSTRAINTS =
@@ -13,6 +11,10 @@ public class Deck {
     private String deckName;
     private String resultStatistics;
 
+    /**
+     * Initializes a Deck that contains the Deck Name and Result Statistics if any.
+     * @param name description of deck
+     */
     public Deck (String name) {
         requireNonNull(name);
         this.deckName = name;
@@ -56,11 +58,14 @@ public class Deck {
     }
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Deck deck = (Deck) o;
-        return Objects.equals(deckName, deck.deckName) &&
-                Objects.equals(resultStatistics, deck.resultStatistics);
+        return Objects.equals(deckName, deck.deckName) && Objects.equals(resultStatistics, deck.resultStatistics);
     }
 
     @Override

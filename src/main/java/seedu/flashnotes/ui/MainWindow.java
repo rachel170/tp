@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         //initialize the deck list root node as the primary scene
-        rootNode = new DeckCardListRoot(primaryStage,logic);
+        rootNode = new DeckCardListRoot(primaryStage, logic);
 
         Region root = rootNode.getFxmlLoader().getRoot();
         primaryStage.setScene(new Scene(root));
