@@ -13,7 +13,7 @@ import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
  */
 public class ListTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "listTags";
+    public static final String COMMAND_WORD = "enterTag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists the flashcards that contain the keywords\n"
