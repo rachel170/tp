@@ -74,19 +74,11 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         //TODO eventually to be changed to read directly from list - PX
         List<Deck> newDeckData = new ArrayList<>();
         List<String> uniqueDeckNames = new ArrayList<>();
-        uniqueDeckNames.add("Default");
+        //uniqueDeckNames.add("Default");
         for (Flashcard card : newData.getFlashcardList()) {
-            Set<Tag> tags = card.getTags();
-            for (Tag tag: tags) {
-                int size = uniqueDeckNames.size();
-                for (String deckName: uniqueDeckNames) {
-                    if (!tag.tagName.equals(deckName)) {
-                        size--;
-                    }
-                }
-                if (size == 0) {
-                    uniqueDeckNames.add(tag.tagName);
-                }
+            Tag tag = card.getTag();
+            if (!uniqueDeckNames.contains(tag.tagName)) {
+                uniqueDeckNames.add(tag.tagName);
             }
         }
         for (String s : uniqueDeckNames) {
