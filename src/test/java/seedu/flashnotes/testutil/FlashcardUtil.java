@@ -4,12 +4,9 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
-
 import seedu.flashnotes.logic.commands.AddCommand;
 import seedu.flashnotes.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.model.tag.Tag;
 
 /**
  * A utility class for Flashcard.

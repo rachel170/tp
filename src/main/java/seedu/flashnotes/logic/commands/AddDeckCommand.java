@@ -3,9 +3,6 @@ package seedu.flashnotes.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;

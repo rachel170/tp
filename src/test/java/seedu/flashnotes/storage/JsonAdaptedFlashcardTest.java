@@ -5,10 +5,6 @@ import static seedu.flashnotes.storage.JsonAdaptedFlashcard.MISSING_FIELD_MESSAG
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.flashnotes.commons.exceptions.IllegalValueException;

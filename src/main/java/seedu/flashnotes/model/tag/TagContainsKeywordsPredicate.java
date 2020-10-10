@@ -1,9 +1,6 @@
 package seedu.flashnotes.model.tag;
 
-import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import seedu.flashnotes.model.flashcard.Flashcard;
 

@@ -2,10 +2,7 @@ package seedu.flashnotes.model.flashcard;
 
 import static seedu.flashnotes.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.flashnotes.model.tag.Tag;
 

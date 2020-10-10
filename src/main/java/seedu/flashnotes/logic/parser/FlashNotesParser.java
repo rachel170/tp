@@ -12,12 +12,12 @@ import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.DeleteCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EnterTagCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
 import seedu.flashnotes.logic.commands.HomeCommand;
 import seedu.flashnotes.logic.commands.ListCommand;
-import seedu.flashnotes.logic.commands.EnterTagCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**

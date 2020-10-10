@@ -15,7 +15,6 @@ import static seedu.flashnotes.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.flashnotes.testutil.TypicalFlashcards.AMY;

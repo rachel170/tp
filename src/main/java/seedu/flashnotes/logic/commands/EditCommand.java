@@ -6,11 +6,8 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.commons.core.index.Index;

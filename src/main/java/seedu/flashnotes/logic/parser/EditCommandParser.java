@@ -6,15 +6,9 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.EditCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
-import seedu.flashnotes.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

@@ -2,8 +2,10 @@ package seedu.flashnotes.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.*;
-import static seedu.flashnotes.testutil.Assert.assertThrows;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.flashnotes.testutil.TypicalFlashcards.BOB;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 
@@ -23,7 +25,8 @@ public class FlashcardTest {
         assertFalse(WHAT.isSameFlashcard(null));
 
         // different answer -> returns false
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).withTag(VALID_TAG_HUSBAND).build();
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withAnswer(VALID_ANSWER_BOB)
+                .withTag(VALID_TAG_HUSBAND).build();
         assertFalse(WHAT.isSameFlashcard(editedAlice));
 
         // different question -> returns false

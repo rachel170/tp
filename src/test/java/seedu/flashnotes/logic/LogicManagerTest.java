@@ -3,7 +3,9 @@ package seedu.flashnotes.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.*;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.ANSWER_DESC_AMY;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.QUESTION_DESC_AMY;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.AMY;
 

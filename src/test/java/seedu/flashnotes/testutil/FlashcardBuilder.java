@@ -1,13 +1,10 @@
 package seedu.flashnotes.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
-import seedu.flashnotes.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Flashcard objects.

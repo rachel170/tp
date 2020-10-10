@@ -18,13 +18,13 @@ public class SampleDataUtil {
     public static Flashcard[] getSampleFlashcards() {
         return new Flashcard[] {
             new Flashcard(new Question("What is the definition of Macroeconomics?"),
-                    new Answer("Macroeconomics is a branch of economics that studies how an overall economy, " +
-                            "the market systems that operate on a large scale, behaves"),
+                    new Answer("Macroeconomics is a branch of economics that studies how an overall economy, "
+                            + "the market systems that operate on a large scale, behaves"),
                     new Tag("Economics")),
             new Flashcard(new Question("What is the definition of Microeconomics?"),
-                    new Answer("Microeconomics is a branch of economics that studies the behavior " +
-                            "of individuals and firms in making decisions regarding the allocation " +
-                            "of scarce resources and the interactions among these individuals and firms"),
+                    new Answer("Microeconomics is a branch of economics that studies the behavior "
+                            + "of individuals and firms in making decisions regarding the allocation "
+                            + "of scarce resources and the interactions among these individuals and firms"),
                     new Tag("Economics")),
             new Flashcard(new Question("When did Singapore gain independence?"),
                     new Answer("1965"), new Tag("Singapore")),
