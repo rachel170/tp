@@ -164,7 +164,7 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode{
                 RootNode rootNode = new DeckCardListRoot(primaryStage, logic);
 
                 Region root = rootNode.getFxmlLoader().getRoot();
-                primaryStage.setScene(new Scene(root));
+                primaryStage.getScene().setRoot(root);
                 primaryStage.show();
 
                 rootNode.fillInnerParts();
