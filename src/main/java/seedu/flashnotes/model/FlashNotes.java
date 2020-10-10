@@ -125,6 +125,19 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         flashcards.remove(key);
     }
 
+    public void removeFlashcardByTag(Tag tag) {
+        ArrayList<Flashcard> toBeRemoved = new ArrayList<>();
+        for (Flashcard flashcard : flashcards) {
+            if (flashcard.getTag().equals(tag)) {
+                toBeRemoved.add(flashcard);
+            }
+        }
+
+        for (int i = 0; i < toBeRemoved.size(); i++) {
+            removeFlashcard(toBeRemoved.get(i));
+        }
+    }
+
 
     //// Deck-level operations
 
@@ -161,6 +174,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      * {@code keyDeck} must exist in the flashnotes.
      */
     public void removeDeck(Deck keyDeck) {
+        removeFlashcardByTag(new Tag(keyDeck.getDeckName()));
         decks.remove(keyDeck);
     }
     //// util methods

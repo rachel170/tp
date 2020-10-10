@@ -100,6 +100,7 @@ public class ModelManager implements Model {
     public void deleteDeck(Deck target) {
         //todo delete deck - PX
         flashNotes.removeDeck(target);
+        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
     }
 
     @Override

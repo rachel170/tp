@@ -53,8 +53,8 @@ public class Deck {
         }
 
         return otherDeck != null
-                && otherDeck.getDeckName().equals(getDeckName())
-                && (otherDeck.getResultStatistics().equals(getResultStatistics()));
+                && otherDeck.getDeckName().equals(getDeckName());
+                //&& (otherDeck.getResultStatistics().equals(getResultStatistics()));
     }
     @Override
     public boolean equals(Object o) {
@@ -65,11 +65,11 @@ public class Deck {
             return false;
         }
         Deck deck = (Deck) o;
-        return Objects.equals(deckName, deck.deckName) && Objects.equals(resultStatistics, deck.resultStatistics);
+        return Objects.equals(deckName, deck.deckName); //&& Objects.equals(resultStatistics, deck.resultStatistics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deckName, resultStatistics);
+        return Objects.hash(deckName); //, resultStatistics);
     }
 }

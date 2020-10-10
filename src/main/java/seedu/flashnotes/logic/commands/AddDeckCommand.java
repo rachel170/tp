@@ -46,6 +46,6 @@ public class AddDeckCommand extends Command {
                 new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
         model.addDeck(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDeckName()));
     }
 }
