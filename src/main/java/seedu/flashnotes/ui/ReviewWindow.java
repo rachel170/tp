@@ -3,6 +3,7 @@ package seedu.flashnotes.ui;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,11 +27,12 @@ public class ReviewWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ReviewWindow.class);
     private static final String FXML = "ReviewWindow.fxml";
     private Logic logic;
-    private List<Flashcard> flashcardsToReview;
+    private ObservableList<Flashcard> flashcardsToReview;
     private int index;
     private CommandBox commandBox;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+//    private IndividualFlashcard individualFlashcard;
 
     private Stage primaryStage;
 
@@ -46,6 +48,9 @@ public class ReviewWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
+//    @FXML
+//    private StackPane individualFlashcardPlaceholder;
+
     /**
      * Creates a new ReviewWindow.
      */
@@ -59,11 +64,15 @@ public class ReviewWindow extends UiPart<Stage> {
         this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         this.primaryStage = primaryStage;
+//        this.individualFlashcard = new IndividualFlashcard();
+//        individualFlashcardPlaceholder.getChildren().add(individualFlashcard.getRoot());
     }
 
-    private void updateCurrentFlashcard() {
-        this.flashcardsToReview = logic.getFlashcardsToReview();
+    private void updateCurrentFlashcard() { //move this to individual flashcard? move list to individual flashcard also?
+        this.flashcardsToReview = logic.getFlashcardsToReview(); //try and move this to constructor?
         Flashcard flashcardToDisplay = flashcardsToReview.get(index);
+//        this.individualFlashcard.updateFlashcardContent(flashcardToDisplay.getQuestion().question,
+//                flashcardToDisplay.getAnswer().value);
         question.setText("Question: " + flashcardToDisplay.getQuestion().question);
         answer.setText("Answer: " + flashcardToDisplay.getAnswer().value);
     }

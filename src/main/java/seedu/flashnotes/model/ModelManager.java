@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
@@ -25,7 +26,7 @@ public class ModelManager implements Model {
     private final FlashNotes flashNotes;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
-    private final FilteredList<Flashcard> flashcardsToReview;
+    private FilteredList<Flashcard> flashcardsToReview;
 
     /**
      * Initializes a ModelManager with the given flashNotes and userPrefs.
@@ -79,6 +80,17 @@ public class ModelManager implements Model {
     public void setFlashNotesFilePath(Path flashNotesFilePath) {
         requireNonNull(flashNotesFilePath);
         userPrefs.setFlashNotesFilePath(flashNotesFilePath);
+    }
+
+    @Override
+    public Integer getReviewCardLimit() {
+        return userPrefs.getReviewCardLimit();
+    }
+
+    @Override
+    public void setReviewCardLimit(Integer reviewCardLimit) {
+        requireNonNull(reviewCardLimit);
+        userPrefs.setReviewCardLimit(reviewCardLimit);
     }
 
     //=========== FlashNotes ================================================================================
@@ -136,13 +148,19 @@ public class ModelManager implements Model {
 
     //=========== Shuffled Flashcard List Operations =============================================================
     public void shuffleReviewFlashcards() {
-//        System.out.println("BEFORE: " + flashcardsToReview);
-//        ObservableList<? extends Flashcard> flashcardsToReviewList = flashcardsToReview.getSource();
-//        FXCollections.shuffle(flashcardsToReviewList);
-//        System.out.println("After: "+ flashcardsToReview);
         // apply shuffling algorithm
+        ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(this.flashNotes.getFlashcardList());
+        FXCollections.shuffle(flashcardsToReviewList);
+
+
         // trim using user preferences
-        // store shuffled result into this.flashcardsToReview
+        Integer reviewCardLimit = userPrefs.getReviewCardLimit();
+        if (reviewCardLimit < flashcardsToReviewList.size()) {
+            flashcardsToReviewList = FXCollections.observableArrayList(flashcardsToReviewList.subList(0, reviewCardLimit));
+        }
+
+        // store shuffled and trimmed result into this.flashcardsToReview
+        this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
     }
 
     /**

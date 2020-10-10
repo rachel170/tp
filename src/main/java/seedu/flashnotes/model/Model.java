@@ -45,6 +45,16 @@ public interface Model {
     void setFlashNotesFilePath(Path flashNotesFilePath);
 
     /**
+     * Returns the user prefs' review card limit.
+     */
+    Integer getReviewCardLimit();
+
+    /**
+     * Sets the user prefs' review card limit.
+     */
+    void setReviewCardLimit(Integer reviewCardLimit);
+
+    /**
      * Replaces flashnotes data with the data in {@code flashNotes}.
      */
     void setFlashNotes(ReadOnlyFlashNotes flashNotes);

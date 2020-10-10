@@ -53,4 +53,14 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' review card limit.
+     */
+    Integer getReviewCardLimit();
+
+    /**
+     * Set the user prefs' review card limit.
+     */
+    void setReviewCardLimit(Integer reviewCardLimit);
 }

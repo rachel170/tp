@@ -44,6 +44,9 @@ public class FlashNotesParser {
             case ReviewCommand.COMMAND_WORD:
                 throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
 
+            case SetReviewLimitCommand.COMMAND_WORD:
+                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+
             case ListTagsCommand.COMMAND_WORD:
                 throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
@@ -82,6 +85,9 @@ public class FlashNotesParser {
             case ReviewCommand.COMMAND_WORD:
                 this.isReviewMode = true;
                 return new ReviewCommand();
+
+            case SetReviewLimitCommand.COMMAND_WORD:
+                return new SetReviewLimitCommandParser().parse(arguments);
 
             case ListTagsCommand.COMMAND_WORD:
                 return new ListTagsCommandParser().parse(arguments);
