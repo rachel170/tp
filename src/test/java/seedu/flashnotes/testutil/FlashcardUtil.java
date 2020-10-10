@@ -27,7 +27,7 @@ public class FlashcardUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_QUESTION + flashcard.getQuestion().question + " ");
         sb.append(PREFIX_ANSWER + flashcard.getAnswer().value + " ");
-        sb.append(PREFIX_TAG + flashcard.getTag().tagName + " ");
+        //sb.append(PREFIX_TAG + flashcard.getTag().tagName + " ");
         return sb.toString();
     }
 

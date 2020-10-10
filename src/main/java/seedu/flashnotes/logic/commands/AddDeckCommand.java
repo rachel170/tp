@@ -41,9 +41,9 @@ public class AddDeckCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
         //todo change the dummy initialisation of flashcards - PX
-        Tag tag = new Tag(toAdd.getDeckName());
-        model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
-                new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
+        //Tag tag = new Tag(toAdd.getDeckName());
+        //model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
+                //new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
         model.addDeck(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDeckName()));

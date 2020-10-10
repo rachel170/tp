@@ -161,6 +161,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setCurrentDeckName(String deckName) {
+
+        }
+
+        @Override
+        public String getCurrentDeckName() {
+            return null;
+        }
+
+        @Override
         public ObservableList<Deck> getFilteredDeckList() {
             return null;
         }

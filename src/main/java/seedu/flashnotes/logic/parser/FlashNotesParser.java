@@ -2,6 +2,7 @@ package seedu.flashnotes.logic.parser;
 
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,7 +44,7 @@ public class FlashNotesParser {
             if (!isInDeck) {
                 throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
             }
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments, deckName);
 
         case EditCommand.COMMAND_WORD:
             if (!isInDeck) {
