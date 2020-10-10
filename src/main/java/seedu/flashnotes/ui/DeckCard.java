@@ -1,20 +1,14 @@
 package seedu.flashnotes.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.flashnotes.model.flashcard.Flashcard;
+import seedu.flashnotes.model.deck.Deck;
 
-/**
- * An UI component that displays information of a {@code Flashcard}.
- */
-public class FlashcardListCard extends UiPart<Region> {
 
-    private static final String FXML = "FlashcardListCard.fxml";
+public class DeckCard extends UiPart<Region> {
+    private static final String FXML = "DeckCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,29 +19,28 @@ public class FlashcardListCard extends UiPart<Region> {
      */
     //todo change the link here
 
-    public final Flashcard flashcard;
+    @FXML
+    private Deck cardDeck;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label question;
+    private Label deckName;
     @FXML
     private Label id;
     @FXML
-    private Label answer;
-    @FXML
-    private Label tag;
+    private Label resultStatistics;
+    //todo update result statistics in the future -> suggested approach is to
 
     /**
-     * Creates a {@code FlashcardListCard} with the given {@code Flashcard} and index to display.
+     * Creates a {@code cardDeck} with the given {@code deckName} and index to display.
      */
-    public FlashcardListCard(Flashcard flashcard, int displayedIndex) {
+    public DeckCard(Deck cardDeck, int displayedIndex) {
         super(FXML);
-        this.flashcard = flashcard;
+        this.cardDeck = cardDeck;
+        deckName.setText(cardDeck.getDeckName());
         id.setText(displayedIndex + ". ");
-        question.setText(flashcard.getQuestion().question);
-        answer.setText(flashcard.getAnswer().value);
-        tag.setText(flashcard.getTag().tagName);
+        resultStatistics.setText(cardDeck.getResultStatistics());
     }
 
     @Override
@@ -58,13 +51,14 @@ public class FlashcardListCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FlashcardListCard)) {
+        if (!(other instanceof DeckCard)) {
             return false;
         }
 
-        // state check
-        FlashcardListCard card = (FlashcardListCard) other;
+        // state check - name and ID check
+        DeckCard card = (DeckCard) other;
         return id.getText().equals(card.id.getText())
-                && flashcard.equals(card.flashcard);
+                && deckName.equals(card.deckName)
+                && cardDeck.equals(card.cardDeck);
     }
 }

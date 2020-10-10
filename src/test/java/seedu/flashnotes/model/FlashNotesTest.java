@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.exceptions.DuplicateFlashcardException;
 import seedu.flashnotes.testutil.FlashcardBuilder;
@@ -95,6 +96,12 @@ public class FlashNotesTest {
         @Override
         public ObservableList<Flashcard> getFlashcardList() {
             return flashcards;
+        }
+
+        @Override
+        public ObservableList<Deck> getDeckList() {
+            return null;
+            //TODO update later
         }
     }
 
