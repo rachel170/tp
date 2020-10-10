@@ -90,7 +90,8 @@ public class Flashcard {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getQuestion())
+        builder.append("Question: ")
+                .append(getQuestion())
                 .append(" Answer: ")
                 .append(getAnswer())
                 .append(" Tag: ")

@@ -26,8 +26,7 @@ public class ListTagsCommandParser implements Parser<ListTagsCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTagsCommand.MESSAGE_USAGE));
         }
 
-        String[] tagKeywords = trimmedArgs.split("\\s+");
 
-        return new ListTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
+        return new ListTagsCommand(new TagContainsKeywordsPredicate(trimmedArgs));
     }
 }

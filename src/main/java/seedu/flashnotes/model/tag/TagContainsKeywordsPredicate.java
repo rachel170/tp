@@ -11,24 +11,21 @@ import seedu.flashnotes.model.flashcard.Flashcard;
  * Tests that a {@code Flashcard}'s {@code Tag} matches any of the keywords given.
  */
 public class TagContainsKeywordsPredicate implements Predicate<Flashcard> {
-    private final List<String> keywords;
+    private final String keyword;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public TagContainsKeywordsPredicate(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override
     public boolean test(Flashcard flashcard) {
-        Set<String> tags = flashcard.getTags().stream()
-                .map(t -> t.toStringWithSpace()).collect(Collectors.toSet());
-        return keywords.stream()
-                .anyMatch(keyword -> tags.contains(keyword));
+        return flashcard.getTag().tagName.equals(keyword);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
+                && keyword.equals(((TagContainsKeywordsPredicate) other).keyword)); // state check
     }
 }

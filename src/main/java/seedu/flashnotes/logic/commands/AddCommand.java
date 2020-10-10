@@ -20,12 +20,11 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_TAG + "TAG \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_QUESTION + "Why is the sky blue? "
             + PREFIX_ANSWER + "Because it's a reflection of the sea "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes";

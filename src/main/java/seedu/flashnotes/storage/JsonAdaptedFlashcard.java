@@ -24,19 +24,17 @@ class JsonAdaptedFlashcard {
 
     private final String question;
     private final String answer;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String tag;
 
     /**
      * Constructs a {@code JsonAdaptedFlashcard} with the given flashcard details.
      */
     @JsonCreator
     public JsonAdaptedFlashcard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                                @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                                @JsonProperty("tag") String tag) {
         this.question = question;
         this.answer = answer;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.tag = tag;
     }
 
     /**
@@ -45,9 +43,7 @@ class JsonAdaptedFlashcard {
     public JsonAdaptedFlashcard(Flashcard source) {
         question = source.getQuestion().question;
         answer = source.getAnswer().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tag = source.getTag().tagName;
     }
 
     /**
@@ -56,11 +52,6 @@ class JsonAdaptedFlashcard {
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
     public Flashcard toModelType() throws IllegalValueException {
-        final List<Tag> flashcardTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            flashcardTags.add(tag.toModelType());
-        }
-
         if (question == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Question.class.getSimpleName()));
@@ -78,8 +69,16 @@ class JsonAdaptedFlashcard {
         }
         final Answer modelAnswer = new Answer(answer);
 
-        final Set<Tag> modelTags = new HashSet<>(flashcardTags);
-        return new Flashcard(modelQuestion, modelAnswer, modelTags);
+        if (tag == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Tag.class.getSimpleName()));
+        }
+        if (!Tag.isValidTagName(tag)) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        final Tag modelTag = new Tag(tag);
+
+        return new Flashcard(modelQuestion, modelAnswer, modelTag);
     }
 
 }

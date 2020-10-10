@@ -36,7 +36,7 @@ public class FlashcardListCard extends UiPart<Region> {
     @FXML
     private Label answer;
     @FXML
-    private FlowPane tags;
+    private Label tag;
 
     /**
      * Creates a {@code FlashcardListCard} with the given {@code Flashcard} and index to display.
@@ -47,9 +47,7 @@ public class FlashcardListCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         question.setText(flashcard.getQuestion().question);
         answer.setText(flashcard.getAnswer().value);
-        flashcard.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        tag.setText(flashcard.getTag().tagName);
     }
 
     @Override

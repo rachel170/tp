@@ -17,18 +17,23 @@ import seedu.flashnotes.model.tag.Tag;
 public class SampleDataUtil {
     public static Flashcard[] getSampleFlashcards() {
         return new Flashcard[] {
-            new Flashcard(new Question("When was the last time you tried something new?"),
-                    new Answer("yesterday"), getTagSet("friends")),
-            new Flashcard(new Question("What is the most sensible thing you have ever heard someone say?"),
-                    new Answer("YOLO"), getTagSet("colleagues", "friends")),
-            new Flashcard(new Question("What gets you excited about life?"),
-                    new Answer("My phone"), getTagSet("neighbours")),
-            new Flashcard(new Question("What do you wish you spent more time doing five years ago?"),
-                    new Answer("Watching drama"), getTagSet("family")),
-            new Flashcard(new Question("Do you ask enough questions or do you settle for what you know?"),
-                    new Answer("nope, too lazy"), getTagSet("classmates")),
-            new Flashcard(new Question("Who do you love and what are you doing about it?"),
-                    new Answer("Drama XD"), getTagSet("colleagues"))
+            new Flashcard(new Question("What is the definition of Macroeconomics?"),
+                    new Answer("Macroeconomics is a branch of economics that studies how an overall economy, " +
+                            "the market systems that operate on a large scale, behaves"),
+                    new Tag("Economics")),
+            new Flashcard(new Question("What is the definition of Microeconomics?"),
+                    new Answer("Microeconomics is a branch of economics that studies the behavior " +
+                            "of individuals and firms in making decisions regarding the allocation " +
+                            "of scarce resources and the interactions among these individuals and firms"),
+                    new Tag("Economics")),
+            new Flashcard(new Question("When did Singapore gain independence?"),
+                    new Answer("1965"), new Tag("Singapore")),
+            new Flashcard(new Question("How many stars are there on Singapore's Flag?"),
+                    new Answer("5"), new Tag("Singapore")),
+            new Flashcard(new Question("Who was Singapore's First Prime Minister?"),
+                    new Answer("Lee Kuan Yew"), new Tag("Singapore")),
+            new Flashcard(new Question("How do you spell Singaporean?"),
+                    new Answer("Singaporean"), new Tag("Singapore"))
         };
     }
 
