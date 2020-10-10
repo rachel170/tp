@@ -1,10 +1,11 @@
 package seedu.flashnotes.logic.parser;
 
-import seedu.flashnotes.commons.core.index.Index;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 
 /**
  * Parses input arguments and creates a new SetReviewLimitCommand object

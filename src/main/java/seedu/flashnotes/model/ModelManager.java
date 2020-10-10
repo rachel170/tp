@@ -4,9 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -147,16 +144,22 @@ public class ModelManager implements Model {
     }
 
     //=========== Shuffled Flashcard List Operations =============================================================
+
+    /**
+     * Shuffles and trims the list of flashcards to review.
+     */
     public void shuffleReviewFlashcards() {
         // apply shuffling algorithm
-        ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(this.flashNotes.getFlashcardList());
+        ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
+                this.flashNotes.getFlashcardList());
         FXCollections.shuffle(flashcardsToReviewList);
 
 
         // trim using user preferences
         Integer reviewCardLimit = userPrefs.getReviewCardLimit();
         if (reviewCardLimit < flashcardsToReviewList.size()) {
-            flashcardsToReviewList = FXCollections.observableArrayList(flashcardsToReviewList.subList(0, reviewCardLimit));
+            flashcardsToReviewList = FXCollections.observableArrayList(
+                    flashcardsToReviewList.subList(0, reviewCardLimit));
         }
 
         // store shuffled and trimmed result into this.flashcardsToReview

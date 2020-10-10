@@ -1,14 +1,9 @@
 package seedu.flashnotes.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -32,7 +27,7 @@ public class ReviewWindow extends UiPart<Stage> {
     private CommandBox commandBox;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-//    private IndividualFlashcard individualFlashcard;
+    //    private IndividualFlashcard individualFlashcard;
 
     private Stage primaryStage;
 
@@ -48,8 +43,8 @@ public class ReviewWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-//    @FXML
-//    private StackPane individualFlashcardPlaceholder;
+    //    @FXML
+    //    private StackPane individualFlashcardPlaceholder;
 
     /**
      * Creates a new ReviewWindow.
@@ -64,15 +59,15 @@ public class ReviewWindow extends UiPart<Stage> {
         this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         this.primaryStage = primaryStage;
-//        this.individualFlashcard = new IndividualFlashcard();
-//        individualFlashcardPlaceholder.getChildren().add(individualFlashcard.getRoot());
+        //        this.individualFlashcard = new IndividualFlashcard();
+        //        individualFlashcardPlaceholder.getChildren().add(individualFlashcard.getRoot());
     }
 
     private void updateCurrentFlashcard() { //move this to individual flashcard? move list to individual flashcard also?
         this.flashcardsToReview = logic.getFlashcardsToReview(); //try and move this to constructor?
         Flashcard flashcardToDisplay = flashcardsToReview.get(index);
-//        this.individualFlashcard.updateFlashcardContent(flashcardToDisplay.getQuestion().question,
-//                flashcardToDisplay.getAnswer().value);
+        //this.individualFlashcard.updateFlashcardContent(flashcardToDisplay.getQuestion().question,
+        //     flashcardToDisplay.getAnswer().value);
         question.setText("Question: " + flashcardToDisplay.getQuestion().question);
         answer.setText("Answer: " + flashcardToDisplay.getAnswer().value);
     }

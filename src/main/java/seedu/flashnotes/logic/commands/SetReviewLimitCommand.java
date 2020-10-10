@@ -1,9 +1,11 @@
 package seedu.flashnotes.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
-import static java.util.Objects.requireNonNull;
+
 
 /**
  * Sets user preferences for maximum number of cards that can be reviewed per session.
@@ -11,8 +13,8 @@ import static java.util.Objects.requireNonNull;
 public class SetReviewLimitCommand extends Command {
     public static final String COMMAND_WORD = "set-review-limit";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets user preferences for maximum number of cards that can " +
-            "be reviewed per session.\n"
+            + ": Sets user preferences for maximum number of cards that can "
+            + "be reviewed per session.\n"
             + "Parameters: NUMBER\n"
             + "Example: " + COMMAND_WORD + " 20";
     public static final String MESSAGE_SUCCESS = "Review card limit successfully updated!";
@@ -20,6 +22,10 @@ public class SetReviewLimitCommand extends Command {
 
     private final Integer reviewCardLimit;
 
+    /**
+     * Constructor to set review card limit
+     * @param reviewCardLimit
+     */
     public SetReviewLimitCommand(Integer reviewCardLimit) {
         requireNonNull(reviewCardLimit);
         this.reviewCardLimit = reviewCardLimit;

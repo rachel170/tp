@@ -2,13 +2,24 @@ package seedu.flashnotes.logic.parser;
 
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.flashnotes.logic.commands.*;
+import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.ClearCommand;
+import seedu.flashnotes.logic.commands.Command;
+import seedu.flashnotes.logic.commands.DeleteCommand;
+import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.ExitCommand;
+import seedu.flashnotes.logic.commands.FindCommand;
+import seedu.flashnotes.logic.commands.HelpCommand;
+import seedu.flashnotes.logic.commands.ListCommand;
+import seedu.flashnotes.logic.commands.ListTagsCommand;
+import seedu.flashnotes.logic.commands.ReviewCommand;
+import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,83 +37,83 @@ public class FlashNotesParser {
     private Command parseCommandInReviewMode(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case AddCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case EditCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case EditCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case DeleteCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case DeleteCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case ClearCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case ClearCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case FindCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case FindCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case ReviewCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
+        case ReviewCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
 
-            case SetReviewLimitCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case SetReviewLimitCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case ListTagsCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case ListTagsCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case ListCommand.COMMAND_WORD:
-                throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case ListCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
     private Command parseCommandInNormalMode(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
-                return new AddCommandParser().parse(arguments);
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
-            case FindCommand.COMMAND_WORD:
-                return new FindCommandParser().parse(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
-            case ReviewCommand.COMMAND_WORD:
-                this.isReviewMode = true;
-                return new ReviewCommand();
+        case ReviewCommand.COMMAND_WORD:
+            this.isReviewMode = true;
+            return new ReviewCommand();
 
-            case SetReviewLimitCommand.COMMAND_WORD:
-                return new SetReviewLimitCommandParser().parse(arguments);
+        case SetReviewLimitCommand.COMMAND_WORD:
+            return new SetReviewLimitCommandParser().parse(arguments);
 
-            case ListTagsCommand.COMMAND_WORD:
-                return new ListTagsCommandParser().parse(arguments);
+        case ListTagsCommand.COMMAND_WORD:
+            return new ListTagsCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
