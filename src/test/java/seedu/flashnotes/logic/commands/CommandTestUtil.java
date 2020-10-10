@@ -51,10 +51,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_AMY)
                 .withAnswer(VALID_ANSWER_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTag(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_BOB)
                 .withAnswer(VALID_ANSWER_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTag(VALID_TAG_HUSBAND).build();
     }
 
     /**

@@ -21,31 +21,35 @@ public class TypicalFlashcards {
 
     public static final Flashcard WHO = new FlashcardBuilder().withQuestion("Who")
             .withAnswer("me")
-            .withTags("friends").build();
+            .withTag("friends").build();
     public static final Flashcard WHAT = new FlashcardBuilder().withQuestion("What")
-            .withAnswer("idk").withTags("owesMoney", "friends").build();
+            .withAnswer("idk").withTag("owesMoney").build();
     public static final Flashcard WHY = new FlashcardBuilder().withQuestion("Why")
-            .withAnswer("because someone has to").build();
+            .withAnswer("because someone has to")
+            .withTag("friends").build();
     public static final Flashcard HOW = new FlashcardBuilder().withQuestion("How").withAnswer("use your hands")
-            .withTags("friends").build();
-    public static final Flashcard WHEN = new FlashcardBuilder().withQuestion("When").withAnswer("at 2pm").build();
-    public static final Flashcard WHERE = new FlashcardBuilder().withQuestion("Where").withAnswer("at home").build();
+            .withTag("friends").build();
+    public static final Flashcard WHEN = new FlashcardBuilder().withQuestion("When").withAnswer("at 2pm")
+            .withTag("Time")
+            .build();
+    public static final Flashcard WHERE = new FlashcardBuilder().withQuestion("Where").withAnswer("at home")
+            .withTag("Place").build();
     public static final Flashcard HOW_MUCH = new FlashcardBuilder().withQuestion("How much")
-            .withAnswer("300 apples").build();
+            .withAnswer("300 apples").withTag("Math").build();
 
     // Manually added
     public static final Flashcard WHO_IS_MEIER = new FlashcardBuilder().withQuestion("who is meier")
-            .withAnswer("8482424").build();
+            .withAnswer("8482424").withTag("test").build();
     public static final Flashcard WHAT_IS_MEIER = new FlashcardBuilder().withQuestion("what is meier")
-            .withAnswer("8482131").build();
+            .withAnswer("8482131").withTag("test").build();
 
     // Manually added - Flashcard's details found in {@code CommandTestUtil}
     public static final Flashcard AMY = new FlashcardBuilder().withQuestion(VALID_QUESTION_AMY)
             .withAnswer(VALID_ANSWER_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTag(VALID_TAG_FRIEND).build();
     public static final Flashcard BOB = new FlashcardBuilder().withQuestion(VALID_QUESTION_BOB)
             .withAnswer(VALID_ANSWER_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTag(VALID_TAG_HUSBAND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

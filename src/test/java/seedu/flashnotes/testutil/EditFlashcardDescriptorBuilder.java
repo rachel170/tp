@@ -32,7 +32,7 @@ public class EditFlashcardDescriptorBuilder {
         descriptor = new EditCommand.EditFlashcardDescriptor();
         descriptor.setQuestion(flashcard.getQuestion());
         descriptor.setAnswer(flashcard.getAnswer());
-        descriptor.setTags(flashcard.getTags());
+        descriptor.setTag(flashcard.getTag());
     }
 
     /**
@@ -56,9 +56,8 @@ public class EditFlashcardDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditFlashcardDescriptor}
      * that we are building.
      */
-    public EditFlashcardDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditFlashcardDescriptorBuilder withTag(String tag) {
+        descriptor.setTag(new Tag(tag));
         return this;
     }
 

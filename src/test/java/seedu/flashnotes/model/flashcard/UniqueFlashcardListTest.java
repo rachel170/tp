@@ -39,14 +39,6 @@ public class UniqueFlashcardListTest {
     }
 
     @Test
-    public void contains_flashcardWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueFlashcardList.add(WHAT);
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(uniqueFlashcardList.contains(editedAlice));
-    }
-
-    @Test
     public void add_nullFlashcard_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueFlashcardList.add(null));
     }
@@ -84,7 +76,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void setFlashcard_editedFlashcardHasSameDetails_success() {
         uniqueFlashcardList.add(WHAT);
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTag(VALID_TAG_HUSBAND)
                 .build();
         uniqueFlashcardList.setFlashcard(WHAT, editedAlice);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();

@@ -16,10 +16,11 @@ public class FlashcardBuilder {
 
     public static final String DEFAULT_QUESTION = "Who am I?";
     public static final String DEFAULT_ANSWER = "85355255";
+    public static final String DEFAULT_TAG = "Singapore";
 
     private Question question;
     private Answer answer;
-    private Set<Tag> tags;
+    private Tag tag;
 
     /**
      * Creates a {@code FlashcardBuilder} with the default details.
@@ -27,7 +28,7 @@ public class FlashcardBuilder {
     public FlashcardBuilder() {
         question = new Question(DEFAULT_QUESTION);
         answer = new Answer(DEFAULT_ANSWER);
-        tags = new HashSet<>();
+        tag = new Tag(DEFAULT_TAG);
     }
 
     /**
@@ -36,7 +37,7 @@ public class FlashcardBuilder {
     public FlashcardBuilder(Flashcard flashcardToCopy) {
         question = flashcardToCopy.getQuestion();
         answer = flashcardToCopy.getAnswer();
-        tags = new HashSet<>(flashcardToCopy.getTags());
+        tag = flashcardToCopy.getTag();
     }
 
     /**
@@ -50,8 +51,8 @@ public class FlashcardBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Flashcard} that we are building.
      */
-    public FlashcardBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public FlashcardBuilder withTag(String tag) {
+        this.tag = new Tag(tag);
         return this;
     }
 
@@ -64,7 +65,7 @@ public class FlashcardBuilder {
     }
 
     public Flashcard build() {
-        return new Flashcard(question, answer, tags);
+        return new Flashcard(question, answer, tag);
     }
 
 }

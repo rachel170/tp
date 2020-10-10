@@ -3,8 +3,7 @@ package seedu.flashnotes.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.ANSWER_DESC_AMY;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.QUESTION_DESC_AMY;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.*;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.AMY;
 
@@ -77,8 +76,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + QUESTION_DESC_AMY + ANSWER_DESC_AMY;
-        Flashcard expectedFlashcard = new FlashcardBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + QUESTION_DESC_AMY + ANSWER_DESC_AMY + TAG_DESC_FRIEND;
+        Flashcard expectedFlashcard = new FlashcardBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFlashcard(expectedFlashcard);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

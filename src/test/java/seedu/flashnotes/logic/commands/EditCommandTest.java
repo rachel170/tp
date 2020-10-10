@@ -56,11 +56,11 @@ public class EditCommandTest {
         FlashcardBuilder flashcardInList = new FlashcardBuilder(lastFlashcard);
         Flashcard editedFlashcard = flashcardInList.withQuestion(VALID_QUESTION_BOB)
                 .withAnswer(VALID_ANSWER_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTag(VALID_TAG_HUSBAND).build();
 
         EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
                 .withQuestion(VALID_QUESTION_BOB)
-                .withAnswer(VALID_ANSWER_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAnswer(VALID_ANSWER_BOB).withTag(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastFlashcard, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
