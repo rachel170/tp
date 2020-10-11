@@ -3,6 +3,7 @@ package seedu.flashnotes.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.flashnotes.commons.core.GuiSettings;
@@ -39,6 +40,9 @@ public class ReviewWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private ProgressBar progressBar;
+
     /**
      * Creates a new ReviewWindow.
      */
@@ -59,6 +63,9 @@ public class ReviewWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getFlashNotesFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        this.progressBar = new ProgressBar(0);
+        statusbarPlaceholder.getChildren().add(progressBar);
     }
 
     /**
@@ -110,6 +117,29 @@ public class ReviewWindow extends UiPart<Stage> {
     }
 
     /**
+     * Flips the flashcard to show the answer/question
+     */
+    public void handleFlip() {
+        this.individualFlashcard.flipFlashcard();
+    }
+
+    /**
+     * After marking the card as correct/wrong depending on user input,
+     * show the next card. If the card is wrong, add card to the back of
+     * the list to be reviewed again later.
+     *
+     * @param isCorrect
+     */
+    public void handleNextCard(int isCorrect) {
+        String result = individualFlashcard.handleNextCard(isCorrect);
+        if (result.equals("exit")) {
+            handleExit();
+        } else {
+            progressBar.setProgress(Double.parseDouble(result));
+        }
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -151,6 +181,14 @@ public class ReviewWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isNext() != 0) {
+                handleNextCard(commandResult.isNext());
+            }
+
+            if (commandResult.isFlipped()) {
+                handleFlip();
             }
 
             return commandResult;

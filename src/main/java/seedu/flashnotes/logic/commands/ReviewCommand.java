@@ -17,6 +17,6 @@ public class ReviewCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         model.shuffleReviewFlashcards();
-        return new CommandResult(SHOWING_REVIEW_MESSAGE, false, false, true);
+        return new CommandResult(SHOWING_REVIEW_MESSAGE, false, false, true, false, 0);
     }
 }

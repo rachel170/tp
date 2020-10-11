@@ -93,6 +93,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered flashcard list */
     ObservableList<Flashcard> getFlashcardsToReview();
 
+    /** Returns the modified list of flashcards to be reviewed */
+    ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
+
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

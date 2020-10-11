@@ -20,14 +20,23 @@ public class CommandResult {
     /** Start the review session **/
     private final boolean startReview;
 
+    /** Determines whether a card has been flipped **/
+    private final boolean isFlipped;
+
+    /** Go to the next card in the review mode **/
+    private final int isNext;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean startReview) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean startReview,
+                         boolean isFlipped, int isNext) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.startReview = startReview;
+        this.isFlipped = isFlipped;
+        this.isNext = isNext;
     }
 
     /**
@@ -35,7 +44,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false, 0);
     }
 
     public String getFeedbackToUser() {
@@ -52,6 +61,14 @@ public class CommandResult {
 
     public boolean isStartReview() {
         return startReview;
+    }
+
+    public boolean isFlipped() {
+        return isFlipped;
+    }
+
+    public int isNext() {
+        return isNext;
     }
 
     @Override
