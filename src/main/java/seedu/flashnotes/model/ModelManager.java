@@ -156,7 +156,7 @@ public class ModelManager implements Model {
 
         // Trim review list using card limit from user prefs
         Integer reviewCardLimit = userPrefs.getReviewCardLimit();
-        if (reviewCardLimit < flashcardsToReviewList.size()) {
+        if (reviewCardLimit < flashcardsToReviewList.size() && reviewCardLimit >= 1) {
             flashcardsToReviewList = FXCollections.observableArrayList(
                     flashcardsToReviewList.subList(0, reviewCardLimit));
         }
