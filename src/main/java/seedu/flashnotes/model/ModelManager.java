@@ -149,20 +149,19 @@ public class ModelManager implements Model {
      * Shuffles and trims the list of flashcards to review.
      */
     public void shuffleReviewFlashcards() {
-        // apply shuffling algorithm
+        // Apply shuffling algorithm
         ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
                 this.flashNotes.getFlashcardList());
         FXCollections.shuffle(flashcardsToReviewList);
 
-
-        // trim using user preferences
+        // Trim review list using card limit from user prefs
         Integer reviewCardLimit = userPrefs.getReviewCardLimit();
         if (reviewCardLimit < flashcardsToReviewList.size()) {
             flashcardsToReviewList = FXCollections.observableArrayList(
                     flashcardsToReviewList.subList(0, reviewCardLimit));
         }
 
-        // store shuffled and trimmed result into this.flashcardsToReview
+        // Store shuffled and trimmed list into flashcardsToReview list
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
     }
 
@@ -171,6 +170,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Flashcard> getFlashcardsToReview() {
+        System.out.println("getter " + flashcardsToReview);
         return flashcardsToReview;
     }
 

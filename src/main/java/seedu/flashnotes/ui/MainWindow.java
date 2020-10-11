@@ -158,7 +158,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!reviewWindow.isShowing()) {
             disableCommandBox();
             reviewWindow.show();
-            reviewWindow.fillInnerParts();
         } else {
             reviewWindow.focus();
         }
