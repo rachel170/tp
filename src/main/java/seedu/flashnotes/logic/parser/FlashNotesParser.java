@@ -2,12 +2,23 @@ package seedu.flashnotes.logic.parser;
 
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.flashnotes.logic.commands.*;
+import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.commands.ClearCommand;
+import seedu.flashnotes.logic.commands.Command;
+import seedu.flashnotes.logic.commands.DeleteCommand;
+import seedu.flashnotes.logic.commands.DeleteDeckCommand;
+import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EnterTagCommand;
+import seedu.flashnotes.logic.commands.ExitCommand;
+import seedu.flashnotes.logic.commands.FindCommand;
+import seedu.flashnotes.logic.commands.HelpCommand;
+import seedu.flashnotes.logic.commands.HomeCommand;
+import seedu.flashnotes.logic.commands.ListCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**

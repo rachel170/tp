@@ -6,12 +6,6 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
-import seedu.flashnotes.model.flashcard.Answer;
-import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.model.flashcard.Question;
-import seedu.flashnotes.model.tag.Tag;
-
-
 
 public class AddDeckCommand extends Command {
     public static final String COMMAND_WORD = "addDeck";
@@ -41,9 +35,11 @@ public class AddDeckCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
         //todo change the dummy initialisation of flashcards - PX
+
         //Tag tag = new Tag(toAdd.getDeckName());
         //model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
-                //new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
+        //new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
+
         model.addDeck(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDeckName()));

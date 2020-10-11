@@ -3,9 +3,9 @@ package seedu.flashnotes.model.flashcard;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
-import static seedu.flashnotes.testutil.TypicalFlashcards.BOB;
+import static seedu.flashnotes.testutil.TypicalFlashcards.MACROECONS;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 
 import java.util.Arrays;
@@ -76,7 +76,7 @@ public class UniqueFlashcardListTest {
     @Test
     public void setFlashcard_editedFlashcardHasSameDetails_success() {
         uniqueFlashcardList.add(WHAT);
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTag(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTag(VALID_TAG_NATURE)
                 .build();
         uniqueFlashcardList.setFlashcard(WHAT, editedAlice);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();
@@ -87,17 +87,17 @@ public class UniqueFlashcardListTest {
     @Test
     public void setFlashcard_editedFlashcardHasDifferentDetails_success() {
         uniqueFlashcardList.add(WHAT);
-        uniqueFlashcardList.setFlashcard(WHAT, BOB);
+        uniqueFlashcardList.setFlashcard(WHAT, MACROECONS);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();
-        expectedUniqueFlashcardList.add(BOB);
+        expectedUniqueFlashcardList.add(MACROECONS);
         assertEquals(expectedUniqueFlashcardList, uniqueFlashcardList);
     }
 
     @Test
     public void setFlashcard_editedFlashcardHasNonUniqueDetails_throwsDuplicateFlashcardException() {
         uniqueFlashcardList.add(WHAT);
-        uniqueFlashcardList.add(BOB);
-        assertThrows(DuplicateFlashcardException.class, () -> uniqueFlashcardList.setFlashcard(WHAT, BOB));
+        uniqueFlashcardList.add(MACROECONS);
+        assertThrows(DuplicateFlashcardException.class, () -> uniqueFlashcardList.setFlashcard(WHAT, MACROECONS));
     }
 
     @Test
@@ -127,7 +127,7 @@ public class UniqueFlashcardListTest {
     public void setFlashcards_uniqueFlashcardList_replacesOwnListWithProvidedUniqueFlashcardList() {
         uniqueFlashcardList.add(WHAT);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();
-        expectedUniqueFlashcardList.add(BOB);
+        expectedUniqueFlashcardList.add(MACROECONS);
         uniqueFlashcardList.setFlashcards(expectedUniqueFlashcardList);
         assertEquals(expectedUniqueFlashcardList, uniqueFlashcardList);
     }
@@ -140,10 +140,10 @@ public class UniqueFlashcardListTest {
     @Test
     public void setFlashcards_list_replacesOwnListWithProvidedList() {
         uniqueFlashcardList.add(WHAT);
-        List<Flashcard> flashcardList = Collections.singletonList(BOB);
+        List<Flashcard> flashcardList = Collections.singletonList(MACROECONS);
         uniqueFlashcardList.setFlashcards(flashcardList);
         UniqueFlashcardList expectedUniqueFlashcardList = new UniqueFlashcardList();
-        expectedUniqueFlashcardList.add(BOB);
+        expectedUniqueFlashcardList.add(MACROECONS);
         assertEquals(expectedUniqueFlashcardList, uniqueFlashcardList);
     }
 

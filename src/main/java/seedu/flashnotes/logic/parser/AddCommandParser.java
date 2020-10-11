@@ -3,7 +3,6 @@ package seedu.flashnotes.logic.parser;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
 
@@ -42,6 +41,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(flashcard);
     }
 
+    @Override
+    public AddCommand parse(String userInput) throws ParseException {
+        return parse(userInput, "Default");
+    }
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -50,8 +54,5 @@ public class AddCommandParser implements Parser<AddCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    @Override
-    public AddCommand parse(String userInput) throws ParseException {
-        return null;
-    }
+
 }

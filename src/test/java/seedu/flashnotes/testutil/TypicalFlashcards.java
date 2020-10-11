@@ -1,11 +1,10 @@
 package seedu.flashnotes.testutil;
 
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_AMY;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_AMY;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_SKY;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_SKY;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_DEFAULT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,12 +43,12 @@ public class TypicalFlashcards {
             .withAnswer("8482131").withTag("test").build();
 
     // Manually added - Flashcard's details found in {@code CommandTestUtil}
-    public static final Flashcard AMY = new FlashcardBuilder().withQuestion(VALID_QUESTION_AMY)
-            .withAnswer(VALID_ANSWER_AMY)
-            .withTag(VALID_TAG_FRIEND).build();
-    public static final Flashcard BOB = new FlashcardBuilder().withQuestion(VALID_QUESTION_BOB)
-            .withAnswer(VALID_ANSWER_BOB)
-            .withTag(VALID_TAG_HUSBAND).build();
+    public static final Flashcard SKY = new FlashcardBuilder().withQuestion(VALID_QUESTION_SKY)
+            .withAnswer(VALID_ANSWER_SKY)
+            .withTag(VALID_TAG_DEFAULT).build();
+    public static final Flashcard MACROECONS = new FlashcardBuilder().withQuestion(VALID_QUESTION_MACROECONS)
+            .withAnswer(VALID_ANSWER_MACROECONS)
+            .withTag(VALID_TAG_DEFAULT).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

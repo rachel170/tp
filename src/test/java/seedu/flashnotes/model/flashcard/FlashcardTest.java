@@ -2,11 +2,11 @@ package seedu.flashnotes.model.flashcard;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.flashnotes.testutil.TypicalFlashcards.BOB;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_ECONOMICS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
+import static seedu.flashnotes.testutil.TypicalFlashcards.MACROECONS;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 
 import org.junit.jupiter.api.Test;
@@ -25,17 +25,18 @@ public class FlashcardTest {
         assertFalse(WHAT.isSameFlashcard(null));
 
         // different answer -> returns false
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withAnswer(VALID_ANSWER_BOB)
-                .withTag(VALID_TAG_HUSBAND).build();
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withAnswer(VALID_ANSWER_MACROECONS)
+                .withTag(VALID_TAG_NATURE).build();
         assertFalse(WHAT.isSameFlashcard(editedAlice));
 
         // different question -> returns false
-        editedAlice = new FlashcardBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).withTag(VALID_TAG_HUSBAND).build();
+        editedAlice = new FlashcardBuilder(WHAT).withQuestion(VALID_QUESTION_MACROECONS)
+                .withTag(VALID_TAG_NATURE).build();
         assertFalse(WHAT.isSameFlashcard(editedAlice));
 
         // same question, same answer, different attributes -> returns false
         editedAlice = new FlashcardBuilder(WHAT)
-                .withTag(VALID_TAG_FRIEND).build();
+                .withTag(VALID_TAG_ECONOMICS).build();
         assertFalse(WHAT.isSameFlashcard(editedAlice));
     }
 
@@ -55,19 +56,19 @@ public class FlashcardTest {
         assertFalse(WHAT.equals(5));
 
         // different flashcard -> returns false
-        assertFalse(WHAT.equals(BOB));
+        assertFalse(WHAT.equals(MACROECONS));
 
         // different question -> returns false
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withQuestion(VALID_QUESTION_BOB).build();
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).withQuestion(VALID_QUESTION_MACROECONS).build();
         assertFalse(WHAT.equals(editedAlice));
 
         // different answer -> returns false
-        editedAlice = new FlashcardBuilder(WHAT).withAnswer(VALID_ANSWER_BOB).build();
+        editedAlice = new FlashcardBuilder(WHAT).withAnswer(VALID_ANSWER_MACROECONS).build();
         assertFalse(WHAT.equals(editedAlice));
 
 
         // different tags -> returns false
-        editedAlice = new FlashcardBuilder(WHAT).withTag(VALID_TAG_HUSBAND).build();
+        editedAlice = new FlashcardBuilder(WHAT).withTag(VALID_TAG_NATURE).build();
         assertFalse(WHAT.equals(editedAlice));
     }
 }

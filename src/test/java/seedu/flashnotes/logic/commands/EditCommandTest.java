@@ -2,11 +2,11 @@ package seedu.flashnotes.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_BOB;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.DESC_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.DESC_SKY;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_MACROECONS;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.showFlashcardAtIndex;
@@ -54,13 +54,13 @@ public class EditCommandTest {
         Flashcard lastFlashcard = model.getFilteredFlashcardList().get(indexLastFlashcard.getZeroBased());
 
         FlashcardBuilder flashcardInList = new FlashcardBuilder(lastFlashcard);
-        Flashcard editedFlashcard = flashcardInList.withQuestion(VALID_QUESTION_BOB)
-                .withAnswer(VALID_ANSWER_BOB)
-                .withTag(VALID_TAG_HUSBAND).build();
+        Flashcard editedFlashcard = flashcardInList.withQuestion(VALID_QUESTION_MACROECONS)
+                .withAnswer(VALID_ANSWER_MACROECONS)
+                .withTag(VALID_TAG_NATURE).build();
 
         EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
-                .withQuestion(VALID_QUESTION_BOB)
-                .withAnswer(VALID_ANSWER_BOB).withTag(VALID_TAG_HUSBAND).build();
+                .withQuestion(VALID_QUESTION_MACROECONS)
+                .withAnswer(VALID_ANSWER_MACROECONS).withTag(VALID_TAG_NATURE).build();
         EditCommand editCommand = new EditCommand(indexLastFlashcard, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
@@ -89,9 +89,9 @@ public class EditCommandTest {
 
         Flashcard flashcardInFilteredList = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         Flashcard editedFlashcard = new FlashcardBuilder(flashcardInFilteredList)
-                .withQuestion(VALID_QUESTION_BOB).build();
+                .withQuestion(VALID_QUESTION_MACROECONS).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_BOB).build());
+                new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_MACROECONS).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard);
 
@@ -127,7 +127,7 @@ public class EditCommandTest {
     public void execute_invalidFlashcardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
         EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
-                .withQuestion(VALID_QUESTION_BOB).build();
+                .withQuestion(VALID_QUESTION_MACROECONS).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
@@ -145,17 +145,17 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashNotes().getFlashcardList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_BOB).build());
+                new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_MACROECONS).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FLASHCARD, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FLASHCARD, DESC_SKY);
 
         // same values -> returns true
-        EditCommand.EditFlashcardDescriptor copyDescriptor = new EditCommand.EditFlashcardDescriptor(DESC_AMY);
+        EditCommand.EditFlashcardDescriptor copyDescriptor = new EditCommand.EditFlashcardDescriptor(DESC_SKY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_FLASHCARD, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -169,10 +169,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FLASHCARD, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FLASHCARD, DESC_SKY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FLASHCARD, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FLASHCARD, DESC_MACROECONS)));
     }
 
 }

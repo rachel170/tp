@@ -54,7 +54,7 @@ public class Deck {
 
         return otherDeck != null
                 && otherDeck.getDeckName().equals(getDeckName());
-                //&& (otherDeck.getResultStatistics().equals(getResultStatistics()));
+        //&& (otherDeck.getResultStatistics().equals(getResultStatistics()));
     }
     @Override
     public boolean equals(Object o) {

@@ -24,19 +24,21 @@ import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_QUESTION_AMY = "Why is the sky blue?";
-    public static final String VALID_QUESTION_BOB = "What is macroeconomics?";
-    public static final String VALID_ANSWER_AMY = "Because it's sleepy";
-    public static final String VALID_ANSWER_BOB = "I don't know";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_QUESTION_SKY = "Why is the sky blue?";
+    public static final String VALID_QUESTION_MACROECONS = "What is macroeconomics?";
+    public static final String VALID_ANSWER_SKY = "Because it's blue";
+    public static final String VALID_ANSWER_MACROECONS = "I don't know";
+    public static final String VALID_TAG_NATURE = "Nature";
+    public static final String VALID_TAG_ECONOMICS = "Economics";
+    public static final String VALID_TAG_DEFAULT = "Default";
 
-    public static final String QUESTION_DESC_AMY = " " + PREFIX_QUESTION + VALID_QUESTION_AMY;
-    public static final String QUESTION_DESC_BOB = " " + PREFIX_QUESTION + VALID_QUESTION_BOB;
-    public static final String ANSWER_DESC_AMY = " " + PREFIX_ANSWER + VALID_ANSWER_AMY;
-    public static final String ANSWER_DESC_BOB = " " + PREFIX_ANSWER + VALID_ANSWER_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String QUESTION_DESC_SKY = " " + PREFIX_QUESTION + VALID_QUESTION_SKY;
+    public static final String QUESTION_DESC_MACROECONS = " " + PREFIX_QUESTION + VALID_QUESTION_MACROECONS;
+    public static final String ANSWER_DESC_SKY = " " + PREFIX_ANSWER + VALID_ANSWER_SKY;
+    public static final String ANSWER_DESC_MACROECONS = " " + PREFIX_ANSWER + VALID_ANSWER_MACROECONS;
+    public static final String TAG_DESC_ECONOMICS = " " + PREFIX_TAG + VALID_TAG_ECONOMICS;
+    public static final String TAG_DESC_NATURE = " " + PREFIX_TAG + VALID_TAG_NATURE;
+    public static final String TAG_DESC_DEFAULT = " " + PREFIX_TAG + VALID_TAG_DEFAULT;
 
     public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // question cannot be blank
     public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + ""; // answer cannot be blank
@@ -45,16 +47,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditFlashcardDescriptor DESC_AMY;
-    public static final EditCommand.EditFlashcardDescriptor DESC_BOB;
+    public static final EditCommand.EditFlashcardDescriptor DESC_SKY;
+    public static final EditCommand.EditFlashcardDescriptor DESC_MACROECONS;
 
     static {
-        DESC_AMY = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_AMY)
-                .withAnswer(VALID_ANSWER_AMY)
-                .withTag(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_BOB)
-                .withAnswer(VALID_ANSWER_BOB)
-                .withTag(VALID_TAG_HUSBAND).build();
+        DESC_SKY = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_SKY)
+                .withAnswer(VALID_ANSWER_SKY)
+                .withTag(VALID_TAG_ECONOMICS).build();
+        DESC_MACROECONS = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_MACROECONS)
+                .withAnswer(VALID_ANSWER_MACROECONS)
+                .withTag(VALID_TAG_NATURE).build();
     }
 
     /**

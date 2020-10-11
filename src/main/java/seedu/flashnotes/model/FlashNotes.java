@@ -129,6 +129,10 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         flashcards.remove(key);
     }
 
+    /**
+     * Removes all flashcards with the specified tag.
+     * @param tag
+     */
     public void removeFlashcardByTag(Tag tag) {
         ArrayList<Flashcard> toBeRemoved = new ArrayList<>();
         for (Flashcard flashcard : flashcards) {

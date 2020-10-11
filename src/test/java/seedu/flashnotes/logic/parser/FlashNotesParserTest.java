@@ -32,10 +32,10 @@ import seedu.flashnotes.testutil.FlashcardBuilder;
 import seedu.flashnotes.testutil.FlashcardUtil;
 
 public class FlashNotesParserTest {
+    private static final String DEFAULT = "Default";
 
     private final FlashNotesParser parser = new FlashNotesParser();
     private boolean isInDeck = true;
-    private String DEFAULT = "Default";
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -116,7 +116,7 @@ public class FlashNotesParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND,
-                () -> parser.parseCommand("unknownCommand", isInDeck, DEFAULT));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+            -> parser.parseCommand("unknownCommand", isInDeck, DEFAULT));
     }
 }

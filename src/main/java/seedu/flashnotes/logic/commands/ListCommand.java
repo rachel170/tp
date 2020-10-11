@@ -13,7 +13,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all flashcards";
+    public static final String MESSAGE_SUCCESS = Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW
+            + " " + "Listed all flashcards";
 
     public static final String DECK_NAME = "Default";
 
@@ -25,8 +26,7 @@ public class ListCommand extends Command {
         model.setIsInDeckTrue();
         model.setCurrentDeckName(DECK_NAME);
         return new CommandResult(
-                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW
-                        + " " + MESSAGE_SUCCESS,
+                String.format(MESSAGE_SUCCESS,
                         model.getFilteredFlashcardList().size()));
     }
 }
