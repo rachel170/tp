@@ -19,6 +19,7 @@ import seedu.flashnotes.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -88,5 +89,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses integer and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified integer is invalid (not greater than 0).
+     */
+    public static Integer parseInteger(String integerString) throws ParseException {
+        String trimmedInteger = integerString.trim();
+        try {
+            return Integer.parseInt(trimmedInteger);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_LIMIT);
+        }
+
     }
 }

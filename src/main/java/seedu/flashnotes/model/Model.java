@@ -45,6 +45,16 @@ public interface Model {
     void setFlashNotesFilePath(Path flashNotesFilePath);
 
     /**
+     * Returns the user prefs' review card limit.
+     */
+    Integer getReviewCardLimit();
+
+    /**
+     * Sets the user prefs' review card limit.
+     */
+    void setReviewCardLimit(Integer reviewCardLimit);
+
+    /**
      * Replaces flashnotes data with the data in {@code flashNotes}.
      */
     void setFlashNotes(ReadOnlyFlashNotes flashNotes);
@@ -80,9 +90,17 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered flashcard list */
     ObservableList<Flashcard> getFilteredFlashcardList();
 
+    /** Returns an unmodifiable view of the filtered flashcard list */
+    ObservableList<Flashcard> getFlashcardsToReview();
+
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
+
+    /**
+     * Shuffles the flashcards for the review session.
+     */
+    void shuffleReviewFlashcards();
 }

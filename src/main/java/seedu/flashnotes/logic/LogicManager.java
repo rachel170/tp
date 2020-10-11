@@ -65,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Flashcard> getFlashcardsToReview() {
+        return model.getFlashcardsToReview();
+    }
+
+    @Override
     public Path getFlashNotesFilePath() {
         return model.getFlashNotesFilePath();
     }
@@ -77,5 +82,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Integer getReviewCardLimit() {
+        return model.getReviewCardLimit();
+    }
+
+    @Override
+    public void setReviewCardLimit(Integer reviewCardLimit) {
+        model.setReviewCardLimit(reviewCardLimit);
     }
 }

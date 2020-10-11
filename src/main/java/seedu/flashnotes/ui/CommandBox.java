@@ -44,6 +44,14 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    public void disable() {
+        commandTextField.setEditable(false);
+    }
+
+    public void enable() {
+        commandTextField.setEditable(true);
+    }
+
     /**
      * Sets the command box style to use the default style.
      */
