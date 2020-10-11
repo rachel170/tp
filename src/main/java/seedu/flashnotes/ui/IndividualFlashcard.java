@@ -93,8 +93,7 @@ public class IndividualFlashcard extends UiPart<Region> {
         } else {
             this.flipped = false;
             displayFlashcard();
-            return Double.toString(count/numOfFlashcards);
+            return Double.toString(count / numOfFlashcards);
         }
     }
-
 }
