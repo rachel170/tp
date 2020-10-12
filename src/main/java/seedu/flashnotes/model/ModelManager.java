@@ -151,7 +151,7 @@ public class ModelManager implements Model {
     public void shuffleReviewFlashcards() {
         // Apply shuffling algorithm
         ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
-                this.flashNotes.getFlashcardList());
+                getFilteredFlashcardList());
         FXCollections.shuffle(flashcardsToReviewList);
 
         // Trim review list using card limit from user prefs
