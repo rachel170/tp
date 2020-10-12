@@ -42,6 +42,34 @@ public class FlashNotesParser {
 
     private boolean isReviewMode = false;
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public Command parseCommand(String userInput, boolean isInDeck, String deckName) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        if (this.isReviewMode) {
+            return parseCommandInReviewMode(commandWord, arguments);
+        }
+
+        if (!isInDeck){
+            return parseCommandInHomeMode(commandWord, arguments);
+        } else {
+            return parseCommandInCardMode(commandWord, arguments, deckName);
+        }
+    }
+
+
     private Command parseCommandInReviewMode(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
@@ -53,6 +81,8 @@ public class FlashNotesParser {
         case SetReviewLimitCommand.COMMAND_WORD:
         case EnterDeckCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
+        case AddDeckCommand.COMMAND_WORD:
+        case DeleteDeckCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
         case ReviewCommand.COMMAND_WORD:
@@ -77,82 +107,29 @@ public class FlashNotesParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-    /**
-     * Parses user input into command for execution.
-     *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public Command parseCommand(String userInput, boolean isInDeck, String deckName) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-
-        if (this.isReviewMode) {
-            return parseCommandInReviewMode(commandWord, arguments);
-        } else {
-            return parseCommandInNormalMode(commandWord, arguments, isInDeck, deckName);
-        }
-    }
-
-    private Command parseCommandInNormalMode(
-            String commandWord, String arguments, boolean isInDeck, String deckName) throws ParseException {
+    private Command parseCommandInHomeMode(
+            String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
-            if (!isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
-            }
-            return new AddCommandParser().parse(arguments, deckName);
-
         case EditCommand.COMMAND_WORD:
-            if (!isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
-            }
-            return new EditCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
-            if (!isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
-            }
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            if (isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
-            }
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
-            if (!isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
-            }
-            return new FindCommandParser().parse(arguments);
-
         case ReviewCommand.COMMAND_WORD:
-            this.isReviewMode = true;
-            return new ReviewCommand();
+        case CorrectCommand.COMMAND_WORD:
+        case FlipCommand.COMMAND_WORD:
+        case HomeCommand.COMMAND_WORD:
+        case WrongCommand.COMMAND_WORD:
+            throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
 
-        case SetReviewLimitCommand.COMMAND_WORD:
-            return new SetReviewLimitCommandParser().parse(arguments);
+        case AddDeckCommand.COMMAND_WORD:
+            return new AddDeckCommandParser().parse(arguments);
+
+        case DeleteDeckCommand.COMMAND_WORD:
+            return new DeleteDeckCommandParser().parse(arguments);
 
         case EnterDeckCommand.COMMAND_WORD:
-            if (isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
-            }
             return new EnterDeckCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            //TODO: Removal of list command?
-            if (isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
-            }
-            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -160,23 +137,52 @@ public class FlashNotesParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case HomeCommand.COMMAND_WORD:
-            return new HomeCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-        case AddDeckCommand.COMMAND_WORD:
-            if (isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
-            }
-            return new AddDeckCommandParser().parse(arguments);
-
-        case DeleteDeckCommand.COMMAND_WORD:
-            if (isInDeck) {
-                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
-            }
-            return new DeleteDeckCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    private Command parseCommandInCardMode(
+            String commandWord, String arguments, String deckName) throws ParseException {
+        switch (commandWord) {
+        case AddDeckCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_WORD:
+        case CorrectCommand.COMMAND_WORD:
+        case DeleteDeckCommand.COMMAND_WORD:
+        case EnterDeckCommand.COMMAND_WORD:
+        case FlipCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD:
+        case WrongCommand.COMMAND_WORD:
+            throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments, deckName);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+        case HomeCommand.COMMAND_WORD:
+            return new HomeCommandParser().parse(arguments);
+        case ReviewCommand.COMMAND_WORD:
+            this.isReviewMode = true;
+            return new ReviewCommand();
+        case SetReviewLimitCommand.COMMAND_WORD:
+            return new SetReviewLimitCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
         }
     }
 
