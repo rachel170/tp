@@ -3,7 +3,6 @@ package seedu.flashnotes.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
@@ -46,8 +45,7 @@ public class FlashNotesTest {
     @Test
     public void resetData_withDuplicateFlashcards_throwsDuplicateFlashcardException() {
         // Two flashcards with the same identity fields
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Flashcard editedAlice = new FlashcardBuilder(WHAT).build();
         List<Flashcard> newFlashcards = Arrays.asList(WHAT, editedAlice);
         FlashNotesStub newData = new FlashNotesStub(newFlashcards);
 
@@ -73,7 +71,7 @@ public class FlashNotesTest {
     @Test
     public void hasFlashcard_flashcardWithSameDetailFieldsInFlashNotes_returnsTrue() {
         flashNotes.addFlashcard(WHAT);
-        Flashcard editedAlice = new FlashcardBuilder(WHAT).withTags(VALID_TAG_HUSBAND)
+        Flashcard editedAlice = new FlashcardBuilder(WHAT)
                 .build();
         assertTrue(flashNotes.hasFlashcard(editedAlice));
     }

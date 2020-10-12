@@ -80,6 +80,17 @@ public interface Model {
      */
     void setDeck(Deck target, Deck editedDeck);
 
+    boolean getIsInDeck();
+
+    void setIsInDeckTrue();
+
+    void setIsInDeckFalse();
+
+    void setCurrentDeckName(String deckName);
+
+    String getCurrentDeckName();
+
+
     /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();
 

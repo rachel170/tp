@@ -100,6 +100,7 @@ public class ModelManager implements Model {
     public void deleteDeck(Deck target) {
         //todo delete deck - PX
         flashNotes.removeDeck(target);
+        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
     }
 
     @Override
@@ -113,6 +114,31 @@ public class ModelManager implements Model {
     public void setDeck(Deck target, Deck editedDeck) {
         flashNotes.setDeck(target, editedDeck);
 
+    }
+
+    @Override
+    public boolean getIsInDeck() {
+        return flashNotes.getIsInDeck();
+    }
+
+    @Override
+    public void setIsInDeckTrue() {
+        flashNotes.setIsInDeckTrue();
+    }
+
+    @Override
+    public void setIsInDeckFalse() {
+        flashNotes.setIsInDeckFalse();
+    }
+
+    @Override
+    public void setCurrentDeckName(String deckName) {
+        flashNotes.setCurrentDeckName(deckName);
+    }
+
+    @Override
+    public String getCurrentDeckName() {
+        return flashNotes.getCurrentDeckName();
     }
 
     @Override
@@ -140,7 +166,7 @@ public class ModelManager implements Model {
     @Override
     public void addFlashcard(Flashcard flashcard) {
         flashNotes.addFlashcard(flashcard);
-        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        //updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override

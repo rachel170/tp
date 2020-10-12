@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.flashnotes.model.deck.Deck;
@@ -21,6 +20,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     private final UniqueFlashcardList flashcards;
     private final UniqueDeckList decks;
+    private boolean isInDeck;
+    private String currentDeckName;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +33,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     {
         flashcards = new UniqueFlashcardList();
         decks = new UniqueDeckList();
+        isInDeck = false;
+        currentDeckName = null;
     }
 
     public FlashNotes() {}
@@ -74,19 +77,11 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         //TODO eventually to be changed to read directly from list - PX
         List<Deck> newDeckData = new ArrayList<>();
         List<String> uniqueDeckNames = new ArrayList<>();
-        uniqueDeckNames.add("Default");
+        //uniqueDeckNames.add("Default");
         for (Flashcard card : newData.getFlashcardList()) {
-            Set<Tag> tags = card.getTags();
-            for (Tag tag: tags) {
-                int size = uniqueDeckNames.size();
-                for (String deckName: uniqueDeckNames) {
-                    if (!tag.tagName.equals(deckName)) {
-                        size--;
-                    }
-                }
-                if (size == 0) {
-                    uniqueDeckNames.add(tag.tagName);
-                }
+            Tag tag = card.getTag();
+            if (!uniqueDeckNames.contains(tag.tagName)) {
+                uniqueDeckNames.add(tag.tagName);
             }
         }
         for (String s : uniqueDeckNames) {
@@ -134,6 +129,23 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         flashcards.remove(key);
     }
 
+    /**
+     * Removes all flashcards with the specified tag.
+     * @param tag
+     */
+    public void removeFlashcardByTag(Tag tag) {
+        ArrayList<Flashcard> toBeRemoved = new ArrayList<>();
+        for (Flashcard flashcard : flashcards) {
+            if (flashcard.getTag().equals(tag)) {
+                toBeRemoved.add(flashcard);
+            }
+        }
+
+        for (int i = 0; i < toBeRemoved.size(); i++) {
+            removeFlashcard(toBeRemoved.get(i));
+        }
+    }
+
 
     //// Deck-level operations
 
@@ -170,8 +182,34 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      * {@code keyDeck} must exist in the flashnotes.
      */
     public void removeDeck(Deck keyDeck) {
+        removeFlashcardByTag(new Tag(keyDeck.getDeckName()));
         decks.remove(keyDeck);
     }
+
+    public boolean getIsInDeck() {
+        return isInDeck;
+    }
+
+    public void setIsInDeckTrue() {
+        isInDeck = true;
+    }
+
+    public void setIsInDeckFalse() {
+        isInDeck = false;
+    }
+
+    public void setCurrentDeckName(String deckName) {
+        this.currentDeckName = deckName;
+    }
+
+    public String getCurrentDeckName() {
+        if (!isInDeck) {
+            return null;
+        }
+        return currentDeckName;
+    }
+
+
     //// util methods
 
     @Override

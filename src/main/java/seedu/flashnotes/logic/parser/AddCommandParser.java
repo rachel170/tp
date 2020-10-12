@@ -3,9 +3,7 @@ package seedu.flashnotes.logic.parser;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.flashnotes.logic.commands.AddCommand;
@@ -25,9 +23,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddCommand parse(String args, String deckName) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ANSWER)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -36,11 +34,16 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Tag tag = new Tag(deckName);
 
-        Flashcard flashcard = new Flashcard(question, answer, tagList);
+        Flashcard flashcard = new Flashcard(question, answer, tag);
 
         return new AddCommand(flashcard);
+    }
+
+    @Override
+    public AddCommand parse(String userInput) throws ParseException {
+        return parse(userInput, "Default");
     }
 
     /**
@@ -50,5 +53,6 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
 
 }

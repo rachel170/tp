@@ -3,18 +3,9 @@ package seedu.flashnotes.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
-import seedu.flashnotes.model.flashcard.Answer;
-import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.model.flashcard.Question;
-import seedu.flashnotes.model.tag.Tag;
-
-
 
 public class AddDeckCommand extends Command {
     public static final String COMMAND_WORD = "addDeck";
@@ -44,12 +35,13 @@ public class AddDeckCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
         //todo change the dummy initialisation of flashcards - PX
-        Set<Tag> set = new HashSet<>();
-        set.add(new Tag(toAdd.getDeckName()));
-        model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
-                new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), set));
+
+        //Tag tag = new Tag(toAdd.getDeckName());
+        //model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
+        //new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
+
         model.addDeck(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDeckName()));
     }
 }

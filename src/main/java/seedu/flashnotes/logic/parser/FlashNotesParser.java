@@ -11,19 +11,22 @@ import seedu.flashnotes.logic.commands.AddDeckCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.DeleteCommand;
+import seedu.flashnotes.logic.commands.DeleteDeckCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EnterTagCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
 import seedu.flashnotes.logic.commands.HomeCommand;
 import seedu.flashnotes.logic.commands.ListCommand;
-import seedu.flashnotes.logic.commands.ListTagsCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
 public class FlashNotesParser {
+    private static final String ILLEGAL_COMMAND_IN_HOME_MESSAGE = "Cannot call command in home screen.";
+    private static final String ILLEGAL_COMMAND_IN_CARD_MESSAGE = "Cannot call command in card screen.";
 
     /**
      * Used for initial separation of command word and args.
@@ -37,7 +40,7 @@ public class FlashNotesParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, boolean isInDeck, String deckName) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -45,27 +48,50 @@ public class FlashNotesParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            if (!isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
+            }
+            return new AddCommandParser().parse(arguments, deckName);
 
         case EditCommand.COMMAND_WORD:
+            if (!isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
+            }
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            if (!isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
+            }
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            if (isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            }
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+            if (!isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
+            }
             return new FindCommandParser().parse(arguments);
 
-        case ListTagsCommand.COMMAND_WORD:
-            return new ListTagsCommandParser().parse(arguments);
+        case EnterTagCommand.COMMAND_WORD:
+            if (isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            }
+            return new EnterTagCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            //TODO: Removal of list command?
+            if (isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            }
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
@@ -78,7 +104,16 @@ public class FlashNotesParser {
             return new HomeCommandParser().parse(arguments);
 
         case AddDeckCommand.COMMAND_WORD:
+            if (isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            }
             return new AddDeckCommandParser().parse(arguments);
+
+        case DeleteDeckCommand.COMMAND_WORD:
+            if (isInDeck) {
+                throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            }
+            return new DeleteDeckCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
