@@ -18,7 +18,7 @@ import seedu.flashnotes.logic.commands.AddCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.DeleteCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
-import seedu.flashnotes.logic.commands.EnterTagCommand;
+import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
@@ -89,9 +89,9 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_enterTag() throws Exception {
         String keyword = "foo";
-        EnterTagCommand command = (EnterTagCommand) parser.parseCommand(
-                EnterTagCommand.COMMAND_WORD + " " + keyword, !isInDeck, DEFAULT);
-        assertEquals(new EnterTagCommand(new TagContainsKeywordsPredicate(keyword)), command);
+        EnterDeckCommand command = (EnterDeckCommand) parser.parseCommand(
+                EnterDeckCommand.COMMAND_WORD + " " + keyword, !isInDeck, DEFAULT);
+        assertEquals(new EnterDeckCommand(new TagContainsKeywordsPredicate(keyword)), command);
     }
 
     @Test
