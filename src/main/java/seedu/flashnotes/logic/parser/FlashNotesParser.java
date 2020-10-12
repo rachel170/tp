@@ -16,7 +16,7 @@ import seedu.flashnotes.logic.commands.CorrectCommand;
 import seedu.flashnotes.logic.commands.DeleteCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
-import seedu.flashnotes.logic.commands.EnterTagCommand;
+import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.FlipCommand;
@@ -51,7 +51,7 @@ public class FlashNotesParser {
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
-        case EnterTagCommand.COMMAND_WORD:
+        case EnterDeckCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
@@ -141,11 +141,11 @@ public class FlashNotesParser {
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
 
-        case EnterTagCommand.COMMAND_WORD:
+        case EnterDeckCommand.COMMAND_WORD:
             if (isInDeck) {
                 throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
             }
-            return new EnterTagCommandParser().parse(arguments);
+            return new EnterDeckCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             //TODO: Removal of list command?
