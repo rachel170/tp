@@ -104,6 +104,7 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_LIMIT);
         }
+    }
 
     /**
      * Parses a {@code String deckName} into a {@code Deck}.

@@ -18,9 +18,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-  
-    //TODO shift to root node 
-    private ReviewWindow reviewWindow;
 
     private RootNode rootNode;
 
@@ -39,10 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
         Region root = rootNode.getFxmlLoader().getRoot();
         primaryStage.setScene(new Scene(root));
-        
-        //TODO shift to root node 
-        helpWindow = new HelpWindow();
-        reviewWindow = new ReviewWindow(logic, primaryStage);
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
     }
@@ -70,19 +64,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Opens the review window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleReview() {
-        if (!reviewWindow.isShowing()) {
-            disableCommandBox();
-            reviewWindow.show();
-        } else {
-            reviewWindow.focus();
-        }
-    }
-
     void show() {
         primaryStage.show();
     }
@@ -95,54 +76,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
-        reviewWindow.hide();
-        primaryStage.hide();
-    }
-
-    //TODO shift to root node 
-    private void disableCommandBox() { 
-        this.commandBox.disable();
-    }
-    //TODO shift to root node 
-    private void enableCommandBox() {
-        this.commandBox.enable();
-    }
-
-    public FlashcardListPanel getFlashcardListPanel() {
-        return flashcardListPanel;
-    }
-
-    /**
-     * Executes the command and returns the result.
-     *
-     * @see seedu.flashnotes.logic.Logic#execute(String)
-     */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
-        try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-            //todo shift to root node
-            if (commandResult.isStartReview()) {
-                handleReview();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            return commandResult;
-        } catch (CommandException | ParseException e) {
-            logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
-            throw e;
-        }
-    }
-        primaryStage.hide();
+        rootNode.handleExit();
     }
 }
