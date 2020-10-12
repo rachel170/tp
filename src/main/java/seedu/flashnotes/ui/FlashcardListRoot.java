@@ -30,6 +30,8 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReviewWindow reviewWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -56,6 +58,7 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        reviewWindow = new ReviewWindow(logic, primaryStage);
     }
 
     private void setAccelerators() {
@@ -104,7 +107,7 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getFlashNotesFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -124,17 +127,37 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
             helpWindow.focus();
         }
     }
+    /**
+     * Opens the review window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReview() {
+        if (!reviewWindow.isShowing()) {
+            disableCommandBox();
+            reviewWindow.show();
+        } else {
+            reviewWindow.focus();
+        }
+    }
 
     /**
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    public void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reviewWindow.hide();
         primaryStage.hide();
+    }
+    private void disableCommandBox() {
+        this.commandBox.disable();
+    }
+
+    private void enableCommandBox() {
+        this.commandBox.enable();
     }
 
     public FlashcardListPanel getFlashcardListPanel() {
@@ -155,6 +178,9 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
                 handleHelp();
             }
 
+            if (commandResult.isStartReview()) {
+                handleReview();
+            }
             if (commandResult.isExit()) {
                 handleExit();
             }

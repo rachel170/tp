@@ -69,6 +69,7 @@ public class CommandResult {
 
     public int isNext() {
         return isNext;
+    }
 
     public boolean isHome() {
         return feedbackToUser.startsWith("Back Home.");

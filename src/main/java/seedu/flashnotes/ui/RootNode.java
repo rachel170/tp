@@ -8,4 +8,5 @@ public interface RootNode {
     FXMLLoader getFxmlLoader();
 
     void setFeedbackToUser(String s);
+    void handleExit();
 }

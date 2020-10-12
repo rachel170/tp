@@ -26,7 +26,6 @@ import seedu.flashnotes.logic.commands.ListCommand;
 import seedu.flashnotes.logic.commands.ReviewCommand;
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.commands.WrongCommand;
-
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,7 +51,7 @@ public class FlashNotesParser {
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
-        case ListTagsCommand.COMMAND_WORD:
+        case EnterTagCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
@@ -76,6 +75,8 @@ public class FlashNotesParser {
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
     /**
      * Parses user input into command for execution.
      *
@@ -84,7 +85,7 @@ public class FlashNotesParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, boolean isInDeck, String deckName) throws ParseException {
-      final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -99,11 +100,8 @@ public class FlashNotesParser {
         }
     }
 
-    private Command parseCommandInNormalMode(String commandWord, String arguments, boolean isInDeck, String deckName) throws ParseException {
-
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-
+    private Command parseCommandInNormalMode(
+            String commandWord, String arguments, boolean isInDeck, String deckName) throws ParseException {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -142,9 +140,6 @@ public class FlashNotesParser {
 
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
-
-        case ListTagsCommand.COMMAND_WORD:
-            return new ListTagsCommandParser().parse(arguments);
 
         case EnterTagCommand.COMMAND_WORD:
             if (isInDeck) {
