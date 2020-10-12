@@ -156,7 +156,7 @@ public class ModelManager implements Model {
 
         // Trim review list using card limit from user prefs
         Integer reviewCardLimit = userPrefs.getReviewCardLimit();
-        if (reviewCardLimit < flashcardsToReviewList.size()) {
+        if (reviewCardLimit < flashcardsToReviewList.size() && reviewCardLimit >= 1) {
             flashcardsToReviewList = FXCollections.observableArrayList(
                     flashcardsToReviewList.subList(0, reviewCardLimit));
         }
@@ -171,6 +171,20 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Flashcard> getFlashcardsToReview() {
         System.out.println("getter " + flashcardsToReview);
+        return flashcardsToReview;
+    }
+
+    /**
+     * Returns the modified list of flashcards to be reviewed after adding the extra flashcard
+     * @param flashcard
+     * @return
+     */
+    @Override
+    public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
+        ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
+                this.flashcardsToReview);
+        flashcardsToReviewList.add(flashcard);
+        this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
         return flashcardsToReview;
     }
 

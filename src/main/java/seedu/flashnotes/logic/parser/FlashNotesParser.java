@@ -11,15 +11,18 @@ import java.util.regex.Pattern;
 import seedu.flashnotes.logic.commands.AddCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
+import seedu.flashnotes.logic.commands.CorrectCommand;
 import seedu.flashnotes.logic.commands.DeleteCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
+import seedu.flashnotes.logic.commands.FlipCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
 import seedu.flashnotes.logic.commands.ListCommand;
 import seedu.flashnotes.logic.commands.ListTagsCommand;
 import seedu.flashnotes.logic.commands.ReviewCommand;
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
+import seedu.flashnotes.logic.commands.WrongCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
@@ -38,31 +41,26 @@ public class FlashNotesParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
-
         case EditCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
-
         case DeleteCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
-
         case ClearCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
-
         case FindCommand.COMMAND_WORD:
+        case SetReviewLimitCommand.COMMAND_WORD:
+        case ListTagsCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
         case ReviewCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
 
-        case SetReviewLimitCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case FlipCommand.COMMAND_WORD:
+            return new FlipCommand();
 
-        case ListTagsCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case CorrectCommand.COMMAND_WORD:
+            return new CorrectCommand();
 
-        case ListCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
+        case WrongCommand.COMMAND_WORD:
+            return new WrongCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -17,6 +17,9 @@ public class IndividualFlashcard extends UiPart<Region> {
     private final Logic logic;
     private ObservableList<Flashcard> flashcardsToReview;
     private int index;
+    private double count;
+    private boolean flipped;
+    private int numOfFlashcards;
     /**
      * Update these below to match flashcard.
      */
@@ -33,6 +36,7 @@ public class IndividualFlashcard extends UiPart<Region> {
     public IndividualFlashcard(Logic logic) {
         super(FXML);
         this.index = 0;
+        this.count = 0;
         this.logic = logic;
     }
 
@@ -41,6 +45,7 @@ public class IndividualFlashcard extends UiPart<Region> {
      */
     public void init() {
         this.flashcardsToReview = logic.getFlashcardsToReview();
+        this.numOfFlashcards = flashcardsToReview.size();
     }
 
     /**
@@ -54,4 +59,41 @@ public class IndividualFlashcard extends UiPart<Region> {
         answer.setVisible(false);
     }
 
+    /**
+     * Flips the flashcard to show the answer/question
+     */
+    public void flipFlashcard() {
+        this.flipped = !flipped;
+        if (flipped) {
+            question.setVisible(false);
+            answer.setVisible(true);
+        } else {
+            question.setVisible(true);
+            answer.setVisible(false);
+        }
+    }
+
+    /**
+     * After marking the card as correct/wrong depending on user input,
+     * show the next card. If the card is wrong, add card to the back of
+     * the list to be reviewed again later.
+     *
+     * @param isCorrect
+     */
+    public String handleNextCard(int isCorrect) {
+        if (isCorrect == 2) {
+            this.count += 1;
+        } else {
+            Flashcard incorrectFlashcard = flashcardsToReview.get(this.index);
+            this.flashcardsToReview = logic.addFlashcardToReview(incorrectFlashcard);
+        }
+        this.index += 1;
+        if (count == numOfFlashcards) {
+            return "exit";
+        } else {
+            this.flipped = false;
+            displayFlashcard();
+            return Double.toString(count / numOfFlashcards);
+        }
+    }
 }
