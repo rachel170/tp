@@ -45,5 +45,4 @@ public class FlashcardListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

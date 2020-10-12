@@ -71,6 +71,15 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Flashcard> getFlashcardsToReview() {
+        return model.getFlashcardsToReview();
+    }
+
+    @Override
+    public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
+        return model.addFlashcardToReview(flashcard);
+    }
+
     public ObservableList<Deck> getFilteredCardDeckList() {
         return model.getFilteredDeckList();
     };
@@ -88,5 +97,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Integer getReviewCardLimit() {
+        return model.getReviewCardLimit();
+    }
+
+    @Override
+    public void setReviewCardLimit(Integer reviewCardLimit) {
+        model.setReviewCardLimit(reviewCardLimit);
     }
 }

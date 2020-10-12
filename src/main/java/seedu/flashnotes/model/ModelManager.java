@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.flashnotes.commons.core.GuiSettings;
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final FlashNotes flashNotes;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
+    private FilteredList<Flashcard> flashcardsToReview;
     private final FilteredList<Deck> filteredDecks;
 
     /**
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.flashNotes = new FlashNotes(flashNotes);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.flashNotes.getFlashcardList());
+        flashcardsToReview = new FilteredList<>(this.flashNotes.getFlashcardList());
         filteredDecks = new FilteredList<>(this.flashNotes.getDeckList());
     }
 
@@ -77,6 +80,17 @@ public class ModelManager implements Model {
     public void setFlashNotesFilePath(Path flashNotesFilePath) {
         requireNonNull(flashNotesFilePath);
         userPrefs.setFlashNotesFilePath(flashNotesFilePath);
+    }
+
+    @Override
+    public Integer getReviewCardLimit() {
+        return userPrefs.getReviewCardLimit();
+    }
+
+    @Override
+    public void setReviewCardLimit(Integer reviewCardLimit) {
+        requireNonNull(reviewCardLimit);
+        userPrefs.setReviewCardLimit(reviewCardLimit);
     }
 
     //=========== FlashNotes ================================================================================
@@ -193,6 +207,50 @@ public class ModelManager implements Model {
         filteredFlashcards.setPredicate(predicate);
     }
 
+    //=========== Shuffled Flashcard List Operations =============================================================
+
+    /**
+     * Shuffles and trims the list of flashcards to review.
+     */
+    public void shuffleReviewFlashcards() {
+        // Apply shuffling algorithm
+        ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
+                getFilteredFlashcardList());
+        FXCollections.shuffle(flashcardsToReviewList);
+
+        // Trim review list using card limit from user prefs
+        Integer reviewCardLimit = userPrefs.getReviewCardLimit();
+        if (reviewCardLimit < flashcardsToReviewList.size() && reviewCardLimit >= 1) {
+            flashcardsToReviewList = FXCollections.observableArrayList(
+                    flashcardsToReviewList.subList(0, reviewCardLimit));
+        }
+
+        // Store shuffled and trimmed list into flashcardsToReview list
+        this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Flashcard} to review.
+     */
+    @Override
+    public ObservableList<Flashcard> getFlashcardsToReview() {
+        System.out.println("getter " + flashcardsToReview);
+        return flashcardsToReview;
+    }
+
+    /**
+     * Returns the modified list of flashcards to be reviewed after adding the extra flashcard
+     * @param flashcard
+     * @return
+     */
+    @Override
+    public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
+        ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
+                this.flashcardsToReview);
+        flashcardsToReviewList.add(flashcard);
+        this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
+        return flashcardsToReview;
+    }
     // =========== Util methods =============================================================
 
     @Override

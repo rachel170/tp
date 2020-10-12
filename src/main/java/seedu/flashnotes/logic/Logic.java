@@ -39,6 +39,16 @@ public interface Logic {
     ObservableList<Deck> getFilteredCardDeckList();
 
     /**
+     * Returns an unmodifiable view of the flashcards to review.
+     */
+    ObservableList<Flashcard> getFlashcardsToReview();
+
+    /**
+     * Returns the modified list of flashcards to be reviewed
+     */
+    ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
+
+    /**
      * Returns the user prefs' flashnotes file path.
      */
     Path getFlashNotesFilePath();
@@ -52,4 +62,14 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' review card limit.
+     */
+    Integer getReviewCardLimit();
+
+    /**
+     * Set the user prefs' review card limit.
+     */
+    void setReviewCardLimit(Integer reviewCardLimit);
 }

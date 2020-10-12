@@ -111,6 +111,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void shuffleReviewFlashcards() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addFlashcard(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
@@ -126,6 +131,14 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Flashcard> getFlashcardsToReview() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
+            throw new AssertionError("This method should not be called.");
+          
         public boolean hasDeck(Deck deck) {
             return false;
         }
@@ -202,6 +215,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getReviewCardLimit() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setReviewCardLimit(Integer reviewCardLimit) {
             throw new AssertionError("This method should not be called.");
         }
     }
