@@ -14,6 +14,7 @@ import seedu.flashnotes.logic.parser.FlashNotesParser;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.storage.Storage;
 
@@ -63,6 +64,11 @@ public class LogicManager implements Logic {
     public ObservableList<Flashcard> getFilteredFlashcardList() {
         return model.getFilteredFlashcardList();
     }
+
+    @Override
+    public ObservableList<Deck> getFilteredCardDeckList() {
+        return model.getFilteredDeckList();
+    };
 
     @Override
     public Path getFlashNotesFilePath() {

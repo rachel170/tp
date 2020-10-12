@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final FlashNotes flashNotes;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
+    private final FilteredList<Deck> filteredDecks;
 
     /**
      * Initializes a ModelManager with the given flashNotes and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.flashNotes = new FlashNotes(flashNotes);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.flashNotes.getFlashcardList());
+        filteredDecks = new FilteredList<>(this.flashNotes.getDeckList());
     }
 
     public ModelManager() {
@@ -87,7 +90,42 @@ public class ModelManager implements Model {
     public ReadOnlyFlashNotes getFlashNotes() {
         return flashNotes;
     }
+    //=========== Decks ================================================================================
+    @Override
+    public boolean hasDeck(Deck deck) {
+        return flashNotes.hasDeck(deck);
+    }
 
+    @Override
+    public void deleteDeck(Deck target) {
+        //todo delete deck - PX
+        flashNotes.removeDeck(target);
+    }
+
+    @Override
+    public void addDeck(Deck deck) {
+        flashNotes.addDeck(deck);
+        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
+
+    }
+
+    @Override
+    public void setDeck(Deck target, Deck editedDeck) {
+        flashNotes.setDeck(target, editedDeck);
+
+    }
+
+    @Override
+    public ObservableList<Deck> getFilteredDeckList() {
+        return flashNotes.getDeckList();
+    }
+
+    @Override
+    public void updateFilteredDeckList(Predicate<Deck> predicate) {
+        requireNonNull(predicate);
+        filteredDecks.setPredicate(predicate);
+    }
+    //=========== FlashCards ================================================================================
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
@@ -128,6 +166,8 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
     }
+
+    // =========== Util methods =============================================================
 
     @Override
     public boolean equals(Object obj) {

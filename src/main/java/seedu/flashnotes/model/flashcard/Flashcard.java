@@ -62,8 +62,8 @@ public class Flashcard {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both cards have the same identity and data fields.
+     * This defines a stronger notion of equality between two cards.
      */
     @Override
     public boolean equals(Object other) {
