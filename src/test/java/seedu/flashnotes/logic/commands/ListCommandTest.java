@@ -28,12 +28,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, String.format(ListCommand.MESSAGE_SUCCESS,
+                model.getFilteredFlashcardList().size()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, String.format(ListCommand.MESSAGE_SUCCESS,
+                7), expectedModel);
     }
 }

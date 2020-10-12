@@ -11,9 +11,9 @@ import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
  * Finds and lists all flashcards in flashnotes which has tags matching any of the argument keywords.
  * Keyword matching is case sensitive.
  */
-public class ListTagsCommand extends Command {
+public class EnterTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "listTags";
+    public static final String COMMAND_WORD = "enterTag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists the flashcards that contain the keywords\n"
@@ -23,7 +23,7 @@ public class ListTagsCommand extends Command {
 
     private final TagContainsKeywordsPredicate predicate;
 
-    public ListTagsCommand(TagContainsKeywordsPredicate predicate) {
+    public EnterTagCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -31,6 +31,8 @@ public class ListTagsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFlashcardList(predicate);
+        model.setIsInDeckTrue();
+        model.setCurrentDeckName(predicate.getKeyword());
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
     }
@@ -38,7 +40,7 @@ public class ListTagsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ListTagsCommand // instanceof handles nulls
-                && predicate.equals(((ListTagsCommand) other).predicate)); // state check
+                || (other instanceof EnterTagCommand // instanceof handles nulls
+                && predicate.equals(((EnterTagCommand) other).predicate)); // state check
     }
 }

@@ -1,10 +1,8 @@
 package seedu.flashnotes.ui;
 
-import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.flashnotes.model.flashcard.Flashcard;
@@ -36,7 +34,7 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private Label answer;
     @FXML
-    private FlowPane tags;
+    private Label tag;
 
     /**
      * Creates a {@code FlashcardCard} with the given {@code Flashcard} and index to display.
@@ -47,9 +45,7 @@ public class FlashcardCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         question.setText(flashcard.getQuestion().question);
         answer.setText(flashcard.getAnswer().value);
-        flashcard.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        tag.setText(flashcard.getTag().tagName);
     }
 
     @Override

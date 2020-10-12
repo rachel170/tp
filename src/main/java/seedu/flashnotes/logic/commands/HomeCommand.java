@@ -16,6 +16,7 @@ public class HomeCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
+        model.setIsInDeckFalse();
         return new CommandResult(Messages.MESSAGE_DECK_OVERVIEW);
     }
 
