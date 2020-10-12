@@ -50,15 +50,15 @@ public class EnterDeckCommandTest {
         assertFalse(listTagsFirstCommand.equals(listTagsSecondCommand));
     }
 
-//    @Test
-//    public void execute_zeroKeywords_noFlashcardFound() {
-//        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 0);
-//        TagContainsKeywordsPredicate predicate = preparePredicate(" ");
-//        EnterDeckCommand command = new EnterDeckCommand(predicate);
-//        expectedModel.updateFilteredFlashcardList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Collections.emptyList(), model.getFilteredFlashcardList());
-//    }
+    //    @Test
+    //    public void execute_zeroKeywords_noFlashcardFound() {
+    //        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 0);
+    //        TagContainsKeywordsPredicate predicate = preparePredicate(" ");
+    //        EnterDeckCommand command = new EnterDeckCommand(predicate);
+    //        expectedModel.updateFilteredFlashcardList(predicate);
+    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    //        assertEquals(Collections.emptyList(), model.getFilteredFlashcardList());
+    //    }
 
     @Test
     public void execute_multipleKeywords_multipleFlashcardsFound() {
