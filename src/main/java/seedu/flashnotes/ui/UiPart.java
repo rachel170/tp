@@ -85,4 +85,8 @@ public abstract class UiPart<T> {
         return requireNonNull(fxmlFileUrl);
     }
 
+    //to be checked again if this is the right approach
+    public FXMLLoader getFxmlLoader() {
+        return fxmlLoader;
+    }
 }

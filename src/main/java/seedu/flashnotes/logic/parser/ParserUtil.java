@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.commons.util.StringUtil;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
@@ -104,5 +105,18 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_LIMIT);
         }
 
+    /**
+     * Parses a {@code String deckName} into a {@code Deck}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deckName} is invalid.
+     */
+    public static Deck parseDeckName(String deckName) throws ParseException {
+        requireNonNull(deckName);
+        String trimmedDeckName = deckName.trim();
+        if (!Deck.isValidDeck(trimmedDeckName)) {
+            throw new ParseException(Deck.MESSAGE_CONSTRAINTS);
+        }
+        return new Deck(trimmedDeckName);
     }
 }

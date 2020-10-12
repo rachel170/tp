@@ -23,17 +23,17 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
    * **`list`** : list all card
-   
+
    * **`add`**`q/What is a question? a/Something that elicits thought.`: create new card
-   
+
    * **`delete`**`3` : Deletes the 3rd card shown in the current list.
-   
+
    * **`clear`** : Deletes all cards.
-   
+
    * **`find`**`question`: Returns all cards with description matching question.
-   
+
    * **`listTags`**`Singapore`: Returns all cards with the tag 'Singapore'.
-   
+
    * **`exit`** : Exits the app.
 
 
@@ -54,6 +54,8 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
   e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
 
 </div>
+
+## Main Mode
 
 ### Viewing help : `help`
 
@@ -122,7 +124,7 @@ Examples:
 * `find Business` returns `Business Management`
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-  
+
 ### Listing flashcards with tag(s) : `listTags`
 
 Lists flashcards with the given tag keywords.
@@ -143,7 +145,7 @@ Deletes the specified flashcard from the flashcard deck.
 Format: `delete INDEX`
 
 * Deletes the flashcard at the specified `INDEX`.
-* The index refers to the index number shown in the currently displayed list of flashcards 
+* The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -170,6 +172,42 @@ FlashNotes data are saved in the hard disk automatically after any command that 
 
 _{explain the feature here}_
 
+## Review Mode
+
+### Flip a flashcard
+
+Flips the flashcard which is being reviewed so that the user can view the answer to the question.
+
+Format: `flip`
+
+* Flips the flashcard that is being reviewed to reveal the answer.
+
+Examples:
+* `flip` returns `The sea is blue because water absorbs colors in the red part of the light spectrum` 
+and `WW11 took place from 1939 to 1945`.
+
+### Mark a flashcard as correct
+
+Marks the flashcard that is being reviewed as correct and proceeds to show the next flashcard.
+
+Format: `c`
+
+* Marks flashcard as correct before moving on to show the question of the next flashcard.
+
+Examples:
+* `c` returns `Why is the sea blue in color?` and `When did WWII occur?`
+
+### Mark a flashcard as wrong
+
+Marks the flashcard that is being reviewed as wrong and proceeds to show the next flashcard.
+
+Format: `w`
+
+* Marks flashcard as wrong before moving on to show the question of the next flashcard.
+
+Examples:
+* `w` returns `What is macroeconomics?` and `Who is Hitler?`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -181,6 +219,8 @@ _{explain the feature here}_
 
 ## Command summary
 
+### Main Mode
+
 Action | Format, Examples
 --------|------------------
 **Add** | `Format: add q/QUESTION a/ANSWER `
@@ -190,3 +230,11 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+
+### Review Mode
+
+Action | Format
+--------|------------------
+**Flip** | `flip`
+**Correct** | `c`
+**Wrong** | `w`

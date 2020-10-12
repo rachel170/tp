@@ -6,11 +6,8 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.commons.core.index.Index;
@@ -35,7 +32,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
             + "[" + PREFIX_ANSWER + "ANSWER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ANSWER + "91234567 ";
 
@@ -89,9 +86,9 @@ public class EditCommand extends Command {
 
         Question updatedQuestion = editFlashcardDescriptor.getQuestion().orElse(flashcardToEdit.getQuestion());
         Answer updatedAnswer = editFlashcardDescriptor.getAnswer().orElse(flashcardToEdit.getAnswer());
-        Set<Tag> updatedTags = editFlashcardDescriptor.getTags().orElse(flashcardToEdit.getTags());
+        Tag updatedTag = editFlashcardDescriptor.getTag().orElse(flashcardToEdit.getTag());
 
-        return new Flashcard(updatedQuestion, updatedAnswer, updatedTags);
+        return new Flashcard(updatedQuestion, updatedAnswer, updatedTag);
     }
 
     @Override
@@ -119,7 +116,7 @@ public class EditCommand extends Command {
     public static class EditFlashcardDescriptor {
         private Question question;
         private Answer answer;
-        private Set<Tag> tags;
+        private Tag tag;
 
         public EditFlashcardDescriptor() {}
 
@@ -130,14 +127,14 @@ public class EditCommand extends Command {
         public EditFlashcardDescriptor(EditFlashcardDescriptor toCopy) {
             setQuestion(toCopy.question);
             setAnswer(toCopy.answer);
-            setTags(toCopy.tags);
+            setTag(toCopy.tag);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(question, answer, tags);
+            return CollectionUtil.isAnyNonNull(question, answer, tag);
         }
 
         public void setQuestion(Question question) {
@@ -156,21 +153,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(answer);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTag(Tag tag) {
+            this.tag = tag;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Tag> getTag() {
+            return Optional.ofNullable(tag);
         }
 
         @Override
@@ -190,7 +178,7 @@ public class EditCommand extends Command {
 
             return getQuestion().equals(e.getQuestion())
                     && getAnswer().equals(e.getAnswer())
-                    && getTags().equals(e.getTags());
+                    && getTag().equals(e.getTag());
         }
     }
 }

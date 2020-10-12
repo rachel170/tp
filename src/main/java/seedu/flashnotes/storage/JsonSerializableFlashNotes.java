@@ -55,7 +55,8 @@ class JsonSerializableFlashNotes {
             }
             flashNotes.addFlashcard(flashcard);
         }
-        return flashNotes;
+        FlashNotes deckOrganizedFlashNotes = new FlashNotes(flashNotes);
+        return deckOrganizedFlashNotes;
     }
 
 }
