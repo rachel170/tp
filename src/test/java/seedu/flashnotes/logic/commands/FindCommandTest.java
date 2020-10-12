@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
-import static seedu.flashnotes.testutil.TypicalFlashcards.WHEN;
-import static seedu.flashnotes.testutil.TypicalFlashcards.WHY;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import java.util.Arrays;

@@ -4,11 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.DESC_MACROECONS;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.DESC_SKY;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_MACROECONS;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_MACROECONS;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.showFlashcardAtIndex;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
@@ -18,14 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.commons.core.index.Index;
-import seedu.flashnotes.logic.commands.EditCommand.EditFlashcardDescriptor;
-import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
-import seedu.flashnotes.testutil.FlashcardBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.

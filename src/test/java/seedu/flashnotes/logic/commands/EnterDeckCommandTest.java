@@ -11,7 +11,6 @@ import static seedu.flashnotes.testutil.TypicalFlashcards.WHY;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
