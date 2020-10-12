@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
+import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all flashcards in flashnotes which has question matching any of the argument keywords.
@@ -28,7 +29,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredFlashcardList(predicate);
+        String currentDeckName = model.getCurrentDeckName();
+        model.updateFilteredFlashcardList(predicate.and(new TagContainsKeywordsPredicate(currentDeckName)));
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
     }

@@ -14,10 +14,12 @@ import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.commons.util.CollectionUtil;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
+import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Edits the details of an existing flashcard in the flashnotes.
@@ -65,6 +67,7 @@ public class EditCommand extends Command {
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
+        String originalDeckName = model.getCurrentDeckName();
         Flashcard editedFlashcard = createEditedFlashcard(flashcardToEdit, editFlashcardDescriptor);
 
         if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasFlashcard(editedFlashcard)) {
@@ -72,7 +75,11 @@ public class EditCommand extends Command {
         }
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
-        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        String editedDeckName = editedFlashcard.getTag().tagName;
+        if (!model.hasDeck(new Deck(editedDeckName))) {
+            model.addDeck(new Deck(editedDeckName));
+        }
+        model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(originalDeckName));
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 
