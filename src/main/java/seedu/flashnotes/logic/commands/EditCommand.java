@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import java.util.List;
 import java.util.Optional;

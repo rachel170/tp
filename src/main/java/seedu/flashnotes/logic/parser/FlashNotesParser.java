@@ -62,7 +62,7 @@ public class FlashNotesParser {
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
-        if (!isInDeck){
+        if (!isInDeck) {
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
             return parseCommandInCardMode(commandWord, arguments, deckName);
