@@ -70,7 +70,7 @@ public class IndividualFlashcard extends UiPart<Region> {
     public String displayStatistics() {
         // Use the question label to list total percentage of first time right
         question.setText(String.format("Percentage of questions answered correctly on the first try: %d%s",
-                (this.correctAnswers / this.numOfFlashcards),
+                (this.correctAnswers * 100) / this.numOfFlashcards,
                 "%"));
         // Use the question label to list total questions right on first time right/total card
         answer.setText(String.format("Out of %d questions, you got %d right on the first try!",
@@ -117,7 +117,15 @@ public class IndividualFlashcard extends UiPart<Region> {
             Flashcard incorrectFlashcard = flashcardsToReview.get(this.index);
             this.flashcardsToReview = logic.addFlashcardToReview(incorrectFlashcard);
         }
+        // Check if index is still within first run
+        if (this.index < numOfFlashcards) {
+            // If correctly answered on first try, increment correctAnswers
+            if (isCorrect == 2) {
+                this.correctAnswers += 1;
+            }
+        }
         this.index += 1;
+
         if (count == numOfFlashcards) {
             return "exit";
         } else {
