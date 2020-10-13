@@ -21,6 +21,7 @@ import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.ReadOnlyUserPrefs;
 import seedu.flashnotes.model.deck.Deck;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.FlashcardBuilder;
 
@@ -225,6 +226,16 @@ public class AddCommandTest {
 
         @Override
         public void setReviewCardLimit(Integer reviewCardLimit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueDeckList getUniqueDeckList() {
             throw new AssertionError("This method should not be called.");
         }
     }
