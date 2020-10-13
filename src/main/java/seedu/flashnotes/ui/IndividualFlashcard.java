@@ -65,12 +65,17 @@ public class IndividualFlashcard extends UiPart<Region> {
     }
 
     /**
-     * Displays the final statistics of review session in the GUI
+     * Displays the final statistics of review session in the GUI.
+     * Update the deck revision stats with the review session's.
      */
     public String displayStatistics() {
+        // Calculate Performance percentage
+        int performance = (this.correctAnswers * 100) / this.numOfFlashcards;
+        // Store the performance value
+        logic.updateDeckPerformanceScore(performance);
         // Use the question label to list total percentage of first time right
         question.setText(String.format("Percentage of questions answered correctly on the first try: %d%s",
-                (this.correctAnswers * 100) / this.numOfFlashcards,
+                performance,
                 "%"));
         // Use the question label to list total questions right on first time right/total card
         answer.setText(String.format("Out of %d questions, you got %d right on the first try!",

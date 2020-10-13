@@ -154,4 +154,9 @@ public interface Model {
      * Shuffles the flashcards for the review session.
      */
     void shuffleReviewFlashcards();
+
+    /**
+     * Update the user's review score for deck used in review.
+     */
+    void updateDeckPerformanceScore(Integer reviewScore);
 }

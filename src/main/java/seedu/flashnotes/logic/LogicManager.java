@@ -108,4 +108,13 @@ public class LogicManager implements Logic {
     public void setReviewCardLimit(Integer reviewCardLimit) {
         model.setReviewCardLimit(reviewCardLimit);
     }
+
+    /**
+     * Update the user's review score for deck used in review.
+     * @param reviewScore Integer value of user's review session score.
+     */
+    @Override
+    public void updateDeckPerformanceScore(Integer reviewScore) {
+        model.updateDeckPerformanceScore(reviewScore);
+    }
 }

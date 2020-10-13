@@ -209,6 +209,20 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         return currentDeckName;
     }
 
+    /**
+     * Update the user's review score for deck used in review.
+     * @param reviewScore Integer value of user's review session score.
+     */
+    public void updateDeckPerformanceScore(Integer reviewScore) {
+        requireNonNull(reviewScore);
+        // Fetch the right deck to update
+        Deck currentDeck = decks.findDeck(this.currentDeckName);
+        // Make sure it is an existing deck
+        if (currentDeck != null) {
+            // Update the deck's statistics
+            currentDeck.setResultStatistics(reviewScore.toString());
+        }
+    }
 
     //// util methods
 

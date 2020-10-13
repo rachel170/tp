@@ -193,9 +193,11 @@ public class ReviewWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
         // hide the review and help windows
         helpWindow.hide();
         this.hide();
+
         // Return to FlashcardListRoot
         RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
 
@@ -204,8 +206,6 @@ public class ReviewWindow extends UiPart<Stage> {
         primaryStage.show();
 
         rootNode.fillInnerParts();
-        // Return logic to non review mode
-
     }
 
     /**

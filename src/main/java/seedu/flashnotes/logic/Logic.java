@@ -72,4 +72,10 @@ public interface Logic {
      * Set the user prefs' review card limit.
      */
     void setReviewCardLimit(Integer reviewCardLimit);
+
+    /**
+     * Update the user's review score for deck used in review.
+     * @param reviewScore Integer value of user's review session score.
+     */
+    void updateDeckPerformanceScore(Integer reviewScore);
 }

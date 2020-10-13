@@ -104,7 +104,9 @@ public class ModelManager implements Model {
     public ReadOnlyFlashNotes getFlashNotes() {
         return flashNotes;
     }
+
     //=========== Decks ================================================================================
+
     @Override
     public boolean hasDeck(Deck deck) {
         return flashNotes.hasDeck(deck);
@@ -165,6 +167,18 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredDecks.setPredicate(predicate);
     }
+
+    /**
+     * Update the user's review score for deck used in review.
+     * @param reviewScore Integer value of user's review session score.
+     */
+    @Override
+    public void updateDeckPerformanceScore(Integer reviewScore) {
+        requireNonNull(reviewScore);
+        flashNotes.updateDeckPerformanceScore(reviewScore);
+
+    }
+
     //=========== FlashCards ================================================================================
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
@@ -251,6 +265,7 @@ public class ModelManager implements Model {
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
         return flashcardsToReview;
     }
+
     // =========== Util methods =============================================================
 
     @Override
