@@ -10,6 +10,7 @@ import seedu.flashnotes.commons.exceptions.DataConversionException;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.ReadOnlyUserPrefs;
 import seedu.flashnotes.model.UserPrefs;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 
 /**
  * Manages storage of FlashNotes data in local storage.
@@ -66,14 +67,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes) throws IOException {
-        saveFlashNotes(flashNotes, flashNotesStorage.getFlashNotesFilePath());
+    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, UniqueDeckList deckList) throws IOException {
+        saveFlashNotes(flashNotes, flashNotesStorage.getFlashNotesFilePath(), deckList);
     }
 
     @Override
-    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath) throws IOException {
+    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        flashNotesStorage.saveFlashNotes(flashNotes, filePath);
+        flashNotesStorage.saveFlashNotes(flashNotes, filePath, deckList);
     }
 
 }

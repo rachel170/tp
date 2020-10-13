@@ -19,6 +19,7 @@ import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.UserPrefs;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.storage.JsonFlashNotesStorage;
 import seedu.flashnotes.storage.JsonUserPrefsStorage;
 import seedu.flashnotes.storage.StorageManager;
@@ -151,7 +152,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath) throws IOException {
+        public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

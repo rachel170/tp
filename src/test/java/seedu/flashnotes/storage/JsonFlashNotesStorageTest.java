@@ -69,7 +69,7 @@ public class JsonFlashNotesStorageTest {
         JsonFlashNotesStorage jsonFlashNotesStorage = new JsonFlashNotesStorage(filePath);
 
         // Save in new file and read back
-        jsonFlashNotesStorage.saveFlashNotes(original, filePath);
+        jsonFlashNotesStorage.saveFlashNotes(original, filePath, );
         ReadOnlyFlashNotes readBack = jsonFlashNotesStorage.readFlashNotes(filePath).get();
         assertEquals(original, new FlashNotes(readBack));
 
@@ -77,14 +77,14 @@ public class JsonFlashNotesStorageTest {
         original.addFlashcard(WHO_IS_MEIER);
         original.removeFlashcard(WHAT);
         original = new FlashNotes(original); //todo remove this line when proper deck impl is up - PX
-        jsonFlashNotesStorage.saveFlashNotes(original, filePath);
+        jsonFlashNotesStorage.saveFlashNotes(original, filePath, );
         readBack = jsonFlashNotesStorage.readFlashNotes(filePath).get();
         assertEquals(original, new FlashNotes(readBack));
 
         // Save and read without specifying file path
         original.addFlashcard(WHAT_IS_MEIER);
         original = new FlashNotes(original); //todo remove this line when proper deck impl is up - PX
-        jsonFlashNotesStorage.saveFlashNotes(original); // file path not specified
+        jsonFlashNotesStorage.saveFlashNotes(original, ); // file path not specified
         readBack = jsonFlashNotesStorage.readFlashNotes().get(); // file path not specified
         assertEquals(original, new FlashNotes(readBack));
 
@@ -101,7 +101,7 @@ public class JsonFlashNotesStorageTest {
     private void saveFlashNotes(ReadOnlyFlashNotes flashNotes, String filePath) {
         try {
             new JsonFlashNotesStorage(Paths.get(filePath))
-                    .saveFlashNotes(flashNotes, addToTestDataPathIfNotNull(filePath));
+                    .saveFlashNotes(flashNotes, addToTestDataPathIfNotNull(filePath), );
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

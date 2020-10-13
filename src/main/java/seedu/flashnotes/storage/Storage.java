@@ -8,6 +8,7 @@ import seedu.flashnotes.commons.exceptions.DataConversionException;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.ReadOnlyUserPrefs;
 import seedu.flashnotes.model.UserPrefs;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 
 /**
  * API of the Storage component
@@ -27,6 +28,6 @@ public interface Storage extends FlashNotesStorage, UserPrefsStorage {
     Optional<ReadOnlyFlashNotes> readFlashNotes() throws DataConversionException, IOException;
 
     @Override
-    void saveFlashNotes(ReadOnlyFlashNotes flashNotes) throws IOException;
+    void saveFlashNotes(ReadOnlyFlashNotes flashNotes, UniqueDeckList deckList) throws IOException;
 
 }

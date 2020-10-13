@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.flashnotes.commons.exceptions.DataConversionException;
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 
 /**
  * Represents a storage for {@link FlashNotes}.
@@ -34,13 +35,14 @@ public interface FlashNotesStorage {
     /**
      * Saves the given {@link ReadOnlyFlashNotes} to the storage.
      * @param flashNotes cannot be null.
+     * @param deckList unqiue decklist
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveFlashNotes(ReadOnlyFlashNotes flashNotes) throws IOException;
+    void saveFlashNotes(ReadOnlyFlashNotes flashNotes, UniqueDeckList deckList) throws IOException;
 
     /**
-     * @see #saveFlashNotes(ReadOnlyFlashNotes)
+     * @see #saveFlashNotes(ReadOnlyFlashNotes, UniqueDeckList)
      */
-    void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath) throws IOException;
+    void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException;
 
 }

@@ -52,7 +52,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveFlashNotes(model.getFlashNotes());
+            storage.saveFlashNotes(model.getFlashNotes(), model.getUniqueDeckList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -115,6 +115,6 @@ public class LogicManager implements Logic {
      */
     @Override
     public void updateDeckPerformanceScore(Integer reviewScore) {
-        model.updateDeckPerformanceScore(reviewScore);
+        model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
     }
 }

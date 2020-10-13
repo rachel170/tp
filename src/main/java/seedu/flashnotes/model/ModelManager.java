@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.model.deck.Deck;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -168,14 +169,21 @@ public class ModelManager implements Model {
         filteredDecks.setPredicate(predicate);
     }
 
+    /** Returns the unique deck list */
+    @Override
+    public UniqueDeckList getUniqueDeckList(){
+        return flashNotes.getUniqueDeckList();
+    }
+
     /**
      * Update the user's review score for deck used in review.
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore) {
+    public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
         requireNonNull(reviewScore);
-        flashNotes.updateDeckPerformanceScore(reviewScore);
+        requireNonNull(deckName);
+        flashNotes.updateDeckPerformanceScore(reviewScore, deckName);
 
     }
 

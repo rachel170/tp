@@ -12,7 +12,9 @@ import seedu.flashnotes.commons.exceptions.DataConversionException;
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.commons.util.FileUtil;
 import seedu.flashnotes.commons.util.JsonUtil;
+import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 
 /**
  * A class to access FlashNotes data stored as a json file on the hard disk.
@@ -60,21 +62,23 @@ public class JsonFlashNotesStorage implements FlashNotesStorage {
     }
 
     @Override
-    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes) throws IOException {
-        saveFlashNotes(flashNotes, filePath);
+    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, UniqueDeckList deckList) throws IOException {
+        saveFlashNotes(flashNotes, filePath, deckList);
     }
 
     /**
-     * Similar to {@link #saveFlashNotes(ReadOnlyFlashNotes)}.
+     * Similar to {@link FlashNotesStorage#saveFlashNotes(ReadOnlyFlashNotes, UniqueDeckList)}.
      *
      * @param filePath location of the data. Cannot be null.
+     * @param deckList
      */
-    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath) throws IOException {
+    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException {
         requireNonNull(flashNotes);
         requireNonNull(filePath);
+        requireNonNull(deckList);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableFlashNotes(flashNotes), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableFlashNotes(flashNotes, deckList), filePath);
     }
 
 }
