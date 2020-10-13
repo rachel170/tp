@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.flashnotes.commons.core.GuiSettings;
@@ -163,9 +164,17 @@ public class ReviewWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        // hide the review and help windows
         helpWindow.hide();
-        primaryStage.hide();
         this.hide();
+        // Return to FlashcardListRoot
+        RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
+
+        Region root = rootNode.getFxmlLoader().getRoot();
+        primaryStage.getScene().setRoot(root);
+        primaryStage.show();
+
+        rootNode.fillInnerParts();
     }
 
     /**
