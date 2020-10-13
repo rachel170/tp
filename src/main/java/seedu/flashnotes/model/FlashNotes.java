@@ -221,7 +221,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         // Make sure it is an existing deck
         if (currentDeck != null) {
             // Update the deck's statistics
-            currentDeck.setResultStatistics(reviewScore.toString() + "%");
+            currentDeck.setResultStatistics(reviewScore.toString());
         }
     }
 

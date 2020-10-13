@@ -10,6 +10,12 @@ import seedu.flashnotes.model.deck.Deck;
 public class DeckCard extends UiPart<Region> {
     private static final String FXML = "DeckCard.fxml";
 
+    // Percentage string message
+    private static final String RESULT_STATISTIC_LABEL = "Cards answered correctly on first try (%): ";
+    // No Statistic message
+    private static final String NO_RESULT_STATISTIC_LABEL =
+            "No statistic available! Conduct a review session for some!";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -40,7 +46,12 @@ public class DeckCard extends UiPart<Region> {
         this.cardDeck = cardDeck;
         deckName.setText(cardDeck.getDeckName());
         id.setText(displayedIndex + ". ");
-        resultStatistics.setText(cardDeck.getResultStatistics());
+        if (Integer.parseInt(cardDeck.getResultStatistics()) == -1) {
+            // Update result display with no statistics available yet.
+            resultStatistics.setText(NO_RESULT_STATISTIC_LABEL);
+        } else {
+            resultStatistics.setText(RESULT_STATISTIC_LABEL + cardDeck.getResultStatistics());
+        }
     }
 
     @Override

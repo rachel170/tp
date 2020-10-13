@@ -20,7 +20,7 @@ public class Deck {
     public Deck (String name) {
         requireNonNull(name);
         this.deckName = name;
-        this.resultStatistics = "0";
+        this.resultStatistics = "-1";
     }
 
     public String getDeckName() {
