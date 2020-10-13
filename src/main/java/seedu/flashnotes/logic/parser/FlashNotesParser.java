@@ -17,6 +17,7 @@ import seedu.flashnotes.logic.commands.DeleteCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
+import seedu.flashnotes.logic.commands.EndReviewCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.FlipCommand;
@@ -82,6 +83,7 @@ public class FlashNotesParser {
         case EnterDeckCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
         case AddDeckCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD:
         case DeleteDeckCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
@@ -97,8 +99,8 @@ public class FlashNotesParser {
         case WrongCommand.COMMAND_WORD:
             return new WrongCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        case EndReviewCommand.COMMAND_WORD:
+            return new EndReviewCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
@@ -120,6 +122,7 @@ public class FlashNotesParser {
         case FlipCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
+        case EndReviewCommand.COMMAND_WORD:
             throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
 
         case AddDeckCommand.COMMAND_WORD:
@@ -158,6 +161,7 @@ public class FlashNotesParser {
         case EnterDeckCommand.COMMAND_WORD:
         case FlipCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
+        case EndReviewCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
             throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
 

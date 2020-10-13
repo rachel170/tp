@@ -11,6 +11,7 @@ import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.logic.Logic;
 import seedu.flashnotes.logic.commands.CommandResult;
+import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
@@ -33,7 +34,7 @@ public class ReviewWindow extends UiPart<Stage> {
     private boolean isComplete;
     // Make use of a standard message for invalid input at end of review session
     public static final String MESSAGE_END_OF_REVIEW = "The review session has ended. "
-            + "Please enter 'exit' to return to the deck screen.";
+            + "Please enter 'endReview' to return to the deck screen.";
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -149,10 +150,6 @@ public class ReviewWindow extends UiPart<Stage> {
      * @throws IllegalStateException when review session has already ended.
      */
     public void handleFlip() throws IllegalStateException {
-        if (isComplete) {
-            // If session has ended, ban the usage of next command
-            throw new IllegalStateException(MESSAGE_END_OF_REVIEW);
-        }
         this.individualFlashcard.flipFlashcard();
     }
 
@@ -220,6 +217,10 @@ public class ReviewWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            if (isComplete && !(commandResult.isExit())) {
+                // If session has ended, ban the usage of next command
+                throw new IllegalStateException(MESSAGE_END_OF_REVIEW);
+            }
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
