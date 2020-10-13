@@ -12,7 +12,6 @@ import seedu.flashnotes.commons.exceptions.DataConversionException;
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.commons.util.FileUtil;
 import seedu.flashnotes.commons.util.JsonUtil;
-import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 
@@ -72,7 +71,8 @@ public class JsonFlashNotesStorage implements FlashNotesStorage {
      * @param filePath location of the data. Cannot be null.
      * @param deckList
      */
-    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException {
+    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList)
+            throws IOException {
         requireNonNull(flashNotes);
         requireNonNull(filePath);
         requireNonNull(deckList);

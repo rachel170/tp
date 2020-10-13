@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.model.FlashNotes;
-import seedu.flashnotes.model.tag.Tag;
 import seedu.flashnotes.model.deck.Deck;
 
 /**

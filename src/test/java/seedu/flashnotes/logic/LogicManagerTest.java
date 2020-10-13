@@ -48,11 +48,11 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
-    /*@Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
-    }*/
+    //    @Test
+    //    public void execute_commandExecutionError_throwsCommandException() {
+    //        String deleteCommand = "delete 9";
+    //        assertCommandException(deleteCommand, MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+    //    }
 
     @Test
     public void execute_validCommand_success() throws Exception {
@@ -61,24 +61,24 @@ public class LogicManagerTest {
                 0), model);
     }
 
-    /*@Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonFlashNotesIoExceptionThrowingStub
-        JsonFlashNotesStorage flashNotesStorage =
-                new JsonFlashNotesIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionFlashNotes.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(flashNotesStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+    //    @Test
+    //    public void execute_storageThrowsIoException_throwsCommandException() {
+    // Setup LogicManager with JsonFlashNotesIoExceptionThrowingStub
+    //        JsonFlashNotesStorage flashNotesStorage =
+    //                new JsonFlashNotesIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionFlashNotes.json"));
+    //        JsonUserPrefsStorage userPrefsStorage =
+    //                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+    //        StorageManager storage = new StorageManager(flashNotesStorage, userPrefsStorage);
+    //        logic = new LogicManager(model, storage);
 
-        // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + QUESTION_DESC_SKY + ANSWER_DESC_SKY + TAG_DESC_ECONOMICS;
-        Flashcard expectedFlashcard = new FlashcardBuilder(SKY).build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addFlashcard(expectedFlashcard);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
-    }*/
+    // Execute add command
+    //        String addCommand = AddCommand.COMMAND_WORD + QUESTION_DESC_SKY + ANSWER_DESC_SKY + TAG_DESC_ECONOMICS;
+    //        Flashcard expectedFlashcard = new FlashcardBuilder(SKY).build();
+    //        ModelManager expectedModel = new ModelManager();
+    //        expectedModel.addFlashcard(expectedFlashcard);
+    //        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+    //        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    //    }
 
     @Test
     public void getFilteredFlashcardList_modifyList_throwsUnsupportedOperationException() {
@@ -152,7 +152,8 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException {
+        public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList)
+                throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

@@ -171,7 +171,7 @@ public class ModelManager implements Model {
 
     /** Returns the unique deck list */
     @Override
-    public UniqueDeckList getUniqueDeckList(){
+    public UniqueDeckList getUniqueDeckList() {
         return flashNotes.getUniqueDeckList();
     }
 

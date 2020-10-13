@@ -11,7 +11,6 @@ import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.logic.Logic;
 import seedu.flashnotes.logic.commands.CommandResult;
-import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
@@ -21,6 +20,9 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 public class ReviewWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ReviewWindow.class);
     private static final String FXML = "ReviewWindow.fxml";
+    // Make use of a standard message for invalid input at end of review session
+    private static final String MESSAGE_END_OF_REVIEW = "The review session has ended. "
+            + "Please enter 'endReview' to return to the deck screen.";
 
     private Logic logic;
     private CommandBox commandBox;
@@ -32,9 +34,6 @@ public class ReviewWindow extends UiPart<Stage> {
 
     // Use a boolean to check status of review session
     private boolean isComplete;
-    // Make use of a standard message for invalid input at end of review session
-    public static final String MESSAGE_END_OF_REVIEW = "The review session has ended. "
-            + "Please enter 'endReview' to return to the deck screen.";
 
     @FXML
     private StackPane commandBoxPlaceholder;

@@ -72,7 +72,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList) throws IOException {
+    public void saveFlashNotes(ReadOnlyFlashNotes flashNotes, Path filePath, UniqueDeckList deckList)
+            throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         flashNotesStorage.saveFlashNotes(flashNotes, filePath, deckList);
     }
