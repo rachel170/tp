@@ -100,6 +100,8 @@ public class FlashNotesParser {
             return new WrongCommand();
 
         case EndReviewCommand.COMMAND_WORD:
+            // Ending Review, set reviewMode to false
+            this.isReviewMode = false;
             return new EndReviewCommand();
 
         case HelpCommand.COMMAND_WORD:
