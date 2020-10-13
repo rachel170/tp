@@ -20,6 +20,10 @@ public class IndividualFlashcard extends UiPart<Region> {
     private double count;
     private boolean flipped;
     private int numOfFlashcards;
+
+    // Count of number of questions gotten right the first time
+    private int correctAnswers;
+
     /**
      * Update these below to match flashcard.
      */
@@ -38,6 +42,7 @@ public class IndividualFlashcard extends UiPart<Region> {
         this.index = 0;
         this.count = 0;
         this.logic = logic;
+        this.correctAnswers = 0;
     }
 
     /**
@@ -57,6 +62,23 @@ public class IndividualFlashcard extends UiPart<Region> {
         answer.setText("Answer: " + flashcardToDisplay.getAnswer().value);
         question.setVisible(true);
         answer.setVisible(false);
+    }
+
+    /**
+     * Displays the final statistics of review session in the GUI
+     */
+    public String displayStatistics() {
+        // Use the question label to list total percentage of first time right
+        question.setText(String.format("Percentage of questions answered correctly on the first try: %d%s",
+                (this.correctAnswers / this.numOfFlashcards),
+                "%"));
+        // Use the question label to list total questions right on first time right/total card
+        answer.setText(String.format("Out of %d questions, you got %d right on the first try!",
+                this.numOfFlashcards, this.correctAnswers));
+        question.setVisible(true);
+        answer.setVisible(true);
+        // Successful update of it leads to display of statistic
+        return "Here is your score for the review session!";
     }
 
     /**
