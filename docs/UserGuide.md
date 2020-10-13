@@ -23,17 +23,17 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
    * **`list`** : list all card
-   
+
    * **`add`**`q/What is a question? a/Something that elicits thought.`: create new card
-   
+
    * **`delete`**`3` : Deletes the 3rd card shown in the current list.
-   
+
    * **`clear`** : Deletes all cards.
-   
+
    * **`find`**`question`: Returns all cards with description matching question.
-   
+
    * **`listTags`**`Singapore`: Returns all cards with the tag 'Singapore'.
-   
+
    * **`exit`** : Exits the app.
 
 
@@ -124,7 +124,7 @@ Examples:
 * `find Business` returns `Business Management`
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-  
+
 ### Listing flashcards with tag(s) : `listTags`
 
 Lists flashcards with the given tag keywords.
@@ -145,7 +145,7 @@ Deletes the specified flashcard from the flashcard deck.
 Format: `delete INDEX`
 
 * Deletes the flashcard at the specified `INDEX`.
-* The index refers to the index number shown in the currently displayed list of flashcards 
+* The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:

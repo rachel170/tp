@@ -14,6 +14,7 @@ import seedu.flashnotes.logic.parser.FlashNotesParser;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.storage.Storage;
 
@@ -42,7 +43,12 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = flashNotesParser.parseCommand(commandText);
+        boolean isInDeck = model.getIsInDeck();
+        String deckName = model.getCurrentDeckName();
+        if (deckName == null) {
+            deckName = "Default";
+        }
+        Command command = flashNotesParser.parseCommand(commandText, isInDeck, deckName);
         commandResult = command.execute(model);
 
         try {
@@ -65,6 +71,20 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Flashcard> getFlashcardsToReview() {
+        return model.getFlashcardsToReview();
+    }
+
+    @Override
+    public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
+        return model.addFlashcardToReview(flashcard);
+    }
+
+    public ObservableList<Deck> getFilteredCardDeckList() {
+        return model.getFilteredDeckList();
+    };
+
+    @Override
     public Path getFlashNotesFilePath() {
         return model.getFlashNotesFilePath();
     }
@@ -77,5 +97,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Integer getReviewCardLimit() {
+        return model.getReviewCardLimit();
+    }
+
+    @Override
+    public void setReviewCardLimit(Integer reviewCardLimit) {
+        model.setReviewCardLimit(reviewCardLimit);
     }
 }

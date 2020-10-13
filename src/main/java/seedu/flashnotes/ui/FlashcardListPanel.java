@@ -30,7 +30,7 @@ public class FlashcardListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Flashcard} using a {@code FlashcardListCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Flashcard} using a {@code FlashcardCard}.
      */
     class FlashcardListViewCell extends ListCell<Flashcard> {
         @Override
@@ -41,9 +41,8 @@ public class FlashcardListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FlashcardListCard(flashcard, getIndex() + 1).getRoot());
+                setGraphic(new FlashcardCard(flashcard, getIndex() + 1).getRoot());
             }
         }
     }
-
 }
