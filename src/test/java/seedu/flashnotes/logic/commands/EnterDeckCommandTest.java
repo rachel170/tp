@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashnotes.testutil.TypicalFlashcards.HOW;
-import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHO;
+import static seedu.flashnotes.testutil.TypicalFlashcards.WHY;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,25 +19,25 @@ import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
 import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
-public class ListTagsCommandTest {
+public class EnterDeckCommandTest {
     private Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
 
     @Test
     public void equals() {
         TagContainsKeywordsPredicate firstPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("first"));
+                new TagContainsKeywordsPredicate("first");
         TagContainsKeywordsPredicate secondPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("second"));
+                new TagContainsKeywordsPredicate("second");
 
-        ListTagsCommand listTagsFirstCommand = new ListTagsCommand(firstPredicate);
-        ListTagsCommand listTagsSecondCommand = new ListTagsCommand(secondPredicate);
+        EnterDeckCommand listTagsFirstCommand = new EnterDeckCommand(firstPredicate);
+        EnterDeckCommand listTagsSecondCommand = new EnterDeckCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(listTagsFirstCommand.equals(listTagsFirstCommand));
 
         // same values -> returns true
-        ListTagsCommand listTagsFirstCommandCopy = new ListTagsCommand(firstPredicate);
+        EnterDeckCommand listTagsFirstCommandCopy = new EnterDeckCommand(firstPredicate);
         assertTrue(listTagsFirstCommand.equals(listTagsFirstCommandCopy));
 
         // different types -> returns false
@@ -51,27 +50,27 @@ public class ListTagsCommandTest {
         assertFalse(listTagsFirstCommand.equals(listTagsSecondCommand));
     }
 
-    @Test
-    public void execute_zeroKeywords_noFlashcardFound() {
-        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 0);
-        TagContainsKeywordsPredicate predicate = preparePredicate(" ");
-        ListTagsCommand command = new ListTagsCommand(predicate);
-        expectedModel.updateFilteredFlashcardList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredFlashcardList());
-    }
+    //    @Test
+    //    public void execute_zeroKeywords_noFlashcardFound() {
+    //        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 0);
+    //        TagContainsKeywordsPredicate predicate = preparePredicate(" ");
+    //        EnterDeckCommand command = new EnterDeckCommand(predicate);
+    //        expectedModel.updateFilteredFlashcardList(predicate);
+    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    //        assertEquals(Collections.emptyList(), model.getFilteredFlashcardList());
+    //    }
 
     @Test
     public void execute_multipleKeywords_multipleFlashcardsFound() {
         String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 3);
-        TagContainsKeywordsPredicate predicate = preparePredicate("owesMoney friends");
-        ListTagsCommand command = new ListTagsCommand(predicate);
+        TagContainsKeywordsPredicate predicate = preparePredicate("friends");
+        EnterDeckCommand command = new EnterDeckCommand(predicate);
         expectedModel.updateFilteredFlashcardList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(WHO, WHAT, HOW), model.getFilteredFlashcardList());
+        assertEquals(Arrays.asList(WHO, WHY, HOW), model.getFilteredFlashcardList());
     }
 
     private TagContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new TagContainsKeywordsPredicate(userInput);
     }
 }

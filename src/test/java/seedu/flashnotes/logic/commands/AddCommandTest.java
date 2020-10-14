@@ -20,6 +20,8 @@ import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.ReadOnlyUserPrefs;
+import seedu.flashnotes.model.deck.Deck;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.FlashcardBuilder;
 
@@ -110,6 +112,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void shuffleReviewFlashcards() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addFlashcard(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
@@ -122,6 +129,69 @@ public class AddCommandTest {
         @Override
         public ReadOnlyFlashNotes getFlashNotes() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Flashcard> getFlashcardsToReview() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
+            throw new AssertionError("This method should not be called.");
+        }
+        public boolean hasDeck(Deck deck) {
+            return false;
+        }
+
+        @Override
+        public void deleteDeck(Deck target) {
+
+        }
+
+        @Override
+        public void addDeck(Deck deck) {
+
+        }
+
+        @Override
+        public void setDeck(Deck target, Deck editedDeck) {
+
+        }
+
+        @Override
+        public boolean getIsInDeck() {
+            return false;
+        }
+
+        @Override
+        public void setIsInDeckTrue() {
+
+        }
+
+        @Override
+        public void setIsInDeckFalse() {
+
+        }
+
+        @Override
+        public void setCurrentDeckName(String deckName) {
+
+        }
+
+        @Override
+        public String getCurrentDeckName() {
+            return null;
+        }
+
+        @Override
+        public ObservableList<Deck> getFilteredDeckList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredDeckList(Predicate<Deck> predicate) {
+
         }
 
         @Override
@@ -146,6 +216,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getReviewCardLimit() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setReviewCardLimit(Integer reviewCardLimit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueDeckList getUniqueDeckList() {
             throw new AssertionError("This method should not be called.");
         }
     }

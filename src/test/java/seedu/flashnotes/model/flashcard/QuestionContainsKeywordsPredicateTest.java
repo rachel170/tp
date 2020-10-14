@@ -73,7 +73,7 @@ public class QuestionContainsKeywordsPredicateTest {
 
         // Keywords match answer and tags, but does not match question
         predicate = new QuestionContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why").withAnswer("12345").withTags("Main")
+        assertFalse(predicate.test(new FlashcardBuilder().withQuestion("Why").withAnswer("12345").withTag("Main")
                 .build()));
     }
 }

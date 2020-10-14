@@ -8,6 +8,7 @@ import seedu.flashnotes.logic.commands.CommandResult;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -34,6 +35,19 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of flashcards */
     ObservableList<Flashcard> getFilteredFlashcardList();
 
+    /** Returns an unmodifiable view of the filtered list of decks */
+    ObservableList<Deck> getFilteredCardDeckList();
+
+    /**
+     * Returns an unmodifiable view of the flashcards to review.
+     */
+    ObservableList<Flashcard> getFlashcardsToReview();
+
+    /**
+     * Returns the modified list of flashcards to be reviewed
+     */
+    ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
+
     /**
      * Returns the user prefs' flashnotes file path.
      */
@@ -48,4 +62,20 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' review card limit.
+     */
+    Integer getReviewCardLimit();
+
+    /**
+     * Set the user prefs' review card limit.
+     */
+    void setReviewCardLimit(Integer reviewCardLimit);
+
+    /**
+     * Update the user's review score for deck used in review.
+     * @param reviewScore Integer value of user's review session score.
+     */
+    void updateDeckPerformanceScore(Integer reviewScore);
 }

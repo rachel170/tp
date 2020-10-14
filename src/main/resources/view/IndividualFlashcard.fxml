@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Label?>
+<StackPane xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1" styleClass="individualFlashcard">
+    <VBox alignment="CENTER">
+        <children>
+            <Label fx:id="question" text="Question" styleClass="individualFlashcard">
+                <HBox.margin>
+                    <Insets right="5.0" />
+                </HBox.margin>
+            </Label>
+        </children>
+        <children>
+            <Label fx:id="answer" text="Answer" styleClass="individualFlashcard">
+                <HBox.margin>
+                    <Insets right="5.0" />
+                </HBox.margin>
+            </Label>
+        </children>
+        <opaqueInsets>
+            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+        </opaqueInsets>
+        <padding>
+            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+        </padding>
+    </VBox>
+</StackPane>

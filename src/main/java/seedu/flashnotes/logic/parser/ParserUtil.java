@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.commons.util.StringUtil;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
@@ -19,6 +20,7 @@ import seedu.flashnotes.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -88,5 +90,34 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses integer and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified integer is invalid (not greater than 0).
+     */
+    public static Integer parseInteger(String integerString) throws ParseException {
+        String trimmedInteger = integerString.trim();
+        try {
+            return Integer.parseInt(trimmedInteger);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_LIMIT);
+        }
+    }
+
+    /**
+     * Parses a {@code String deckName} into a {@code Deck}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deckName} is invalid.
+     */
+    public static Deck parseDeckName(String deckName) throws ParseException {
+        requireNonNull(deckName);
+        String trimmedDeckName = deckName.trim();
+        if (!Deck.isValidDeck(trimmedDeckName)) {
+            throw new ParseException(Deck.MESSAGE_CONSTRAINTS);
+        }
+        return new Deck(trimmedDeckName);
     }
 }
