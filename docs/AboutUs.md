@@ -9,51 +9,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jacob Chia Chu You
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuyouchia.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/chuyouchia)]
+[[portfolio](team/chuyouchia.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Foong Siqi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/foongsq.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/foongsq)]
+[[portfolio](team/foongsq.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deliverables and Deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### Jean Doe
+### Sruthi Saravanan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sruthisarav.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Sruthisarav)]
+[[portfolio](team/sruthisarav.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
-### James Doe
+### Peng Xiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pengxiangg.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://https://github.com/pengxiangg)]
+[[portfolio](team/pengxiangg.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, 
+integrating various parts of the software to create a whole.
+
+### Rachel Ho
+
+<img src="images/rachel170.png" width="200px">
+
+[[github](http://github.com/rachel170)]
+[[portfolio](team/rachel170.md)]
+
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
