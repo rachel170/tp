@@ -53,7 +53,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noFlashcardFound() {
-        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
         QuestionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredFlashcardList(predicate);
