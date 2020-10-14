@@ -3,7 +3,6 @@ package seedu.flashnotes.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
