@@ -20,6 +20,10 @@ public class IndividualFlashcard extends UiPart<Region> {
     private double count;
     private boolean flipped;
     private int numOfFlashcards;
+
+    // Count of number of questions gotten right the first time
+    private int correctAnswers;
+
     /**
      * Update these below to match flashcard.
      */
@@ -38,6 +42,7 @@ public class IndividualFlashcard extends UiPart<Region> {
         this.index = 0;
         this.count = 0;
         this.logic = logic;
+        this.correctAnswers = 0;
     }
 
     /**
@@ -57,6 +62,28 @@ public class IndividualFlashcard extends UiPart<Region> {
         answer.setText("Answer: " + flashcardToDisplay.getAnswer().value);
         question.setVisible(true);
         answer.setVisible(false);
+    }
+
+    /**
+     * Displays the final statistics of review session in the GUI.
+     * Update the deck revision stats with the review session's.
+     */
+    public String displayStatistics() {
+        // Calculate Performance percentage
+        int performance = (this.correctAnswers * 100) / this.numOfFlashcards;
+        // Store the performance value
+        logic.updateDeckPerformanceScore(performance);
+        // Use the question label to list total percentage of first time right
+        question.setText(String.format("Percentage of questions answered correctly on the first try: %d%s",
+                performance,
+                "%"));
+        // Use the question label to list total questions right on first time right/total card
+        answer.setText(String.format("Out of %d questions, you got %d right on the first try!",
+                this.numOfFlashcards, this.correctAnswers));
+        question.setVisible(true);
+        answer.setVisible(true);
+        // Successful update of it leads to display of statistic
+        return "Here is your score for the review session!";
     }
 
     /**
@@ -95,7 +122,15 @@ public class IndividualFlashcard extends UiPart<Region> {
             Flashcard incorrectFlashcard = flashcardsToReview.get(this.index);
             this.flashcardsToReview = logic.addFlashcardToReview(incorrectFlashcard);
         }
+        // Check if index is still within first run
+        if (this.index < numOfFlashcards) {
+            // If correctly answered on first try, increment correctAnswers
+            if (isCorrect == 2) {
+                this.correctAnswers += 1;
+            }
+        }
         this.index += 1;
+
         if (count == numOfFlashcards) {
             return "exit";
         } else {

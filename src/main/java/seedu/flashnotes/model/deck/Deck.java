@@ -7,6 +7,8 @@ import java.util.Objects;
 public class Deck {
     public static final String MESSAGE_CONSTRAINTS =
             "DeckName should not be blank";
+    public static final String MESSAGE_CONSTRAINTS_STATISTIC =
+            "ResultStatistic should not be blank or a non numeric value";
     // Identity fields
     private String deckName;
     private String resultStatistics;
@@ -18,7 +20,7 @@ public class Deck {
     public Deck (String name) {
         requireNonNull(name);
         this.deckName = name;
-        this.resultStatistics = "";
+        this.resultStatistics = "-1";
     }
 
     public String getDeckName() {

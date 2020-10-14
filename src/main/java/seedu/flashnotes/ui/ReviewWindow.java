@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.flashnotes.commons.core.GuiSettings;
@@ -19,6 +20,9 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 public class ReviewWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ReviewWindow.class);
     private static final String FXML = "ReviewWindow.fxml";
+    // Make use of a standard message for invalid input at end of review session
+    private static final String MESSAGE_END_OF_REVIEW = "The review session has ended. "
+            + "Please enter 'endReview' to return to the deck screen.";
 
     private Logic logic;
     private CommandBox commandBox;
@@ -27,6 +31,9 @@ public class ReviewWindow extends UiPart<Stage> {
     private IndividualFlashcard individualFlashcard;
 
     private Stage primaryStage;
+
+    // Use a boolean to check status of review session
+    private boolean isComplete;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +73,9 @@ public class ReviewWindow extends UiPart<Stage> {
 
         this.progressBar = new ProgressBar(0);
         statusbarPlaceholder.getChildren().add(progressBar);
+
+        // Initial state of isComplete is False
+        this.isComplete = false;
     }
 
     /**
@@ -117,9 +127,28 @@ public class ReviewWindow extends UiPart<Stage> {
     }
 
     /**
-     * Flips the flashcard to show the answer/question
+     * Shows the final statistics of the review session.
+     * Marks the session to be at its end
+     * @throws IllegalStateException
      */
-    public void handleFlip() {
+    public void displayStatistics() {
+        // Log
+        logger.fine("Showing statistics page of current review session.");
+        // Update IndividualFlashcard UI
+        String message = this.individualFlashcard.displayStatistics();
+        // Update resultDisplay
+        resultDisplay.setFeedbackToUser(message);
+        // Update progressBar display (100% correctly answered)
+        progressBar.setProgress(1);
+        // Mark the review session at its end
+        this.isComplete = true;
+    }
+
+    /**
+     * Flips the flashcard to show the answer/question
+     * @throws IllegalStateException when review session has already ended.
+     */
+    public void handleFlip() throws IllegalStateException {
         this.individualFlashcard.flipFlashcard();
     }
 
@@ -134,7 +163,7 @@ public class ReviewWindow extends UiPart<Stage> {
         if (individualFlashcard.isCardFlipped()) {
             String result = individualFlashcard.handleNextCard(isCorrect);
             if (result.equals("exit")) {
-                handleExit();
+                displayStatistics();
             } else {
                 progressBar.setProgress(Double.parseDouble(result));
             }
@@ -163,9 +192,19 @@ public class ReviewWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
+        // hide the review and help windows
         helpWindow.hide();
-        primaryStage.hide();
         this.hide();
+
+        // Return to FlashcardListRoot
+        RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
+
+        Region root = rootNode.getFxmlLoader().getRoot();
+        primaryStage.getScene().setRoot(root);
+        primaryStage.show();
+
+        rootNode.fillInnerParts();
     }
 
     /**
@@ -177,6 +216,10 @@ public class ReviewWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            if (isComplete && !(commandResult.isExit())) {
+                // If session has ended, ban the usage of next command
+                throw new IllegalStateException(MESSAGE_END_OF_REVIEW);
+            }
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
@@ -184,7 +227,13 @@ public class ReviewWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isExit()) {
-                handleExit();
+                if (isComplete) {
+                    // If session has ended, invoke unique exit function
+                    handleExit();
+                } else {
+                    // Else invoke normal exit function
+                    handleExit();
+                }
             }
 
             if (commandResult.isNext() != 0) {
@@ -196,7 +245,7 @@ public class ReviewWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | IllegalStateException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

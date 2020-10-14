@@ -37,6 +37,18 @@ public class UniqueDeckList implements Iterable<Deck> {
     }
 
     /**
+     * Returns Deck that matches given string (if any).
+     * Else, returns null
+     * @param deck String containing name of deck to find
+     */
+    public Deck findDeck(String deck) {
+        requireNonNull(deck);
+        return internalList.stream().filter(finding -> deck.equals(finding.getDeckName()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
      * Adds a deck to the list.
      * The deck must not already exist in the list.
      */

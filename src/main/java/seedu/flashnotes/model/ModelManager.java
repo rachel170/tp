@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.model.deck.Deck;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -104,7 +105,9 @@ public class ModelManager implements Model {
     public ReadOnlyFlashNotes getFlashNotes() {
         return flashNotes;
     }
+
     //=========== Decks ================================================================================
+
     @Override
     public boolean hasDeck(Deck deck) {
         return flashNotes.hasDeck(deck);
@@ -165,6 +168,25 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredDecks.setPredicate(predicate);
     }
+
+    /** Returns the unique deck list */
+    @Override
+    public UniqueDeckList getUniqueDeckList() {
+        return flashNotes.getUniqueDeckList();
+    }
+
+    /**
+     * Update the user's review score for deck used in review.
+     * @param reviewScore Integer value of user's review session score.
+     */
+    @Override
+    public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+        requireNonNull(reviewScore);
+        requireNonNull(deckName);
+        flashNotes.updateDeckPerformanceScore(reviewScore, deckName);
+
+    }
+
     //=========== FlashCards ================================================================================
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
@@ -251,6 +273,7 @@ public class ModelManager implements Model {
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
         return flashcardsToReview;
     }
+
     // =========== Util methods =============================================================
 
     @Override
