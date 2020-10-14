@@ -66,7 +66,7 @@ class JsonSerializableFlashNotes {
 
         // For each deck info read
         for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
-            // Update model with the statistics
+            // Update the model with the statistics read from file (if any)
             jsonAdaptedDeck.updateModel(deckOrganizedFlashNotes);
         }
 
