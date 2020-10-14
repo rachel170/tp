@@ -18,7 +18,7 @@ public class FindCommand extends Command {
             + "of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " where";
-     public static final String MESSAGE_SUCCESS = "%1$d flashcards found";
+    public static final String MESSAGE_SUCCESS = "%1$d flashcards found";
 
     private final QuestionContainsKeywordsPredicate predicate;
 
