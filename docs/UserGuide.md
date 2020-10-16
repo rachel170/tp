@@ -152,6 +152,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd flashcard from the flashcard deck.
 * `find English` followed by `delete 1` deletes the 1st flashcard shown in the results of the `find` command.
 
+### Setting card limit for review session : `set-card-limit`
+
+Sets the maximum number of cards that can be reviewed in a single review session.
+
+Format: `set-card-limit REVIEW_LIMIT`
+
+* `REVIEW_LIMIT` can be an integer greater than 0
+* `REVIEW_LIMIT` can be the string `all`. (case sensitive)
+* This review card limit applies to all decks once it is set. 
+* This review card limit is remembered by the program. (User does not have to set the card limit 
+again after he/she closes and reopens the application)
+
+Examples:
+* `set-card-limit 20` sets a limit of 20 cards per review session.
+* `set-card-limit all` removes the card limit and lets user review all cards in the deck.
+
 ### Clearing all entries : `clear`
 
 Clears all flashcards from the program.
@@ -173,6 +189,15 @@ FlashNotes data are saved in the hard disk automatically after any command that 
 _{explain the feature here}_
 
 ## Review Mode
+
+### Opens the review mode: `review`
+
+Opens the review mode to display cards one by one so that users can review them.
+
+Format: `review`
+
+* This command is only valid from the card screen.
+
 
 ### Flip a flashcard
 
