@@ -13,7 +13,6 @@ title: Developer Guide
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
