@@ -273,3 +273,4 @@ testers are expected to do more *exploratory* testing.
        
     1. Test case: `set-review-limit 20` from the review window <br>
        Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
+       
