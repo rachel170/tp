@@ -4,12 +4,9 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
-
 import seedu.flashnotes.logic.commands.AddCommand;
 import seedu.flashnotes.logic.commands.EditCommand.EditFlashcardDescriptor;
 import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.model.tag.Tag;
 
 /**
  * A utility class for Flashcard.
@@ -30,9 +27,7 @@ public class FlashcardUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_QUESTION + flashcard.getQuestion().question + " ");
         sb.append(PREFIX_ANSWER + flashcard.getAnswer().value + " ");
-        flashcard.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        //sb.append(PREFIX_TAG + flashcard.getTag().tagName + " ");
         return sb.toString();
     }
 
@@ -44,14 +39,7 @@ public class FlashcardUtil {
         descriptor.getQuestion().ifPresent(question -> sb.append(PREFIX_QUESTION)
                 .append(question.question).append(" "));
         descriptor.getAnswer().ifPresent(answer -> sb.append(PREFIX_ANSWER).append(answer.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
+        descriptor.getTag().ifPresent(tag -> sb.append(PREFIX_TAG).append(tag.tagName).append(" "));
         return sb.toString();
     }
 }

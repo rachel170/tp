@@ -2,9 +2,9 @@ package seedu.flashnotes.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
+import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all flashcards in flashnotes which has question matching any of the argument keywords.
@@ -18,6 +18,7 @@ public class FindCommand extends Command {
             + "of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " where";
+    public static final String MESSAGE_SUCCESS = "%1$d flashcards found";
 
     private final QuestionContainsKeywordsPredicate predicate;
 
@@ -28,9 +29,10 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredFlashcardList(predicate);
+        String currentDeckName = model.getCurrentDeckName();
+        model.updateFilteredFlashcardList(predicate.and(new TagContainsKeywordsPredicate(currentDeckName)));
         return new CommandResult(
-                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
+                String.format(MESSAGE_SUCCESS, model.getFilteredFlashcardList().size()));
     }
 
     @Override

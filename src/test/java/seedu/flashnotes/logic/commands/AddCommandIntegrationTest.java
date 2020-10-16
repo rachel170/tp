@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.FlashcardBuilder;
 
@@ -31,6 +32,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.addFlashcard(validFlashcard);
+        expectedModel.addDeck(new Deck("Singapore"));
 
         assertCommandSuccess(new AddCommand(validFlashcard), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validFlashcard), expectedModel);
