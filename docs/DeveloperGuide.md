@@ -7,6 +7,23 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Storage component
+
+![Structure of the Storage Component](images/StorageClassDiagram.png)
+
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
+
+The `Storage` component,
+* can save `UserPref` objects and general data within FlashNotes in json format.
+* can read back data in json save file on next initialization of FlashNotes.
+* can update save file's data during execution of a valid command entered by the user.
+
+### Common classes
+
+Classes used by multiple components are in the `seedu.flashnotes.commons` package.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
