@@ -4,6 +4,17 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Documentation, logging, testing, configuration, dev-ops**
+
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
