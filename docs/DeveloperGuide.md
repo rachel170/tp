@@ -64,8 +64,8 @@ The following general activity diagram summarizes what happens when a user execu
 
 ##### 2 possible designs for Adding Deck
 
-* **Alternative 1 (current choice):** Contain a reference to list of deck names and its associated attributes.
-  * Pros: Easy to implement.
+* **Alternative 1 (current choice):** Contain a list of deck names and uses it to search up relevant flashcards.
+  * Pros: Easy to implement. Suitable at this current stage because there is at most 4 cards shown at any point in time on screen. Over-optimisation is unnecessary.
   * Cons: May have performance issues if trying to find a large number cards contained by the deck.
 
 * **Alternative 2:** Store Flashcards within deck.
