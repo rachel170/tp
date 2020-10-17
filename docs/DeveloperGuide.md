@@ -6,6 +6,72 @@ title: Developer Guide
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
+### UI component
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+**API** :
+[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+
+The UI consists of a `MainWindow` which acts as a stage, and the `MainWindow` that references a `RootNode` to display the scene.
+The Root Node contains the scene, which is composed of UI parts like`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+The `UI` component,
+
+* Executes user commands using the `Logic` component.
+* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+--------------------------------------------------------------------------------------------------------------------
+
+### Create Deck feature
+
+#### Implementation
+
+`FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
+
+* `Flashnotes#addDeck()` — Add a new Deck with a unique deck name.
+
+`Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
+
+##### Given below is an example usage scenario.
+
+Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
+
+Step 2. The user executes `addDeck n/Deck1` command to add a new Deck in the FlashNotes. The `addDeck` command calls `Model#addDeck()`, which executes the command and saves it to `FlashNotes`.
+
+Step 3. The user is now able to see the new `Deck1` added. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
+
+</div>
+
+##### Corresponding sequence diagram for `AddDeck`:
+
+The following sequence diagram shows how AddDeck operation works:
+
+![AddDeckSequenceDiagram](images/AddDeckSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `addDeckCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following general activity diagram summarizes what happens when a user executes a new command:
+
+![CommandActivityDiagram](images/CommandActivityDiagram.png)
+
+#### Design consideration:
+
+##### 2 possible designs for Adding Deck
+
+* **Alternative 1 (current choice):** Contain a list of deck names and uses it to search up relevant flashcards.
+  * Pros: Easy to implement. Suitable at this current stage because there is at most 4 cards shown at any point in time on screen. Over-optimisation is unnecessary.
+  * Cons: May have performance issues if trying to find a large number cards contained by the deck.
+
+* **Alternative 2:** Store Flashcards within deck.
+  * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
+  * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -41,76 +107,174 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `FlashNotes` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a card**
+####**Use case: UC01 - Review cards**
+
+####Precondition: Cards that will be reviewed are already selected; User sees the full list of cards in the given deck.
+
+**MSS:**
+
+1. Deck selects the relevant number of cards from current storage and display it
+1. User start reviewing using the cards that are currently being displayed
+1. Start review in different window
+1. Card appears
+1. Card flipped
+1. Card marked as correct or wrong
+1. Continue steps 3 to 5 until Deck end
+1. Close Window
+1. Show Review statistics
+1. Return to list view of deck in main window
+
+Use case ends.
+
+**Extension:**
+
+* 6.a User marks the card as correct
+   * 6.1. System shows next card.
+
+* 6.b User marks card as wrong
+   * 6.1. System adds card back into the queue.
+   * 6.2 System shows the next card.
+
+* *User ends the review session prematurely
+    * a. Review statistics screen not shown.
+    * b. Review statistics not updated in the deck list.
+
+####**Use case: UC02 - Create new Deck**
+#####Precondition: User is in the Home Screen, and is not in review mode.
+
+**MSS:**
+
+1. User enters the command to create a new deck.
+1. User enters empty deck view
+1. User returns to main screen
+Use Case Ends
+
+**Extension:**
+
+* 1a. Deck name is a duplicate of existing decks
+    * 1.a.1 Raise error and stay in Home Screen
+* 2a. User creates new card in deck view (UC04)
+    * 2.a.1  Card tagged with the deck name
+
+* 2b User deletes card (UC03)
+
+* 2c. User edits card (UC05)
+
+####**Use case: UC03 - Delete a Card**
+#####Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS**
 
-1.  User requests to list cards
-2.  Flashnotes shows a list of cards
-3.  User requests to delete a specific card in the list
-4.  Flashnotes deletes the card
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. Flashnotes shows an error message.
-      Use case resumes at step 2.
-
-**Use case: Add a card**
-
-**MSS**
-
-1.  User add card
-2.  Flashnotes adds the card
-    Use case ends.
-
-**Extensions**
-
-* 2a. There is a duplicate question.
-    * 2a1. Flashnotes shows an error message.
-      Use case resumes at step 2.
-
-**Use case: Edit a card**
-
-**MSS**
-
-1.  User requests to list cards
-2.  Flashnotes shows a list of cards
-3.  User requests to edit a specific card in the list
-4.  Flashnotes edits the card
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. Flashnotes shows an error message.
-      Use case resumes at step 2.
-
-
-**Use case: Filtering cards by a certain tag**
-
-**MSS**
-1. User filters all cards using a certain tag.
-2. Flashnotes shows a list of cards that contain the tag.
-
+1. User requests to list cards
+1. Flashnotes shows a list of cards
+1. User requests to delete a specific card in the list
+1. Flashnotes deletes the card
 Use case ends.
 
 **Extensions**
 
-* 1a. User enters a tag that is not found
-    * 1a1. Flashnotes returns no cards.
-    Use case ends.
+* 2a. The list is empty.
+Use case ends.
+* 3a. The given index is invalid.
+    * 3a1. Flashnotes shows an error message.
+    Use case resumes at step 2.
 
-*{More to be added}*
+####**Use case: UC04 - Add a card**
+#####Precondition: Must be inside the deck view.
+
+**MSS**
+
+1. User add card
+1. Flashnotes adds the card
+Use case ends.
+
+**Extensions**
+
+* 2a. There is a duplicate card.
+    * 2a1. Flashnotes shows an error message.
+    Use case resumes at step 2.
+
+####**Use case: UC05 - Edit a card**
+#####Precondition: Must be inside the deck mode.
+
+**MSS**
+
+1. User requests to list cards
+1. Flashnotes shows a list of cards
+1. User requests to edit a specific card in the list
+1. Flashnotes edits the card
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    Use case ends.
+* 3a. The given index is invalid.
+    * 3a1. Flashnotes shows an error message.
+    Use case resumes at step 2.
+
+#####**Use case: UC06 - Open Existing Deck**
+#####Precondition: User is in the Home Mode, and is not in review mode.
+
+**MSS**
+
+1. User filters all cards belonging to a deck.
+1. Flashnotes shows a list of cards using deck mode.
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters a tag that is not found.
+    * 1a1. Flashnotes returns empty card list.
+Use case ends.
+
+####**Use case: UC07 - Delete current Deck**
+#####Precondition: User is in the Home Mode, and is not in review mode. If in deck view mode, cannot delete.
+
+**MSS:**
+
+1. User enters command to delete an existing deck.
+1. Deck delete success message in main screen
+Use Case ends
+
+**Extension:**
+
+* 2a. Tries to delete deck.
+    * 2.a.1 Deck not found.
+    * 2.a.2 Display Error Message.
+    Use Case ends.
+
+####**Use case: UC07 - Rename current Deck**
+#####Precondition: User is in the Home mode, and is not in review mode.
+
+**MSS:**
+
+1. User enters command to rename an existing deck.
+1. Deck renamed with success message.
+1. User returns to main screen.
+
+Use Case Ends
+
+**Extension:**
+
+* 2a. User renames to the same name as an existing deck
+    * 2a1 Error message is shown in the main screen and the deck is not renamed
+
+####**Use case: UC08 - Return to Home mode**
+#####Precondition: User is not in Home mode and not in review mode.
+
+**MSS:**
+
+1. User enters Home Command.
+1. User returns to main screen
+
+Use Case Ends
+
+**Extension:**
+
+* 2.a Already in the Home screen
+    * 2.a.1 Return message to remind user
+
 
 ### Non-Functional Requirements
 
@@ -121,14 +285,15 @@ Use case ends.
 5.  The user can directly edit the data file to add or edit flashcards.
 6.  The user can import or export the flashcards by adding/copying a new json file with the same name.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Flashcard**: A card with a question and answer, and may contain a tag.
 * **Flashnotes**: The software that stores flashcards.
 * **Tag**: A note to group cards of a certain category together.
+* **Review Mode**: a mode which displays cards from a deck individually in shuffled order.
+* **Deck Mode**: A mode which displays a list of cards
+* **Home Mode**: A mode which displays a list of decks
 
 --------------------------------------------------------------------------------------------------------------------
 
