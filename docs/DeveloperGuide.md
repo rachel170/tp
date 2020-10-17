@@ -24,6 +24,20 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 --------------------------------------------------------------------------------------------------------------------
 
+### Logic component
+
+![Structure of the Logic Component](images/LogicClassDiagram.png)
+
+**API** :
+[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/flashnotes/logic/Logic.java)
+
+1. `Logic` uses the `FlashNotesParser` class to parse the user command.
+1. This results in a `Command` object which is executed by the `LogicManager`.
+1. The command execution can affect the `Model` (e.g. adding a flashcard).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+--------------------------------------------------------------------------------------------------------------------
+
 ### Create Deck feature
 
 #### Implementation
