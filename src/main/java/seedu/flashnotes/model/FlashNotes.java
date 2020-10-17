@@ -260,8 +260,6 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     @Override
     public ObservableList<Deck> getDeckList() {
-        //todo read the tags and update
-        //todo change when we have decklist implementation up
         return decks.asUnmodifiableObservableList();
     }
 
