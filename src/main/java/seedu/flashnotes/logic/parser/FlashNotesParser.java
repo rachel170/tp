@@ -41,8 +41,6 @@ public class FlashNotesParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private boolean isReviewMode = false;
-
     /**
      * Parses user input into command for execution.
      *
@@ -100,8 +98,6 @@ public class FlashNotesParser {
             return new WrongCommand();
 
         case EndReviewCommand.COMMAND_WORD:
-            // Ending Review, set reviewMode to false
-            this.isReviewMode = false;
             return new EndReviewCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -182,7 +178,6 @@ public class FlashNotesParser {
         case HomeCommand.COMMAND_WORD:
             return new HomeCommandParser().parse(arguments);
         case ReviewCommand.COMMAND_WORD:
-            this.isReviewMode = true;
             return new ReviewCommand();
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
