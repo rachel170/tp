@@ -9,10 +9,12 @@ Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
+interface RootNode <<Interface>>
+Class XYZListRoot
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class XYZListPanel
+Class XYZCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -30,28 +32,30 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> MainWindow
-MainWindow --> HelpWindow
-MainWindow *-down-> CommandBox
-MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PersonListPanel
-MainWindow *-down-> StatusBarFooter
+MainWindow --> RootNode
+RootNode --> XYZListRoot
+XYZListRoot --> HelpWindow
+XYZListRoot *-down-> CommandBox
+XYZListRoot *-down-> ResultDisplay
+XYZListRoot *-down-> XYZListPanel
+XYZListRoot *-down-> StatusBarFooter
 
-PersonListPanel -down-> PersonCard
+XYZListPanel -down-> XYZCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+XYZListPanel --|> UiPart
+XYZCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 
-PersonCard ..> Model
+XYZListPanel ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+XYZListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
