@@ -175,18 +175,18 @@ Examples:
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Listing flashcards with tag(s) : `listTags`
+### Entering a deck : `enterDeck`
 
-Lists flashcards with the given tag keywords.
+Lists flashcards inside the deck.
 
-Format: `listTags KEYWORD [MORE_KEYWORDS]`
+Format: `enterDeck KEYWORD`
 
 * The search is case-sensitive. e.g. `GET1025` will not match `get1025`
 * only full words will be matched e.g. `GE` will not match `GET1025`
-* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
+* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards in deck `GET1025 philosophy` and not `GET1025` nor `philosophy`.
 
 Examples:
-* `listTags Singapore` return cards with Tags `Singapore`
+* `enterDeck Singapore` return cards in deck `Singapore`
 
 ### Deleting a flashcard : `delete`
 
