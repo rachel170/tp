@@ -39,9 +39,9 @@ The `model`,
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Implementation
+## Implementation
 
-#### Create Deck feature
+### Create Deck feature
 
 
 `FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
@@ -50,7 +50,7 @@ The `model`,
 
 `Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
 
-##### Given below is an example usage scenario.
+#### Given below is an example usage scenario.
 
 Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
 
@@ -62,7 +62,7 @@ Step 3. The user is now able to see the new `Deck1` added. The `add` command als
 
 </div>
 
-##### Corresponding sequence diagram for `AddDeck`:
+#### Corresponding sequence diagram for `AddDeck`:
 
 The following sequence diagram shows how AddDeck operation works:
 
@@ -87,6 +87,26 @@ The following general activity diagram summarizes what happens when a user execu
 * **Alternative 2:** Store Flashcards within deck.
   * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
   * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
+
+
+### Handle invalid inputs/commands
+#### Deck vs Card related commands
+* The system disables card-related commands (e.g. add, delete, edit, review, find) when user is at the home screen.
+* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
+* Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
+* The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
+
+#### Review related commands
+* The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
+* The parser (logic) keeps track of whether the user is currently doing a review, and disables certain commands if the user is currently in a review session.
+
+#### Design considerations:
+* Alternative 1 (current choice): Checking of commands are done in the logic component.
+    * Pros: Model component does not need to keep track and handle invalid inputs by user
+    * Cons: Coupling between logic and model is increased
+* Alternative 2: Checking of commands are done in the model component.
+    * Pros; Reduced coupling
+    * Cons: Model has to handle commands, reducing cohesion.
 
 ## **Appendix: Requirements**
 
