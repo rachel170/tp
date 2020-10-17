@@ -1,0 +1,20 @@
+@startuml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command is valid])
+    :Save Command Result to Model;
+    :Store changes in FlashNotesStorage;
+    :Display Command Result on Screen;
+else ([else])
+    :Throws CommandException;
+    :Displays error message
+    in Result Display;
+
+endif
+
+stop
+@enduml
