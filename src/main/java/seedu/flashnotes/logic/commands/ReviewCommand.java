@@ -15,7 +15,8 @@ public class ReviewCommand extends Command {
 
     public static final String SHOWING_REVIEW_MESSAGE = "Opened review window.";
 
-    private static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using 'add q/QUESTION a/ANSWER' first.";
+    private static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
+            + "'add q/QUESTION a/ANSWER' first.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
