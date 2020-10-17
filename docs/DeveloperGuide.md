@@ -141,17 +141,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 6a. User marks the card as correct.
-   * 6a.1. System shows next card. <br />
+   * 6a.1. System shows next card. <br>
    Use case resumes from Step 4.
 
 * 6b. User marks card as wrong.
    * 6b.1. System adds card back into the queue.
-   * 6b.2. System shows the next card. <br />
+   * 6b.2. System shows the next card. <br>
    Use case resumes from Step 4.
 
 * *User ends the review session prematurely.
     * *a. Review statistics screen not shown.
-    * *b. Review statistics not updated in the deck list. <br />
+    * *b. Review statistics not updated in the deck list. <br>
     Use case resumes from Step 10.
 
 ####**Use case: UC02 - Create new Deck**
@@ -168,17 +168,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 1a. Deck name is a duplicate of existing decks.
-    * 1a.1. Raise error and stay in Home Screen. <br />
+    * 1a.1. Raise error and stay in Home Screen. <br>
     Use case ends.
     
 * 2a. User creates new card in deck view (UC04).
-    * 2a.1.  Card tagged with the deck name. <br />
+    * 2a.1.  Card tagged with the deck name. <br>
     Use case resumes from Step 3.
 
-* 2b. User deletes card (UC03). <br />
+* 2b. User deletes card (UC03). <br>
     Use case resumes from Step 3.
 
-* 2c. User edits card (UC05). <br />
+* 2c. User edits card (UC05). <br>
     Use case resumes from Step 3.
 
 ####**Use case: UC03 - Delete a Card**
@@ -199,7 +199,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
     
 * 3a. The given index is invalid.
-    * 3a.1. Flashnotes shows an error message. <br />
+    * 3a.1. Flashnotes shows an error message. <br>
     Use case resumes at Step 2.
 
 ####**Use case: UC04 - Add a card**
@@ -215,7 +215,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a.1. Flashnotes shows an error message. <br />
+    * 2a.1. Flashnotes shows an error message. <br>
     Use case resumes at Step 2.
 
 ####**Use case: UC05 - Edit a card**
@@ -232,10 +232,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty. <br>
     Use case ends.
 * 3a. The given index is invalid.
-    * 3a.1. Flashnotes shows an error message.
+    * 3a.1. Flashnotes shows an error message.<br>
     Use case resumes at step 2.
 
 #####**Use case: UC06 - Open Existing Deck**
@@ -251,7 +251,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User enters a tag that is not found.
-    * 1a.1. Flashnotes returns empty card list. <br />
+    * 1a.1. Flashnotes returns empty card list. <br>
     Use case ends.
 
 ####**Use case: UC07 - Delete current Deck**
@@ -268,7 +268,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Tries to delete deck.
     * 2a.1 Deck not found.
-    * 2a.2 Display Error Message. <br />
+    * 2a.2 Display Error Message. <br>
     Use Case ends.
 
 ####**Use case: UC07 - Rename current Deck**
@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 2a. User renames deck to the same name as an already existing deck.
-    * 2a.1 Error message is shown in the main screen and the deck will not be renamed.  <br />
+    * 2a.1 Error message is shown in the main screen and the deck will not be renamed.  <br>
     Use Case ends.
 
 ####**Use case: UC08 - Return to Home mode**
@@ -301,7 +301,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 2a. Already in the Home screen.
-    * 2a.1. Return message to remind user. <br />
+    * 2a.1. Return message to remind user. <br>
     Use Case ends.
 
 
@@ -382,3 +382,29 @@ testers are expected to do more *exploratory* testing.
        Expected: All cards with the tag 'Singapore' and cards with the tag 'Malaysia' will be shown.
 
 1. _{ more test cases …​ }
+
+### Flipping flashcard that is being reviewed
+1. Type `flip` in the command box
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Test case: `flip` when the card is showing the question<br>
+        Expected: The card should be flipped to show the answer for this question <br>
+    1. Test case: `flip` when the card is showing the answer <br>
+        Expected: The card should be flipped to show the question for this answer <br>
+    
+
+### Marking flashcard that is being reviewed as correct
+1. Type `c` in the command box
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Test case: `c` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
+    1. Test case: `c` when the card is showing the answer <br>
+        Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
+
+### Marking flashcard that is being reviewed as wrong
+1. Type `w` in the command box
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Test case: `w` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
+    1. Test case: `w` when the card is showing the answer <br>
+        Expected: It should show the question of the next card and the progress bar should still have the same progress.
+
