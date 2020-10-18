@@ -11,8 +11,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
+
+import static seedu.flashnotes.logic.commands.AddDeckCommand.MESSAGE_DUPLICATE_DECK;
 
 /**
  * An Immutable FlashNotes that is serializable to JSON format.
@@ -62,15 +65,16 @@ class JsonSerializableFlashNotes {
             }
             flashNotes.addFlashcard(flashcard);
         }
-        FlashNotes deckOrganizedFlashNotes = new FlashNotes(flashNotes);
-
         // For each deck info read
         for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
-            // Update the model with the statistics read from file (if any)
-            jsonAdaptedDeck.updateModel(deckOrganizedFlashNotes);
+            Deck theDeck = jsonAdaptedDeck.toModelType();
+            if (flashNotes.hasDeck(theDeck)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
+            }
+            flashNotes.addDeck(theDeck);
         }
 
-        return deckOrganizedFlashNotes;
+        return flashNotes;
     }
 
 }
