@@ -24,15 +24,15 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
    * **`list`** : list all card
 
-   * **`add`**`q/What is a question? a/Something that elicits thought.`: create new card
+   * **`addDeck`**`n/Economics `: create new empty Deck named Economics
 
-   * **`delete`**`3` : Deletes the 3rd card shown in the current list.
+   * **`deleteDeck`**`Singapore` : Deletes the existing Deck named Singapore and all cards inside it.
 
    * **`clear`** : Deletes all cards.
 
    * **`find`**`question`: Returns all cards with description matching question.
 
-   * **`listTags`**`Singapore`: Returns all cards with the tag 'Singapore'.
+   * **`enterDeck`**`Singapore`: Returns all cards inside the deck 'Singapore'.
 
    * **`exit`** : Exits the app.
 
@@ -52,10 +52,60 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
-
 </div>
 
-## Main Mode
+--------------------------------------------------------------------------------------------------------------------
+
+## Main Mode (Home Screen)
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Quick Summary of Main Mode:**<br>
+
+* Main Mode primarily allows management of flashcard decks.
+* In order to manage flashcards directly, need to enter deck mode.
+</div>
+
+### Find all flashcards within the deck : `enterDeck [DECKNAME]`
+
+Lists flashcards within the given deck.
+
+Format: `enterDeck [DECKNAME]`
+
+* The search is case-sensitive. e.g. `GET1025` will not match `get1025`
+* only full words will be matched e.g. `GE` will not match `GET1025`
+* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
+
+Examples:
+* `enterDeck Singapore` return cards with Tags `Singapore`
+
+### Create a new Deck : `addDeck n/[DECKNAME]`
+
+Lists flashcards within the given deck.
+
+Format: `addDeck n/[DECKNAME]`
+
+* The deck name is case-sensitive. e.g. `GET1025` will not match `get1025`
+* if there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
+
+Examples:
+* `addDeck Singapore` creates an empty deck called `Singapore`.
+
+### Rename a new Deck : `editDeck n/[DECKNAME] t/[TARGETDECKNAME]`
+{more to come}
+
+### Delete a new Deck : `deleteDeck n/[DECKNAME] t/[TARGETDECKNAME]`
+{more to come}
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Deck Mode (List of Cards)
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Quick Summary of Deck Mode:**<br>
+
+* Deck Mode primarily allows management of flashcards.
+* In order to manage decks directly, need to return to deck mode via home command.
+</div>
 
 ### Viewing help : `help`
 
@@ -125,18 +175,18 @@ Examples:
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Listing flashcards with tag(s) : `listTags`
+### Entering a deck : `enterDeck`
 
-Lists flashcards with the given tag keywords.
+Lists flashcards inside the deck.
 
-Format: `listTags KEYWORD [MORE_KEYWORDS]`
+Format: `enterDeck KEYWORD`
 
 * The search is case-sensitive. e.g. `GET1025` will not match `get1025`
 * only full words will be matched e.g. `GE` will not match `GET1025`
-* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
+* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards in deck `GET1025 philosophy` and not `GET1025` nor `philosophy`.
 
 Examples:
-* `listTags Singapore` return cards with Tags `Singapore`
+* `enterDeck Singapore` return cards in deck `Singapore`
 
 ### Deleting a flashcard : `delete`
 
@@ -156,7 +206,7 @@ Examples:
 
 Sets the maximum number of cards that can be reviewed in a single review session.
 
-Format: `set-card-limit REVIEW_LIMIT`
+Format: `set-review-limit REVIEW_LIMIT`
 
 * `REVIEW_LIMIT` can be an integer greater than 0
 * `REVIEW_LIMIT` can be the string `all`. (case sensitive)
@@ -165,8 +215,14 @@ Format: `set-card-limit REVIEW_LIMIT`
 again after he/she closes and reopens the application)
 
 Examples:
-* `set-card-limit 20` sets a limit of 20 cards per review session.
-* `set-card-limit all` removes the card limit and lets user review all cards in the deck.
+* `set-review-limit 20` sets a limit of 20 cards per review session.
+* `set-review-limit all` removes the card limit and lets user review all cards in the deck.
+
+### Return to Main Mode : `home`
+
+Return to Main mode with list of decks.
+
+Format: `home`
 
 ### Clearing all entries : `clear`
 
@@ -182,13 +238,22 @@ Format: `exit`
 
 ### Saving the data
 
-FlashNotes data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FlashNotes saves data to the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Archiving data files `[coming in v2.0]`
 
-_{explain the feature here}_
+{explain the feature here}
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Review Mode
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Quick Summary of Review Mode:**<br>
+
+* Review Mode primarily allows active flashcards to be used for revision.
+* It also provides relevant statistics if the review session was fully completed.
+</div>
 
 ### Opens the review mode: `review`
 
@@ -209,7 +274,7 @@ Format: `flip`
 
 Examples:
 * `flip` returns `The sea is blue because water absorbs colors in the red part of the light spectrum` 
-and `WW11 took place from 1939 to 1945`.
+ which is the answer to the question `Why is the sea blue?`.
 
 ### Mark a flashcard as correct
 
@@ -220,7 +285,7 @@ Format: `c`
 * Marks flashcard as correct before moving on to show the question of the next flashcard.
 
 Examples:
-* `c` returns `Why is the sea blue in color?` and `When did WWII occur?`
+* `c` returns next card in deck if any.
 
 ### Mark a flashcard as wrong
 
@@ -231,20 +296,37 @@ Format: `w`
 * Marks flashcard as wrong before moving on to show the question of the next flashcard.
 
 Examples:
-* `w` returns `What is macroeconomics?` and `Who is Hitler?`.
+* `w` returns next card in deck if any.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlashNotes home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlashNotes home folder.<br>
+**Q**: What should I do if I have problems launching the application? <br>
+**A**: Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application. <br>
+**Q**: When I exit the program, will all my new flashcards and updates be saved? <br>
+**A**: Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To ensure none of your data is lost, do not delete the data folder. <br>
+**Q**: Is it possible to restore a deck that I just deleted?
+**A**: Sorry but no. There is no such functionality at this point in time. 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 ### Main Mode
+
+Action | Format, Examples
+--------|------------------
+**Add Deck** | `Format: addDeck n/[DECKNAME]`<br> e.g., `addDeck Default`
+**Read Deck** | `Format: enterDeck [DECKNAME]` <br> e.g., `enterDeck Default`
+**Delete Deck** | `Format: delete [DECKNAME]`<br> e.g., `delete Default`
+**Edit Deck name** | `edit [n/NEWDECKNAME] [t/TARGETDECKNAME]`<br> e.g., `edit n/Default Deck t/Default`
+**List** | `list`
+**Help** | `help`
+
+### Deck Mode
 
 Action | Format, Examples
 --------|------------------
@@ -255,6 +337,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Home** | `home`
 
 ### Review Mode
 
