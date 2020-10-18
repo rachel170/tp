@@ -187,8 +187,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      */
     public void setDeck(Deck target, Deck editedDeck) {
         requireNonNull(editedDeck);
-
         decks.setDeck(target, editedDeck);
+        //TODO update the flashcards if there are existing flashcardsun
     }
 
     /**
