@@ -11,7 +11,7 @@ title: Developer Guide
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/ui/Ui.java)
 
 The UI consists of a `MainWindow` which acts as a stage, and the `MainWindow` that references a `RootNode` to display the scene.
 The Root Node contains the scene, which is composed of UI parts like`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
@@ -22,6 +22,21 @@ The `UI` component,
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
+
+
+### Model Component
+![Structure of the Model Component](images/ModelClassDiagram.png)
+
+**API** :
+[`Model.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/ui/Model.java)
+The `model`,
+* Stores a `UserPref` Object that represents the user's preferences.
+* Stores the Flashnotes data
+* Exposes an unmodifiable `ObserbableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes. This list is to show cards in the card page of the Ui.
+* Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
+* Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the home page of the Ui.
+* Does not depend on any of the other three components.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Logic component
@@ -43,9 +58,10 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Implementation
+
 ### Create Deck feature
 
-#### Implementation
 
 `FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
 
@@ -53,7 +69,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 `Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
 
-##### Given below is an example usage scenario.
+#### Given below is an example usage scenario.
 
 Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
 
@@ -65,7 +81,7 @@ Step 3. The user is now able to see the new `Deck1` added. The `add` command als
 
 </div>
 
-##### Corresponding sequence diagram for `AddDeck`:
+#### Corresponding sequence diagram for `AddDeck`:
 
 The following sequence diagram shows how AddDeck operation works:
 
@@ -90,6 +106,26 @@ The following general activity diagram summarizes what happens when a user execu
 * **Alternative 2:** Store Flashcards within deck.
   * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
   * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
+
+
+### Handle invalid inputs/commands
+#### Deck vs Card related commands
+* The system disables card-related commands (e.g. add, delete, edit, review, find) when user is at the home screen.
+* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
+* Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
+* The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
+
+#### Review related commands
+* The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
+* The parser (logic) keeps track of whether the user is currently doing a review, and disables certain commands if the user is currently in a review session.
+
+#### Design considerations:
+* Alternative 1 (current choice): Checking of commands are done in the logic component.
+    * Pros: Model component does not need to keep track and handle invalid inputs by user
+    * Cons: Coupling between logic and model is increased
+* Alternative 2: Checking of commands are done in the model component.
+    * Pros; Reduced coupling
+    * Cons: Model has to handle commands, reducing cohesion.
 
 ## **Appendix: Requirements**
 
@@ -315,9 +351,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 cards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Searching for a flashcard should not take more than 2 seconds.
+4.  Interactions should not take more than 2 seconds.
 5.  The user can directly edit the data file to add or edit flashcards.
 6.  The user can import or export the flashcards by adding/copying a new json file with the same name.
+7.  Should be usable by someone not used to CLI.
 
 ### Glossary
 
@@ -342,51 +379,50 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample flashcards. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample flashcards. The window size may not be optimum.
 
-1. Saving window preferences
+Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }
 
 ### Deleting a card
 
-1. Deleting a card while all persons are being shown
+Deleting a card while all persons are being shown
 
    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }
 
 
-### Finding cards by tag
-1. Finding cards via a specific tag
+### Entering a deck
+Entering a deck
 
-    1. Prerequisites: Flashnotes have cards containing tag 'Singapore' and 'Malaysia'
-    1. Test case: `listTags Singapore` <br>
+   1. Prerequisites: Flashnotes have decks with names 'Singapore' and 'Malaysia'
+    
+   2. Test case: `enterDeck Singapore` <br>
        Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.    
-    1. Test case: `listTags singapore` <br>
+    
+   3. Test case: `enterDeck singapore` <br>
        Expected: None of the cards are shown (as the keyword is case-sensitive)       
-    1. Test case: `listTags Singapore Malaysia` <br>
-       Expected: All cards with the tag 'Singapore' and cards with the tag 'Malaysia' will be shown.
-
-1. _{ more test cases …​ }
+    
+   4. Test case: `enterDeck Singapore Malaysia` <br>
+       Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
 
 ### Flipping flashcard that is being reviewed
 1. Type `flip` in the command box
@@ -412,4 +448,3 @@ testers are expected to do more *exploratory* testing.
         Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
     1. Test case: `w` when the card is showing the answer <br>
         Expected: It should show the question of the next card and the progress bar should still have the same progress.
-
