@@ -24,6 +24,25 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 --------------------------------------------------------------------------------------------------------------------
 
+### Logic component
+
+![Structure of the Logic Component](images/LogicClassDiagram.png)
+
+**API** :
+[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/flashnotes/logic/Logic.java)
+
+1. `Logic` uses the `FlashNotesParser` class to parse the user command.
+1. This results in a `Command` object which is executed by the `LogicManager`.
+1. The command execution can affect the `Model` (e.g. adding a flashcard).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Create Deck feature
 
 #### Implementation
@@ -105,112 +124,123 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FlashNotes` and the **Actor** is the `user`, unless specified otherwise)
-
 ####**Use case: UC01 - Review cards**
 
 ####Precondition: Cards that will be reviewed are already selected; User sees the full list of cards in the given deck.
 
 **MSS:**
 
-1. Deck selects the relevant number of cards from current storage and display it
-1. User start reviewing using the cards that are currently being displayed
-1. Start review in different window
-1. Card appears
-1. Card flipped
-1. Card marked as correct or wrong
-1. Continue steps 3 to 5 until Deck end
-1. Close Window
-1. Show Review statistics
-1. Return to list view of deck in main window
+1. Deck selects the relevant number of cards from current storage and displays it.
+1. User start reviewing using the cards that are currently being displayed in deck.
+1. Start review in a different window.
+1. Card appears.
+1. Card flipped.
+1. Card marked as correct or wrong.
+1. Repeat steps 4 to 6 until Deck ends.
+1. Show Review statistics.
+1. Close Window.
+1. Return to list view of deck in the main window.
 
-Use case ends.
+    Use case ends.
 
 **Extension:**
 
-* 6.a User marks the card as correct
-   * 6.1. System shows next card.
+* 6a. User marks the card as correct.
+   * 6a.1. System shows next card. <br>
+   Use case resumes from Step 4.
 
-* 6.b User marks card as wrong
-   * 6.1. System adds card back into the queue.
-   * 6.2 System shows the next card.
+* 6b. User marks card as wrong.
+   * 6b.1. System adds card back into the queue.
+   * 6b.2. System shows the next card. <br>
+   Use case resumes from Step 4.
 
-* *User ends the review session prematurely
-    * a. Review statistics screen not shown.
-    * b. Review statistics not updated in the deck list.
+* *User ends the review session prematurely.
+    * *a. Review statistics screen not shown.
+    * *b. Review statistics not updated in the deck list. <br>
+    Use case resumes from Step 10.
 
 ####**Use case: UC02 - Create new Deck**
 #####Precondition: User is in the Home Screen, and is not in review mode.
 
 **MSS:**
 
-1. User enters the command to create a new deck.
-1. User enters empty deck view
-1. User returns to main screen
-Use Case Ends
+1. User enters command to create a new deck.
+1. User enters empty deck view.
+1. User returns to main screen.
+
+    Use Case Ends.
 
 **Extension:**
 
-* 1a. Deck name is a duplicate of existing decks
-    * 1.a.1 Raise error and stay in Home Screen
-* 2a. User creates new card in deck view (UC04)
-    * 2.a.1  Card tagged with the deck name
+* 1a. Deck name is a duplicate of existing decks.
+    * 1a.1. Raise error and stay in Home Screen. <br>
+    Use case ends.
+    
+* 2a. User creates new card in deck view (UC04).
+    * 2a.1.  Card tagged with the deck name. <br>
+    Use case resumes from Step 3.
 
-* 2b User deletes card (UC03)
+* 2b. User deletes card (UC03). <br>
+    Use case resumes from Step 3.
 
-* 2c. User edits card (UC05)
+* 2c. User edits card (UC05). <br>
+    Use case resumes from Step 3.
 
 ####**Use case: UC03 - Delete a Card**
 #####Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS**
 
-1. User requests to list cards
-1. Flashnotes shows a list of cards
-1. User requests to delete a specific card in the list
-1. Flashnotes deletes the card
-Use case ends.
+1. User requests to list cards.
+1. Flashnotes shows a list of cards.
+1. User requests to delete a specific card in the list.
+1. Flashnotes deletes the card.
+
+    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-Use case ends.
+    Use case ends.
+    
 * 3a. The given index is invalid.
-    * 3a1. Flashnotes shows an error message.
-    Use case resumes at step 2.
+    * 3a.1. Flashnotes shows an error message. <br>
+    Use case resumes at Step 2.
 
 ####**Use case: UC04 - Add a card**
 #####Precondition: Must be inside the deck view.
 
 **MSS**
 
-1. User add card
-1. Flashnotes adds the card
-Use case ends.
+1. User add card.
+1. Flashnotes adds the card.
+
+    Use case ends.
 
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a1. Flashnotes shows an error message.
-    Use case resumes at step 2.
+    * 2a.1. Flashnotes shows an error message. <br>
+    Use case resumes at Step 2.
 
 ####**Use case: UC05 - Edit a card**
 #####Precondition: Must be inside the deck mode.
 
 **MSS**
 
-1. User requests to list cards
-1. Flashnotes shows a list of cards
-1. User requests to edit a specific card in the list
-1. Flashnotes edits the card
-Use case ends.
+1. User requests to list cards.
+1. Flashnotes shows a list of cards.
+1. User requests to edit a specific card in the list.
+1. Flashnotes edits the card.
+
+    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty. <br>
     Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. Flashnotes shows an error message.
+    * 3a.1. Flashnotes shows an error message.<br>
     Use case resumes at step 2.
 
 #####**Use case: UC06 - Open Existing Deck**
@@ -218,15 +248,16 @@ Use case ends.
 
 **MSS**
 
-1. User filters all cards belonging to a deck.
-1. Flashnotes shows a list of cards using deck mode.
-Use case ends.
+1. User filters all cards belonging to a particular deck.
+1. Flashnotes shows a list of cards using the deck mode.
+
+    Use case ends.
 
 **Extensions**
 
 * 1a. User enters a tag that is not found.
-    * 1a1. Flashnotes returns empty card list.
-Use case ends.
+    * 1a.1. Flashnotes returns empty card list. <br>
+    Use case ends.
 
 ####**Use case: UC07 - Delete current Deck**
 #####Precondition: User is in the Home Mode, and is not in review mode. If in deck view mode, cannot delete.
@@ -234,14 +265,15 @@ Use case ends.
 **MSS:**
 
 1. User enters command to delete an existing deck.
-1. Deck delete success message in main screen
-Use Case ends
+1. Deck delete success message shown in main screen.
+
+    Use Case ends.
 
 **Extension:**
 
 * 2a. Tries to delete deck.
-    * 2.a.1 Deck not found.
-    * 2.a.2 Display Error Message.
+    * 2a.1 Deck not found.
+    * 2a.2 Display Error Message. <br>
     Use Case ends.
 
 ####**Use case: UC07 - Rename current Deck**
@@ -250,15 +282,16 @@ Use Case ends
 **MSS:**
 
 1. User enters command to rename an existing deck.
-1. Deck renamed with success message.
-1. User returns to main screen.
+1. Deck renamed with success message shown.
+1. User returns to the main screen.
 
-Use Case Ends
+    Use Case ends.
 
 **Extension:**
 
-* 2a. User renames to the same name as an existing deck
-    * 2a1 Error message is shown in the main screen and the deck is not renamed
+* 2a. User renames deck to the same name as an already existing deck.
+    * 2a.1 Error message is shown in the main screen and the deck will not be renamed.  <br>
+    Use Case ends.
 
 ####**Use case: UC08 - Return to Home mode**
 #####Precondition: User is not in Home mode and not in review mode.
@@ -266,14 +299,15 @@ Use Case Ends
 **MSS:**
 
 1. User enters Home Command.
-1. User returns to main screen
+1. User returns to main screen.
 
-Use Case Ends
+    Use Case ends.
 
 **Extension:**
 
-* 2.a Already in the Home screen
-    * 2.a.1 Return message to remind user
+* 2a. Already in the Home screen.
+    * 2a.1. Return message to remind user. <br>
+    Use Case ends.
 
 
 ### Non-Functional Requirements
@@ -353,3 +387,29 @@ testers are expected to do more *exploratory* testing.
        Expected: All cards with the tag 'Singapore' and cards with the tag 'Malaysia' will be shown.
 
 1. _{ more test cases …​ }
+
+### Flipping flashcard that is being reviewed
+1. Type `flip` in the command box
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Test case: `flip` when the card is showing the question<br>
+        Expected: The card should be flipped to show the answer for this question <br>
+    1. Test case: `flip` when the card is showing the answer <br>
+        Expected: The card should be flipped to show the question for this answer <br>
+    
+
+### Marking flashcard that is being reviewed as correct
+1. Type `c` in the command box
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Test case: `c` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
+    1. Test case: `c` when the card is showing the answer <br>
+        Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
+
+### Marking flashcard that is being reviewed as wrong
+1. Type `w` in the command box
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Test case: `w` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
+    1. Test case: `w` when the card is showing the answer <br>
+        Expected: It should show the question of the next card and the progress bar should still have the same progress.
+
