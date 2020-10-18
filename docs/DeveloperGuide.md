@@ -5,6 +5,47 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
+## **Design**
+
+### Architecture
+
+<img src="images/ArchitectureDiagram.png" width="450" />
+
+The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
+
+<div markdown="span" class="alert alert-primary">
+
+</div>
+
+**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+Each of the four components,
+
+* defines its *API* in an `interface` with the same name as the Component.
+* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
+
+![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck Singapore`.
+
+<img src="images/ArchitectureSequenceDiagramUpdated.png" width="574" />
+
+The sections below give more details of each component.
 
 ### UI component
 
@@ -150,13 +191,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new deck                 |                                                                        |
+| `* * *`  | user                                       | open a deck                    | see what flashcards I have created in that deck so far                 |
+| `* * *`  | user                                       | delete a deck                  | get rid of decks of flashcards that I no longer need quickly           |
+| `* * `   | user                                       | rename a deck                  | organize my decks better                                               |
 | `* * *`  | user                                       | add a new card                 |                                                                        |
 | `* * *`  | user                                       | delete a card                  | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a card by keyword         | locate certain cards without having to go through the entire list      |
+| `* * *`  | user                                       | review a deck                  | test my knowledge about the content of the cards in that deck          |
+| `* * *`  | user                                       | mark a flashcard as right or wrong | keep track of which cards I have already mastered and which cards I still need to review again |
+| `* * *`  | user                                       | see how many cards I got correct after a review session | track my topics mastery and feel a sense of accomplishment for studying efficiently |
 | `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
-| `*`      | user with many related cards in the app    | nest the card decks by tags    | locate a cards of the same group easily when reviewing                               |
-
-*{More to be added}*
+| `*`      | user with many related cards in the app    | nest the card decks by tags    | locate a cards of the same group easily when reviewing                 |
 
 ### Use cases
 
@@ -359,9 +405,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Flashcard**: A card with a question and answer, and may contain a tag.
 * **Flashnotes**: The software that stores flashcards.
+* **Flashcard**: A card with a question and answer, and may contain a tag.
+* **Deck**: A collection of flashcards.
+* **Home screen**: The home screen displays a list of decks of flashcards.
+* **Card screen**: The card screen displays a list of flashcards in a specific deck.
+* **Review mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
 * **Tag**: A note to group cards of a certain category together.
+* **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
 * **Review Mode**: a mode which displays cards from a deck individually in shuffled order.
 * **Deck Mode**: A mode which displays a list of cards
 * **Home Mode**: A mode which displays a list of decks
@@ -393,6 +444,7 @@ Saving window preferences
        Expected: The most recent window size and location is retained.
 
 
+
 ### Deleting a card
 
 Deleting a card while all persons are being shown
@@ -420,9 +472,44 @@ Entering a deck
     
    3. Test case: `enterDeck singapore` <br>
        Expected: None of the cards are shown (as the keyword is case-sensitive)       
-    
+
    4. Test case: `enterDeck Singapore Malaysia` <br>
        Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
+
+### Reviewing a deck of cards
+1. Opening the review window
+
+    1. Prerequisites: User is in card screen
+    
+    1. Test case: `review` <br>
+       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
+    
+    1. Test case: `review 7` <br>
+       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
+        
+    1. Test case: `review hello` <br>
+       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
+            
+1. Flipping a card
+
+1. _{ more test cases …​ }
+
+### Setting the review card limit
+1. Setting the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
+    
+    1. Test case: `set-review-limit 20` <br>
+       Expected: The message "Review card limit successfully updated!" should appear in the result display box.
+       
+    1. Test case: `set-review-limit 0` <br>
+       Expected: The message "Review card limit must be an integer greater than 0." should appear in the result display box.
+        
+    1. Test case: `set-review-limit all` <br>
+       Expected: The message "Review card limit successfully updated!" should appear in the result display box.
+       
+    1. Test case: `set-review-limit 20` from the review window <br>
+       Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
 
 ### Flipping flashcard that is being reviewed
 1. Type `flip` in the command box
