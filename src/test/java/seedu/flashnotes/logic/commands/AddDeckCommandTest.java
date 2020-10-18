@@ -1,7 +1,20 @@
 package seedu.flashnotes.logic.commands;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.flashnotes.testutil.Assert.assertThrows;
+import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_1;
+import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_2;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.FlashNotes;
@@ -11,20 +24,6 @@ import seedu.flashnotes.model.ReadOnlyUserPrefs;
 import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.testutil.FlashcardBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.testutil.Assert.assertThrows;
-import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_1;
-import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_2;
 
 public class AddDeckCommandTest {
 
@@ -34,12 +33,13 @@ public class AddDeckCommandTest {
     }
 
     @Test
-    public void execute_DeckAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_deckAcceptedByModel_success() throws Exception {
         AddDeckCommandTest.ModelStubAcceptingDeckAdded modelStub = new AddDeckCommandTest.ModelStubAcceptingDeckAdded();
 
         CommandResult commandResult = new AddDeckCommand(VALID_DECK_1).execute(modelStub);
 
-        assertEquals(String.format(AddDeckCommand.MESSAGE_SUCCESS, VALID_DECK_1.getDeckName()), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddDeckCommand.MESSAGE_SUCCESS, VALID_DECK_1.getDeckName()),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(VALID_DECK_1), modelStub.decksAdded);
     }
 

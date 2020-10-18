@@ -1,20 +1,12 @@
 package seedu.flashnotes.model.deck;
-
-import org.junit.jupiter.api.Test;
-import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.testutil.FlashcardBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_MACROECONS;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_MACROECONS;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
 import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_1;
 import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_2;
-import static seedu.flashnotes.testutil.TypicalFlashcards.MACROECONS;
-import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
+
+import org.junit.jupiter.api.Test;
 
 public class DeckTest {
 
@@ -64,7 +56,7 @@ public class DeckTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Deck copyDeck = new Deck( "Test Deck");
+        Deck copyDeck = new Deck("Test Deck");
         assertTrue(VALID_DECK_1.equals(copyDeck));
 
         // same object -> returns true

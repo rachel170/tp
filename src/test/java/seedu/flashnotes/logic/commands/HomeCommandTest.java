@@ -1,19 +1,16 @@
 package seedu.flashnotes.logic.commands;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.flashnotes.model.Model;
-import seedu.flashnotes.model.ModelManager;
-import seedu.flashnotes.model.UserPrefs;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_DECK_OVERVIEW;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_1;
-import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_2;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.flashnotes.model.Model;
+import seedu.flashnotes.model.ModelManager;
+import seedu.flashnotes.model.UserPrefs;
 
 public class HomeCommandTest {
     private Model model;

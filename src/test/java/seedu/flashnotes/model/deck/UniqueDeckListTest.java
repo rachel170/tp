@@ -1,19 +1,21 @@
 package seedu.flashnotes.model.deck;
-
-import org.junit.jupiter.api.Test;
-import seedu.flashnotes.model.deck.exceptions.DeckNotFoundException;
-import seedu.flashnotes.model.deck.exceptions.DuplicateDeckException;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_1;
 import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_2;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.flashnotes.model.deck.exceptions.DeckNotFoundException;
+import seedu.flashnotes.model.deck.exceptions.DuplicateDeckException;
+
+
 
 public class UniqueDeckListTest {
 
@@ -30,7 +32,7 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void contains_DeckInList_returnsTrue() {
+    public void contains_deckInList_returnsTrue() {
         uniqueDeckList.add(VALID_DECK_2);
         assertTrue(uniqueDeckList.contains(VALID_DECK_2));
     }
@@ -103,7 +105,7 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void remove_DeckDoesNotExist_throwsDeckNotFoundException() {
+    public void remove_deckDoesNotExist_throwsDeckNotFoundException() {
         assertThrows(DeckNotFoundException.class, () -> uniqueDeckList.remove(VALID_DECK_1));
     }
 
@@ -154,11 +156,11 @@ public class UniqueDeckListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueDeckList.asUnmodifiableObservableList().remove(0));
+            -> uniqueDeckList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
-    public void findDeck_listWithAvailableDeck_Success() {
+    public void findDeck_listWithAvailableDeck_success() {
         uniqueDeckList.add(VALID_DECK_1);
         Deck deckFound = uniqueDeckList.findDeck("Test Deck");
         Deck expectedDeck = new Deck("Test Deck");

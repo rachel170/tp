@@ -94,7 +94,7 @@ public class FlashNotesTest {
         flashNotes.addFlashcard(WHAT);
         Flashcard editedAlice = new FlashcardBuilder(WHY)
                 .build();
-        flashNotes.setFlashcard(WHAT,editedAlice);
+        flashNotes.setFlashcard(WHAT, editedAlice);
 
         List<Flashcard> flashcards = new ArrayList<>();
         flashcards.add(editedAlice);
@@ -107,7 +107,7 @@ public class FlashNotesTest {
         flashNotes.addFlashcard(WHAT);
         Flashcard editedAlice = new FlashcardBuilder(WHY)
                 .build();
-        flashNotes.setFlashcard(WHAT,editedAlice);
+        flashNotes.setFlashcard(WHAT, editedAlice);
 
         List<Flashcard> flashcards = new ArrayList<>();
         flashcards.add(WHAT);
@@ -121,7 +121,7 @@ public class FlashNotesTest {
     }
 
     @Test
-    public void hasDeck_DeckNotInFlashNotes_returnsFalse() {
+    public void hasDeck_deckNotInFlashNotes_returnsFalse() {
         assertFalse(flashNotes.hasDeck(new Deck("WHAT")));
     }
 
@@ -149,7 +149,7 @@ public class FlashNotesTest {
     }
 
     @Test
-    public void setDeck_DeckWithDifferentDetailFieldsInFlashNotes_notEqual() {
+    public void setDeck_deckWithDifferentDetailFieldsInFlashNotes_notEqual() {
         flashNotes.addDeck(VALID_DECK_1);
         flashNotes.setDeck(VALID_DECK_1, VALID_DECK_2);
 
@@ -160,7 +160,7 @@ public class FlashNotesTest {
     }
 
     @Test
-    public void removeDeck_DeckFoundInNonEmptyFlashNotes_success() {
+    public void removeDeck_deckFoundInNonEmptyFlashNotes_success() {
         flashNotes.setDecks(TypicalDecks.getTypicalDecks());
         flashNotes.removeDeck(VALID_DECK_1);
         flashNotes.removeDeck(VALID_DECK_2);
@@ -170,7 +170,7 @@ public class FlashNotesTest {
     }
 
     @Test
-    public void removeDeck_DeckNotFoundInNonEmptyFlashNotes_throwsDeckNotFoundException() {
+    public void removeDeck_deckNotFoundInNonEmptyFlashNotes_throwsDeckNotFoundException() {
         flashNotes.setDecks(TypicalDecks.getTypicalDecks());
         assertThrows(DeckNotFoundException.class, () -> flashNotes.removeDeck(new Deck ("Funky")));
     }

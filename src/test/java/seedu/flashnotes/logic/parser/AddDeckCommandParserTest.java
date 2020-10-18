@@ -6,6 +6,7 @@ import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseFai
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.flashnotes.logic.commands.AddDeckCommand;
 import seedu.flashnotes.model.deck.Deck;
 
