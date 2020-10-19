@@ -16,6 +16,9 @@ import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
 import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
+/**
+ * Edits the deck name and tags of corresponding cards.
+ */
 public class EditDeckNameCommand extends Command {
 
     public static final String COMMAND_WORD = "editDeckName";
@@ -36,7 +39,14 @@ public class EditDeckNameCommand extends Command {
     private final Index index;
     private final Deck newDeck;
 
+    /**
+     * @param index of deck to be edited.
+     * @param newDeck details of new deck.
+     */
     public EditDeckNameCommand(Index index, Deck newDeck) {
+        requireNonNull(index);
+        requireNonNull(newDeck);
+
         this.index = index;
         this.newDeck = newDeck;
     }

@@ -2,10 +2,6 @@ package seedu.flashnotes.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.commons.util.StringUtil;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
