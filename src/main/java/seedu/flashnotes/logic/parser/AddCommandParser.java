@@ -26,10 +26,19 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args, String deckName) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER);
+        String additionalMessage = "";
 
         if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ANSWER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getCountValue(PREFIX_QUESTION).get() > 1) {
+            additionalMessage += "\nThere are more than 1 occurrences of q/ prefix. Only the last one is taken.";
+        }
+
+        if (argMultimap.getCountValue(PREFIX_ANSWER).get() > 1) {
+            additionalMessage += "\nThere are more than 1 occurrences of a/ prefix. Only the last one is taken.";
         }
 
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
@@ -38,7 +47,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Flashcard flashcard = new Flashcard(question, answer, tag);
 
-        return new AddCommand(flashcard);
+        AddCommand addCommand = new AddCommand(flashcard);
+        addCommand.setAdditionalMessage(additionalMessage);
+        return addCommand;
     }
 
     @Override

@@ -1,4 +1,5 @@
 package seedu.flashnotes.storage;
+import static seedu.flashnotes.logic.commands.AddDeckCommand.MESSAGE_DUPLICATE_DECK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
-import static seedu.flashnotes.logic.commands.AddDeckCommand.MESSAGE_DUPLICATE_DECK;
 
 /**
  * An Immutable FlashNotes that is serializable to JSON format.

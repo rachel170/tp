@@ -73,7 +73,7 @@ class JsonAdaptedDeck {
             // If exception is found, throw IVE
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
         }
-        Deck theDeck =  new Deck(deckName);
+        Deck theDeck = new Deck(deckName);
         theDeck.setResultStatistics(resultStatistic);
 
         return theDeck;

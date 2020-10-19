@@ -31,6 +31,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes";
 
     private final Flashcard toAdd;
+    private String additionalMessage = "";
 
     /**
      * Creates an AddCommand to add the specified {@code Flashcard}
@@ -53,7 +54,17 @@ public class AddCommand extends Command {
         }
 
         model.addFlashcard(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + additionalMessage);
+    }
+
+    /**
+     * Adds an additional message behind the feedback for Command Result.
+     *
+     * @param additionalMessage given by the caller.
+     */
+    public void setAdditionalMessage(String additionalMessage) {
+        requireNonNull(additionalMessage);
+        this.additionalMessage = additionalMessage;
     }
 
     @Override
