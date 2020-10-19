@@ -175,18 +175,18 @@ Examples:
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Listing flashcards with tag(s) : `listTags`
+### Entering a deck : `enterDeck`
 
-Lists flashcards with the given tag keywords.
+Lists flashcards inside the deck.
 
-Format: `listTags KEYWORD [MORE_KEYWORDS]`
+Format: `enterDeck KEYWORD`
 
 * The search is case-sensitive. e.g. `GET1025` will not match `get1025`
 * only full words will be matched e.g. `GE` will not match `GET1025`
-* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
+* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards in deck `GET1025 philosophy` and not `GET1025` nor `philosophy`.
 
 Examples:
-* `listTags Singapore` return cards with Tags `Singapore`
+* `enterDeck Singapore` return cards in deck `Singapore`
 
 ### Deleting a flashcard : `delete`
 
@@ -201,6 +201,22 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd flashcard from the flashcard deck.
 * `find English` followed by `delete 1` deletes the 1st flashcard shown in the results of the `find` command.
+
+### Setting card limit for review session : `set-card-limit`
+
+Sets the maximum number of cards that can be reviewed in a single review session.
+
+Format: `set-review-limit REVIEW_LIMIT`
+
+* `REVIEW_LIMIT` can be an integer greater than 0
+* `REVIEW_LIMIT` can be the string `all`. (case sensitive)
+* This review card limit applies to all decks once it is set. 
+* This review card limit is remembered by the program. (User does not have to set the card limit 
+again after he/she closes and reopens the application)
+
+Examples:
+* `set-review-limit 20` sets a limit of 20 cards per review session.
+* `set-review-limit all` removes the card limit and lets user review all cards in the deck.
 
 ### Return to Main Mode : `home`
 
@@ -238,6 +254,15 @@ FlashNotes saves data to the hard disk automatically after any command that chan
 * Review Mode primarily allows active flashcards to be used for revision.
 * It also provides relevant statistics if the review session was fully completed.
 </div>
+
+### Opens the review mode: `review`
+
+Opens the review mode to display cards one by one so that users can review them.
+
+Format: `review`
+
+* This command is only valid from the card screen.
+
 
 ### Flip a flashcard
 
@@ -278,7 +303,13 @@ Examples:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlashNotes home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlashNotes home folder.<br>
+**Q**: What should I do if I have problems launching the application? <br>
+**A**: Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application. <br>
+**Q**: When I exit the program, will all my new flashcards and updates be saved? <br>
+**A**: Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To ensure none of your data is lost, do not delete the data folder. <br>
+**Q**: Is it possible to restore a deck that I just deleted?
+**A**: Sorry but no. There is no such functionality at this point in time. 
 
 --------------------------------------------------------------------------------------------------------------------
 
