@@ -86,7 +86,7 @@ To provide the UI display and changes related to review statistics, the followin
 
 The following sequence diagram shows how the endReview command operation works:
 
-![EndReviewSequenceDiagram](images/EndReviewSequenceDiagram.png)
+![EndReviewSequenceDiagram](../images/EndReviewSequenceDiagram.png)
 
 
 #### Design consideration:
