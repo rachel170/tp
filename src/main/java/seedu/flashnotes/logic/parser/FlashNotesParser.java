@@ -1,10 +1,5 @@
 package seedu.flashnotes.logic.parser;
 
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,12 +24,13 @@ import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.commands.WrongCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
+import static seedu.flashnotes.commons.core.Messages.*;
+
 /**
  * Parses user input.
  */
 public class FlashNotesParser {
-    private static final String ILLEGAL_COMMAND_IN_HOME_MESSAGE = "Cannot call command in home screen.";
-    private static final String ILLEGAL_COMMAND_IN_CARD_MESSAGE = "Cannot call command in card screen.";
+
 
     /**
      * Used for initial separation of command word and args.
@@ -50,6 +46,7 @@ public class FlashNotesParser {
      */
     public Command parseCommand(String userInput, boolean isReviewMode, boolean isInDeck, String deckName)
             throws ParseException {
+        assert !(isReviewMode && isInDeck) : "Program cannot be in review mode and card mode at the same time";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -72,18 +69,18 @@ public class FlashNotesParser {
 
     private Command parseCommandInReviewMode(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_WORD:
+        case AddDeckCommand.COMMAND_WORD:
+        case DeleteDeckCommand.COMMAND_WORD:
+        case EnterDeckCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
-        case EnterDeckCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_WORD:
-        case AddDeckCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
-        case DeleteDeckCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
+        case HomeCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
         case ReviewCommand.COMMAND_WORD:
@@ -117,12 +114,12 @@ public class FlashNotesParser {
         case DeleteCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case ReviewCommand.COMMAND_WORD:
-        case CorrectCommand.COMMAND_WORD:
         case FlipCommand.COMMAND_WORD:
-        case HomeCommand.COMMAND_WORD:
+        case CorrectCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
+        case HomeCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_INVALID_COMMAND_IN_HOME);
 
         case AddDeckCommand.COMMAND_WORD:
             return new AddDeckCommandParser().parse(arguments);
@@ -162,7 +159,7 @@ public class FlashNotesParser {
         case ListCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_IN_CARD);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments, deckName);
