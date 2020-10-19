@@ -7,6 +7,7 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_NEW_DECK_NAME;
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.EditDeckNameCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
+import seedu.flashnotes.model.deck.Deck;
 
 public class EditDeckNameCommandParser implements Parser<EditDeckNameCommand> {
 
@@ -30,10 +31,10 @@ public class EditDeckNameCommandParser implements Parser<EditDeckNameCommand> {
                     EditDeckNameCommand.MESSAGE_USAGE), pe);
         }
 
-        String newDeckName = argMultiMap.getValue(PREFIX_NEW_DECK_NAME).get().trim();
+        Deck newDeck = ParserUtil.parseDeckName(argMultiMap.getValue(PREFIX_NEW_DECK_NAME).get());
 
 
-        return new EditDeckNameCommand(index, newDeckName);
+        return new EditDeckNameCommand(index, newDeck);
 
     }
 

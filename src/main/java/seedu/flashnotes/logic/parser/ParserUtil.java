@@ -79,7 +79,7 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
-    
+
 
     /**
      * Parses integer and returns it. Leading and trailing whitespaces will be

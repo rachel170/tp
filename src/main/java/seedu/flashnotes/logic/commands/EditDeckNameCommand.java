@@ -34,11 +34,11 @@ public class EditDeckNameCommand extends Command {
 
 
     private final Index index;
-    private final String newDeckName;
+    private final Deck newDeck;
 
-    public EditDeckNameCommand(Index index, String newDeckName) {
+    public EditDeckNameCommand(Index index, Deck newDeck) {
         this.index = index;
-        this.newDeckName = newDeckName;
+        this.newDeck = newDeck;
     }
 
     @Override
@@ -50,19 +50,19 @@ public class EditDeckNameCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
         }
 
-        if (model.hasDeck(new Deck(newDeckName))) {
+        if (model.hasDeck(newDeck)) {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
 
         Deck deckToEdit = lastShownList.get(index.getZeroBased());
         String resultStatistics = deckToEdit.getResultStatistics();
-        Deck newDeck = new Deck(newDeckName, resultStatistics);
+        newDeck.setResultStatistics(resultStatistics);
         model.setDeck(deckToEdit, newDeck);
 
-        changeTagOfCards(deckToEdit.getDeckName(), newDeckName, model);
+        changeTagOfCards(deckToEdit.getDeckName(), newDeck.getDeckName(), model);
         model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, newDeckName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newDeck.getDeckName()));
 
     }
 
@@ -70,8 +70,8 @@ public class EditDeckNameCommand extends Command {
         model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(deckName));
         List<Flashcard> cardsWithTag = model.getFilteredFlashcardList();
         if (cardsWithTag.size() > 0) {
-            for (int i = 0; i < cardsWithTag.size(); i++) {
-                Flashcard flashcardToEdit = cardsWithTag.get(i);
+            while (cardsWithTag.size() != 0) {
+                Flashcard flashcardToEdit = cardsWithTag.get(0);
                 Flashcard editedFlashcard = createEditedTagFlashcard(flashcardToEdit, new Tag(newDeckName));
                 model.setFlashcard(flashcardToEdit, editedFlashcard);
             }
