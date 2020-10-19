@@ -23,6 +23,12 @@ public class Deck {
         this.resultStatistics = "-1";
     }
 
+    public Deck (String name, String resultStatistics) {
+        requireNonNull(name, resultStatistics);
+        this.deckName = name;
+        this.resultStatistics = resultStatistics;
+    }
+
     public String getDeckName() {
         return deckName;
     }

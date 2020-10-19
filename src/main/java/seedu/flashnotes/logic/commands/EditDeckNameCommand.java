@@ -1,0 +1,89 @@
+package seedu.flashnotes.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_NEW_DECK_NAME;
+
+import java.util.List;
+
+import seedu.flashnotes.commons.core.Messages;
+import seedu.flashnotes.commons.core.index.Index;
+import seedu.flashnotes.logic.commands.exceptions.CommandException;
+import seedu.flashnotes.model.Model;
+import seedu.flashnotes.model.deck.Deck;
+import seedu.flashnotes.model.flashcard.Answer;
+import seedu.flashnotes.model.flashcard.Flashcard;
+import seedu.flashnotes.model.flashcard.Question;
+import seedu.flashnotes.model.tag.Tag;
+import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
+
+public class EditDeckNameCommand extends Command {
+
+    public static final String COMMAND_WORD = "editDeckName";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the deck name and "
+            + "the tag of all corresponding cards to the specified keyword"
+            + "Parameters: "
+            + "INDEX (must be a positive integer) "
+            + PREFIX_NEW_DECK_NAME + "NEW DECK NAME \n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_NEW_DECK_NAME + "History ";
+
+    public static final String MESSAGE_SUCCESS = "Deck edited successfully: %1$s";
+    public static final String MESSAGE_DUPLICATE_DECK = "The deck name that you are trying to edit to already exists. "
+            + "Please enter a new deck name";
+
+
+    private final Index index;
+    private final String newDeckName;
+
+    public EditDeckNameCommand(Index index, String newDeckName) {
+        this.index = index;
+        this.newDeckName = newDeckName;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Deck> lastShownList = model.getFilteredDeckList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+        }
+
+        if (model.hasDeck(new Deck(newDeckName))) {
+            throw new CommandException(MESSAGE_DUPLICATE_DECK);
+        }
+
+        Deck deckToEdit = lastShownList.get(index.getZeroBased());
+        String resultStatistics = deckToEdit.getResultStatistics();
+        Deck newDeck = new Deck(newDeckName, resultStatistics);
+        model.setDeck(deckToEdit, newDeck);
+
+        changeTagOfCards(deckToEdit.getDeckName(), newDeckName, model);
+        model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newDeckName));
+
+    }
+
+    private void changeTagOfCards(String deckName, String newDeckName, Model model) {
+        model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(deckName));
+        List<Flashcard> cardsWithTag = model.getFilteredFlashcardList();
+        if (cardsWithTag.size() > 0) {
+            for (int i = 0; i < cardsWithTag.size(); i++) {
+                Flashcard flashcardToEdit = cardsWithTag.get(i);
+                Flashcard editedFlashcard = createEditedTagFlashcard(flashcardToEdit, new Tag(newDeckName));
+                model.setFlashcard(flashcardToEdit, editedFlashcard);
+            }
+        }
+    }
+
+    private Flashcard createEditedTagFlashcard(Flashcard flashcardToEdit, Tag editedTag) {
+        assert flashcardToEdit != null;
+
+        Question question = flashcardToEdit.getQuestion();
+        Answer answer = flashcardToEdit.getAnswer();
+
+        return new Flashcard(question, answer, editedTag);
+    }
+}
