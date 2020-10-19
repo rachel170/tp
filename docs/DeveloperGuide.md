@@ -7,32 +7,6 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Storage component
-
-![Structure of the Storage Component](images/StorageClassDiagram.png)
-
-**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
-
-The `Storage` component,
-* can save `UserPref` objects and general data within FlashNotes in json format.
-* can read back data in json save file on next initialization of FlashNotes.
-* can update save file's data during execution of a valid command entered by the user.
-
-### Common classes
-
-Classes used by multiple components are in the `seedu.flashnotes.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-
---------------------------------------------------------------------------------------------------------------------
-
 ### UI component
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -98,6 +72,34 @@ The following general activity diagram summarizes what happens when a user execu
 * **Alternative 2:** Store Flashcards within deck.
   * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
   * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Storage component
+
+![Structure of the Storage Component](images/StorageClassDiagram.png)
+
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
+
+The `Storage` component,
+* can save `UserPref` objects and general data within FlashNotes in json format.
+* can read back data in json save file on next initialization of FlashNotes.
+* can update save file's data during execution of a valid command entered by the user.
+
+### Common classes
+
+Classes used by multiple components are in the `seedu.flashnotes.commons` package.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Documentation, logging, testing, configuration, dev-ops**
+
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 

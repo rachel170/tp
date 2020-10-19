@@ -86,14 +86,7 @@ To provide the UI display and changes related to review statistics, the followin
 
 The following sequence diagram shows how the endReview command operation works:
 
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `endReviewCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following general activity diagram summarizes what happens when a user executes a new command:
-
+![EndReviewSequenceDiagram](images/EndReviewSequenceDiagram.png)
 
 
 #### Design consideration:
