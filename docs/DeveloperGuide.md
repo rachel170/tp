@@ -9,8 +9,7 @@ title: Developer Guide
 ## **Design**
 
 ### Architecture
-
-<img src="images/ArchitectureDiagram.png" width="450" />
+![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
@@ -44,7 +43,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck Singapore`.
 
-<img src="images/ArchitectureSequenceDiagramUpdated.png" width="574" />
+![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagramUpdated.png)
 
 The sections below give more details of each component.
 
@@ -193,7 +192,67 @@ The following general activity diagram summarizes what happens when a user execu
 * Alternative 2: Checking of commands are done in the model component.
     * Pros; Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
+
+### Review Mode 
+Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
+
+#### Implementation
+The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users type in commands)
+and result display box (where the application displays messages to the user). On top of that, there is also the Individual Flashcard section
+of the window that shows the question of 1 flashcard. When the "flip" command is executed, 
+the answer to that question will be showed instead.
+
+To support the opening of this review session, the following commands were added:
+* `review` - A command that sets up the list of flashcards to review and opens a new review window displaying those cards.
+
+The following is a sequence diagram that demonstrates how a review command sets up the review session:
+![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
+
+`ModelManager#shuffleReviewFlashcards` method sets up the list of flashcards to review inside `Model`.
+It duplicates the list of filtered flashcards in the model as of the moment that the review command was
+called, it then shuffles these cards using the `FXCollections.shuffle()` method, and it trims the list of
+flashcards to review according to the review limit set by users.
+
+#### Design considerations:
+* Alternative 1 (current choice): Open a new JavaFX window
+    * Pro: Differentiates the review mode from the other modes better visually, 
+    allows the UI for the review mode to be minimalistic, reducing distractions for users when reviewing their flashcards.
+    * Cons: We would have to create a new window with another command box and result display, and display
+    the main command box.
+* Alternative 2: Implement the review session in the same window as the rest of the application.
+    * Pro: Can use the same command box and result display so we would't have to create new command boxes and result
+    display boxes and disable main command box. 
+    * Con: The UI looks more cluttered and users might get distracted when reviewing their flashcards
     
+
+### Set Review Limit feature
+Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
+review session (review limit). 
+
+#### Implementation
+Users only have to set the review limit once and it will be saved as user preferences in a storage file. Users will
+then only need to use this feature again when they want to change the review limit again in the future.
+
+The initial value for the review limit is set to 0 in `preferences.json`, which tells the program that the user did not
+set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
+session. 
+
+The valid range of integer inputs for this command is any integer more than 1 however, as we thought it wouldn't 
+make sense on the user's end to set 0 or negative values as the review limit.
+
+The following is an activity diagram showing how the set review command is intended to be used
+when a user wants to use FlashNotes to review a deck of flashcards.
+
+![SetReviewLimitActivityDiagram](images/SetReviewLimitActivityDiagram.png)
+
+#### Design considerations:
+* Alternative 1 (current choice): Save review limit in the user preferences file.
+    * Users would not have to set review limit every time they start up the application.
+    * We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in model.
+* Alternative 2: Save review limit internally in Model
+    * Users would have to set review limit every time they start up the application.
+    * Do not have to write into a data file.
+
 ### Review Statistics feature
 
 #### Implementation
