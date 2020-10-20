@@ -223,7 +223,73 @@ flashcards to review according to the review limit set by users.
     * Pro: Can use the same command box and result display so we would't have to create new command boxes and result
     display boxes and disable main command box. 
     * Con: The UI looks more cluttered and users might get distracted when reviewing their flashcards
+
+### Flip Card feature
+Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
+see the answer for the question on the flashcard.    
+
+#### Implementation
+Users only have to type the `flip` command to flip their flashcard. Users can flip the flashcard as many times as they
+would like to in the review mode.
+
+The initial value of `isFlipped` is set to false, so that the review mode is showing the question on the flashcard first.
+
+To support the flipping of flashcards, the following commands were added:
+* `flip` - A command that flips the flashcard being reviewed and displays the question or answer depending on the number
+ of times the card was flipped.
+
+The following is a sequence diagram that demonstrates how a flip command flips a card in the review session:
+![FlipCommandSequenceDiagram](images/FlipCommandSequenceDiagram.png)
+
+This feature is implemented by adding an isFlipped boolean in the `Model` of the `Flashcard`. To toggle this boolean,
+a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `LogicManager#execute()` 
+when it received the `CommandResult` from the `FlashNotesParser`.
+
+#### Design considerations:
+* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model
+    * Only need the instance of the flashcard to update or check whether the particular flashcard has been flipped in
+    the review mode.
+    * Ensures that the logic of flipping of flashcard isn't done in the UI
+* Alternative 2: Implement the boolean isFlipped in the UI part, IndividualFlashcard.
+    * Pro: No need for extra function calls as flipping is directly done in the UI
+    * Con: Logic is being done in the UI section
+    * Con: Hard to test using testcases. Have to manually test.
     
+### Next Card feature
+Our FlashNotes application allows users to go to the next card to review once they are done reviewing the current 
+flashcard.    
+
+#### Implementation
+Users only have to type the `c` or `w` command to see the next flashcard where `c` means that they managed to review
+the flashcard correctly and `w` means that they got the question wrong. These commands will only work after the user
+sees the answer of the flashcard currently being reviewed which is noted by whether the flashcard has been flipped or
+not. 
+
+The initial value of `isCorrect` is set to 0 to denote that the card has yet to be reviewed.
+
+To support the ability to go to the next flashcard in the review session, the following commands were added:
+* `c` - A command that goes to the next flashcard after marking the flashcard as correct.
+* `w` - A command that goes to the next flashcard after marking the flashcard as wrong and adding it back to the review
+        list.
+
+The following activity diagram summarizes what happens when a user executes a `c` or `w` command:
+![NextCommandActivityDiagram](images/NextCommandActivityDiagram.png)
+
+This feature is implemented by adding an isCorrect int in the `Model` of the `Flashcard`. To update this int,
+a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is called by the 
+`LogicManager#updateFlashcardBeingReviewed()` which is a call from `LogicManager#execute()` when it received the 
+`CommandResult` from the `FlashNotesParser`.
+
+#### Design considerations:
+* Alternative 1 (current choice): Change isCorrect int in the flashcard model
+    * Only need the instance of the flashcard to update or check whether the particular flashcard has been reviewed 
+    correctly by the user in the review mode.
+    * Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI
+* Alternative 2: Implement the int isCorrect in the UI part, IndividualFlashcard.
+    * Pro: No need for extra function calls as marking the result of the review can be directly done in the UI
+    * Con: Logic is being done in the UI section
+    * Con: Hard to test using testcases. Have to manually test.
+
 
 ### Set Review Limit feature
 Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
