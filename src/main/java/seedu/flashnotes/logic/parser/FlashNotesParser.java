@@ -60,7 +60,7 @@ public class FlashNotesParser {
         final String arguments = matcher.group("arguments");
 
         if (this.isReviewMode) {
-            assert !isInDeck : "Program should not be in card mode";
+            assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
