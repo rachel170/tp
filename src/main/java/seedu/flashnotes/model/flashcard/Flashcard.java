@@ -16,6 +16,8 @@ public class Flashcard {
     private final Question question;
     private final Answer answer;
     private final Tag tag;
+    private boolean isFlipped = false;
+    private int isCorrect = 0;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +46,49 @@ public class Flashcard {
     }
 
     /**
+     * Returns whether the flashcard has been flipped in review mode
+     *
+     * @return boolean
+     */
+    public boolean getIsFlipped() {
+        return isFlipped;
+    }
+
+    /**
+     * Flips flashcard being reviewed in the review mode
+     */
+    public void flipFlashcard() {
+        if (this.isFlipped) {
+            this.isFlipped = false;
+        } else {
+            this.isFlipped = true;
+        }
+    }
+
+    /**
+     * Resets the value of isFlipped to false
+     */
+    public void resetFlip() {
+        isFlipped = false;
+    }
+
+    /**
+     * Marks whether the card was reviewed correctly in the review mode
+     * @param result
+     */
+    public void markCard(int result) {
+        this.isCorrect = result;
+    }
+
+    /**
+     * Returns the value of isCorrect
+     * @return int
+     */
+    public int getIsCorrect() {
+        return this.isCorrect;
+    }
+
+    /**
      * Returns true if both flashcards have the same question have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two flashcards.
      */
@@ -55,7 +100,8 @@ public class Flashcard {
         return otherFlashcard != null
                 && otherFlashcard.getQuestion().equals(getQuestion())
                 && (otherFlashcard.getAnswer().equals(getAnswer()))
-                && otherFlashcard.getTag().equals(getTag());
+                && otherFlashcard.getTag().equals(getTag())
+                && otherFlashcard.getIsFlipped() == getIsFlipped();
     }
 
     /**
@@ -75,7 +121,8 @@ public class Flashcard {
         Flashcard otherFlashcard = (Flashcard) other;
         return otherFlashcard.getQuestion().equals(getQuestion())
                 && otherFlashcard.getAnswer().equals(getAnswer())
-                && otherFlashcard.getTag().equals(getTag());
+                && otherFlashcard.getTag().equals(getTag())
+                && otherFlashcard.getIsFlipped() == getIsFlipped();
     }
 
     @Override

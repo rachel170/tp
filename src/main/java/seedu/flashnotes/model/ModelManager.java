@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Flashcard> filteredFlashcards;
     private FilteredList<Flashcard> flashcardsToReview;
     private final FilteredList<Deck> filteredDecks;
+    private int flashcardBeingReviewed = 0;
 
     /**
      * Initializes a ModelManager with the given flashNotes and userPrefs.
@@ -287,6 +288,62 @@ public class ModelManager implements Model {
         flashcardsToReviewList.add(flashcard);
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
         return flashcardsToReview;
+    }
+
+    /**
+     * Updates the flashcard being reviewed in the review mode
+     */
+    @Override
+    public void updateFlashcardBeingReviewed(int result) {
+        Flashcard flashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
+        markFlashcardBeingReviewed(flashcard, result);
+        this.flashcardBeingReviewed += 1;
+        if (flashcardBeingReviewed >= flashcardsToReview.size()) {
+            flashcardBeingReviewed = 0;
+        }
+    }
+
+    /**
+     * Reset flashcard being reviewed back to false
+     */
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        this.flashcardsToReview.get(flashcardBeingReviewed).resetFlip();
+    }
+
+    /**
+     * Gets the flashcard being reviewed in the review mode and returns it.
+     * @return Flashcard being reviewed
+     */
+    @Override
+    public Flashcard getFlashcardBeingReviewed() {
+        return this.flashcardsToReview.get(flashcardBeingReviewed);
+    }
+
+    /**
+     * Checks whether the flashcard being reviewed is flipped
+     * @return
+     */
+    @Override
+    public boolean getIsFlashcardFlipped() {
+        return this.flashcardsToReview.get(flashcardBeingReviewed).getIsFlipped();
+    }
+
+    /**
+     * Flip the flashcard currently being reviewed
+     */
+    @Override
+    public void carryOutFlipCommand() {
+        Flashcard flashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
+        flashcard.flipFlashcard();
+    }
+
+    /**
+     * Marks flashcard being reviewed as correct or wrong
+     */
+    @Override
+    public void markFlashcardBeingReviewed(Flashcard flashcard, int result) {
+        flashcard.markCard(result);
     }
 
     // =========== Util methods =============================================================

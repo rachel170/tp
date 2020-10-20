@@ -161,6 +161,7 @@ public class ReviewWindow extends UiPart<Stage> {
      */
     public void handleNextCard(int isCorrect) {
         if (individualFlashcard.isCardFlipped()) {
+            logic.resetFlipOfFlashcardBeingReviewed();
             String result = individualFlashcard.handleNextCard(isCorrect);
             if (result.equals("exit")) {
                 displayStatistics();

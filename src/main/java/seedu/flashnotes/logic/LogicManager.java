@@ -7,8 +7,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
-import seedu.flashnotes.logic.commands.Command;
-import seedu.flashnotes.logic.commands.CommandResult;
+import seedu.flashnotes.logic.commands.*;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.FlashNotesParser;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
@@ -52,6 +51,12 @@ public class LogicManager implements Logic {
         Command command = flashNotesParser.parseCommand(commandText, isReviewMode, isInDeck, deckName);
         commandResult = command.execute(model);
 
+        if (commandResult.isFlipped()) {
+            model.carryOutFlipCommand();
+        } else if (commandResult.isNext() > 0) {
+            updateFlashcardBeingReviewed(commandResult.isNext());
+        }
+
         try {
             storage.saveFlashNotes(model.getFlashNotes(), model.getUniqueDeckList());
         } catch (IOException ioe) {
@@ -79,6 +84,23 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
         return model.addFlashcardToReview(flashcard);
+    }
+
+    @Override
+    public void updateFlashcardBeingReviewed(int result) {
+        if (model.getIsFlashcardFlipped()) {
+            model.updateFlashcardBeingReviewed(result);
+        }
+    }
+
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        model.resetFlipOfFlashcardBeingReviewed();
+    }
+
+    @Override
+    public Flashcard getFlashcardBeingReviewed() {
+        return model.getFlashcardBeingReviewed();
     }
 
     public ObservableList<Deck> getFilteredCardDeckList() {
