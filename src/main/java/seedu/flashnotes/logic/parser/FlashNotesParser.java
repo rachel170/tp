@@ -60,15 +60,15 @@ public class FlashNotesParser {
         final String arguments = matcher.group("arguments");
 
         if (this.isReviewMode) {
-            assert !isInDeck: "Program should not be in card mode";
+            assert !isInDeck : "Program should not be in card mode";
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
         if (!isInDeck) {
-            assert !this.isReviewMode: "Program should not be in review mode";
+            assert !this.isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
-            assert !this.isReviewMode: "Program should not be in review mode";
+            assert !this.isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
         }
     }
