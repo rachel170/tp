@@ -1,5 +1,12 @@
 package seedu.flashnotes.logic.parser;
 
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_CARD;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_HOME;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,8 +30,6 @@ import seedu.flashnotes.logic.commands.ReviewCommand;
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.commands.WrongCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
-
-import static seedu.flashnotes.commons.core.Messages.*;
 
 /**
  * Parses user input.
