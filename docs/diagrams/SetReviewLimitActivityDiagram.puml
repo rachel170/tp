@@ -1,0 +1,14 @@
+@startuml
+start
+:User starts up FlashNotes;
+
+if () then ([wants to change review limit])
+    :Set review limit;
+else ([else])
+
+endif
+:User enters a flashcard deck;
+:User reviews the flashcards in that deck;
+:User exits FlashNotes;
+stop
+@enduml
