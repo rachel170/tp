@@ -62,7 +62,7 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 **:information_source: Quick Summary of Main Mode:**<br>
 
 * Main Mode primarily allows management of flashcard decks.
-* In order to manage flashcards directly, need to enter deck mode.
+* In order to manage flashcards directly, need to enter card mode.
 </div>
 
 ### Find all flashcards within the deck : `enterDeck`
