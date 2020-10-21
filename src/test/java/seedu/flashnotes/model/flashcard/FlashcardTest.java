@@ -23,27 +23,27 @@ public class FlashcardTest {
     }
 
     @Test
-    public void execute_double_flipFlashcard() {
+    public void execute_doubleFlipFlashcard() {
         WHAT.flipFlashcard();
         WHAT.flipFlashcard();
         assertEquals(false, WHAT.getIsFlipped());
     }
 
     @Test
-    public void execute_resetFlip_beforeFlipping() {
+    public void execute_resetFlipBeforeFlipping() {
         WHAT.resetFlip();
         assertEquals(false, WHAT.getIsFlipped());
     }
 
     @Test
-    public void execute_resetFlip_afterFlipping() {
+    public void execute_resetFlipAfterFlipping() {
         WHAT.flipFlashcard();
         WHAT.resetFlip();
         assertEquals(false, WHAT.getIsFlipped());
     }
 
     @Test
-    public void execute_resetFlip_afterDoubleFlips() {
+    public void execute_resetFlipAfterDoubleFlips() {
         WHAT.flipFlashcard();
         WHAT.flipFlashcard();
         WHAT.resetFlip();

@@ -2,11 +2,13 @@ package seedu.flashnotes.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHAT;
 import static seedu.flashnotes.testutil.TypicalFlashcards.WHO;
+import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +17,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.flashnotes.commons.core.GuiSettings;
+import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
 import seedu.flashnotes.testutil.FlashNotesBuilder;
 
@@ -96,6 +99,134 @@ public class ModelManagerTest {
     public void getFilteredFlashcardList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager
                 .getFilteredFlashcardList().remove(0));
+    }
+
+    @Test
+    public void execute_addFlashcardToReview() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
+        int size = model.getFlashcardsToReview().size();
+        assertEquals(size + 1, expectedModel.addFlashcardToReview(WHAT).size());
+        Flashcard newFlashcard = expectedModel.getFlashcardsToReview().get(size);
+        assertEquals(WHAT, newFlashcard);
+    }
+
+    @Test
+    public void execute_updateFlashcardBeingReviewedForCorrectCommand() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
+        Flashcard flashcard = expectedModel.getFlashcardBeingReviewed();
+        assertEquals(model.getFlashcardBeingReviewed(), flashcard);
+        expectedModel.updateFlashcardBeingReviewed(2);
+        assertEquals(2, flashcard.getIsCorrect());
+        Flashcard nextFlashcard = expectedModel.getFlashcardBeingReviewed();
+        assertNotEquals(flashcard, nextFlashcard);
+    }
+
+    @Test
+    public void execute_updateFlashcardBeingReviewedForWrongCommand() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
+        Flashcard flashcard = expectedModel.getFlashcardBeingReviewed();
+        assertEquals(model.getFlashcardBeingReviewed(), flashcard);
+
+        expectedModel.updateFlashcardBeingReviewed(1);
+        assertEquals(1, flashcard.getIsCorrect());
+
+        Flashcard nextFlashcard = expectedModel.getFlashcardBeingReviewed();
+        assertNotEquals(flashcard, nextFlashcard);
+    }
+
+    @Test
+    public void execute_resetFlipOfFlashcardBeingReviewedWhenFlipped() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        // To get a new flashcard
+        model.updateFlashcardBeingReviewed(2);
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        //flip flashcard to test whether it can be reset
+        flashcard.flipFlashcard();
+        assertEquals(true, flashcard.getIsFlipped());
+
+        model.resetFlipOfFlashcardBeingReviewed();
+        assertEquals(false, flashcard.getIsFlipped());
+    }
+
+    @Test
+    public void execute_resetFlipOfFlashcardBeingReviewedWhenNotFlipped() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        // To get a new flashcard
+        model.updateFlashcardBeingReviewed(2);
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        assertEquals(false, flashcard.getIsFlipped());
+
+        model.resetFlipOfFlashcardBeingReviewed();
+        assertEquals(false, flashcard.getIsFlipped());
+    }
+
+    @Test
+    public void execute_getFlashcardBeingReviewed() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
+
+        Flashcard expectedFlashcard = expectedModel.getFlashcardsToReview().get(0);
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        assertEquals(expectedFlashcard, flashcard);
+    }
+
+    @Test
+    public void execute_getIsFlashcardFlipped() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        assertEquals(false, flashcard.getIsFlipped());
+        assertEquals(false, model.getIsFlashcardFlipped());
+
+        model.carryOutFlipCommand();
+        assertEquals(true, flashcard.getIsFlipped());
+        assertEquals(true, model.getIsFlashcardFlipped());
+    }
+
+    @Test
+    public void execute_carryOutFlipCommand() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        // To get a new flashcard
+        model.updateFlashcardBeingReviewed(2);
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        assertEquals(false, flashcard.getIsFlipped());
+
+        model.carryOutFlipCommand();
+        assertEquals(true, flashcard.getIsFlipped());
+
+        model.carryOutFlipCommand();
+        assertEquals(false, flashcard.getIsFlipped());
+    }
+
+    @Test
+    public void execute_markFlashcardBeingReviewedAsCorrect() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        // To get a new flashcard
+        model.updateFlashcardBeingReviewed(2);
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        assertEquals(0, flashcard.getIsCorrect());
+
+        model.markFlashcardBeingReviewed(flashcard, 2);
+        assertEquals(2, flashcard.getIsCorrect());
+    }
+
+    @Test
+    public void execute_markFlashcardBeingReviewedAsWrong() {
+        Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+        // To get a new flashcard
+        model.updateFlashcardBeingReviewed(2);
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+
+        model.markFlashcardBeingReviewed(flashcard, 1);
+        assertEquals(1, flashcard.getIsCorrect());
     }
 
     @Test
