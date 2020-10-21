@@ -212,8 +212,6 @@ public class ModelManagerTest {
         model.updateFlashcardBeingReviewed(2);
         Flashcard flashcard = model.getFlashcardBeingReviewed();
 
-        assertEquals(0, flashcard.getIsCorrect());
-
         model.markFlashcardBeingReviewed(flashcard, 2);
         assertEquals(2, flashcard.getIsCorrect());
     }
