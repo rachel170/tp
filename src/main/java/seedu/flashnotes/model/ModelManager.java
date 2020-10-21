@@ -295,6 +295,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void updateFlashcardBeingReviewed(int result) {
+        resetFlipOfFlashcardBeingReviewed();
         Flashcard flashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
         markFlashcardBeingReviewed(flashcard, result);
         this.flashcardBeingReviewed += 1;
