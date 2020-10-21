@@ -138,10 +138,10 @@ Format: `clear`
 # Card Mode (List of Cards)
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Quick Summary of Deck Mode:**<br>
+**:information_source: Quick Summary of Card Mode:**<br>
 
-* Deck Mode primarily allows management of flashcards.
-* In order to manage decks directly, need to return to deck mode via home command.
+* Card Mode primarily allows management of flashcards.
+* In order to manage decks directly, need to return to main mode via home command.
 </div>
 
 ### Viewing help : `help`
