@@ -12,6 +12,7 @@ public class FlipCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        model.carryOutFlipCommand();
         return new CommandResult(MESSAGE_FLIP_ACKNOWLEDGEMENT, false, false, true, true, 0);
     }
 }

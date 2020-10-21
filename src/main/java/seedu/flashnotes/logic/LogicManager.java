@@ -52,12 +52,6 @@ public class LogicManager implements Logic {
         Command command = flashNotesParser.parseCommand(commandText, isReviewMode, isInDeck, deckName);
         commandResult = command.execute(model);
 
-        if (commandResult.isFlipped()) {
-            model.carryOutFlipCommand();
-        } else if (commandResult.isNext() > 0) {
-            updateFlashcardBeingReviewed(commandResult.isNext());
-        }
-
         try {
             storage.saveFlashNotes(model.getFlashNotes(), model.getUniqueDeckList());
         } catch (IOException ioe) {
@@ -88,20 +82,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void updateFlashcardBeingReviewed(int result) {
-        if (model.getIsFlashcardFlipped()) {
-            model.updateFlashcardBeingReviewed(result);
-        }
-    }
-
-    @Override
     public void resetFlipOfFlashcardBeingReviewed() {
         model.resetFlipOfFlashcardBeingReviewed();
-    }
-
-    @Override
-    public Flashcard getFlashcardBeingReviewed() {
-        return model.getFlashcardBeingReviewed();
     }
 
     public ObservableList<Deck> getFilteredCardDeckList() {

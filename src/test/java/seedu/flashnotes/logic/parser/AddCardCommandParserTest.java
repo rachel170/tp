@@ -17,14 +17,14 @@ import static seedu.flashnotes.testutil.TypicalFlashcards.MACROECONS;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddCardCommand;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.testutil.FlashcardBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddCardCommandParserTest {
+    private AddCardCommandParser parser = new AddCardCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -32,22 +32,22 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + QUESTION_DESC_MACROECONS + ANSWER_DESC_MACROECONS,
-                new AddCommand(expectedFlashcard));
+                new AddCardCommand(expectedFlashcard));
 
         String test;
         // multiple questions - last question accepted
         assertParseSuccess(parser, QUESTION_DESC_SKY + QUESTION_DESC_MACROECONS + ANSWER_DESC_MACROECONS,
-                new AddCommand(expectedFlashcard));
+                new AddCardCommand(expectedFlashcard));
 
         // multiple answers - last answer accepted
         assertParseSuccess(parser, QUESTION_DESC_MACROECONS + ANSWER_DESC_SKY + ANSWER_DESC_MACROECONS,
-                new AddCommand(expectedFlashcard));
+                new AddCardCommand(expectedFlashcard));
 
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCardCommand.MESSAGE_USAGE);
 
         // missing question prefix
         assertParseFailure(parser, VALID_QUESTION_MACROECONS + ANSWER_DESC_MACROECONS,
@@ -75,6 +75,6 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + QUESTION_DESC_MACROECONS + ANSWER_DESC_MACROECONS,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCardCommand.MESSAGE_USAGE));
     }
 }

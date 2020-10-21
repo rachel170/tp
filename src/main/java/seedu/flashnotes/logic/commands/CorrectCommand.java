@@ -12,6 +12,9 @@ public class CorrectCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        if (model.getIsFlashcardFlipped()) {
+            model.updateFlashcardBeingReviewed(2);
+        }
         return new CommandResult(MESSAGE_CORRECT_ACKNOWLEDGEMENT, false, false, true, false, 2);
     }
 }

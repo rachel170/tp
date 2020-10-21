@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddCardCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
-import seedu.flashnotes.logic.commands.DeleteCommand;
-import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.DeleteCardCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
 import seedu.flashnotes.logic.commands.FindCommand;
@@ -41,9 +41,9 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Flashcard flashcard = new FlashcardBuilder().build();
-        AddCommand command = (AddCommand) parser
+        AddCardCommand command = (AddCardCommand) parser
                 .parseCommand(FlashcardUtil.getAddCommand(flashcard), isReviewMode, isInDeck, DEFAULT_TAG);
-        assertEquals(new AddCommand(flashcard), command);
+        assertEquals(new AddCardCommand(flashcard), command);
     }
 
     @Test
@@ -56,20 +56,20 @@ public class FlashNotesParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased(),
+        DeleteCardCommand command = (DeleteCardCommand) parser.parseCommand(
+                DeleteCardCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased(),
                 isReviewMode, isInDeck, DEFAULT);
-        assertEquals(new DeleteCommand(INDEX_FIRST_FLASHCARD), command);
+        assertEquals(new DeleteCardCommand(INDEX_FIRST_FLASHCARD), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Flashcard flashcard = new FlashcardBuilder().build();
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(flashcard).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditCardCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(flashcard).build();
+        EditCardCommand command = (EditCardCommand) parser.parseCommand(EditCardCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FLASHCARD.getOneBased() + " "
                 + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor), isReviewMode, isInDeck, DEFAULT);
-        assertEquals(new EditCommand(INDEX_FIRST_FLASHCARD, descriptor), command);
+        assertEquals(new EditCardCommand(INDEX_FIRST_FLASHCARD, descriptor), command);
     }
 
     @Test

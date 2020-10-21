@@ -8,14 +8,14 @@ import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddCardCommand;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.CorrectCommand;
-import seedu.flashnotes.logic.commands.DeleteCommand;
+import seedu.flashnotes.logic.commands.DeleteCardCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
-import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.logic.commands.EndReviewCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
@@ -73,9 +73,9 @@ public class FlashNotesParser {
     private Command parseCommandInReviewMode(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_WORD:
+        case AddCardCommand.COMMAND_WORD:
+        case EditCardCommand.COMMAND_WORD:
+        case DeleteCardCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
@@ -112,9 +112,9 @@ public class FlashNotesParser {
     private Command parseCommandInHomeMode(
             String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_WORD:
+        case AddCardCommand.COMMAND_WORD:
+        case EditCardCommand.COMMAND_WORD:
+        case DeleteCardCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case ReviewCommand.COMMAND_WORD:
         case CorrectCommand.COMMAND_WORD:
@@ -164,11 +164,11 @@ public class FlashNotesParser {
         case WrongCommand.COMMAND_WORD:
             throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments, deckName);
-        case DeleteCommand.COMMAND_WORD:
+        case AddCardCommand.COMMAND_WORD:
+            return new AddCardCommandParser().parse(arguments, deckName);
+        case DeleteCardCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-        case EditCommand.COMMAND_WORD:
+        case EditCardCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

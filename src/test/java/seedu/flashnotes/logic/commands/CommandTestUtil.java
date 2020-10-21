@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditFlashcardDescriptor DESC_SKY;
-    public static final EditCommand.EditFlashcardDescriptor DESC_MACROECONS;
+    public static final EditCardCommand.EditFlashcardDescriptor DESC_SKY;
+    public static final EditCardCommand.EditFlashcardDescriptor DESC_MACROECONS;
 
     static {
         DESC_SKY = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_SKY)

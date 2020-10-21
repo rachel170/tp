@@ -7,20 +7,20 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.flashnotes.commons.core.index.Index;
-import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCommandParser implements Parser<EditCardCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditCardCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG);
@@ -30,10 +30,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE), pe);
         }
 
-        EditCommand.EditFlashcardDescriptor editFlashcardDescriptor = new EditCommand.EditFlashcardDescriptor();
+        EditCardCommand.EditFlashcardDescriptor editFlashcardDescriptor = new EditCardCommand.EditFlashcardDescriptor();
         if (argMultimap.getValue(PREFIX_QUESTION).isPresent()) {
             editFlashcardDescriptor.setQuestion(ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get()));
         }
@@ -46,10 +46,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editFlashcardDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCardCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editFlashcardDescriptor);
+        return new EditCardCommand(index, editFlashcardDescriptor);
     }
 
 }

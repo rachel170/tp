@@ -23,19 +23,19 @@ import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_THIRD_FLASHCARD;
 import org.junit.jupiter.api.Test;
 
 import seedu.flashnotes.commons.core.index.Index;
-import seedu.flashnotes.logic.commands.EditCommand;
-import seedu.flashnotes.logic.commands.EditCommand.EditFlashcardDescriptor;
+import seedu.flashnotes.logic.commands.EditCardCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand.EditFlashcardDescriptor;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Question;
 import seedu.flashnotes.model.tag.Tag;
 import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
 
-public class EditCommandParserTest {
+public class EditCardCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -45,7 +45,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_QUESTION_SKY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", EditCardCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -91,7 +91,7 @@ public class EditCommandParserTest {
 
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_SKY)
                 .withAnswer(VALID_ANSWER_MACROECONS).withTag(VALID_TAG_NATURE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -101,9 +101,9 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_FLASHCARD;
         String userInput = targetIndex.getOneBased() + ANSWER_DESC_MACROECONS;
 
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
+        EditCardCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
                 .withAnswer(VALID_ANSWER_MACROECONS).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -115,19 +115,19 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + QUESTION_DESC_SKY;
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
                 .withQuestion(VALID_QUESTION_SKY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // answer
         userInput = targetIndex.getOneBased() + ANSWER_DESC_SKY;
         descriptor = new EditFlashcardDescriptorBuilder().withAnswer(VALID_ANSWER_SKY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCardCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tag
         userInput = targetIndex.getOneBased() + TAG_DESC_ECONOMICS;
         descriptor = new EditFlashcardDescriptorBuilder().withTag(VALID_TAG_ECONOMICS).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCardCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -138,10 +138,10 @@ public class EditCommandParserTest {
                 + TAG_DESC_ECONOMICS + ANSWER_DESC_SKY + TAG_DESC_ECONOMICS
                 + ANSWER_DESC_MACROECONS + TAG_DESC_NATURE;
 
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
+        EditCardCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
                 .withAnswer(VALID_ANSWER_MACROECONS)
                 .withTag(VALID_TAG_NATURE).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -153,14 +153,14 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + INVALID_ANSWER_DESC + ANSWER_DESC_MACROECONS;
         EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
                 .withAnswer(VALID_ANSWER_MACROECONS).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCardCommand expectedCommand = new EditCardCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + INVALID_ANSWER_DESC
                 + ANSWER_DESC_MACROECONS;
         descriptor = new EditFlashcardDescriptorBuilder().withAnswer(VALID_ANSWER_MACROECONS).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCardCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
