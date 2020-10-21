@@ -21,13 +21,7 @@ create FlipCommand
 FlashNotesParser -> FlipCommand
 activate FlipCommand
 
-FlipCommand --> FlashNotesParser : commandResult
-deactivate FlipCommand
-
-FlashNotesParser --> LogicManager : commandResult
-deactivate FlashNotesParser
-
-LogicManager -> Model : carryOutFlipCommand()
+FlipCommand --> Model : carryOutFlipCommand()
 activate Model
 
 Model -> Flashcard : flipFlashcard()
@@ -36,8 +30,14 @@ activate Flashcard
 Flashcard -> Model :
 deactivate Flashcard
 
-Model -> LogicManager :
+Model -> FlipCommand :
 deactivate Model
+
+FlipCommand --> FlashNotesParser : commandResult
+deactivate FlipCommand
+
+FlashNotesParser --> LogicManager : commandResult
+deactivate FlashNotesParser
 
 [<--LogicManager : commandResult
 deactivate LogicManager

@@ -224,6 +224,34 @@ flashcards to review according to the review limit set by users.
     display boxes and disable main command box. 
     * Con: The UI looks more cluttered and users might get distracted when reviewing their flashcards
 
+### Set Review Limit feature
+Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
+review session (review limit). 
+
+#### Implementation
+Users only have to set the review limit once and it will be saved as user preferences in a storage file. Users will
+then only need to use this feature again when they want to change the review limit again in the future.
+
+The initial value for the review limit is set to 0 in `preferences.json`, which tells the program that the user did not
+set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
+session. 
+
+The valid range of integer inputs for this command is any integer more than 1 however, as we thought it wouldn't 
+make sense on the user's end to set 0 or negative values as the review limit.
+
+The following is an activity diagram showing how the set review command is intended to be used
+when a user wants to use FlashNotes to review a deck of flashcards.
+
+![SetReviewLimitActivityDiagram](images/SetReviewLimitActivityDiagram.png)
+
+#### Design considerations:
+* Alternative 1 (current choice): Save review limit in the user preferences file.
+    * Users would not have to set review limit every time they start up the application.
+    * We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in model.
+* Alternative 2: Save review limit internally in Model
+    * Users would have to set review limit every time they start up the application.
+    * Do not have to write into a data file.
+
 ### Flip Card feature
 Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
 see the answer for the question on the flashcard.    
@@ -242,8 +270,8 @@ The following is a sequence diagram that demonstrates how a flip command flips a
 ![FlipCommandSequenceDiagram](images/FlipCommandSequenceDiagram.png)
 
 This feature is implemented by adding an isFlipped boolean in the `Model` of the `Flashcard`. To toggle this boolean,
-a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `LogicManager#execute()` 
-when it received the `CommandResult` from the `FlashNotesParser`.
+a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `FlipCommand#execute()` 
+when it is created from the `FlashNotesParser`.
 
 #### Design considerations:
 * Alternative 1 (current choice): Change isFlipped boolean in the flashcard model
@@ -276,9 +304,8 @@ The following activity diagram summarizes what happens when a user executes a `c
 ![NextCommandActivityDiagram](images/NextCommandActivityDiagram.png)
 
 This feature is implemented by adding an isCorrect int in the `Model` of the `Flashcard`. To update this int,
-a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is called by the 
-`LogicManager#updateFlashcardBeingReviewed()` which is a call from `LogicManager#execute()` when it received the 
-`CommandResult` from the `FlashNotesParser`.
+a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
+`CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
 
 #### Design considerations:
 * Alternative 1 (current choice): Change isCorrect int in the flashcard model
@@ -289,35 +316,6 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
     * Pro: No need for extra function calls as marking the result of the review can be directly done in the UI
     * Con: Logic is being done in the UI section
     * Con: Hard to test using testcases. Have to manually test.
-
-
-### Set Review Limit feature
-Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
-review session (review limit). 
-
-#### Implementation
-Users only have to set the review limit once and it will be saved as user preferences in a storage file. Users will
-then only need to use this feature again when they want to change the review limit again in the future.
-
-The initial value for the review limit is set to 0 in `preferences.json`, which tells the program that the user did not
-set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
-session. 
-
-The valid range of integer inputs for this command is any integer more than 1 however, as we thought it wouldn't 
-make sense on the user's end to set 0 or negative values as the review limit.
-
-The following is an activity diagram showing how the set review command is intended to be used
-when a user wants to use FlashNotes to review a deck of flashcards.
-
-![SetReviewLimitActivityDiagram](images/SetReviewLimitActivityDiagram.png)
-
-#### Design considerations:
-* Alternative 1 (current choice): Save review limit in the user preferences file.
-    * Users would not have to set review limit every time they start up the application.
-    * We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in model.
-* Alternative 2: Save review limit internally in Model
-    * Users would have to set review limit every time they start up the application.
-    * Do not have to write into a data file.
 
 ### Review Statistics feature
 
