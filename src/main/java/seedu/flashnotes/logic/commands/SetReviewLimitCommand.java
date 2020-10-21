@@ -11,7 +11,7 @@ import seedu.flashnotes.model.Model;
  * Sets user preferences for maximum number of cards that can be reviewed per session.
  */
 public class SetReviewLimitCommand extends Command {
-    public static final String COMMAND_WORD = "set-review-limit";
+    public static final String COMMAND_WORD = "setReviewLimit";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets user preferences for maximum number of cards that can "
             + "be reviewed per session.\n"

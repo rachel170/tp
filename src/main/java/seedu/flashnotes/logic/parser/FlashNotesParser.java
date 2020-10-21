@@ -65,7 +65,7 @@ public class FlashNotesParser {
         if (!isInDeck) {
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
-            return parseCommandInCardMode(commandWord, arguments, deckName);
+            return parseCommandInCardMode(commandWord, arguments, deckName.toLowerCase());
         }
     }
 
@@ -125,13 +125,13 @@ public class FlashNotesParser {
             throw new ParseException(ILLEGAL_COMMAND_IN_HOME_MESSAGE);
 
         case AddDeckCommand.COMMAND_WORD:
-            return new AddDeckCommandParser().parse(arguments);
+            return new AddDeckCommandParser().parse(arguments.toLowerCase());
 
         case DeleteDeckCommand.COMMAND_WORD:
-            return new DeleteDeckCommandParser().parse(arguments);
+            return new DeleteDeckCommandParser().parse(arguments.toLowerCase());
 
         case EnterDeckCommand.COMMAND_WORD:
-            return new EnterDeckCommandParser().parse(arguments);
+            return new EnterDeckCommandParser().parse(arguments.toLowerCase());
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -167,9 +167,9 @@ public class FlashNotesParser {
         case AddCardCommand.COMMAND_WORD:
             return new AddCardCommandParser().parse(arguments, deckName);
         case DeleteCardCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCardCommandParser().parse(arguments);
         case EditCardCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCardCommandParser().parse(arguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case FindCommand.COMMAND_WORD:

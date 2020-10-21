@@ -13,7 +13,7 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditCardCommand> {
+public class EditCardCommandParser implements Parser<EditCardCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand

@@ -100,8 +100,7 @@ public class Flashcard {
         return otherFlashcard != null
                 && otherFlashcard.getQuestion().equals(getQuestion())
                 && (otherFlashcard.getAnswer().equals(getAnswer()))
-                && otherFlashcard.getTag().equals(getTag())
-                && otherFlashcard.getIsFlipped() == getIsFlipped();
+                && otherFlashcard.getTag().equals(getTag());
     }
 
     /**
@@ -121,8 +120,7 @@ public class Flashcard {
         Flashcard otherFlashcard = (Flashcard) other;
         return otherFlashcard.getQuestion().equals(getQuestion())
                 && otherFlashcard.getAnswer().equals(getAnswer())
-                && otherFlashcard.getTag().equals(getTag())
-                && otherFlashcard.getIsFlipped() == getIsFlipped();
+                && otherFlashcard.getTag().equals(getTag());
     }
 
     @Override

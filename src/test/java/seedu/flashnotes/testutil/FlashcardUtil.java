@@ -16,7 +16,7 @@ public class FlashcardUtil {
     /**
      * Returns an add command string for adding the {@code flashcard}.
      */
-    public static String getAddCommand(Flashcard flashcard) {
+    public static String getAddCardCommand(Flashcard flashcard) {
         return AddCardCommand.COMMAND_WORD + " " + getFlashcardDetails(flashcard);
     }
 

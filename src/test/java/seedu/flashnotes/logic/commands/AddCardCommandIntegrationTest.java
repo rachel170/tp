@@ -32,7 +32,7 @@ public class AddCardCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.addFlashcard(validFlashcard);
-        expectedModel.addDeck(new Deck("Singapore"));
+        expectedModel.addDeck(new Deck("singapore"));
 
         assertCommandSuccess(new AddCardCommand(validFlashcard), model,
                 String.format(AddCardCommand.MESSAGE_SUCCESS, validFlashcard), expectedModel);

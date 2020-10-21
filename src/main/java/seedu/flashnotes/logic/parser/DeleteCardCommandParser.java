@@ -9,7 +9,7 @@ import seedu.flashnotes.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCardCommand> {
+public class DeleteCardCommandParser implements Parser<DeleteCardCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand

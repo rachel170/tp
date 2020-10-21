@@ -42,7 +42,7 @@ public class FlashNotesParserTest {
     public void parseCommand_add() throws Exception {
         Flashcard flashcard = new FlashcardBuilder().build();
         AddCardCommand command = (AddCardCommand) parser
-                .parseCommand(FlashcardUtil.getAddCommand(flashcard), isReviewMode, isInDeck, DEFAULT_TAG);
+                .parseCommand(FlashcardUtil.getAddCardCommand(flashcard), isReviewMode, isInDeck, DEFAULT_TAG);
         assertEquals(new AddCardCommand(flashcard), command);
     }
 
