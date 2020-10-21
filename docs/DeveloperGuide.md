@@ -524,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at Step 2.
 
 ####**Use case: UC05 - Edit a card**
-#####Precondition: Must be inside the deck mode.
+#####Precondition: Must be inside the card mode.
 
 **MSS**
 
@@ -549,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User filters all cards belonging to a particular deck.
-1. Flashnotes shows a list of cards using the deck mode.
+1. Flashnotes shows a list of cards using the card mode.
 
     Use case ends.
 
@@ -632,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tag**: A note to group cards of a certain category together.
 * **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
 * **Review Mode**: a mode which displays cards from a deck individually in shuffled order.
-* **Deck Mode**: A mode which displays a list of cards
+* **Card Mode**: A mode which displays a list of cards
 * **Home Mode**: A mode which displays a list of decks
 
 --------------------------------------------------------------------------------------------------------------------
