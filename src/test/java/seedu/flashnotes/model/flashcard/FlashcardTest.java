@@ -1,7 +1,6 @@
 package seedu.flashnotes.model.flashcard;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_ANSWER_MACROECONS;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_QUESTION_MACROECONS;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_ECONOMICS;
@@ -15,6 +14,51 @@ import seedu.flashnotes.testutil.FlashcardBuilder;
 
 public class FlashcardTest {
 
+    @Test
+    public void execute_flip_flashcard() {
+        WHAT.flipFlashcard();
+        assertEquals(true, WHAT.getIsFlipped());
+    }
+
+    @Test
+    public void execute_double_flip_flashcard() {
+        WHAT.flipFlashcard();
+        WHAT.flipFlashcard();
+        assertEquals(false, WHAT.getIsFlipped());
+    }
+
+    @Test
+    public void execute_reset_flip_before_flipping() {
+        WHAT.resetFlip();
+        assertEquals(false, WHAT.getIsFlipped());
+    }
+
+    @Test
+    public void execute_reset_flip_after_flipping() {
+        WHAT.flipFlashcard();
+        WHAT.resetFlip();
+        assertEquals(false, WHAT.getIsFlipped());
+    }
+
+    @Test
+    public void execute_reset_flip_after_double_flips() {
+        WHAT.flipFlashcard();
+        WHAT.flipFlashcard();
+        WHAT.resetFlip();
+        assertEquals(false, WHAT.getIsFlipped());
+    }
+
+    @Test
+    public void execute_mark_card_as_correct_success() {
+        WHAT.markCard(2);
+        assertEquals(2, WHAT.getIsCorrect());
+    }
+
+    @Test
+    public void execute_mark_card_as_wrong_success() {
+        WHAT.markCard(1);
+        assertEquals(1, WHAT.getIsCorrect());
+    }
 
     @Test
     public void isSameFlashcard() {
