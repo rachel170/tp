@@ -58,13 +58,16 @@ public class FlashNotesParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
+
         if (isReviewMode) {
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
         if (!isInDeck) {
+            assert !this.isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
+            assert !this.isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
         }
     }
