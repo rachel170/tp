@@ -145,6 +145,9 @@ public class FlashNotesParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case SetReviewLimitCommand.COMMAND_WORD:
+            return new SetReviewLimitCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
