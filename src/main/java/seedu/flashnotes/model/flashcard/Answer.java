@@ -8,7 +8,7 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAnswer(String)}
  */
 public class Answer {
-    
+
     public static final String MESSAGE_CONSTRAINTS =
             "Answers should not be blank and should be fewer than 140 characters. "
                 + "Current length of answer is %d.";
