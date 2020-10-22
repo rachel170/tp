@@ -66,11 +66,11 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid question
         assertParseFailure(parser, INVALID_QUESTION_DESC + ANSWER_DESC_MACROECONS,
-                Question.MESSAGE_CONSTRAINTS);
+                String.format(Question.MESSAGE_CONSTRAINTS, 0));
 
         // invalid answer
         assertParseFailure(parser, QUESTION_DESC_MACROECONS + INVALID_ANSWER_DESC,
-                Answer.MESSAGE_CONSTRAINTS);
+                String.format(Answer.MESSAGE_CONSTRAINTS, 0));
 
 
         // non-empty preamble

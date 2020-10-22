@@ -33,8 +33,8 @@ public class FlashcardCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label answer;
-//    @FXML
-//    private Label tag;
+    //    @FXML
+    //    private Label tag;
 
     /**
      * Creates a {@code FlashcardCard} with the given {@code Flashcard} and index to display.
@@ -45,7 +45,7 @@ public class FlashcardCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         question.setText(flashcard.getQuestion().question);
         answer.setText(flashcard.getAnswer().value);
-//        tag.setText(flashcard.getTag().tagName);
+        //tag.setText(flashcard.getTag().tagName);
     }
 
     @Override

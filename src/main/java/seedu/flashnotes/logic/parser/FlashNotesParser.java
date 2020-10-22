@@ -8,7 +8,26 @@ import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.flashnotes.logic.commands.*;
+import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.commands.CheckReviewLimitCommand;
+import seedu.flashnotes.logic.commands.ClearCommand;
+import seedu.flashnotes.logic.commands.Command;
+import seedu.flashnotes.logic.commands.CorrectCommand;
+import seedu.flashnotes.logic.commands.DeleteCommand;
+import seedu.flashnotes.logic.commands.DeleteDeckCommand;
+import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EndReviewCommand;
+import seedu.flashnotes.logic.commands.EnterDeckCommand;
+import seedu.flashnotes.logic.commands.ExitCommand;
+import seedu.flashnotes.logic.commands.FindCommand;
+import seedu.flashnotes.logic.commands.FlipCommand;
+import seedu.flashnotes.logic.commands.HelpCommand;
+import seedu.flashnotes.logic.commands.HomeCommand;
+import seedu.flashnotes.logic.commands.ListCommand;
+import seedu.flashnotes.logic.commands.ReviewCommand;
+import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
+import seedu.flashnotes.logic.commands.WrongCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
