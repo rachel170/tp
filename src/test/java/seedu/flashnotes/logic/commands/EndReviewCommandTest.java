@@ -14,7 +14,7 @@ public class EndReviewCommandTest {
 
     @Test
     public void execute_endReview_success() {
-        CommandResult expectedCommandResult = new CommandResult(EndReviewCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT,
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT,
                 false, true, false, false, 0);
         assertCommandSuccess(new EndReviewCommand(), model, expectedCommandResult, expectedModel);
     }
