@@ -1,35 +1,35 @@
 package seedu.flashnotes.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashnotes.testutil.Assert.assertThrows;
-import static seedu.flashnotes.testutil.FlashcardBuilder.DEFAULT_TAG;
-import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.flashnotes.logic.commands.AddCommand;
-import seedu.flashnotes.logic.commands.ClearCommand;
-import seedu.flashnotes.logic.commands.DeleteCommand;
-import seedu.flashnotes.logic.commands.EditCommand;
-import seedu.flashnotes.logic.commands.EnterDeckCommand;
-import seedu.flashnotes.logic.commands.ExitCommand;
-import seedu.flashnotes.logic.commands.FindCommand;
-import seedu.flashnotes.logic.commands.HelpCommand;
-import seedu.flashnotes.logic.commands.ListCommand;
-import seedu.flashnotes.logic.parser.exceptions.ParseException;
-import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
-import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
-import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
-import seedu.flashnotes.testutil.FlashcardBuilder;
-import seedu.flashnotes.testutil.FlashcardUtil;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+//import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+//import static seedu.flashnotes.testutil.Assert.assertThrows;
+//import static seedu.flashnotes.testutil.FlashcardBuilder.DEFAULT_TAG;
+//import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
+//
+//import java.util.Arrays;
+//import java.util.List;
+//import java.util.stream.Collectors;
+//
+//import org.junit.jupiter.api.Test;
+//
+//import seedu.flashnotes.logic.commands.AddCommand;
+//import seedu.flashnotes.logic.commands.ClearCommand;
+//import seedu.flashnotes.logic.commands.DeleteCommand;
+//import seedu.flashnotes.logic.commands.EditCommand;
+//import seedu.flashnotes.logic.commands.EnterDeckCommand;
+//import seedu.flashnotes.logic.commands.ExitCommand;
+//import seedu.flashnotes.logic.commands.FindCommand;
+//import seedu.flashnotes.logic.commands.HelpCommand;
+//import seedu.flashnotes.logic.commands.ListCommand;
+//import seedu.flashnotes.logic.parser.exceptions.ParseException;
+//import seedu.flashnotes.model.flashcard.Flashcard;
+//import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
+//import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
+//import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
+//import seedu.flashnotes.testutil.FlashcardBuilder;
+//import seedu.flashnotes.testutil.FlashcardUtil;
 
 public class FlashNotesParserTest {
     //    private static final String DEFAULT = "Default";
@@ -116,7 +116,8 @@ public class FlashNotesParserTest {
     //
     //    @Test
     //    public void parseCommand_unrecognisedInput_throwsParseException() {
-    //        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+    //        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+    //        HelpCommand.MESSAGE_USAGE), ()
     //            -> parser.parseCommand("", isReviewMode, isInDeck, DEFAULT));
     //    }
     //
