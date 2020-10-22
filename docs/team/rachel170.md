@@ -30,6 +30,7 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to existing features**:
+  * Standardized one word command to not accept further arguments.
 
 * **Documentation**:
   * User Guide:
