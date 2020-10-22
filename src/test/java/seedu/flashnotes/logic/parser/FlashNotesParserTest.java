@@ -50,7 +50,8 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         // Clear command created by default
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, isReviewMode, !isInDeck, DEFAULT) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, isReviewMode, !isInDeck, DEFAULT)
+                instanceof ClearCommand);
         // Throws ParseException if Clear command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ClearCommand.COMMAND_WORD), ()
             -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", isReviewMode, !isInDeck, DEFAULT));
@@ -77,7 +78,8 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         // Able to create ExitCommand by default
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, isReviewMode, isInDeck, DEFAULT) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, isReviewMode, isInDeck, DEFAULT)
+                instanceof ExitCommand);
         // Throws ParseException if Exit command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ExitCommand.COMMAND_WORD), ()
             -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", isReviewMode, isInDeck, DEFAULT));
@@ -104,7 +106,8 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         // Able to create HelpCommand by default
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, isReviewMode, isInDeck, DEFAULT) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, isReviewMode, isInDeck, DEFAULT)
+                instanceof HelpCommand);
         // Throws ParseException if Help command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, HelpCommand.COMMAND_WORD), ()
             -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", isReviewMode, isInDeck, DEFAULT));
@@ -113,7 +116,8 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         // Able to create ListCommand by default
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, isReviewMode, !isInDeck, DEFAULT) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, isReviewMode, !isInDeck, DEFAULT)
+                instanceof ListCommand);
         // Throws ParseException if List command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ListCommand.COMMAND_WORD), ()
             -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", isReviewMode, !isInDeck, DEFAULT));
