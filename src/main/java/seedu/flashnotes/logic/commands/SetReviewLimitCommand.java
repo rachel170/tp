@@ -17,7 +17,8 @@ public class SetReviewLimitCommand extends Command {
             + "be reviewed per session.\n"
             + "Parameters: NUMBER\n"
             + "Example: " + COMMAND_WORD + " 20";
-    public static final String MESSAGE_SUCCESS = "Review card limit successfully updated!";
+    public static final String MESSAGE_SUCCESS = "Review card limit successfully updated! "
+            + "Review limit is now %d.";
     public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
 
     private final Integer reviewCardLimit;
@@ -40,7 +41,8 @@ public class SetReviewLimitCommand extends Command {
         }
 
         model.setReviewCardLimit(reviewCardLimit);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        int newReviewLimit = model.getReviewCardLimit();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newReviewLimit));
     }
 
     @Override
