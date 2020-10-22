@@ -9,8 +9,7 @@ title: Developer Guide
 ## **Design**
 
 ### Architecture
-
-<img src="images/ArchitectureDiagram.png" width="450" />
+![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
@@ -18,7 +17,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -44,7 +43,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck Singapore`.
 
-<img src="images/ArchitectureSequenceDiagramUpdated.png" width="574" />
+![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagramUpdated.png)
 
 The sections below give more details of each component.
 
@@ -58,7 +57,7 @@ The sections below give more details of each component.
 The UI consists of a `MainWindow` which acts as a stage, and the `MainWindow` that references a `RootNode` to display the scene.
 The Root Node contains the scene, which is composed of UI parts like`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -70,11 +69,12 @@ The `UI` component,
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
 **API** :
-[`Model.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/ui/Model.java)
+[`Model.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/model/Model.java)
+
 The `model`,
 * Stores a `UserPref` Object that represents the user's preferences.
 * Stores the Flashnotes data
-* Exposes an unmodifiable `ObserbableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes. This list is to show cards in the card page of the Ui.
+* Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes. This list is to show cards in the card page of the Ui.
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
 * Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the home page of the Ui.
 * Does not depend on any of the other three components.
@@ -86,7 +86,7 @@ The `model`,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/flashnotes/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/logic/Logic.java)
 
 1. `Logic` uses the `FlashNotesParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -143,7 +143,7 @@ Step 1. The user launches the application for the first time. The `FlashNotes` w
 
 Step 2. The user executes `addDeck n/Deck1` command to add a new Deck in the FlashNotes. The `addDeck` command calls `Model#addDeck()`, which executes the command and saves it to `FlashNotes`.
 
-Step 3. The user is now able to see the new `Deck1` added. 
+Step 3. The user is now able to see the new `Deck1` added.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
 
@@ -177,14 +177,15 @@ The following general activity diagram summarizes what happens when a user execu
 
 ### Handle invalid inputs/commands
 #### Deck vs Card related commands
-* The system disables card-related commands (e.g. add, delete, edit, review, find) when user is at the home screen.
+* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the home screen.
 * The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
 * Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
 * The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
 
 #### Review related commands
 * The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
-* The parser (logic) keeps track of whether the user is currently doing a review, and disables certain commands if the user is currently in a review session.
+* Flashnotes also keeps track of whether the user is currently inside review mode.
+* The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
 
 #### Design considerations:
 * Alternative 1 (current choice): Checking of commands are done in the logic component.
@@ -193,7 +194,133 @@ The following general activity diagram summarizes what happens when a user execu
 * Alternative 2: Checking of commands are done in the model component.
     * Pros; Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
+
+### Review Mode 
+Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
+
+#### Implementation
+The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users type in commands)
+and result display box (where the application displays messages to the user). On top of that, there is also the Individual Flashcard section
+of the window that shows the question of 1 flashcard. When the "flip" command is executed, 
+the answer to that question will be showed instead.
+
+To support the opening of this review session, the following commands were added:
+* `review` - A command that sets up the list of flashcards to review and opens a new review window displaying those cards.
+
+The following is a sequence diagram that demonstrates how a review command sets up the review session:
+![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
+
+`ModelManager#shuffleReviewFlashcards` method sets up the list of flashcards to review inside `Model`.
+It duplicates the list of filtered flashcards in the model as of the moment that the review command was
+called, it then shuffles these cards using the `FXCollections.shuffle()` method, and it trims the list of
+flashcards to review according to the review limit set by users.
+
+#### Design considerations:
+* Alternative 1 (current choice): Open a new JavaFX window
+    * Pros: Differentiates the review mode from the other modes better visually, 
+    allows the UI for the review mode to be minimalistic, reducing distractions for users when reviewing their flashcards.
+    * Cons: We would have to create a new window with another command box and result display, and display
+    the main command box.
+* Alternative 2: Implement the review session in the same window as the rest of the application.
+    * Pros: Can use the same command box and result display so that we would not have to create new command boxes and result
+    display boxes and disable main command box. 
+    * Cons: The UI looks more cluttered and users might get distracted when reviewing their flashcards
+
+### Set Review Limit feature
+Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
+review session (review limit). 
+
+#### Implementation
+Users only have to set the review limit once and it will be saved as user preferences in a storage file. Users will
+then only need to use this feature again when they want to change the review limit again in the future.
+
+The initial value for the review limit is set to 0 in `preferences.json`, which tells the program that the user did not
+set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
+session. 
+
+The valid range of integer inputs for this command is any integer more than 1 however, as we thought it wouldn't 
+make sense on the user's end to set 0 or negative values as the review limit.
+
+The following is an activity diagram showing how the set review command is intended to be used
+when a user wants to use FlashNotes to review a deck of flashcards.
+
+![SetReviewLimitActivityDiagram](images/SetReviewLimitActivityDiagram.png)
+
+#### Design considerations:
+* Alternative 1 (current choice): Save review limit in the user preferences file.
+    * Pros: Users would not have to set review limit every time they start up the application.
+    * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in model.
+* Alternative 2: Save review limit internally in Model
+    * Pros: Do not have to write into a data file.
+    * Cons: Users would have to set review limit every time they start up the application.
+
+### Flip Card feature
+Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
+see the answer for the question on the flashcard.    
+
+#### Implementation
+Users only have to type the `flip` command to flip their flashcard. Users can flip the flashcard as many times as they
+would like to in the review mode.
+
+The initial value of `isFlipped` is set to false, so that the review mode is showing the question on the flashcard first.
+
+To support the flipping of flashcards, the following commands were added:
+* `flip` - A command that flips the flashcard being reviewed and displays the question or answer depending on the number
+ of times the card was flipped.
+
+The following is a sequence diagram that demonstrates how a flip command flips a card in the review session:
+![FlipCommandSequenceDiagram](images/FlipCommandSequenceDiagram.png)
+
+This feature is implemented by adding an isFlipped boolean in the `Model` of the `Flashcard`. To toggle this boolean,
+a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `FlipCommand#execute()` 
+when it is created from the `FlashNotesParser`.
+
+#### Design considerations:
+* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model
+    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been flipped in
+    the review mode.
+    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI
+    * Cons: Increases coupling
+* Alternative 2: Implement the boolean isFlipped in the UI part, IndividualFlashcard.
+    * Pros: No need for extra function calls as flipping is directly done in the UI
+    * Cons: Logic is being done in the UI section
+    * Cons: Hard to test using testcases. Have to manually test.
     
+### Next Card feature
+Our FlashNotes application allows users to go to the next card to review once they are done reviewing the current 
+flashcard.    
+
+#### Implementation
+Users only have to type the `c` or `w` command to see the next flashcard where `c` means that they managed to review
+the flashcard correctly and `w` means that they got the question wrong. These commands will only work after the user
+sees the answer of the flashcard currently being reviewed which is noted by whether the flashcard has been flipped or
+not. 
+
+The initial value of `isCorrect` is set to 0 to denote that the card has yet to be reviewed.
+
+To support the ability to go to the next flashcard in the review session, the following commands were added:
+* `c` - A command that goes to the next flashcard after marking the flashcard as correct.
+* `w` - A command that goes to the next flashcard after marking the flashcard as wrong and adding it back to the review
+        list.
+
+The following activity diagram summarizes what happens when a user executes a `c` or `w` command:
+![NextCommandActivityDiagram](images/NextCommandActivityDiagram.png)
+
+This feature is implemented by adding an isCorrect int in the `Model` of the `Flashcard`. To update this int,
+a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
+`CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
+
+#### Design considerations:
+* Alternative 1 (current choice): Change isCorrect int in the flashcard model
+    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been reviewed 
+    correctly by the user in the review mode.
+    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI
+    * Cons: Increases coupling
+* Alternative 2: Implement the int isCorrect in the UI part, IndividualFlashcard.
+    * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI
+    * Cons: Logic is being done in the UI section
+    * Cons: Hard to test using testcases. Have to manually test.
+
 ### Review Statistics feature
 
 #### Implementation
@@ -239,13 +366,13 @@ To provide the UI display and changes related to review statistics, the followin
 
 5. User enters `endReview` command to end the review session.
 
-6. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's jaon file with the new review session statistic for the deck.
+6. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
 
 ##### Corresponding sequence diagram for `endReview`:
 
 The following sequence diagram shows how the endReview command operation works:
 
-![EndReviewSequenceDiagram](../images/EndReviewSequenceDiagram.png)
+![EndReviewSequenceDiagram](images/EndReviewSequenceDiagram.png)
 
 #### Design consideration:
 
@@ -397,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at Step 2.
 
 ####**Use case: UC05 - Edit a card**
-#####Precondition: Must be inside the deck mode.
+#####Precondition: Must be inside the card mode.
 
 **MSS**
 
@@ -422,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User filters all cards belonging to a particular deck.
-1. Flashnotes shows a list of cards using the deck mode.
+1. Flashnotes shows a list of cards using the card mode.
 
     Use case ends.
 
@@ -505,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tag**: A note to group cards of a certain category together.
 * **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
 * **Review Mode**: a mode which displays cards from a deck individually in shuffled order.
-* **Deck Mode**: A mode which displays a list of cards
+* **Card Mode**: A mode which displays a list of cards
 * **Home Mode**: A mode which displays a list of decks
 
 --------------------------------------------------------------------------------------------------------------------
