@@ -13,6 +13,8 @@ import seedu.flashnotes.model.Model;
 public class CheckReviewLimitCommand extends Command {
     public static final String COMMAND_WORD = "checkReviewLimit";
     public static final String MESSAGE_SUCCESS = "Review card limit is %d!";
+    public static final String MESSAGE_SUCCESS_NO_LIMIT = "There is no review limit. "
+            + "You can review all the flashcards in your deck.";
 
 
     /**
@@ -23,7 +25,11 @@ public class CheckReviewLimitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        int reviewLimit = model.getReviewCardLimit();
+        Integer reviewLimit = model.getReviewCardLimit();
+
+        if (reviewLimit.equals(Integer.MAX_VALUE)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS_NO_LIMIT));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, reviewLimit));
     }
 

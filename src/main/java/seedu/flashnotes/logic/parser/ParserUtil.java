@@ -97,12 +97,16 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified integer is invalid (not greater than 0).
      */
-    public static Integer parseInteger(String integerString) throws ParseException {
-        String trimmedInteger = integerString.trim();
-        try {
-            return Integer.parseInt(trimmedInteger);
-        } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_LIMIT);
+    public static Integer parseReviewLimit(String integerString) throws ParseException {
+        String trimmedInteger = integerString.trim().toLowerCase();
+        if (trimmedInteger.equals("all")) {
+            return Integer.MAX_VALUE;
+        } else {
+            try {
+                return Integer.parseInt(trimmedInteger);
+            } catch (NumberFormatException e) {
+                throw new ParseException(MESSAGE_INVALID_LIMIT);
+            }
         }
     }
 
