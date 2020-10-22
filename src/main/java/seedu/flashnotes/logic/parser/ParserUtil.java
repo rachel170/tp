@@ -45,7 +45,7 @@ public class ParserUtil {
         requireNonNull(question);
         String trimmedQuestion = question.trim();
         if (!Question.isValidQuestion(trimmedQuestion)) {
-            throw new ParseException(Question.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Question.MESSAGE_CONSTRAINTS, question.length()));
         }
         return new Question(trimmedQuestion);
     }
@@ -60,7 +60,7 @@ public class ParserUtil {
         requireNonNull(answer);
         String trimmedAnswer = answer.trim();
         if (!Answer.isValidAnswer(trimmedAnswer)) {
-            throw new ParseException(Answer.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Answer.MESSAGE_CONSTRAINTS, answer.length()));
         }
         return new Answer(trimmedAnswer);
     }
