@@ -136,7 +136,7 @@ public class ReviewWindow extends UiPart<Stage> {
      */
     public void displayStatistics() {
         // Log
-        logger.fine("Showing statistics page of current review session.");
+        logger.info("Displaying statistics of current review session.");
         // Update IndividualFlashcard UI
         String message = this.individualFlashcard.displayStatistics();
         // Update resultDisplay
