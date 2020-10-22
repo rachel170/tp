@@ -4,27 +4,36 @@ import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_M
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_ADDCARD_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_EDITCARD_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_DELETECARD_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_CLEAR_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_FIND_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_LIST_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_ADDDECK_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_EXIT_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_ADDCARD_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_EDITCARD_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_DELETECARD_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_FIND_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_REVIEW_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_CORRECT_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_FLIP_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_HOME_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_WRONG_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.ILLEGAL_ENDREVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETECARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EXIT_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETECARD_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CORRECT_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CORRECT_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_DECK_MESSAGE;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -105,7 +114,7 @@ public class FlashNotesParser {
         case AddDeckCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
         case DeleteDeckCommand.COMMAND_WORD:
-            return parseIllegalCommandInReviewMode(commandWord);
+            return parseInvalidCommandInReviewMode(commandWord);
 
         case ReviewCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
@@ -130,43 +139,43 @@ public class FlashNotesParser {
         }
     }
 
-    private Command parseIllegalCommandInReviewMode(
+    private Command parseInvalidCommandInReviewMode(
             String commandWord) throws ParseException {
 
         switch (commandWord) {
 
         case AddCardCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_ADDCARD_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE);
 
         case EditCardCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_EDITCARD_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE);
 
         case DeleteCardCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_DELETECARD_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_DELETECARD_COMMAND_IN_REVIEW_MESSAGE);
 
         case ClearCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_CLEAR_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE);
 
         case FindCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_FIND_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE);
 
         case SetReviewLimitCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE);
 
         case EnterDeckCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE);
 
         case ListCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_LIST_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE);
 
         case AddDeckCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_ADDDECK_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE);
 
         case ExitCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_EXIT_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_EXIT_COMMAND_IN_REVIEW_MESSAGE);
 
         case DeleteDeckCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE);
+            throw new ParseException(INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE);
 
         default:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
@@ -186,7 +195,7 @@ public class FlashNotesParser {
         case HomeCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
-            return parseIllegalCommandInHomeMode(commandWord);
+            return parseInvalidCommandInHomeMode(commandWord);
 
         case AddDeckCommand.COMMAND_WORD:
             return new AddDeckCommandParser().parse(arguments.toLowerCase());
@@ -214,40 +223,40 @@ public class FlashNotesParser {
         }
     }
 
-    private Command parseIllegalCommandInHomeMode(
+    private Command parseInvalidCommandInHomeMode(
             String commandWord) throws ParseException {
 
         switch (commandWord) {
 
         case AddCardCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_ADDCARD_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE);
 
         case EditCardCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_EDITCARD_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE);
 
         case DeleteCardCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_DELETECARD_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_DELETECARD_COMMAND_IN_HOME_MESSAGE);
 
         case FindCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_FIND_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_FIND_COMMAND_IN_HOME_MESSAGE);
 
         case ReviewCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_REVIEW_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE);
 
         case CorrectCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_CORRECT_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_CORRECT_COMMAND_IN_HOME_MESSAGE);
 
         case FlipCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_FLIP_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_FLIP_COMMAND_IN_HOME_MESSAGE);
 
         case HomeCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_HOME_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_HOME_COMMAND_IN_HOME_MESSAGE);
 
         case WrongCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_WRONG_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_WRONG_COMMAND_IN_HOME_MESSAGE);
 
         case EndReviewCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_ENDREVIEW_COMMAND_IN_HOME_MESSAGE);
+            throw new ParseException(INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -266,7 +275,7 @@ public class FlashNotesParser {
         case ListCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
-            throw new ParseException(ILLEGAL_COMMAND_IN_CARD_MESSAGE);
+            return parseInvalidCommandInDeckMode(commandWord);
 
         case AddCardCommand.COMMAND_WORD:
             return new AddCardCommandParser().parse(arguments, deckName);
@@ -286,6 +295,34 @@ public class FlashNotesParser {
             return new ReviewCommand();
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+        }
+    }
+
+    private Command parseInvalidCommandInDeckMode(
+            String commandWord) throws ParseException {
+
+        switch (commandWord) {
+        case AddDeckCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE);
+        case ClearCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE);
+        case CorrectCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_CORRECT_COMMAND_IN_DECK_MESSAGE);
+        case DeleteDeckCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_DELETEDECK_COMMAND_IN_DECK_MESSAGE);
+        case EnterDeckCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE);
+        case FlipCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_FLIP_COMMAND_IN_DECK_MESSAGE);
+        case ListCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_LIST_COMMAND_IN_DECK_MESSAGE);
+        case EndReviewCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE);
+        case WrongCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_WRONG_COMMAND_IN_DECK_MESSAGE);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
