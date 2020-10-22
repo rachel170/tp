@@ -309,7 +309,7 @@ Format: `endReview`
 **A**: Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application. <br>
 **Q**: When I exit the program, will all my new flashcards and updates be saved? <br>
 **A**: Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To ensure none of your data is lost, do not delete the data folder. <br>
-**Q**: Is it possible to restore a deck that I just deleted?
+**Q**: Is it possible to restore a deck that I just deleted? <br>
 **A**: Sorry but no. There is no such functionality at this point in time. 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -333,9 +333,9 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add Card** | `Format: add q/QUESTION a/ANSWER `
-**Delete Card** | `delete INDEX`<br> e.g., `delete 3`
-**Edit Card** | `edit INDEX [q/QUESTION] [a/ANSWER]`<br> e.g.,`edit 2 q/What is the real question? a/This is a real question.`
+**Add Card** | `Format: addCard q/QUESTION a/ANSWER `
+**Delete Card** | `deleteCard INDEX`<br> e.g., `deleteCard 3`
+**Edit Card** | `editCard INDEX [q/QUESTION] [a/ANSWER]`<br> e.g.,`editCard 2 q/What is the real question? a/This is a real question.`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
 **Home** | `home`
