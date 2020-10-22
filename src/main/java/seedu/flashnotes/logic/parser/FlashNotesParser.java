@@ -42,8 +42,6 @@ public class FlashNotesParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private boolean isReviewMode = false;
-
     /**
      * Parses user input into command for execution.
      *
@@ -51,7 +49,8 @@ public class FlashNotesParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, boolean isInDeck, String deckName) throws ParseException {
+    public Command parseCommand(String userInput, boolean isReviewMode, boolean isInDeck, String deckName)
+            throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -123,8 +122,6 @@ public class FlashNotesParser {
                 // If arguments exist, throw ParseException
                 throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, EndReviewCommand.COMMAND_WORD));
             }
-            // Ending Review, set reviewMode to false
-            this.isReviewMode = false;
             return new EndReviewCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -245,12 +242,12 @@ public class FlashNotesParser {
             return new HomeCommandParser().parse(arguments);
 
         case ReviewCommand.COMMAND_WORD:
+
             // There should be no arguments for review command
             if (hasArguments(arguments)) {
                 // If arguments exist, throw ParseException
                 throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ReviewCommand.COMMAND_WORD));
             }
-            this.isReviewMode = true;
             return new ReviewCommand();
 
         case SetReviewLimitCommand.COMMAND_WORD:

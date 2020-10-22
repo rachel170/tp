@@ -37,28 +37,30 @@ public class FlashNotesParserTest {
 
     private final FlashNotesParser parser = new FlashNotesParser();
     private boolean isInDeck = true;
+    private boolean isReviewMode = false;
 
     @Test
     public void parseCommand_add() throws Exception {
         Flashcard flashcard = new FlashcardBuilder().build();
         AddCommand command = (AddCommand) parser
-                .parseCommand(FlashcardUtil.getAddCommand(flashcard), isInDeck, DEFAULT_TAG);
+                .parseCommand(FlashcardUtil.getAddCommand(flashcard), isReviewMode, isInDeck, DEFAULT_TAG);
         assertEquals(new AddCommand(flashcard), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
         // Clear command created by default
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, !isInDeck, DEFAULT) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, isReviewMode, !isInDeck, DEFAULT) instanceof ClearCommand);
         // Throws ParseException if Clear command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ClearCommand.COMMAND_WORD), ()
-            -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", !isInDeck, DEFAULT));
+            -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", isReviewMode, !isInDeck, DEFAULT));
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased(), isInDeck, DEFAULT);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_FLASHCARD.getOneBased(),
+                isReviewMode, isInDeck, DEFAULT);
         assertEquals(new DeleteCommand(INDEX_FIRST_FLASHCARD), command);
     }
 
@@ -68,18 +70,17 @@ public class FlashNotesParserTest {
         EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(flashcard).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FLASHCARD.getOneBased() + " "
-                + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor), isInDeck, DEFAULT);
+                + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor), isReviewMode, isInDeck, DEFAULT);
         assertEquals(new EditCommand(INDEX_FIRST_FLASHCARD, descriptor), command);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
         // Able to create ExitCommand by default
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD,
-                isInDeck, DEFAULT) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, isReviewMode, isInDeck, DEFAULT) instanceof ExitCommand);
         // Throws ParseException if Exit command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ExitCommand.COMMAND_WORD), ()
-            -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", !isInDeck, DEFAULT));
+            -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", isReviewMode, isInDeck, DEFAULT));
     }
 
     @Test
@@ -88,7 +89,7 @@ public class FlashNotesParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")),
-                isInDeck, DEFAULT);
+                isReviewMode, isInDeck, DEFAULT);
         assertEquals(new FindCommand(new QuestionContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -96,37 +97,37 @@ public class FlashNotesParserTest {
     public void parseCommand_enterTag() throws Exception {
         String keyword = "foo";
         EnterDeckCommand command = (EnterDeckCommand) parser.parseCommand(
-                EnterDeckCommand.COMMAND_WORD + " " + keyword, !isInDeck, DEFAULT);
+                EnterDeckCommand.COMMAND_WORD + " " + keyword, isReviewMode, !isInDeck, DEFAULT);
         assertEquals(new EnterDeckCommand(new TagContainsKeywordsPredicate(keyword)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         // Able to create HelpCommand by default
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, isInDeck, DEFAULT) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, isReviewMode, isInDeck, DEFAULT) instanceof HelpCommand);
         // Throws ParseException if Help command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, HelpCommand.COMMAND_WORD), ()
-            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", !isInDeck, DEFAULT));
+            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", isReviewMode, isInDeck, DEFAULT));
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         // Able to create ListCommand by default
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, !isInDeck, DEFAULT) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, isReviewMode, !isInDeck, DEFAULT) instanceof ListCommand);
         // Throws ParseException if List command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ListCommand.COMMAND_WORD), ()
-            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", !isInDeck, DEFAULT));
+            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", isReviewMode, !isInDeck, DEFAULT));
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", isInDeck, DEFAULT));
+            -> parser.parseCommand("", isReviewMode, isInDeck, DEFAULT));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
-            -> parser.parseCommand("unknownCommand", isInDeck, DEFAULT));
+            -> parser.parseCommand("unknownCommand", isReviewMode, isInDeck, DEFAULT));
     }
 }
