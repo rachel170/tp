@@ -2,29 +2,29 @@ package seedu.flashnotes.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_DELETECARD_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_EXIT_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_DELETECARD_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CORRECT_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETECARD_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETECARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EXIT_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.FlashcardBuilder.DEFAULT_TAG;
 import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
@@ -151,128 +151,128 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_addCardInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("addCard q/What? a/nothing", true, false, DEFAULT));
+            -> parser.parseCommand("addCard q/What? a/nothing", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_editCardInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("editCard 1", true, false, DEFAULT));
+            -> parser.parseCommand("editCard 1", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_deleteCardInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_DELETECARD_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("deleteCard 1", true, false, DEFAULT));
+            -> parser.parseCommand("deleteCard 1", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_clearInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("clear", true, false, DEFAULT));
+            -> parser.parseCommand("clear", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_findInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("find econs", true, false, DEFAULT));
+            -> parser.parseCommand("find econs", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_setReviewLimitInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("setReviewLimit 10", true, false, DEFAULT));
+            -> parser.parseCommand("setReviewLimit 10", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_enterDeckInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("enterDeck default", true, false, DEFAULT));
+            -> parser.parseCommand("enterDeck default", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_listInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("list", true, false, DEFAULT));
+            -> parser.parseCommand("list", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_addDeckInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("addDeck History", true, false, DEFAULT));
+            -> parser.parseCommand("addDeck History", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_exitInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_EXIT_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("exit", true, false, DEFAULT));
+            -> parser.parseCommand("exit", true, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_deleteDeckInReviewMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand("deleteDeck Economics", true, false, DEFAULT));
+            -> parser.parseCommand("deleteDeck Economics", true, false, DEFAULT));
     }
 
     // Invalid Commands in Home Screen
     @Test
     public void parseCommand_addCardInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("addCard q/What? a/nothing", false, false, DEFAULT));
+            -> parser.parseCommand("addCard q/What? a/nothing", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_editCardInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("editCard 1", false, false, DEFAULT));
+            -> parser.parseCommand("editCard 1", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_deleteCardInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_DELETECARD_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("deleteCard 1", false, false, DEFAULT));
+            -> parser.parseCommand("deleteCard 1", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_findInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_FIND_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("find economics", false, false, DEFAULT));
+            -> parser.parseCommand("find economics", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_reviewInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("review", false, false, DEFAULT));
+            -> parser.parseCommand("review", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_correctInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_CORRECT_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("c", false, false, DEFAULT));
+            -> parser.parseCommand("c", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_flipInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_FLIP_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("flip", false, false, DEFAULT));
+            -> parser.parseCommand("flip", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_homeInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_HOME_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("home", false, false, DEFAULT));
+            -> parser.parseCommand("home", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_wrongInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_WRONG_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("w", false, false, DEFAULT));
+            -> parser.parseCommand("w", false, false, DEFAULT));
     }
 
     @Test
     public void parseCommand_endReviewInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE, ()
-                -> parser.parseCommand("endReview", false, false, DEFAULT));
+            -> parser.parseCommand("endReview", false, false, DEFAULT));
     }
 
 }
