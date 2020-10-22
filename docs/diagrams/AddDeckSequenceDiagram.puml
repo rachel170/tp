@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FlashNotesParser" as FlashNotesParser LOGIC_COLOR
+participant "u:AddDeckCommand" as AddDeckCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FlashNotes" as FlashNotes MODEL_COLOR
+end box
+[-> LogicManager : execute(addDeck n/Deck1)
+activate LogicManager
+
+LogicManager -> FlashNotesParser : parseCommand(addDeck n/Deck 1)
+activate FlashNotesParser
+
+create AddDeckCommand
+FlashNotesParser -> AddDeckCommand
+activate AddDeckCommand
+
+AddDeckCommand --> FlashNotesParser
+deactivate AddDeckCommand
+
+FlashNotesParser --> LogicManager : u
+deactivate FlashNotesParser
+
+LogicManager -> AddDeckCommand : execute()
+activate AddDeckCommand
+
+AddDeckCommand -> Model : addDeck(Deck1)
+activate Model
+
+Model -> FlashNotes : addDeck(Deck1)
+activate FlashNotes
+
+FlashNotes -> FlashNotes :addDeck(ReadOnlyFlashNotes)
+FlashNotes --> Model :
+deactivate FlashNotes
+
+Model --> AddDeckCommand
+deactivate Model
+
+AddDeckCommand --> LogicManager : result
+deactivate AddDeckCommand
+AddDeckCommand -[hidden]-> LogicManager : result
+destroy AddDeckCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

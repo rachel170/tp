@@ -1,0 +1,31 @@
+@startuml
+start
+:User inputs valid command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([flashcard is flipped])
+    if () then ([isCorrect == true])
+    :Mark isCorrect in
+    Flashcard to true;
+    :Increase Progress bar
+    shown in Review Mode;
+    :Display next flashcard
+      on review screen;
+    else ([else])
+        :Mark isCorrect in
+         Flashcard to false;
+        :Add flashcard back
+           to review list;
+        :Display next flashcard
+          on review screen;
+    endif
+else ([else])
+    :Displays error message
+    in Result Display;
+
+endif
+
+stop
+@enduml
