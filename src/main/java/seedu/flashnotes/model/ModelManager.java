@@ -228,7 +228,22 @@ public class ModelManager implements Model {
         filteredFlashcards.setPredicate(predicate);
     }
 
-    //=========== Shuffled Flashcard List Operations =============================================================
+    //=========== Review Operations =============================================================
+
+    @Override
+    public boolean getIsReviewMode() {
+        return flashNotes.getIsReviewMode();
+    }
+
+    @Override
+    public void setIsReviewModeTrue() {
+        flashNotes.setIsReviewModeTrue();
+    }
+
+    @Override
+    public void setIsReviewModeFalse() {
+        flashNotes.setIsReviewModeFalse();
+    }
 
     /**
      * Shuffles and trims the list of flashcards to review.
