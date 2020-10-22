@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<?import java.net.URL?>
+<?import javafx.scene.image.Image?>
+<fx:root resizable="false" title="Review" minWidth="500" minHeight="300" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/review_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+            <VBox>
+                <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                </StackPane>
+
+                <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                           minHeight="100" prefHeight="100" maxHeight="100">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                </StackPane>
+
+                <StackPane VBox.vgrow="NEVER" fx:id="individualFlashcardPlaceholder" styleClass="pane-with-border"
+                           minHeight="200" prefHeight="100" maxHeight="400">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                </StackPane>
+
+                <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

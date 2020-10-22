@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -22,23 +23,29 @@ class JsonSerializableFlashNotes {
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "Flashcards list contains duplicate flashcard(s).";
 
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
+    private final List<JsonAdaptedDeck> decks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableFlashNotes} with the given flashcards.
      */
     @JsonCreator
-    public JsonSerializableFlashNotes(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards) {
+    public JsonSerializableFlashNotes(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards,
+                                      @JsonProperty("decks") List<JsonAdaptedDeck> decks) {
         this.flashcards.addAll(flashcards);
+        this.decks.addAll(decks);
     }
+
 
     /**
      * Converts a given {@code ReadOnlyFlashNotes} into this class for Jackson use.
-     *
+     * Converts a given {@code UniqueDeckList} into this class for Jackson use.
      * @param source future changes to this will not affect the created {@code JsonSerializableFlashNotes}.
      */
-    public JsonSerializableFlashNotes(ReadOnlyFlashNotes source) {
+    public JsonSerializableFlashNotes(ReadOnlyFlashNotes source, UniqueDeckList deckList) {
         flashcards.addAll(source.getFlashcardList().stream()
                 .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
+        decks.addAll(deckList.asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedDeck::new).collect(Collectors.toList()));
     }
 
     /**
@@ -55,7 +62,15 @@ class JsonSerializableFlashNotes {
             }
             flashNotes.addFlashcard(flashcard);
         }
-        return flashNotes;
+        FlashNotes deckOrganizedFlashNotes = new FlashNotes(flashNotes);
+
+        // For each deck info read
+        for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
+            // Update the model with the statistics read from file (if any)
+            jsonAdaptedDeck.updateModel(deckOrganizedFlashNotes);
+        }
+
+        return deckOrganizedFlashNotes;
     }
 
 }

@@ -3,7 +3,9 @@ package seedu.flashnotes.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.flashnotes.commons.core.Messages;
+import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
 
@@ -11,26 +13,35 @@ import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
  * Finds and lists all flashcards in flashnotes which has tags matching any of the argument keywords.
  * Keyword matching is case sensitive.
  */
-public class ListTagsCommand extends Command {
+public class EnterDeckCommand extends Command {
 
-    public static final String COMMAND_WORD = "listTags";
+    public static final String COMMAND_WORD = "enterDeck";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists the flashcards that contain the keywords\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + ": Lists the flashcards that belong to specified deck\n"
+            + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " Singapore";
+
+    public static final String MESSAGE_DECK_NOT_FOUND = "Deck does not exist in flashnotes";
 
 
     private final TagContainsKeywordsPredicate predicate;
 
-    public ListTagsCommand(TagContainsKeywordsPredicate predicate) {
+    public EnterDeckCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.hasDeck(new Deck(predicate.getKeyword()))) {
+            throw new CommandException(MESSAGE_DECK_NOT_FOUND);
+        }
+
         model.updateFilteredFlashcardList(predicate);
+        model.setIsInDeckTrue();
+        model.setCurrentDeckName(predicate.getKeyword());
         return new CommandResult(
                 String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
     }
@@ -38,7 +49,7 @@ public class ListTagsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ListTagsCommand // instanceof handles nulls
-                && predicate.equals(((ListTagsCommand) other).predicate)); // state check
+                || (other instanceof EnterDeckCommand // instanceof handles nulls
+                && predicate.equals(((EnterDeckCommand) other).predicate)); // state check
     }
 }

@@ -48,17 +48,11 @@ User Guide:
 5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
 
    * **`list`** : list all card
-   
    * **`add`**`q/What is a question? a/Something that elicits thought.`: create new card
-   
    * **`delete`**`3` : Deletes the 3rd card shown in the current list.
-   
    * **`clear`** : Deletes all contacts.
-   
    * **`find`**`question`: Returns all cards with description matching question.
-   
    * **`exit`** : Exits the app.
-   
 ---
 
 ## Features
@@ -90,7 +84,7 @@ Examples:
 * **`find`**`Business` returns `Business Management`
 * **`find`**`conflict resolution` returns `Handling Conflict` and `Resolution`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-  
+
 ---
 
 ## FAQ
@@ -257,21 +251,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Flashnotes shows a list of cards
 3.  User requests to delete a specific card in the list
 4.  Flashnotes deletes the card
-
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
   Use case ends.
-
 * 3a. The given index is invalid.
-
     * 3a1. Flashnotes shows an error message.
-
       Use case resumes at step 2.
-      
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
