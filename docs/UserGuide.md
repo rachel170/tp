@@ -5,8 +5,39 @@ title: User Guide
 
 FlashNotes is a **desktop app for flashcards**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Flashnotes can help you create word-based flashcards faster than traditional GUI apps.
 
-* Table of Contents
+Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for.
+
+This User Guide will help you find out how FlashNotes is able to help you study more efficiently using flashcards and how to use it. Let's get started.
+
+--------------------------------------------------------------------------------------------------------------------
+
+<details markdown="block">
+- Table of Contents
 {:toc}
+</details>
+
+--------------------------------------------------------------------------------------------------------------------
+## Overview
+
+When studying for any topics, you typically organize your notes by topics or the subjects.
+
+You also want to be able to pull up information regarding those topics closer to examination date and review those topics.
+
+If necessary, you may need to review it multiple times in order to track your progress and understanding. However, you don't want to have to manually update a spreadsheet everytime you review your content.
+
+Is studying with flashcards starting to seem like a massive chore already? Fret not, FlashNotes is here to help you!
+
+### Understanding the 3 different modes:
+
+Available Modes | Functionality involved | Real Life Representation
+--------|------------------ | ------
+**Main Mode** | Holds the list of currently stored decks, which contains the list of cards internally. | Topics or Subjects of interest.
+**Card Mode** | Holds the list of cards from the selected deck, or the list of all cards currently available. | Sub-questions and content knowledge.
+**Review Mode** | Reads all cards from the card mode. It allows cards to be flipped and enables you to mark them correct or wrong. | Revision session.
+
+This is a basic overview of what FlashNotes can do for you, but there are more features such as editing decks and cards.
+
+Ready to dominate exams season? Let's get down to work.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,15 +49,14 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data and the `Command Box` has been identified with the red box. The box is where you can issue all your commands in FlashNotes.<br>
+   ![Main Mode](images/mainmode.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
-   * **`list`** : list all card
 
-   * **`addDeck`**`n/Economics `: create new empty Deck named Economics
+   * **`addDeck`**`n/Economics `: create new empty Deck named Economics.
 
-   * **`deleteDeck`**`Singapore` : Deletes the existing Deck named Singapore and all cards inside it.
+   * **`list`** : list all cards by going inside card mode.
 
    * **`clear`** : Deletes all cards.
 
@@ -36,18 +66,20 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
    * **`exit`** : Exits the app.
 
+1. After executing each command, a success or failure message will be displayed in the region highlighted in the image below. This will help you to know if you have successfully executed relevant commands, it will also provide additional information on why the command failed, if you provide the correct command prefixes. <br>
+    ![Main Mode](images/resultDisplay.png)
 
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Explanation of Command Formats used in features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `addCard q/QUESTION`, `QUESTION` is a parameter which can be used as `add q/What is the question?`.
 
 * Parameters can be in any order.<br>
@@ -56,31 +88,34 @@ FlashNotes is a **desktop app for flashcards**, optimized for use via a Command 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Main Mode (Home Screen)
+## Main Mode Features
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Quick Summary of Main Mode:**<br>
 
 * Main Mode primarily allows management of flashcard decks.
-* In order to manage flashcards directly, need to enter card mode.
+* In order to manage flashcards directly, you will need to enter card mode using the `enterDeck` Command.
 </div>
 
 ### Find all flashcards within the deck : `enterDeck`
 
-Lists flashcards within the given deck.
+Lists flashcards within your chosen deck.
 
 Format: `enterDeck [DECKNAME]`
 
 * The search is case-sensitive. e.g. `GET1025` will not match `get1025`
-* only full words will be matched e.g. `GE` will not match `GET1025`
+* **only full words will** be matched e.g. `GE` will not match `GET1025`
 * Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
 
 Examples:
 * `enterDeck Singapore` return cards with Tags `Singapore`
 
+Outcome expected:
+![EnterDeck](images/cardmode.png)
+
 ### Create a new Deck : `addDeck`
 
-Lists flashcards within the given deck.
+Lists flashcards within your chosen deck.
 
 Format: `addDeck n/DECKNAME`
 
@@ -89,6 +124,9 @@ Format: `addDeck n/DECKNAME`
 
 Examples:
 * `addDeck Singapore` creates an empty deck called `Singapore`.
+
+Outcome Expected:
+- Success message displayed is: `New Deck added: Singapore`
 
 ### Rename a new Deck : `editDeck`
 
@@ -104,10 +142,12 @@ Format: `editDeck INDEX n/NEWDECKNAME`
 Examples:
 * `editDeck 1 History` will change the name of the deck at index `1` to `History`.
 
+Outcome Expected:
+- `to be added`
 
 ### Delete a new Deck : `deleteDeck`
 
-Deletes the deck and all the cards in the deck.
+Deletes the deck and all the associated cards in your specified deck.
 
 Format: `deleteDeck DECKNAME`
 
@@ -117,25 +157,33 @@ Format: `deleteDeck DECKNAME`
 Example:
 * `deleteDeck Singapore` will delete the deck and all its corresponding cards.
 
+Outcome Expected:
+- Success message displayed is: `Deleted deck: Singapore`
 
-### Listing all flashcards : `list`
+### List all flashcards : `list`
 
 Shows a list of all flashcards.
 
 Format: `list`
 
+Outcome Expected:
+- Success message displayed is: `Inside Deck. 9 flashcards listed! Listed all flashcards`
+
 * Any cards added while in the list mode will be added to the `Default` deck.
 
-### Clearing all entries : `clear`
+### Clear all entries : `clear`
 
 Clears all decks and flashcards from the program.
 
 Format: `clear`
 
+Outcome Expected:
+- Success message displayed is: `Flash Notes has been cleared!`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Card Mode (List of Cards)
+## Card Mode Features
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Quick Summary of Card Mode:**<br>
@@ -152,6 +200,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+Outcome Expected:
+- Success message displayed is: `Opened help window.`
+- Help Window pop up with the link to user guide.
 
 ### Adding a flashcard : `addCard`
 
@@ -162,6 +213,8 @@ Format: `addCard n/QUESTION a/ANSWER`
 Examples:
 * `addCard q/When did Singapore gain independence? a/9th August 1965`
 
+Outcome Expected:
+- Success message displayed is: `New flashcard added: Question: When did Singapore gain independence? Answer: 9th August 1965 Tag: Singapore.`
 
 ### Editing a flashcard : `editCard`
 
@@ -176,6 +229,9 @@ Format: `editCard INDEX [q/QUESTION] [a/ANSWER]`
 Examples:
 *  `editCard 2 a/Lee Kuan Yew` Edits the answer of the 2nd flashcard to be `Lee Kuan Yew`
 
+Outcome Expected:
+- Success message displayed is: `Edited flashcard: Question: When did Singapore gain independence? Answer: LKY Tag: Singapore.`
+
 ### Finding flashcards : `find`
 
 Finds flashcards which contain any of the given keywords.
@@ -183,7 +239,7 @@ Finds flashcards which contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `test` will match `Test`
-* Only full words will be matched e.g. `Art` will not match `Artifact`
+* **Only full words will** be matched e.g. `Art` will not match `Artifact`
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 Examples:
@@ -191,6 +247,8 @@ Examples:
 * `find Business` returns `Business Management`
 * `find conflict resolution` returns `Handling Conflict` and `Resolution`
 
+Outcome Expected:
+- Success message displayed is: `3 flashcards found`
 
 ### Deleting a flashcard : `deleteCard`
 
@@ -206,7 +264,10 @@ Examples:
 * `list` followed by `deleteCard 2` deletes the 2nd flashcard from the flashcard deck.
 * `find English` followed by `deleteCard 1` deletes the 1st flashcard shown in the results of the `find` command.
 
-### Setting card limit for review session : `setReviewLimit`
+Outcome Expected:
+- Success message displayed is: `Deleted Flashcard: Question: When did Singapore gain independence? Answer: 9th August 1965 Tag: Singapore.`
+
+### Set card limit for review session : `setReviewLimit`
 
 Sets the maximum number of cards that can be reviewed in a single review session.
 
@@ -215,12 +276,16 @@ Format: `setReviewLimit REVIEW_LIMIT`
 * `REVIEW_LIMIT` can be an integer greater than 0
 * `REVIEW_LIMIT` can be the string `all`. (case sensitive)
 * This review card limit applies to all decks once it is set. 
-* This review card limit is remembered by the program. (User does not have to set the card limit 
+* This review card limit is remembered by the program. (You do not have to set the card limit 
 again after he/she closes and reopens the application)
 
 Examples:
 * `setReviewLimit 20` sets a limit of 20 cards per review session.
-* `setReviewLimitall` removes the card limit and lets user review all cards in the deck.
+* `setReviewLimitall` removes the card limit and lets you review all cards in the deck.
+
+
+Outcome Expected:
+- Success message displayed is: `Review card limit successfully updated!`
 
 ### Return to Main Mode : `home`
 
@@ -228,11 +293,18 @@ Return to Main mode with list of decks.
 
 Format: `home`
 
+Outcome Expected:
+
+![Main Mode](images/mainmode-wo-redbox.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+Outcome Expected:
+- Program closes down and saves all current data.
 
 ### Saving the data
 
@@ -240,27 +312,32 @@ FlashNotes saves data to the hard disk automatically after any command that chan
 
 ### Opens the review mode: `review`
 
-Opens the review mode to display cards one by one so that users can review them.
+Opens the review mode to display cards one by one so that you can review them.
 
 Format: `review`
+
+Outcome Expected:
+
+![Review Window](images/reviewmode.png)
 
 * This command is only valid in the card mode.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Review Mode
+## Review Mode Features
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Quick Summary of Review Mode:**<br>
 
 * Review Mode primarily allows active flashcards to be used for revision.
-* It also provides relevant statistics if the review session was fully completed.
+* It also provides relevant statistics upon completion of review session.
+* Enter Review mode by calling `review` command in card mode.
 </div>
 
 
 ### Flip a flashcard: `flip`
 
-Flips the flashcard which is being reviewed so that the user can view the answer to the question.
+Flips the flashcard which is being reviewed so that you can view the answer to the question.
 
 Format: `flip`
 
@@ -269,6 +346,9 @@ Format: `flip`
 Examples:
 * `flip` returns `The sea is blue because water absorbs colors in the red part of the light spectrum` 
  which is the answer to the question `Why is the sea blue?`.
+
+Outcome Expected:
+- Success message displayed is: `Flipping Flashcard as requested ...`
 
 ### Mark a flashcard as correct: `c`
 
@@ -281,6 +361,9 @@ Format: `c`
 Examples:
 * `c` returns next card in deck if any.
 
+Outcome Expected:
+- Success message displayed is: `Marking Flashcard as correct as requested ...`
+
 ### Mark a flashcard as wrong: `w`
 
 Marks the flashcard that is being reviewed as wrong and proceeds to show the next flashcard.
@@ -292,12 +375,17 @@ Format: `w`
 Examples:
 * `w` returns next card in deck if any.
 
+Outcome Expected:
+- Success message displayed is: `Marking Flashcard as wrong as requested ...`
 
 ### End current review session: `endReview`
 
 Ends the current review session and shows review statistics.
 
 Format: `endReview`
+
+Outcome Expected:
+- Review Window is closed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -311,6 +399,7 @@ Format: `endReview`
 **A**: Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To ensure none of your data is lost, do not delete the data folder. <br>
 **Q**: Is it possible to restore a deck that I just deleted? <br>
 **A**: Sorry but no. There is no such functionality at this point in time. 
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -327,7 +416,6 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
-**List** | `list`
 
 ### Card Mode
 
@@ -339,6 +427,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
 **Home** | `home`
+**Start Review** | `review`
+**Set Review Limit** | `setReviewLimit LIMIT` <br> e.g., `setReviewLimit 30`
 
 ### Review Mode
 
