@@ -21,6 +21,7 @@ public class DeleteDeckCommand extends Command {
     private final Deck deck;
 
     public DeleteDeckCommand(Deck deck) {
+        requireNonNull(deck);
         this.deck = deck;
     }
 
@@ -34,5 +35,12 @@ public class DeleteDeckCommand extends Command {
 
         model.deleteDeck(deck);
         return new CommandResult(String.format(MESSAGE_DELETE_DECK_SUCCESS, deck.getDeckName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteDeckCommand // instanceof handles nulls
+                && deck.equals(((DeleteDeckCommand) other).deck)); // state check
     }
 }

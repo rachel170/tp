@@ -28,6 +28,7 @@ public class EnterDeckCommand extends Command {
     private final TagContainsKeywordsPredicate predicate;
 
     public EnterDeckCommand(TagContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

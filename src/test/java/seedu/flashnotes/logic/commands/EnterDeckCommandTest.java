@@ -26,6 +26,11 @@ public class EnterDeckCommandTest {
     private Model expectedModel = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
 
     @Test
+    public void constructor_nullFlashcard_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new EnterDeckCommand(null));
+    }
+
+    @Test
     public void equals() {
         TagContainsKeywordsPredicate firstPredicate =
                 new TagContainsKeywordsPredicate("first");
