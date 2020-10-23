@@ -64,10 +64,10 @@ public class FlashNotesParser {
         }
 
         if (!isInDeck) {
-            assert !this.isReviewMode : "Program should not be in review mode";
+            //assert !this.isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
-            assert !this.isReviewMode : "Program should not be in review mode";
+            //assert !this.isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
         }
     }
