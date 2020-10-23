@@ -1,52 +1,58 @@
 package seedu.flashnotes.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.flashnotes.commons.core.GuiSettings;
-import seedu.flashnotes.logic.commands.exceptions.CommandException;
+import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.ReadOnlyUserPrefs;
 import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
+import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
+import seedu.flashnotes.model.flashcard.Question;
+import seedu.flashnotes.model.tag.Tag;
 
-public class DeleteDeckCommandTest {
+
+public class EditDeckNameCommandTest {
+    private static final String NAME = "Singapore";
+    private static final String NEW_NAME = "Malaysia";
+    private static final String QUESTION = "Testq";
+    private static final String ANSWER = "Testa";
 
     @Test
     public void constructor_nullFlashcard_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteDeckCommand(null));
+        assertThrows(NullPointerException.class, () -> new EditDeckNameCommand(null, null));
     }
 
     @Test
-    public void execute_deckAcceptedByModel_deleteSuccessful() throws Exception {
-        Deck deck = new Deck("Singapore");
-        ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck);
-        assertEquals(1, modelStub.decks.size());
-        CommandResult commandResult = new DeleteDeckCommand(deck).execute(modelStub);
+    public void execute_editDeck_editSuccessful() throws Exception {
+        Deck deck = new Deck(NAME);
+        Flashcard flashcard = new Flashcard(new Question(QUESTION),
+                new Answer(ANSWER), new Tag(NAME));
+        Deck expectedDeck = new Deck(NEW_NAME);
+        Flashcard expectedFlashcard = new Flashcard(new Question(QUESTION),
+                new Answer(ANSWER), new Tag(NEW_NAME));
+        ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck, flashcard);
+        ModelStubWithFlashcardAndDeck expectedModelStub =
+                new ModelStubWithFlashcardAndDeck(expectedDeck, expectedFlashcard);
 
-        assertEquals(String.format(DeleteDeckCommand.MESSAGE_DELETE_DECK_SUCCESS,
-                deck.getDeckName()), commandResult.getFeedbackToUser());
-        assertEquals(0, modelStub.decks.size());
-    }
+        CommandResult commandResult = new EditDeckNameCommand(Index.fromZeroBased(0), new Deck(NEW_NAME))
+                .execute(modelStub);
+        assertEquals(String.format(EditDeckNameCommand.MESSAGE_SUCCESS, NEW_NAME), commandResult.getFeedbackToUser());
+        assertEquals(expectedModelStub.flashcards, modelStub.newFlashcards);
+        assertEquals(expectedModelStub.decks, modelStub.decks);
 
-    @Test
-    public void execute_deleteDeck_deckNotFound() throws Exception {
-        Deck deck = new Deck("Singapore");
-        ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck);
-        DeleteDeckCommand command = new DeleteDeckCommand(new Deck("Malaysia"));
 
-        assertThrows(CommandException.class,
-                DeleteDeckCommand.MESSAGE_DECK_NOT_FOUND, () -> command.execute(modelStub));
     }
 
     private class ModelStub implements Model {
@@ -227,16 +233,18 @@ public class DeleteDeckCommandTest {
     }
 
     private class ModelStubWithFlashcardAndDeck extends ModelStub {
-        final ArrayList<Deck> decks = new ArrayList<>();
+        final ObservableList<Deck> decks = FXCollections.observableArrayList();
+        final ObservableList<Flashcard> flashcards = FXCollections.observableArrayList();
+        final ObservableList<Flashcard> newFlashcards = FXCollections.observableArrayList();
 
-        ModelStubWithFlashcardAndDeck(Deck deck) {
+        ModelStubWithFlashcardAndDeck(Deck deck, Flashcard flashcard) {
             decks.add(deck);
+            flashcards.add(flashcard);
         }
 
         @Override
-        public void deleteDeck(Deck deck) {
-            requireNonNull(deck);
-            decks.remove(deck);
+        public ObservableList<Deck> getFilteredDeckList() {
+            return decks;
         }
 
         @Override
@@ -244,6 +252,26 @@ public class DeleteDeckCommandTest {
             return decks.contains(deck);
         }
 
+        @Override
+        public void setDeck(Deck original, Deck newDeck) {
+            int index = decks.indexOf(original);
+            decks.set(index, newDeck);
+        }
 
+        @Override
+        public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+
+        }
+
+        @Override
+        public ObservableList<Flashcard> getFilteredFlashcardList() {
+            return flashcards;
+        }
+
+        @Override
+        public void setFlashcard(Flashcard original, Flashcard newCard) {
+            newFlashcards.add(newCard);
+            flashcards.remove(original);
+        }
     }
 }

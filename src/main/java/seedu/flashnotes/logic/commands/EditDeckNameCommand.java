@@ -96,4 +96,12 @@ public class EditDeckNameCommand extends Command {
 
         return new Flashcard(question, answer, editedTag);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindCommand // instanceof handles nulls
+                && index.equals(((EditDeckNameCommand) other).index))
+                && newDeck.equals(((EditDeckNameCommand) other).newDeck); // state check
+    }
 }
