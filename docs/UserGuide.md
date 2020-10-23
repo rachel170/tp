@@ -104,7 +104,7 @@ Lists flashcards within your chosen deck.
 Format: `enterDeck [DECKNAME]`
 
 * The search is case-sensitive. e.g. `GET1025` will not match `get1025`
-* only full words will be matched e.g. `GE` will not match `GET1025`
+* **only full words will** be matched e.g. `GE` will not match `GET1025`
 * Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
 
 Examples:
@@ -160,7 +160,7 @@ Example:
 Outcome Expected:
 - Success message displayed is: `Deleted deck: Singapore`
 
-### Listing all flashcards : `list`
+### List all flashcards : `list`
 
 Shows a list of all flashcards.
 
@@ -171,7 +171,7 @@ Outcome Expected:
 
 * Any cards added while in the list mode will be added to the `Default` deck.
 
-### Clearing all entries : `clear`
+### Clear all entries : `clear`
 
 Clears all decks and flashcards from the program.
 
@@ -183,7 +183,7 @@ Outcome Expected:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Card Mode Features
+## Card Mode Features
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Quick Summary of Card Mode:**<br>
@@ -239,7 +239,7 @@ Finds flashcards which contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `test` will match `Test`
-* Only full words will be matched e.g. `Art` will not match `Artifact`
+* **Only full words will** be matched e.g. `Art` will not match `Artifact`
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 Examples:
@@ -267,7 +267,7 @@ Examples:
 Outcome Expected:
 - Success message displayed is: `Deleted Flashcard: Question: When did Singapore gain independence? Answer: 9th August 1965 Tag: Singapore.`
 
-### Setting card limit for review session : `setReviewLimit`
+### Set card limit for review session : `setReviewLimit`
 
 Sets the maximum number of cards that can be reviewed in a single review session.
 
@@ -329,7 +329,8 @@ Outcome Expected:
 **:information_source: Quick Summary of Review Mode:**<br>
 
 * Review Mode primarily allows active flashcards to be used for revision.
-* It also provides relevant statistics if the review session was fully completed.
+* It also provides relevant statistics upon completion of review session.
+* Enter Review mode by calling `review` command in card mode.
 </div>
 
 
