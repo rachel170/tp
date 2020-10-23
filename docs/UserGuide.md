@@ -317,6 +317,7 @@ Opens the review mode to display cards one by one so that you can review them.
 Format: `review`
 
 Outcome Expected:
+
 ![Review Window](images/reviewmode.png)
 
 * This command is only valid in the card mode.
