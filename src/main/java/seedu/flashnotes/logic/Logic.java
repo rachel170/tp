@@ -78,4 +78,9 @@ public interface Logic {
      * @param reviewScore Integer value of user's review session score.
      */
     void updateDeckPerformanceScore(Integer reviewScore);
+
+    /**
+     * Turn off review mode.
+     */
+    void setIsReviewModeFalse();
 }
