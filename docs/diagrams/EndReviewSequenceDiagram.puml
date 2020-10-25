@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+box UI UI_COLOR_T1
+Participant ":UI" as ui UI_COLOR
+Participant ":ReviewWindow" as review UI_COLOR
+Participant ":FlashCardList" as cardView UI_COLOR
+end box
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+user -[USER_COLOR]> ui : "endReview"
+activate ui UI_COLOR
+
+ui -[USER_COLOR]> review : executeCommand("endReview")
+activate review UI_COLOR
+
+review -[UI_COLOR]> logic : execute("endReview")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> storage : saveFlashNotes(flashNotes, decks)
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR_T1
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+
+storage --[STORAGE_COLOR]> logic
+deactivate storage
+
+logic -[LOGIC_COLOR]-> review
+deactivate logic
+
+review -[UI_COLOR]> review: handleExit()
+activate review UI_COLOR_T2
+
+review -[UI_COLOR]> cardView **
+activate cardView UI_COLOR
+
+note left of review
+""handleExit()"" sets a
+new FlashCardListRoot
+object for the primaryStage
+to display, returning to
+the view of the deck.
+end note
+
+cardView -[UI_COLOR]-> review
+deactivate cardView
+
+review --[UI_COLOR]> review
+deactivate review
+
+review --[UI_COLOR]> ui
+deactivate review
+
+ui--[UI_COLOR]> user
+deactivate ui
+
+destroy review
+@enduml

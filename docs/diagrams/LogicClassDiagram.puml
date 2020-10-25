@@ -5,10 +5,9 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
-
 package Parser {
 Interface Parser <<Interface>>
-Class AddressBookParser
+Class FlashNotesParser
 Class XYZCommandParser
 Class CliSyntax
 Class ParserUtil
@@ -35,8 +34,8 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .up.|> Logic
-LogicManager -->"1" AddressBookParser
-AddressBookParser .left.> XYZCommandParser: creates >
+LogicManager -->"1" FlashNotesParser
+FlashNotesParser .left.> XYZCommandParser: creates >
 
 XYZCommandParser ..> XYZCommand : creates >
 XYZCommandParser ..|> Parser

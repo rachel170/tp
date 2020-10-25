@@ -116,7 +116,6 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteDeck(Deck target) {
-        //todo delete deck - PX
         flashNotes.removeDeck(target);
         updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
     }
@@ -131,7 +130,6 @@ public class ModelManager implements Model {
     @Override
     public void setDeck(Deck target, Deck editedDeck) {
         flashNotes.setDeck(target, editedDeck);
-
     }
 
     @Override
@@ -272,7 +270,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Flashcard> getFlashcardsToReview() {
-        System.out.println("getter " + flashcardsToReview);
         return flashcardsToReview;
     }
 

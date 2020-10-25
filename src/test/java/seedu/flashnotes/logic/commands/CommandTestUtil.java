@@ -3,6 +3,7 @@ package seedu.flashnotes.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
@@ -38,7 +39,10 @@ public class CommandTestUtil {
     public static final String ANSWER_DESC_MACROECONS = " " + PREFIX_ANSWER + VALID_ANSWER_MACROECONS;
     public static final String TAG_DESC_ECONOMICS = " " + PREFIX_TAG + VALID_TAG_ECONOMICS;
     public static final String TAG_DESC_NATURE = " " + PREFIX_TAG + VALID_TAG_NATURE;
+    public static final String DECK_DESC_ECONOMICS = " " + PREFIX_DECK_NAME + VALID_TAG_ECONOMICS;
+    public static final String DECK_DESC_NATURE = " " + PREFIX_DECK_NAME + VALID_TAG_NATURE;
     public static final String TAG_DESC_DEFAULT = " " + PREFIX_TAG + VALID_TAG_DEFAULT;
+
 
     public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // question cannot be blank
     public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + ""; // answer cannot be blank

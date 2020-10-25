@@ -189,8 +189,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      */
     public void setDeck(Deck target, Deck editedDeck) {
         requireNonNull(editedDeck);
-
         decks.setDeck(target, editedDeck);
+        //TODO update the flashcards if there are existing flashcardsun
     }
 
     /**
@@ -275,8 +275,6 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     @Override
     public ObservableList<Deck> getDeckList() {
-        //todo read the tags and update
-        //todo change when we have decklist implementation up
         return decks.asUnmodifiableObservableList();
     }
 

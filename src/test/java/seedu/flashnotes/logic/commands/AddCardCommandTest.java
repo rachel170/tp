@@ -177,17 +177,17 @@ public class AddCardCommandTest {
 
         @Override
         public void deleteDeck(Deck target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addDeck(Deck deck) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setDeck(Deck target, Deck editedDeck) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -197,17 +197,17 @@ public class AddCardCommandTest {
 
         @Override
         public void setIsInDeckTrue() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setIsInDeckFalse() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setCurrentDeckName(String deckName) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -222,7 +222,7 @@ public class AddCardCommandTest {
 
         @Override
         public void updateFilteredDeckList(Predicate<Deck> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -322,6 +322,10 @@ public class AddCardCommandTest {
             flashcardsAdded.add(flashcard);
         }
 
+        @Override
+        public void addDeck(Deck deck) {
+            requireNonNull(deck);
+        }
         @Override
         public ReadOnlyFlashNotes getFlashNotes() {
             return new FlashNotes();

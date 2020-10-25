@@ -17,6 +17,7 @@ public class DeleteCardCommandParser implements Parser<DeleteCardCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCardCommand parse(String args) throws ParseException {
+        assert args != null;
         try {
             Index index = ParserUtil.parseIndex(args);
             return new DeleteCardCommand(index);

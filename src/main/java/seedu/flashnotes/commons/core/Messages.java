@@ -11,10 +11,12 @@ public class Messages {
     public static final String MESSAGE_ALREADY_IN_REVIEW_MODE = "You are already in review mode.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The flashcard index provided is invalid";
+    public static final String MESSAGE_INVALID_COMMAND_IN_HOME = "Cannot call command in home screen.";
+    public static final String MESSAGE_INVALID_COMMAND_IN_CARD = "Cannot call command in card screen.";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "Inside Deck. %1$d flashcards listed!";
     public static final String MESSAGE_DECK_OVERVIEW = "Back Home.";
 
-    // Messages for illegal commands used in home screen
+    // Messages for invalid commands used in home screen
     public static final String INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE = "You cannot add a flashcard in the home"
             + " screen. Enter a deck by using the command `enterDeck n/DECKNAME` first.";
     public static final String INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE = "You cannot edit a flashcard in the home"
@@ -39,7 +41,7 @@ public class Messages {
             + "in the home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first and then enter "
             + "the review mode with the command `review`.";
 
-    // Messages for illegal commands used in review mode
+    // Messages for invalid commands used in review mode
     public static final String INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE = "You cannot add a flashcard in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE = "You cannot edit a flashcard in the"
@@ -63,7 +65,7 @@ public class Messages {
     public static final String INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE = "You cannot delete a deck in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
 
-    // Messages for illegal commands used in deck screen
+    // Messages for invalid commands used in deck screen
     public static final String INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE = "You cannot add a deck in the"
             + " deck screen. Exit deck mode by using the command `home` first.";
     public static final String INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE = "You cannot clear decks in the"
@@ -82,5 +84,7 @@ public class Messages {
             + "in the deck screen. Enter the review mode with the command `review`.";
     public static final String INVALID_WRONG_COMMAND_IN_DECK_MESSAGE = "You cannot mark a flashcard as wrong "
             + "in the deck screen. Enter the review mode with the command `review`.";
-
+    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
+    public static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
+            + "'add q/QUESTION a/ANSWER' first.";
 }
