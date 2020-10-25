@@ -344,8 +344,6 @@ Additionally, the following operations have been implemented to support this fea
 * UI component:
     * `IndividualFlashcard#displayStatistics()` - Calculates the user's review session's score, updates the model with the generated statistics and set display of the end of the review session.
 
-`Model` interface depends on  `Flashnotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` to support functionality of `Model#updateDeckPerformanceScore(Integer reviewScore, String deckName)` that `FlashNotes` implements. Similarly, `Logic` interface depends on  `Model#updateDeckPerformanceScore(Integer reviewScore, String deckName)` to support functionality of `LogicManager#updateDeckPerformanceScore(Integer reviewScore)` that implements it.
-
 Further more, the following operations have been adjusted to support the feature:
 * `Storage#saveFlashNotes(ReaOnlyFlashNotes flashNotes)` - This operation, and all methods dependent on it, has been expanded to accept an additional parameter `UniqueDeckList decklist` to facilitate the saving of the deck data in FlashNotes.
 * `FlashNotes#resetData(ReadOnlyFlashNotes newData)` - This operation has been adjusted to include the recreation of the FlashNotes model's deck data read from Storage.

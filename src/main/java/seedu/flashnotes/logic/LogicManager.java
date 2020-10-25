@@ -118,4 +118,12 @@ public class LogicManager implements Logic {
     public void updateDeckPerformanceScore(Integer reviewScore) {
         model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
     }
+
+    /**
+     * Turn off review mode.
+     */
+    @Override
+    public void setIsReviewModeFalse() {
+        model.setIsReviewModeFalse();
+    }
 }
