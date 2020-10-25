@@ -51,7 +51,6 @@ public class FlashNotesParser {
      */
     public Command parseCommand(String userInput, boolean isReviewMode, boolean isInDeck, String deckName)
             throws ParseException {
-        assert !(isReviewMode && isInDeck) : "Program cannot be in review mode and card mode at the same time";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
