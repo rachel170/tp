@@ -61,15 +61,15 @@ public class FlashNotesParser {
 
 
         if (isReviewMode) {
-            assert isInDeck : "Program should be in card mode before entering review mode";
+            //assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
         if (!isInDeck) {
-            assert !isReviewMode : "Program should not be in review mode";
+            //assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
-            assert !isReviewMode : "Program should not be in review mode";
+            //assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
         }
     }
