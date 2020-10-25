@@ -235,6 +235,21 @@ public class AddDeckCommandTest {
         public UniqueDeckList getUniqueDeckList() {
             throw new AssertionError("This method should not be called.");
         }
+        
+        @Override
+        public void setIsReviewModeFalse() {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        @Override
+        public void setIsReviewModeTrue() {
+            throw new AssertionError("This method should not be called.");
+        }
+        
+        @Override
+        public boolean getIsReviewMode() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
