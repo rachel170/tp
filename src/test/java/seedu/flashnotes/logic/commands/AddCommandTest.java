@@ -220,6 +220,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getIsReviewMode() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIsReviewModeFalse() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIsReviewModeTrue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Integer getReviewCardLimit() {
             throw new AssertionError("This method should not be called.");
         }

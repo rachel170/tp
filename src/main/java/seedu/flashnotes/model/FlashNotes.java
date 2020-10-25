@@ -20,6 +20,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     private final UniqueFlashcardList flashcards;
     private final UniqueDeckList decks;
+    private boolean isReviewMode;
     private boolean isInDeck;
     private String currentDeckName;
 
@@ -33,6 +34,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     {
         flashcards = new UniqueFlashcardList();
         decks = new UniqueDeckList();
+        isReviewMode = false;
         isInDeck = false;
         currentDeckName = null;
     }
@@ -242,6 +244,19 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     /** Returns the unique deck list */
     public UniqueDeckList getUniqueDeckList() {
         return decks;
+    }
+
+    //// Review methods
+    public boolean getIsReviewMode() {
+        return isReviewMode;
+    }
+
+    public void setIsReviewModeTrue() {
+        isReviewMode = true;
+    }
+
+    public void setIsReviewModeFalse() {
+        isReviewMode = false;
     }
 
     //// util methods
