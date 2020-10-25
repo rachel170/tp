@@ -25,11 +25,11 @@ import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.FlashcardBuilder;
 
-public class AddCommandTest {
+public class AddCardCommandTest {
 
     @Test
     public void constructor_nullFlashcard_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCardCommand(null));
     }
 
     @Test
@@ -37,34 +37,34 @@ public class AddCommandTest {
         ModelStubAcceptingFlashcardAdded modelStub = new ModelStubAcceptingFlashcardAdded();
         Flashcard validFlashcard = new FlashcardBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validFlashcard).execute(modelStub);
+        CommandResult commandResult = new AddCardCommand(validFlashcard).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validFlashcard), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCardCommand.MESSAGE_SUCCESS, validFlashcard), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validFlashcard), modelStub.flashcardsAdded);
     }
 
     @Test
     public void execute_duplicateFlashcard_throwsCommandException() {
         Flashcard validFlashcard = new FlashcardBuilder().build();
-        AddCommand addCommand = new AddCommand(validFlashcard);
+        AddCardCommand addCardCommand = new AddCardCommand(validFlashcard);
         ModelStub modelStub = new ModelStubWithFlashcard(validFlashcard);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_FLASHCARD, () -> addCommand.execute(modelStub));
+                AddCardCommand.MESSAGE_DUPLICATE_FLASHCARD, () -> addCardCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Flashcard alice = new FlashcardBuilder().withQuestion("Why?").build();
         Flashcard bob = new FlashcardBuilder().withQuestion("How?").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddCardCommand addAliceCommand = new AddCardCommand(alice);
+        AddCardCommand addBobCommand = new AddCardCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddCardCommand addAliceCommandCopy = new AddCardCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -140,6 +140,37 @@ public class AddCommandTest {
         public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFlashcardBeingReviewed(int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetFlipOfFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Flashcard getFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsFlashcardFlipped() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void carryOutFlipCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markFlashcardBeingReviewed(Flashcard flashcard, int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean hasDeck(Deck deck) {
             return false;
         }

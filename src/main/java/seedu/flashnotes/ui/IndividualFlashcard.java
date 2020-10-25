@@ -18,8 +18,8 @@ public class IndividualFlashcard extends UiPart<Region> {
     private ObservableList<Flashcard> flashcardsToReview;
     private int index;
     private double count;
-    private boolean flipped;
     private int numOfFlashcards;
+    private Flashcard flashcardToDisplay;
 
     // Count of number of questions gotten right the first time
     private int correctAnswers;
@@ -57,7 +57,7 @@ public class IndividualFlashcard extends UiPart<Region> {
      * Displays the flashcard in the GUI
      */
     public void displayFlashcard() {
-        Flashcard flashcardToDisplay = this.flashcardsToReview.get(this.index);
+        flashcardToDisplay = this.flashcardsToReview.get(this.index);
         question.setText("Question: " + flashcardToDisplay.getQuestion().question);
         answer.setText("Answer: " + flashcardToDisplay.getAnswer().value);
         question.setVisible(true);
@@ -94,14 +94,27 @@ public class IndividualFlashcard extends UiPart<Region> {
      * Flips the flashcard to show the answer/question
      */
     public void flipFlashcard() {
-        this.flipped = !flipped;
-        if (flipped) {
-            question.setVisible(false);
-            answer.setVisible(true);
+        if (flashcardToDisplay.getIsFlipped()) {
+            showAnswer();
         } else {
-            question.setVisible(true);
-            answer.setVisible(false);
+            showQuestion();
         }
+    }
+
+    /**
+     * Makes question visible while hiding the answer
+     */
+    public void showQuestion() {
+        question.setVisible(true);
+        answer.setVisible(false);
+    }
+
+    /**
+     * Makes answer visible while hiding question
+     */
+    public void showAnswer() {
+        question.setVisible(false);
+        answer.setVisible(true);
     }
 
     /**
@@ -109,7 +122,7 @@ public class IndividualFlashcard extends UiPart<Region> {
      * @return boolean
      */
     public boolean isCardFlipped() {
-        return this.flipped;
+        return flashcardToDisplay.getIsFlipped();
     }
 
     /**
@@ -139,7 +152,6 @@ public class IndividualFlashcard extends UiPart<Region> {
         if (count == numOfFlashcards) {
             return "exit";
         } else {
-            this.flipped = false;
             displayFlashcard();
             return Double.toString(count / numOfFlashcards);
         }

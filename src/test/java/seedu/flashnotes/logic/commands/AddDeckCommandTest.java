@@ -137,6 +137,37 @@ public class AddDeckCommandTest {
         public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFlashcardBeingReviewed(int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetFlipOfFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Flashcard getFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsFlashcardFlipped() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void carryOutFlipCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markFlashcardBeingReviewed(Flashcard flashcard, int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean hasDeck(Deck deck) {
             return false;
         }

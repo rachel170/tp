@@ -48,6 +48,9 @@ public interface Logic {
      */
     ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
 
+    /** Reset flashcard being reviewed back to false */
+    public void resetFlipOfFlashcardBeingReviewed();
+
     /**
      * Returns the user prefs' flashnotes file path.
      */

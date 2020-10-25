@@ -6,7 +6,7 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 
 import java.util.stream.Stream;
 
-import seedu.flashnotes.logic.commands.AddCommand;
+import seedu.flashnotes.logic.commands.AddCardCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
@@ -16,14 +16,14 @@ import seedu.flashnotes.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class AddCardCommandParser implements Parser<AddCardCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args, String deckName) throws ParseException {
+    public AddCardCommand parse(String args, String deckName) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER);
         String additionalMessage = "";
@@ -31,7 +31,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         assert deckName != null;
         if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ANSWER)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCardCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getCountValue(PREFIX_QUESTION).get() > 1) {
@@ -48,13 +48,13 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Flashcard flashcard = new Flashcard(question, answer, tag);
 
-        AddCommand addCommand = new AddCommand(flashcard);
-        addCommand.setAdditionalMessage(additionalMessage);
-        return addCommand;
+        AddCardCommand addCardCommand = new AddCardCommand(flashcard);
+        addCardCommand.setAdditionalMessage(additionalMessage);
+        return addCardCommand;
     }
 
     @Override
-    public AddCommand parse(String userInput) throws ParseException {
+    public AddCardCommand parse(String userInput) throws ParseException {
         return parse(userInput, "Default");
     }
 

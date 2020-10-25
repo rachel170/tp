@@ -81,6 +81,11 @@ public class LogicManager implements Logic {
         return model.addFlashcardToReview(flashcard);
     }
 
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        model.resetFlipOfFlashcardBeingReviewed();
+    }
+
     public ObservableList<Deck> getFilteredCardDeckList() {
         return model.getFilteredDeckList();
     };

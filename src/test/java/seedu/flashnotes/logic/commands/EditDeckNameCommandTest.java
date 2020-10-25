@@ -116,43 +116,73 @@ public class EditDeckNameCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFlashcardBeingReviewed(int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetFlipOfFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsFlashcardFlipped() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Flashcard getFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void carryOutFlipCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markFlashcardBeingReviewed(Flashcard flashcard, int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean hasDeck(Deck deck) {
             return false;
         }
 
         @Override
         public void deleteDeck(Deck target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addDeck(Deck deck) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setDeck(Deck target, Deck editedDeck) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean getIsInDeck() {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setIsInDeckTrue() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setIsInDeckFalse() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setCurrentDeckName(String deckName) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

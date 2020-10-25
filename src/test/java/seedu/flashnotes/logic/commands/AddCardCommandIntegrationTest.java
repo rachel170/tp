@@ -17,7 +17,7 @@ import seedu.flashnotes.testutil.FlashcardBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddCardCommandIntegrationTest {
 
     private Model model;
 
@@ -32,16 +32,16 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.addFlashcard(validFlashcard);
-        expectedModel.addDeck(new Deck("Singapore"));
+        expectedModel.addDeck(new Deck("singapore"));
 
-        assertCommandSuccess(new AddCommand(validFlashcard), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validFlashcard), expectedModel);
+        assertCommandSuccess(new AddCardCommand(validFlashcard), model,
+                String.format(AddCardCommand.MESSAGE_SUCCESS, validFlashcard), expectedModel);
     }
 
     @Test
     public void execute_duplicateFlashcard_throwsCommandException() {
         Flashcard flashcardInList = model.getFlashNotes().getFlashcardList().get(0);
-        assertCommandFailure(new AddCommand(flashcardInList), model, AddCommand.MESSAGE_DUPLICATE_FLASHCARD);
+        assertCommandFailure(new AddCardCommand(flashcardInList), model, AddCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
 
 }
