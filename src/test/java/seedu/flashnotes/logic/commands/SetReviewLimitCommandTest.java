@@ -31,7 +31,6 @@ public class SetReviewLimitCommandTest {
         ModelManager expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.setReviewCardLimit(validLimit);
         //TODO check failure reason
-        
         //assertCommandSuccess(setReviewLimitCommand, model, expectedMessage, expectedModel);
     }
 
