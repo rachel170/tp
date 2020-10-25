@@ -277,7 +277,6 @@ public class AddDeckCommandTest {
             requireNonNull(deck);
             return decksAdded.stream().anyMatch(deck::isSameDeck);
         }
-        
         @Override
         public void addDeck(Deck deck) {
             requireNonNull(deck);
