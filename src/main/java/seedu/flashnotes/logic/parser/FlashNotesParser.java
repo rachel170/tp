@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 import seedu.flashnotes.logic.commands.AddCommand;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.commands.CheckReviewLimitCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.CorrectCommand;
@@ -60,6 +61,7 @@ public class FlashNotesParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         if (isReviewMode) {
             //assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
@@ -85,6 +87,7 @@ public class FlashNotesParser {
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
+        case CheckReviewLimitCommand.COMMAND_WORD:
         case AddCommand.COMMAND_WORD:
         case EditDeckNameCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD:
@@ -199,6 +202,11 @@ public class FlashNotesParser {
 
         case EditDeckNameCommand.COMMAND_WORD:
             return new EditDeckNameCommandParser().parse(arguments);
+        case SetReviewLimitCommand.COMMAND_WORD:
+            return new SetReviewLimitCommandParser().parse(arguments);
+
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            return new CheckReviewLimitCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -250,17 +258,17 @@ public class FlashNotesParser {
             return new HomeCommandParser().parse(arguments);
 
         case ReviewCommand.COMMAND_WORD:
-
             // There should be no arguments for review command
             if (hasArguments(arguments)) {
                 // If arguments exist, throw ParseException
                 throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ReviewCommand.COMMAND_WORD));
             }
-
             return new ReviewCommand();
 
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            return new CheckReviewLimitCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

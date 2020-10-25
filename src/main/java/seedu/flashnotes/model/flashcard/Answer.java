@@ -9,9 +9,9 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
  */
 public class Answer {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Answers should not be blank";
+            "Answers should not be blank and should be fewer than 140 characters. "
+                + "Current length of answer is %d.";
     public final String value;
 
     /**
@@ -29,7 +29,7 @@ public class Answer {
      * Returns true if a given string is a valid answer.
      */
     public static boolean isValidAnswer(String test) {
-        return !test.isBlank();
+        return !test.isBlank() && test.length() <= 140;
     }
 
     @Override
