@@ -205,6 +205,7 @@ public class FlashNotesParserTest {
         AddCommand command = (AddCommand) parser
                 .parseCommand(FlashcardUtil.getAddCommand(flashcard), isNotReviewMode, isInDeck, DEFAULT_TAG);
         assertEquals(new AddCommand(flashcard), command);
+    }
 
     @Test
     public void parseCommand_clear() throws Exception {
