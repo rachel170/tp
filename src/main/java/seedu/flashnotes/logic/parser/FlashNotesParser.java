@@ -31,6 +31,7 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_SETREVIEWLIMIT_COMM
 import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_CARD;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_EXTENDED_COMMAND_ERROR;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_HOME;
@@ -42,12 +43,14 @@ import java.util.regex.Pattern;
 
 import seedu.flashnotes.logic.commands.AddCardCommand;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.commands.CheckReviewLimitCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.CorrectCommand;
 import seedu.flashnotes.logic.commands.DeleteCardCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
 import seedu.flashnotes.logic.commands.EditCardCommand;
+import seedu.flashnotes.logic.commands.EditDeckNameCommand;
 import seedu.flashnotes.logic.commands.EndReviewCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
@@ -88,6 +91,7 @@ public class FlashNotesParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         if (isReviewMode) {
             //assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
@@ -117,6 +121,8 @@ public class FlashNotesParser {
         case ExitCommand.COMMAND_WORD:
         case DeleteDeckCommand.COMMAND_WORD:
             return parseInvalidCommandInReviewMode(commandWord);
+        case CheckReviewLimitCommand.COMMAND_WORD:
+        case EditDeckNameCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
@@ -269,6 +275,14 @@ public class FlashNotesParser {
             }
             return new ClearCommand();
 
+        case EditDeckNameCommand.COMMAND_WORD:
+            return new EditDeckNameCommandParser().parse(arguments);
+        case SetReviewLimitCommand.COMMAND_WORD:
+            return new SetReviewLimitCommandParser().parse(arguments);
+
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            return new CheckReviewLimitCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -327,6 +341,8 @@ public class FlashNotesParser {
         case EndReviewCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
             return parseInvalidCommandInDeckMode(commandWord);
+        case EditDeckNameCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_INVALID_COMMAND_IN_CARD);
 
         case AddCardCommand.COMMAND_WORD:
             return new AddCardCommandParser().parse(arguments, deckName);
@@ -358,17 +374,17 @@ public class FlashNotesParser {
             return new HomeCommandParser().parse(arguments);
 
         case ReviewCommand.COMMAND_WORD:
-
             // There should be no arguments for review command
             if (hasArguments(arguments)) {
                 // If arguments exist, throw ParseException
                 throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ReviewCommand.COMMAND_WORD));
             }
-
             return new ReviewCommand();
 
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            return new CheckReviewLimitCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -68,13 +68,16 @@ public class EditCardCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_QUESTION_DESC, Question.MESSAGE_CONSTRAINTS); // invalid question
-        assertParseFailure(parser, "1" + INVALID_ANSWER_DESC, Answer.MESSAGE_CONSTRAINTS); // invalid answer
+        assertParseFailure(parser, "1" + INVALID_QUESTION_DESC,
+                String.format(Question.MESSAGE_CONSTRAINTS, 0)); // invalid question
+        assertParseFailure(parser, "1" + INVALID_ANSWER_DESC,
+                String.format(Answer.MESSAGE_CONSTRAINTS, 0)); // invalid answer
 
 
         /// valid answer followed by invalid answer. The test case for invalid answer followed by valid answer
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + ANSWER_DESC_MACROECONS + INVALID_ANSWER_DESC, Answer.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ANSWER_DESC_MACROECONS + INVALID_ANSWER_DESC,
+                String.format(Answer.MESSAGE_CONSTRAINTS, 0));
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Flashcard} being edited,
         // parsing it together with a valid tag results in error

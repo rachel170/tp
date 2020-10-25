@@ -2,10 +2,6 @@ package seedu.flashnotes.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.commons.util.StringUtil;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
@@ -45,7 +41,7 @@ public class ParserUtil {
         requireNonNull(question);
         String trimmedQuestion = question.trim();
         if (!Question.isValidQuestion(trimmedQuestion)) {
-            throw new ParseException(Question.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Question.MESSAGE_CONSTRAINTS, question.length()));
         }
         return new Question(trimmedQuestion);
     }
@@ -60,7 +56,7 @@ public class ParserUtil {
         requireNonNull(answer);
         String trimmedAnswer = answer.trim();
         if (!Answer.isValidAnswer(trimmedAnswer)) {
-            throw new ParseException(Answer.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Answer.MESSAGE_CONSTRAINTS, answer.length()));
         }
         return new Answer(trimmedAnswer);
     }
@@ -80,29 +76,22 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
 
     /**
      * Parses integer and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified integer is invalid (not greater than 0).
      */
-    public static Integer parseInteger(String integerString) throws ParseException {
-        String trimmedInteger = integerString.trim();
-        try {
-            return Integer.parseInt(trimmedInteger);
-        } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_LIMIT);
+    public static Integer parseReviewLimit(String integerString) throws ParseException {
+        String trimmedInteger = integerString.trim().toLowerCase();
+        if (trimmedInteger.equals("all")) {
+            return Integer.MAX_VALUE;
+        } else {
+            try {
+                return Integer.parseInt(trimmedInteger);
+            } catch (NumberFormatException e) {
+                throw new ParseException(MESSAGE_INVALID_LIMIT);
+            }
         }
     }
 
@@ -116,7 +105,7 @@ public class ParserUtil {
         requireNonNull(deckName);
         String trimmedDeckName = deckName.trim();
         if (!Deck.isValidDeck(trimmedDeckName)) {
-            throw new ParseException(Deck.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS, deckName.length()));
         }
         return new Deck(trimmedDeckName);
     }

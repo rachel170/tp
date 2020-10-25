@@ -19,7 +19,6 @@ public class ReviewCommand extends Command {
     private static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
             + "'add q/QUESTION a/ANSWER' first.";
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         boolean isReviewListEmpty = model.getFilteredFlashcardList().size() == 0;

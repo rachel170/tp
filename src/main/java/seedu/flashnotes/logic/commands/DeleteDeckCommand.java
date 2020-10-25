@@ -20,7 +20,12 @@ public class DeleteDeckCommand extends Command {
 
     private final Deck deck;
 
+
+    /**
+     * Creates a delete deck command that deletes the specified deck and all cards in the deck.
+     */
     public DeleteDeckCommand(Deck deck) {
+        requireNonNull(deck);
         this.deck = deck;
     }
 
