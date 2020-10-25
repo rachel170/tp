@@ -3,7 +3,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-
+/**
+ * Deck is the tag which is given to every card.
+ */
 public class Deck {
     public static final String MESSAGE_CONSTRAINTS =
             "DeckName should not be blank";
@@ -32,10 +34,12 @@ public class Deck {
     }
 
     public void setDeckName(String deckName) {
+        requireNonNull(deckName);
         this.deckName = deckName;
     }
 
     public void setResultStatistics(String resultStatistics) {
+        requireNonNull(resultStatistics);
         this.resultStatistics = resultStatistics;
     }
 
@@ -56,7 +60,6 @@ public class Deck {
 
         return otherDeck != null
                 && otherDeck.getDeckName().equals(getDeckName());
-        //&& (otherDeck.getResultStatistics().equals(getResultStatistics()));
     }
     @Override
     public boolean equals(Object o) {
@@ -67,11 +70,11 @@ public class Deck {
             return false;
         }
         Deck deck = (Deck) o;
-        return Objects.equals(deckName, deck.deckName); //&& Objects.equals(resultStatistics, deck.resultStatistics);
+        return Objects.equals(deckName, deck.deckName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deckName); //, resultStatistics);
+        return Objects.hash(deckName);
     }
 }

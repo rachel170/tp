@@ -129,7 +129,6 @@ public class ModelManager implements Model {
     @Override
     public void setDeck(Deck target, Deck editedDeck) {
         flashNotes.setDeck(target, editedDeck);
-
     }
 
     @Override
@@ -228,7 +227,22 @@ public class ModelManager implements Model {
         filteredFlashcards.setPredicate(predicate);
     }
 
-    //=========== Shuffled Flashcard List Operations =============================================================
+    //=========== Review Operations =============================================================
+
+    @Override
+    public boolean getIsReviewMode() {
+        return flashNotes.getIsReviewMode();
+    }
+
+    @Override
+    public void setIsReviewModeTrue() {
+        flashNotes.setIsReviewModeTrue();
+    }
+
+    @Override
+    public void setIsReviewModeFalse() {
+        flashNotes.setIsReviewModeFalse();
+    }
 
     /**
      * Shuffles and trims the list of flashcards to review.
@@ -255,7 +269,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Flashcard> getFlashcardsToReview() {
-        System.out.println("getter " + flashcardsToReview);
         return flashcardsToReview;
     }
 
