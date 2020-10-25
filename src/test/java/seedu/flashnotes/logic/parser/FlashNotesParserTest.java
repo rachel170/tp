@@ -204,6 +204,7 @@ public class FlashNotesParserTest {
         AddCommand command = (AddCommand) parser
                 .parseCommand(FlashcardUtil.getAddCommand(flashcard), isNotReviewMode, isInDeck, DEFAULT_TAG);
         assertEquals(new AddCommand(flashcard), command);
+
     }
 
     @Test
@@ -221,6 +222,7 @@ public class FlashNotesParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FLASHCARD.getOneBased() + " "
                 + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor), isNotReviewMode, isInDeck, DEFAULT);
+
         assertEquals(new EditCommand(INDEX_FIRST_FLASHCARD, descriptor), command);
     }
 
@@ -228,6 +230,7 @@ public class FlashNotesParserTest {
     public void inDeck_exit_success() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD,
                 isNotReviewMode, isInDeck, DEFAULT) instanceof ExitCommand);
+
     }
 
     @Test
@@ -472,11 +475,13 @@ public class FlashNotesParserTest {
     public void inReview_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand("", isReviewMode, isNotInDeck, DEFAULT));
+
     }
 
     @Test
     public void inReview_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
             -> parser.parseCommand("unknownCommand", isReviewMode, isNotInDeck, DEFAULT));
+
     }
 }

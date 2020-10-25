@@ -1,5 +1,4 @@
 package seedu.flashnotes.logic.commands;
-
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_NO_CARDS_TO_REVIEW;
 
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
@@ -16,7 +15,6 @@ public class ReviewCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_REVIEW_MESSAGE = "Opened review window.";
-
 
 
     @Override
