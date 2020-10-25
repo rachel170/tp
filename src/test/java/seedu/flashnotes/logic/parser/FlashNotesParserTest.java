@@ -25,7 +25,6 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_HOM
 import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
@@ -35,7 +34,6 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HO
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_EXTENDED_COMMAND_ERROR;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_CARD;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_HOME;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -50,12 +48,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.flashnotes.logic.commands.AddCardCommand;
-import seedu.flashnotes.logic.commands.ClearCommand;
-import seedu.flashnotes.logic.commands.DeleteCardCommand;
-import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.CorrectCommand;
+import seedu.flashnotes.logic.commands.DeleteCardCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.logic.commands.EndReviewCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
