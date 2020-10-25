@@ -20,7 +20,7 @@ public class SetReviewLimitCommandTest {
 
     @Test
     public void execute_validLimit_success() {
-        Integer validLimit = new Integer(20);
+        Integer validLimit = 20;
         SetReviewLimitCommand setReviewLimitCommand = new SetReviewLimitCommand(validLimit);
 
         String expectedMessage = SetReviewLimitCommand.MESSAGE_SUCCESS;
@@ -33,7 +33,7 @@ public class SetReviewLimitCommandTest {
 
     @Test
     public void execute_invalidLimit_throwsCommandException() {
-        Integer invalidLimit = new Integer(0);
+        Integer invalidLimit = 0;
         SetReviewLimitCommand setReviewLimitCommand = new SetReviewLimitCommand(invalidLimit);
 
         //TODO check failure reason
