@@ -1,17 +1,18 @@
 package seedu.flashnotes.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.flashnotes.commons.core.GuiSettings;
+import seedu.flashnotes.commons.core.Messages;
+import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
@@ -20,19 +21,16 @@ import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
+
 public class DeleteDeckCommandTest {
 
-    @Test
-    public void constructor_nullFlashcard_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteDeckCommand(null));
-    }
 
     @Test
     public void execute_deckAcceptedByModel_deleteSuccessful() throws Exception {
         Deck deck = new Deck("Singapore");
         ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck);
         assertEquals(1, modelStub.decks.size());
-        CommandResult commandResult = new DeleteDeckCommand(deck).execute(modelStub);
+        CommandResult commandResult = new DeleteDeckCommand(Index.fromZeroBased(0)).execute(modelStub);
 
         assertEquals(String.format(DeleteDeckCommand.MESSAGE_DELETE_DECK_SUCCESS,
                 deck.getDeckName()), commandResult.getFeedbackToUser());
@@ -43,10 +41,10 @@ public class DeleteDeckCommandTest {
     public void execute_deleteDeck_deckNotFound() throws Exception {
         Deck deck = new Deck("Singapore");
         ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck);
-        DeleteDeckCommand command = new DeleteDeckCommand(new Deck("Malaysia"));
+        DeleteDeckCommand command = new DeleteDeckCommand(Index.fromZeroBased(1));
 
         assertThrows(CommandException.class,
-                DeleteDeckCommand.MESSAGE_DECK_NOT_FOUND, () -> command.execute(modelStub));
+                Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX, () -> command.execute(modelStub));
     }
 
     private class ModelStub implements Model {
@@ -145,7 +143,7 @@ public class DeleteDeckCommandTest {
         }
 
         @Override
-        public void deleteDeck(Deck target) {
+        public void deleteDeck(Deck target){
 
         }
 
@@ -257,7 +255,7 @@ public class DeleteDeckCommandTest {
     }
 
     private class ModelStubWithFlashcardAndDeck extends ModelStub {
-        final ArrayList<Deck> decks = new ArrayList<>();
+        final ObservableList<Deck> decks = FXCollections.observableArrayList();
 
         ModelStubWithFlashcardAndDeck(Deck deck) {
             decks.add(deck);
@@ -265,8 +263,12 @@ public class DeleteDeckCommandTest {
 
         @Override
         public void deleteDeck(Deck deck) {
-            requireNonNull(deck);
             decks.remove(deck);
+        }
+
+        @Override
+        public ObservableList<Deck> getFilteredDeckList() {
+            return decks;
         }
 
         @Override
