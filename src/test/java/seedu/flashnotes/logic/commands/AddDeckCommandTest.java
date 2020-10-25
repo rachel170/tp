@@ -235,17 +235,14 @@ public class AddDeckCommandTest {
         public UniqueDeckList getUniqueDeckList() {
             throw new AssertionError("This method should not be called.");
         }
-        
         @Override
         public void setIsReviewModeFalse() {
             throw new AssertionError("This method should not be called.");
         }
-        
         @Override
         public void setIsReviewModeTrue() {
             throw new AssertionError("This method should not be called.");
         }
-        
         @Override
         public boolean getIsReviewMode() {
             throw new AssertionError("This method should not be called.");
@@ -280,7 +277,7 @@ public class AddDeckCommandTest {
             requireNonNull(deck);
             return decksAdded.stream().anyMatch(deck::isSameDeck);
         }
-
+        
         @Override
         public void addDeck(Deck deck) {
             requireNonNull(deck);
