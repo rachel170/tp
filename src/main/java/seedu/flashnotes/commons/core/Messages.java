@@ -15,7 +15,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_IN_CARD = "Cannot call command in card screen.";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "Inside Deck. %1$d flashcards listed!";
     public static final String MESSAGE_DECK_OVERVIEW = "Back Home.";
+    public static final String MESSAGE_EXTENDED_COMMAND_ERROR = "This command contains more arguments than necessary. "
+            + "\nPlease try the command again without any arguments: %1$s";
     public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
     public static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
             + "'add q/QUESTION a/ANSWER' first.";
+
 }
