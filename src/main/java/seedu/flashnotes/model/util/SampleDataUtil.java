@@ -37,9 +37,7 @@ public class SampleDataUtil {
     }
 
     public static Deck[] getSampleDecks() {
-        return new Deck[] {
-                new Deck("Economics"),
-                new Deck("Singapore")
+        return new Deck[] { new Deck("Economics"), new Deck("Singapore")
         };
     }
 
