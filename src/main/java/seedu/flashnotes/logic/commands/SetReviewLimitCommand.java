@@ -1,6 +1,7 @@
 package seedu.flashnotes.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_LIMIT;
 
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
@@ -22,6 +23,7 @@ public class SetReviewLimitCommand extends Command {
     public static final String MESSAGE_SUCCESS_NO_LIMIT = "Review card limit successfully updated! "
             + "There is now no review limit.";
     public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
+
 
     private final Integer reviewCardLimit;
 

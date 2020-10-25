@@ -1,9 +1,10 @@
 package seedu.flashnotes.logic.commands;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_NO_CARDS_TO_REVIEW;
 
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
-/**
+/*
  * Format full help instructions for every command for display.
  */
 public class ReviewCommand extends Command {

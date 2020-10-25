@@ -15,6 +15,9 @@ import java.util.Optional;
  */
 public class ArgumentMultimap {
 
+    /** Keeps Track of number of Times the argument is added. **/
+    private final Map<Prefix, Integer> argMultimapCounter = new HashMap<>();
+
     /** Prefixes mapped to their respective arguments**/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
@@ -29,6 +32,21 @@ public class ArgumentMultimap {
         List<String> argValues = getAllValues(prefix);
         argValues.add(argValue);
         argMultimap.put(prefix, argValues);
+
+        if (argMultimapCounter.get(prefix) == null) {
+            argMultimapCounter.put(prefix, 1);
+        } else {
+            int count = argMultimapCounter.get(prefix) + 1;
+            argMultimapCounter.put(prefix, count);
+        }
+    }
+
+    /**
+     * Returns the occurrences of {@code prefix}.
+     */
+    public Optional<Integer> getCountValue(Prefix prefix) {
+        Integer value = argMultimapCounter.get(prefix);
+        return value == null ? Optional.empty() : Optional.of(value);
     }
 
     /**

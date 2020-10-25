@@ -129,7 +129,6 @@ public class ModelManager implements Model {
     @Override
     public void setDeck(Deck target, Deck editedDeck) {
         flashNotes.setDeck(target, editedDeck);
-
     }
 
     @Override
@@ -270,7 +269,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Flashcard> getFlashcardsToReview() {
-        System.out.println("getter " + flashcardsToReview);
         return flashcardsToReview;
     }
 
