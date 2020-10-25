@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
@@ -35,10 +36,21 @@ public class SampleDataUtil {
         };
     }
 
+    public static Deck[] getSampleDecks() {
+        return new Deck[] {
+                new Deck("Economics"),
+                new Deck("Singapore")
+        };
+    }
+
     public static ReadOnlyFlashNotes getSampleFlashNotes() {
         FlashNotes sampleAb = new FlashNotes();
         for (Flashcard sampleFlashcard : getSampleFlashcards()) {
             sampleAb.addFlashcard(sampleFlashcard);
+        }
+
+        for (Deck deck : getSampleDecks()) {
+            sampleAb.addDeck(deck);
         }
         return sampleAb;
     }
