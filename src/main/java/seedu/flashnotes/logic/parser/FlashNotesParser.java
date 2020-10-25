@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import seedu.flashnotes.logic.commands.AddCommand;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
+import seedu.flashnotes.logic.commands.CheckReviewLimitCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
 import seedu.flashnotes.logic.commands.Command;
 import seedu.flashnotes.logic.commands.CorrectCommand;
@@ -41,8 +42,6 @@ public class FlashNotesParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private boolean isReviewMode = false;
-
     /**
      * Parses user input into command for execution.
      *
@@ -50,7 +49,8 @@ public class FlashNotesParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, boolean isInDeck, String deckName) throws ParseException {
+    public Command parseCommand(String userInput, boolean isReviewMode, boolean isInDeck, String deckName)
+            throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -59,16 +59,16 @@ public class FlashNotesParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        if (this.isReviewMode) {
+        if (isReviewMode) {
             assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
         if (!isInDeck) {
-            assert !this.isReviewMode : "Program should not be in review mode";
+            assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
-            assert !this.isReviewMode : "Program should not be in review mode";
+            assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
         }
     }
@@ -88,6 +88,7 @@ public class FlashNotesParser {
         case AddDeckCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
         case DeleteDeckCommand.COMMAND_WORD:
+        case CheckReviewLimitCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
 
         case ReviewCommand.COMMAND_WORD:
@@ -103,8 +104,6 @@ public class FlashNotesParser {
             return new WrongCommand();
 
         case EndReviewCommand.COMMAND_WORD:
-            // Ending Review, set reviewMode to false
-            this.isReviewMode = false;
             return new EndReviewCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -151,6 +150,12 @@ public class FlashNotesParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case SetReviewLimitCommand.COMMAND_WORD:
+            return new SetReviewLimitCommandParser().parse(arguments);
+
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            return new CheckReviewLimitCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -185,10 +190,11 @@ public class FlashNotesParser {
         case HomeCommand.COMMAND_WORD:
             return new HomeCommandParser().parse(arguments);
         case ReviewCommand.COMMAND_WORD:
-            this.isReviewMode = true;
             return new ReviewCommand();
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            return new CheckReviewLimitCommand();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 

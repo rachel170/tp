@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class Deck {
     public static final String MESSAGE_CONSTRAINTS =
-            "DeckName should not be blank";
+            "Deck name should not be blank and should contain fewer than 140 characters. "
+                + "Current number of characters in deck name is %d.";
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
             "ResultStatistic should not be blank or a non numeric value";
     // Identity fields
@@ -43,7 +44,7 @@ public class Deck {
      * Returns true if a given string is a valid deck name.
      */
     public static boolean isValidDeck(String test) {
-        return !test.isBlank();
+        return !test.isBlank() && test.length() <= 140;
     }
     /**
      * Returns true if both Decks have at least one other identity field that is the same.
