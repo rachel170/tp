@@ -26,6 +26,7 @@ public class Deck {
         this.resultStatistics = "-1";
     }
 
+
     public String getDeckName() {
         return deckName;
     }

@@ -2,10 +2,6 @@ package seedu.flashnotes.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.commons.util.StringUtil;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
@@ -80,17 +76,6 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
 
     /**
      * Parses integer and returns it. Leading and trailing whitespaces will be

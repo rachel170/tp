@@ -20,6 +20,7 @@ import seedu.flashnotes.logic.commands.CorrectCommand;
 import seedu.flashnotes.logic.commands.DeleteCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
 import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EditDeckNameCommand;
 import seedu.flashnotes.logic.commands.EndReviewCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
@@ -88,6 +89,7 @@ public class FlashNotesParser {
         case ExitCommand.COMMAND_WORD:
         case CheckReviewLimitCommand.COMMAND_WORD:
         case AddCommand.COMMAND_WORD:
+        case EditDeckNameCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_WORD:
@@ -198,6 +200,8 @@ public class FlashNotesParser {
             }
             return new ClearCommand();
 
+        case EditDeckNameCommand.COMMAND_WORD:
+            return new EditDeckNameCommandParser().parse(arguments);
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
 
@@ -221,6 +225,7 @@ public class FlashNotesParser {
         case ListCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
+        case EditDeckNameCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_INVALID_COMMAND_IN_CARD);
 
         case AddCommand.COMMAND_WORD:

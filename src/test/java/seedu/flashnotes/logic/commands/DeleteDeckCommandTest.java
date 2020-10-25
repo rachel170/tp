@@ -1,89 +1,52 @@
 package seedu.flashnotes.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.flashnotes.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.flashnotes.commons.core.GuiSettings;
+import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
-import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
 import seedu.flashnotes.model.ReadOnlyUserPrefs;
-import seedu.flashnotes.model.UserPrefs;
 import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.model.flashcard.QuestionContainsKeywordsPredicate;
 
-/**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
- */
-public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
+public class DeleteDeckCommandTest {
 
     @Test
-    public void equals() {
-        QuestionContainsKeywordsPredicate firstPredicate =
-                new QuestionContainsKeywordsPredicate(Collections.singletonList("first"));
-        QuestionContainsKeywordsPredicate secondPredicate =
-                new QuestionContainsKeywordsPredicate(Collections.singletonList("second"));
-
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
-
-        // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
-
-        // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
-
-        // different flashcard -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+    public void constructor_nullFlashcard_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteDeckCommand(null));
     }
 
-    //    @Test
-    //    public void execute_zeroKeywords_noFlashcardFound() {
-    //        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
-    //        QuestionContainsKeywordsPredicate predicate = preparePredicate(" ");
-    //        FindCommand command = new FindCommand(predicate);
-    //        Flashcard validFlashcard = new FlashcardBuilder().build();
-    //        ModelStub modelStub = new ModelStubWithFlashcard(validFlashcard);
-    //        assertThrows(CommandException.class,
-    //                FindCommand.MESSAGE_USAGE, () -> command.execute(modelStub));
-    //    }
+    @Test
+    public void execute_deckAcceptedByModel_deleteSuccessful() throws Exception {
+        Deck deck = new Deck("Singapore");
+        ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck);
+        assertEquals(1, modelStub.decks.size());
+        CommandResult commandResult = new DeleteDeckCommand(deck).execute(modelStub);
 
-    //    @Test
-    //    public void execute_multipleKeywords_multipleFlashcardsFound() {
-    //        String expectedMessage = String.format(MESSAGE_FLASHCARDS_LISTED_OVERVIEW, 3);
-    //        QuestionContainsKeywordsPredicate predicate = preparePredicate("why what when");
-    //        FindCommand command = new FindCommand(predicate);
-    //        expectedModel.updateFilteredFlashcardList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(WHAT, WHY, WHEN), model.getFilteredFlashcardList());
-    //    }
+        assertEquals(String.format(DeleteDeckCommand.MESSAGE_DELETE_DECK_SUCCESS,
+                deck.getDeckName()), commandResult.getFeedbackToUser());
+        assertEquals(0, modelStub.decks.size());
+    }
 
-    /**
-     * Parses {@code userInput} into a {@code QuestionContainsKeywordsPredicate}.
-     */
-    private QuestionContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new QuestionContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    @Test
+    public void execute_deleteDeck_deckNotFound() throws Exception {
+        Deck deck = new Deck("Singapore");
+        ModelStubWithFlashcardAndDeck modelStub = new ModelStubWithFlashcardAndDeck(deck);
+        DeleteDeckCommand command = new DeleteDeckCommand(new Deck("Malaysia"));
+
+        assertThrows(CommandException.class,
+                DeleteDeckCommand.MESSAGE_DECK_NOT_FOUND, () -> command.execute(modelStub));
     }
 
     private class ModelStub implements Model {
@@ -146,6 +109,7 @@ public class FindCommandTest {
         public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
+
         public boolean hasDeck(Deck deck) {
             return false;
         }
@@ -259,23 +223,27 @@ public class FindCommandTest {
         public UniqueDeckList getUniqueDeckList() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
-    /**
-     * A Model stub that contains a single flashcard.
-     */
-    private class ModelStubWithFlashcard extends ModelStub {
-        private final Flashcard flashcard;
+    private class ModelStubWithFlashcardAndDeck extends ModelStub {
+        final ArrayList<Deck> decks = new ArrayList<>();
 
-        ModelStubWithFlashcard(Flashcard flashcard) {
-            requireNonNull(flashcard);
-            this.flashcard = flashcard;
+        ModelStubWithFlashcardAndDeck(Deck deck) {
+            decks.add(deck);
         }
 
         @Override
-        public boolean hasFlashcard(Flashcard flashcard) {
-            requireNonNull(flashcard);
-            return this.flashcard.isSameFlashcard(flashcard);
+        public void deleteDeck(Deck deck) {
+            requireNonNull(deck);
+            decks.remove(deck);
         }
+
+        @Override
+        public boolean hasDeck(Deck deck) {
+            return decks.contains(deck);
+        }
+
+
     }
 }

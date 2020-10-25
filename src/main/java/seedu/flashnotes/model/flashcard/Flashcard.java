@@ -35,10 +35,6 @@ public class Flashcard {
         return answer;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
     public Tag getTag() {
         return tag;
     }
