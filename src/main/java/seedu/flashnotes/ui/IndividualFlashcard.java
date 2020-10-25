@@ -73,6 +73,10 @@ public class IndividualFlashcard extends UiPart<Region> {
         int performance = (this.correctAnswers * 100) / this.numOfFlashcards;
         // Store the performance value
         logic.updateDeckPerformanceScore(performance);
+        // Log the new statistics
+        logger.info(String.format("Statistic for review session: %1$d/%2$d",
+                this.correctAnswers, this.numOfFlashcards));
+        logger.info(String.format("Calculated statistic for review session: %d percent correct", performance));
         // Use the question label to list total percentage of first time right
         question.setText(String.format("Percentage of questions answered correctly on the first try: %d%s",
                 performance,

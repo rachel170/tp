@@ -33,6 +33,7 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_SETREVIEWLIMIT_COMM
 import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
+import static seedu.flashnotes.commons.core.Messages.MESSAGE_EXTENDED_COMMAND_ERROR;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_CARD;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_HOME;
@@ -234,6 +235,16 @@ public class FlashNotesParserTest {
         AddCardCommand command = (AddCardCommand) parser
                 .parseCommand(FlashcardUtil.getAddCardCommand(flashcard), isNotReviewMode, isInDeck, DEFAULT_TAG);
         assertEquals(new AddCardCommand(flashcard), command);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        // Clear command created by default
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, isNotReviewMode, !isInDeck, DEFAULT)
+                instanceof ClearCommand);
+        // Throws ParseException if Clear command has any arguments
+        assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ClearCommand.COMMAND_WORD), ()
+            -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", isNotReviewMode, !isInDeck, DEFAULT));
 
     }
 
@@ -252,8 +263,17 @@ public class FlashNotesParserTest {
         EditCardCommand command = (EditCardCommand) parser.parseCommand(EditCardCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FLASHCARD.getOneBased() + " "
                 + FlashcardUtil.getEditFlashcardDescriptorDetails(descriptor), isNotReviewMode, isInDeck, DEFAULT);
-
         assertEquals(new EditCardCommand(INDEX_FIRST_FLASHCARD, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_exit() throws Exception {
+        // Able to create ExitCommand by default
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, isNotReviewMode, isInDeck, DEFAULT)
+                instanceof ExitCommand);
+        // Throws ParseException if Exit command has any arguments
+        assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ExitCommand.COMMAND_WORD), ()
+            -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", isNotReviewMode, isInDeck, DEFAULT));
     }
 
     @Test
@@ -319,6 +339,26 @@ public class FlashNotesParserTest {
         assertThrows(ParseException.class, INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE, ()
             -> parser.parseCommand(EnterDeckCommand.COMMAND_WORD + " " + keyword,
                 isNotReviewMode, isInDeck, DEFAULT));
+    }
+
+    @Test
+    public void parseCommand_help() throws Exception {
+        // Able to create HelpCommand by default
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, isNotReviewMode, isInDeck, DEFAULT)
+                instanceof HelpCommand);
+        // Throws ParseException if Help command has any arguments
+        assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, HelpCommand.COMMAND_WORD), ()
+            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", isNotReviewMode, isInDeck, DEFAULT));
+    }
+
+    @Test
+    public void parseCommand_list() throws Exception {
+        // Able to create ListCommand by default
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, isNotReviewMode, !isInDeck, DEFAULT)
+                instanceof ListCommand);
+        // Throws ParseException if List command has any arguments
+        assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ListCommand.COMMAND_WORD), ()
+            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", isNotReviewMode, !isInDeck, DEFAULT));
     }
 
     @Test
@@ -512,7 +552,6 @@ public class FlashNotesParserTest {
     public void inReview_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
             -> parser.parseCommand("unknownCommand", isReviewMode, isNotInDeck, DEFAULT));
-
     }
 
     // Parse Invalid Commands in Review Mode
