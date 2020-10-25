@@ -101,7 +101,7 @@ public class FlashNotesParser {
             //assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
-            return parseCommandInCardMode(commandWord, arguments, deckName.toLowerCase());
+            return parseCommandInCardMode(commandWord, arguments, deckName);
             //assert !isReviewMode : "Program should not be in review mode";
         }
     }
@@ -235,10 +235,10 @@ public class FlashNotesParser {
             throw new ParseException(MESSAGE_INVALID_COMMAND_IN_HOME);
 
         case AddDeckCommand.COMMAND_WORD:
-            return new AddDeckCommandParser().parse(arguments.toLowerCase());
+            return new AddDeckCommandParser().parse(arguments);
 
         case DeleteDeckCommand.COMMAND_WORD:
-            return new DeleteDeckCommandParser().parse(arguments.toLowerCase());
+            return new DeleteDeckCommandParser().parse(arguments);
 
         case EnterDeckCommand.COMMAND_WORD:
             return new EnterDeckCommandParser().parse(arguments.toLowerCase());
