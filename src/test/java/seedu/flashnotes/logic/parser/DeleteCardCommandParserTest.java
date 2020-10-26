@@ -7,7 +7,7 @@ import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashnotes.logic.commands.DeleteCommand;
+import seedu.flashnotes.logic.commands.DeleteCardCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -16,18 +16,18 @@ import seedu.flashnotes.logic.commands.DeleteCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeleteCommandParserTest {
+public class DeleteCardCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeleteCardCommandParser parser = new DeleteCardCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_FLASHCARD));
+        assertParseSuccess(parser, "1", new DeleteCardCommand(INDEX_FIRST_FLASHCARD));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCommand.MESSAGE_USAGE));
+                DeleteCardCommand.MESSAGE_USAGE));
     }
 }

@@ -4,8 +4,8 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.flashnotes.logic.commands.AddCommand;
-import seedu.flashnotes.logic.commands.EditCommand.EditFlashcardDescriptor;
+import seedu.flashnotes.logic.commands.AddCardCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand.EditFlashcardDescriptor;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -16,8 +16,8 @@ public class FlashcardUtil {
     /**
      * Returns an add command string for adding the {@code flashcard}.
      */
-    public static String getAddCommand(Flashcard flashcard) {
-        return AddCommand.COMMAND_WORD + " " + getFlashcardDetails(flashcard);
+    public static String getAddCardCommand(Flashcard flashcard) {
+        return AddCardCommand.COMMAND_WORD + " " + getFlashcardDetails(flashcard);
     }
 
     /**

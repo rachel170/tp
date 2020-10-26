@@ -20,6 +20,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     private final UniqueFlashcardList flashcards;
     private final UniqueDeckList decks;
+    private boolean isReviewMode;
     private boolean isInDeck;
     private String currentDeckName;
 
@@ -33,6 +34,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     {
         flashcards = new UniqueFlashcardList();
         decks = new UniqueDeckList();
+        isReviewMode = false;
         isInDeck = false;
         currentDeckName = null;
     }
@@ -73,36 +75,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
         setFlashcards(newData.getFlashcardList());
 
-
-        //TODO eventually to be changed to read directly from list - PX
-        List<Deck> newDeckData = newData.getDeckList();
-        List<Deck> newDeckList = new ArrayList<>();
-        List<String> uniqueDeckNames = new ArrayList<>();
-        //uniqueDeckNames.add("Default");
-        for (Flashcard card : newData.getFlashcardList()) {
-            Tag tag = card.getTag();
-            if (!uniqueDeckNames.contains(tag.tagName)) {
-                uniqueDeckNames.add(tag.tagName);
-            }
-        }
-
-        // For each uniqueDeckName, make sure a deck exist for it
-        for (String s : uniqueDeckNames) {
-            //Create a deck with that deckName
-            Deck newDeck = new Deck(s);
-            // Now check to see if deck stats were loaded in for deck
-            // Check through each deck to see if it already exist
-            for (Deck d : newDeckData) {
-                if (d.getDeckName().equals(s)) {
-                    // If it does, then set the statistics for the deck
-                    newDeck.setResultStatistics(d.getResultStatistics());
-                    break;
-                }
-            }
-            // Finally add it to the list
-            newDeckList.add(newDeck);
-        }
-        setDecks(newDeckList);
+        setDecks(newData.getDeckList());
     }
 
     //// flashcard-level operations
@@ -187,8 +160,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      */
     public void setDeck(Deck target, Deck editedDeck) {
         requireNonNull(editedDeck);
-
         decks.setDeck(target, editedDeck);
+        //TODO update the flashcards if there are existing flashcards
     }
 
     /**
@@ -244,6 +217,19 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         return decks;
     }
 
+    //// Review methods
+    public boolean getIsReviewMode() {
+        return isReviewMode;
+    }
+
+    public void setIsReviewModeTrue() {
+        isReviewMode = true;
+    }
+
+    public void setIsReviewModeFalse() {
+        isReviewMode = false;
+    }
+
     //// util methods
 
     @Override
@@ -260,8 +246,6 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     @Override
     public ObservableList<Deck> getDeckList() {
-        //todo read the tags and update
-        //todo change when we have decklist implementation up
         return decks.asUnmodifiableObservableList();
     }
 

@@ -145,11 +145,35 @@ public interface Model {
     /** Returns the modified list of flashcards to be reviewed */
     ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
 
+    /** Updates the flashcard being reviewed in the review mode */
+    public void updateFlashcardBeingReviewed(int result);
+
+    /** Reset flashcard being reviewed back to false */
+    public void resetFlipOfFlashcardBeingReviewed();
+
+    /** Checks whether the flashcard being reviewed is flipped */
+    public boolean getIsFlashcardFlipped();
+
+    /** Gets the flashcard being reviewed in the review mode and returns it. */
+    public Flashcard getFlashcardBeingReviewed();
+
+    /** Flip the flashcard currently being reviewed */
+    public void carryOutFlipCommand();
+
+    /** Marks flashcard being reviewed as correct or wrong */
+    public void markFlashcardBeingReviewed(Flashcard flashcard, int result);
+
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
+
+    boolean getIsReviewMode();
+
+    void setIsReviewModeTrue();
+
+    void setIsReviewModeFalse();
 
     /**
      * Shuffles the flashcards for the review session.

@@ -13,9 +13,9 @@ import seedu.flashnotes.model.flashcard.Flashcard;
 /**
  * Deletes a flashcard identified using it's displayed index from the flashnotes.
  */
-public class DeleteCommand extends Command {
+public class DeleteCardCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "deleteCard";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the flashcard identified by the index number used in the displayed flashcard list.\n"
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteCardCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteCardCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteCardCommand) other).targetIndex)); // state check
     }
 }

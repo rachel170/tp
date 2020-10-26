@@ -23,9 +23,9 @@ import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 /**
  * Edits the details of an existing flashcard in the flashnotes.
  */
-public class EditCommand extends Command {
+public class EditCardCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editCard";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
             + "by the index number used in the displayed flashcard list. "
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
      * @param index of the flashcard in the filtered flashcard list to edit
      * @param editFlashcardDescriptor details to edit the flashcard with
      */
-    public EditCommand(Index index, EditFlashcardDescriptor editFlashcardDescriptor) {
+    public EditCardCommand(Index index, EditFlashcardDescriptor editFlashcardDescriptor) {
         requireNonNull(index);
         requireNonNull(editFlashcardDescriptor);
 
@@ -105,12 +105,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCardCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditCardCommand e = (EditCardCommand) other;
         return index.equals(e.index)
                 && editFlashcardDescriptor.equals(e.editFlashcardDescriptor);
     }

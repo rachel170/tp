@@ -3,10 +3,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-
+/**
+ * Deck is the tag which is given to every card.
+ */
 public class Deck {
     public static final String MESSAGE_CONSTRAINTS =
-            "DeckName should not be blank";
+            "Deck name should not be blank and should contain fewer than 140 characters. "
+                + "Current number of characters in deck name is %d.";
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
             "ResultStatistic should not be blank or a non numeric value";
     // Identity fields
@@ -23,6 +26,7 @@ public class Deck {
         this.resultStatistics = "-1";
     }
 
+
     public String getDeckName() {
         return deckName;
     }
@@ -32,10 +36,12 @@ public class Deck {
     }
 
     public void setDeckName(String deckName) {
+        requireNonNull(deckName);
         this.deckName = deckName;
     }
 
     public void setResultStatistics(String resultStatistics) {
+        requireNonNull(resultStatistics);
         this.resultStatistics = resultStatistics;
     }
 
@@ -43,7 +49,7 @@ public class Deck {
      * Returns true if a given string is a valid deck name.
      */
     public static boolean isValidDeck(String test) {
-        return !test.isBlank();
+        return !test.isBlank() && test.length() <= 140;
     }
     /**
      * Returns true if both Decks have at least one other identity field that is the same.
@@ -56,7 +62,6 @@ public class Deck {
 
         return otherDeck != null
                 && otherDeck.getDeckName().equals(getDeckName());
-        //&& (otherDeck.getResultStatistics().equals(getResultStatistics()));
     }
     @Override
     public boolean equals(Object o) {
@@ -67,11 +72,11 @@ public class Deck {
             return false;
         }
         Deck deck = (Deck) o;
-        return Objects.equals(deckName, deck.deckName); //&& Objects.equals(resultStatistics, deck.resultStatistics);
+        return Objects.equals(deckName, deck.deckName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deckName); //, resultStatistics);
+        return Objects.hash(deckName);
     }
 }

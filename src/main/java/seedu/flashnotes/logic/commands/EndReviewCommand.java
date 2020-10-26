@@ -13,6 +13,8 @@ public class EndReviewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        // Turn review mode off in model
+        model.setIsReviewModeFalse();
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true, false, false, 0);
     }
 

@@ -43,12 +43,13 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        boolean isReviewMode = model.getIsReviewMode();
         boolean isInDeck = model.getIsInDeck();
         String deckName = model.getCurrentDeckName();
         if (deckName == null) {
             deckName = "Default";
         }
-        Command command = flashNotesParser.parseCommand(commandText, isInDeck, deckName);
+        Command command = flashNotesParser.parseCommand(commandText, isReviewMode, isInDeck, deckName);
         commandResult = command.execute(model);
 
         try {
@@ -78,6 +79,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
         return model.addFlashcardToReview(flashcard);
+    }
+
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        model.resetFlipOfFlashcardBeingReviewed();
     }
 
     public ObservableList<Deck> getFilteredCardDeckList() {
@@ -116,5 +122,13 @@ public class LogicManager implements Logic {
     @Override
     public void updateDeckPerformanceScore(Integer reviewScore) {
         model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+    }
+
+    /**
+     * Turn off review mode.
+     */
+    @Override
+    public void setIsReviewModeFalse() {
+        model.setIsReviewModeFalse();
     }
 }

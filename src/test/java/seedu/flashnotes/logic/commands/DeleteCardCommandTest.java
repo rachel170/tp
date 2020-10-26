@@ -22,29 +22,29 @@ import seedu.flashnotes.model.flashcard.Flashcard;
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteCardCommandTest {
 
     private Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Flashcard flashcardToDelete = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_FLASHCARD);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(INDEX_FIRST_FLASHCARD);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete);
+        String expectedMessage = String.format(DeleteCardCommand.MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.deleteFlashcard(flashcardToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCardCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCardCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
@@ -52,15 +52,15 @@ public class DeleteCommandTest {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
 
         Flashcard flashcardToDelete = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_FLASHCARD);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(INDEX_FIRST_FLASHCARD);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete);
+        String expectedMessage = String.format(DeleteCardCommand.MESSAGE_DELETE_FLASHCARD_SUCCESS, flashcardToDelete);
 
         Model expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.deleteFlashcard(flashcardToDelete);
         showNoFlashcard(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCardCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -71,21 +71,21 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of flashnotes list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashNotes().getFlashcardList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCardCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_FLASHCARD);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_FLASHCARD);
+        DeleteCardCommand deleteFirstCommand = new DeleteCardCommand(INDEX_FIRST_FLASHCARD);
+        DeleteCardCommand deleteSecondCommand = new DeleteCardCommand(INDEX_SECOND_FLASHCARD);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_FLASHCARD);
+        DeleteCardCommand deleteFirstCommandCopy = new DeleteCardCommand(INDEX_FIRST_FLASHCARD);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

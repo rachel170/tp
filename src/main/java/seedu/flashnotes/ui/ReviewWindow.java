@@ -102,6 +102,8 @@ public class ReviewWindow extends UiPart<Stage> {
         this.individualFlashcard.displayFlashcard();
         getRoot().setAlwaysOnTop(true);
         getRoot().showAndWait();
+        // After manual closing
+        this.handleExit();
         getRoot().centerOnScreen();
     }
 
@@ -113,14 +115,15 @@ public class ReviewWindow extends UiPart<Stage> {
     }
 
     /**
-     * Hides the help window.
+     * Hides the review window.
      */
     public void hide() {
+        // Hide review window
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the review window.
      */
     public void focus() {
         getRoot().requestFocus();
@@ -133,7 +136,7 @@ public class ReviewWindow extends UiPart<Stage> {
      */
     public void displayStatistics() {
         // Log
-        logger.fine("Showing statistics page of current review session.");
+        logger.info("Displaying statistics of current review session.");
         // Update IndividualFlashcard UI
         String message = this.individualFlashcard.displayStatistics();
         // Update resultDisplay
@@ -162,6 +165,7 @@ public class ReviewWindow extends UiPart<Stage> {
     public void handleNextCard(int isCorrect) {
         assert(isCorrect > 0);
         if (individualFlashcard.isCardFlipped()) {
+            logic.resetFlipOfFlashcardBeingReviewed();
             String result = individualFlashcard.handleNextCard(isCorrect);
             if (result.equals("exit")) {
                 displayStatistics();
@@ -193,10 +197,11 @@ public class ReviewWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        // Turn off review mode in logic
+        logic.setIsReviewModeFalse();
 
-        // hide the review and help windows
+        // Hide help window
         helpWindow.hide();
-        this.hide();
 
         // Return to FlashcardListRoot
         RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
@@ -228,13 +233,10 @@ public class ReviewWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isExit()) {
-                if (isComplete) {
-                    // If session has ended, invoke unique exit function
-                    handleExit();
-                } else {
-                    // Else invoke normal exit function
-                    handleExit();
-                }
+                // Hide review window
+                this.hide();
+                // Return to Card View
+                handleExit();
             }
 
             if (commandResult.isNext() != 0) {
@@ -252,4 +254,5 @@ public class ReviewWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }

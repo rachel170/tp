@@ -1,10 +1,11 @@
 package seedu.flashnotes.logic.commands;
-
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
+import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_1;
+import static seedu.flashnotes.testutil.TypicalDecks.VALID_DECK_2;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,60 +24,56 @@ import seedu.flashnotes.model.ReadOnlyUserPrefs;
 import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.deck.UniqueDeckList;
 import seedu.flashnotes.model.flashcard.Flashcard;
-import seedu.flashnotes.testutil.FlashcardBuilder;
 
-public class AddCommandTest {
+public class AddDeckCommandTest {
 
     @Test
-    public void constructor_nullFlashcard_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullDeck_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddDeckCommand(null));
     }
 
     @Test
-    public void execute_flashcardAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingFlashcardAdded modelStub = new ModelStubAcceptingFlashcardAdded();
-        Flashcard validFlashcard = new FlashcardBuilder().build();
+    public void execute_deckAcceptedByModel_success() throws Exception {
+        AddDeckCommandTest.ModelStubAcceptingDeckAdded modelStub = new AddDeckCommandTest.ModelStubAcceptingDeckAdded();
 
-        CommandResult commandResult = new AddCommand(validFlashcard).execute(modelStub);
+        CommandResult commandResult = new AddDeckCommand(VALID_DECK_1).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validFlashcard), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validFlashcard), modelStub.flashcardsAdded);
+        assertEquals(String.format(AddDeckCommand.MESSAGE_SUCCESS, VALID_DECK_1.getDeckName()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(VALID_DECK_1), modelStub.decksAdded);
     }
 
     @Test
-    public void execute_duplicateFlashcard_throwsCommandException() {
-        Flashcard validFlashcard = new FlashcardBuilder().build();
-        AddCommand addCommand = new AddCommand(validFlashcard);
-        ModelStub modelStub = new ModelStubWithFlashcard(validFlashcard);
+    public void execute_duplicateDeck_throwsCommandException() {
+        Deck validDeck = new Deck("Funky");
+        AddDeckCommand addDeckCommand = new AddDeckCommand(validDeck);
+        ModelStub modelStub = new ModelStubWithDeck(validDeck);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_FLASHCARD, () -> addCommand.execute(modelStub));
+                AddDeckCommand.MESSAGE_DUPLICATE_DECK, () -> addDeckCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Flashcard alice = new FlashcardBuilder().withQuestion("Why?").build();
-        Flashcard bob = new FlashcardBuilder().withQuestion("How?").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddDeckCommand addFirstValidDeckCommand = new AddDeckCommand(VALID_DECK_1);
+        AddDeckCommand addSecondValidDeckCommand = new AddDeckCommand(VALID_DECK_2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addFirstValidDeckCommand.equals(addFirstValidDeckCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddDeckCommand addFirstValidDeckCommandCopy = new AddDeckCommand(VALID_DECK_1);
+        assertTrue(addFirstValidDeckCommand.equals(addFirstValidDeckCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addFirstValidDeckCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addFirstValidDeckCommand.equals(null));
 
         // different flashcard -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addFirstValidDeckCommand.equals(addSecondValidDeckCommand));
     }
-
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -140,23 +137,54 @@ public class AddCommandTest {
         public ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFlashcardBeingReviewed(int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetFlipOfFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Flashcard getFlashcardBeingReviewed() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsFlashcardFlipped() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void carryOutFlipCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markFlashcardBeingReviewed(Flashcard flashcard, int result) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean hasDeck(Deck deck) {
             return false;
         }
 
         @Override
         public void deleteDeck(Deck target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addDeck(Deck deck) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setDeck(Deck target, Deck editedDeck) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -166,17 +194,17 @@ public class AddCommandTest {
 
         @Override
         public void setIsInDeckTrue() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setIsInDeckFalse() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setCurrentDeckName(String deckName) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -191,7 +219,7 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredDeckList(Predicate<Deck> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -238,42 +266,52 @@ public class AddCommandTest {
         public UniqueDeckList getUniqueDeckList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void setIsReviewModeFalse() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setIsReviewModeTrue() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean getIsReviewMode() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single flashcard.
      */
-    private class ModelStubWithFlashcard extends ModelStub {
-        private final Flashcard flashcard;
+    private class ModelStubWithDeck extends ModelStub {
+        private final Deck deck;
 
-        ModelStubWithFlashcard(Flashcard flashcard) {
-            requireNonNull(flashcard);
-            this.flashcard = flashcard;
+        ModelStubWithDeck(Deck deck) {
+            requireNonNull(deck);
+            this.deck = deck;
         }
 
         @Override
-        public boolean hasFlashcard(Flashcard flashcard) {
-            requireNonNull(flashcard);
-            return this.flashcard.isSameFlashcard(flashcard);
+        public boolean hasDeck(Deck deck) {
+            requireNonNull(deck);
+            return this.deck.isSameDeck(deck);
         }
     }
-
     /**
      * A Model stub that always accept the flashcard being added.
      */
-    private class ModelStubAcceptingFlashcardAdded extends ModelStub {
-        final ArrayList<Flashcard> flashcardsAdded = new ArrayList<>();
+    private class ModelStubAcceptingDeckAdded extends AddDeckCommandTest.ModelStub {
+        final ArrayList<Deck> decksAdded = new ArrayList<>();
 
         @Override
-        public boolean hasFlashcard(Flashcard flashcard) {
-            requireNonNull(flashcard);
-            return flashcardsAdded.stream().anyMatch(flashcard::isSameFlashcard);
+        public boolean hasDeck(Deck deck) {
+            requireNonNull(deck);
+            return decksAdded.stream().anyMatch(deck::isSameDeck);
         }
-
         @Override
-        public void addFlashcard(Flashcard flashcard) {
-            requireNonNull(flashcard);
-            flashcardsAdded.add(flashcard);
+        public void addDeck(Deck deck) {
+            requireNonNull(deck);
+            decksAdded.add(deck);
         }
 
         @Override
@@ -281,5 +319,4 @@ public class AddCommandTest {
             return new FlashNotes();
         }
     }
-
 }

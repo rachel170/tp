@@ -19,7 +19,7 @@ public class SetReviewLimitCommandParser implements Parser<SetReviewLimitCommand
      */
     public SetReviewLimitCommand parse(String args) throws ParseException {
         try {
-            Integer reviewCardLimit = ParserUtil.parseInteger(args);
+            Integer reviewCardLimit = ParserUtil.parseReviewLimit(args);
             return new SetReviewLimitCommand(reviewCardLimit);
         } catch (ParseException pe) {
             throw new ParseException(

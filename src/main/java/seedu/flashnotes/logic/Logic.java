@@ -48,6 +48,9 @@ public interface Logic {
      */
     ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
 
+    /** Reset flashcard being reviewed back to false */
+    public void resetFlipOfFlashcardBeingReviewed();
+
     /**
      * Returns the user prefs' flashnotes file path.
      */
@@ -78,4 +81,9 @@ public interface Logic {
      * @param reviewScore Integer value of user's review session score.
      */
     void updateDeckPerformanceScore(Integer reviewScore);
+
+    /**
+     * Turn off review mode.
+     */
+    void setIsReviewModeFalse();
 }

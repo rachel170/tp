@@ -10,7 +10,7 @@ import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashnotes.logic.commands.EditCommand.EditFlashcardDescriptor;
+import seedu.flashnotes.logic.commands.EditCardCommand.EditFlashcardDescriptor;
 import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
 
 public class EditFlashcardDescriptorTest {
