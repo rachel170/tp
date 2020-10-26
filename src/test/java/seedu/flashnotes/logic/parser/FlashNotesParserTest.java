@@ -660,7 +660,7 @@ public class FlashNotesParserTest {
     @Test
     public void parseCommand_flipInHomeMode_throwsParseException() {
         assertThrows(ParseException.class, INVALID_FLIP_COMMAND_IN_HOME_MESSAGE, ()
-            -> parser.parseCommand("flip", false, false, DEFAULT));
+            -> parser.parseCommand("f", false, false, DEFAULT));
     }
 
     @Test

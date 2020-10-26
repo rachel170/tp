@@ -6,7 +6,7 @@ import seedu.flashnotes.model.Model;
  * Flips the card in review mode
  */
 public class FlipCommand extends Command {
-    public static final String COMMAND_WORD = "flip";
+    public static final String COMMAND_WORD = "f";
 
     public static final String MESSAGE_FLIP_ACKNOWLEDGEMENT = "Flipping Flashcard as requested...";
 
