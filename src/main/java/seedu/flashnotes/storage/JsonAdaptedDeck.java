@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.deck.Deck;
-import seedu.flashnotes.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Deck}.
