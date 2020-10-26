@@ -241,7 +241,7 @@ public class FlashNotesParser {
             return new DeleteDeckCommandParser().parse(arguments);
 
         case EnterDeckCommand.COMMAND_WORD:
-            return new EnterDeckCommandParser().parse(arguments.toLowerCase());
+            return new EnterDeckCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             // There should be no arguments for exit command
