@@ -23,7 +23,6 @@ public class SampleDataUtil {
                     new Tag("Economics")),
             new Flashcard(new Question("What is the definition of Microeconomics?"),
                     new Answer("Microeconomics is a branch of economics that studies the behavior "
-                            + "of individuals and firms in making decisions regarding the allocation "
                             + "of scarce resources and the interactions among these individuals and firms"),
                     new Tag("Economics")),
             new Flashcard(new Question("When did Singapore gain independence?"),

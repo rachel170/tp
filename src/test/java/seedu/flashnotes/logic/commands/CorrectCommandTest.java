@@ -27,7 +27,7 @@ public class CorrectCommandTest {
         assertEquals(correctCommand.execute(model), expectedCommandResult);
 
         Flashcard flashcard = model.getFlashcardBeingReviewed();
-        assertEquals(0, flashcard.getIsCorrect());
+        assertEquals(2, flashcard.getIsCorrect());
     }
 
     @Test
