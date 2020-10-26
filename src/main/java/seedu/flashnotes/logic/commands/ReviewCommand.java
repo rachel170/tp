@@ -1,6 +1,7 @@
 package seedu.flashnotes.logic.commands;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_NO_CARDS_TO_REVIEW;
 
+import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
@@ -16,14 +17,12 @@ public class ReviewCommand extends Command {
 
     public static final String SHOWING_REVIEW_MESSAGE = "Opened review window.";
 
-    private static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
-            + "'add q/QUESTION a/ANSWER' first.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         boolean isReviewListEmpty = model.getFilteredFlashcardList().size() == 0;
         if (isReviewListEmpty) {
-            throw new CommandException(MESSAGE_NO_CARDS_TO_REVIEW);
+            throw new CommandException(Messages.MESSAGE_NO_CARDS_TO_REVIEW);
         }
         model.shuffleReviewFlashcards();
         model.setIsReviewModeTrue();
