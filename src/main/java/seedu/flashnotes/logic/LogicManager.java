@@ -1,5 +1,7 @@
 package seedu.flashnotes.logic;
 
+import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -81,6 +83,11 @@ public class LogicManager implements Logic {
         return model.addFlashcardToReview(flashcard);
     }
 
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        model.resetFlipOfFlashcardBeingReviewed();
+    }
+
     public ObservableList<Deck> getFilteredCardDeckList() {
         return model.getFilteredDeckList();
     };
@@ -116,6 +123,16 @@ public class LogicManager implements Logic {
      */
     @Override
     public void updateDeckPerformanceScore(Integer reviewScore) {
-        model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+        if (!model.getCurrentDeckName().equals(RESERVED_DECK_NAME)) {
+            model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+        }
+    }
+
+    /**
+     * Turn off review mode.
+     */
+    @Override
+    public void setIsReviewModeFalse() {
+        model.setIsReviewModeFalse();
     }
 }

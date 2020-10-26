@@ -34,21 +34,22 @@ class JsonAdaptedDeck {
     }
 
     /**
-     * Reads from this Jackson-friendly adapted deck object, and update the model's {@code Deck} object.
+     * Reads from this Jackson-friendly adapted deck object, and turn it into model's {@code Deck} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public void updateModel(FlashNotes flashNotes) throws IllegalValueException {
         // Check to make sure deck name is valid
-        if (!Deck.isValidDeck(deckName)) {
-            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS);
+        if (!Deck.isValidDeckLength(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!Deck.isValidDeckReservedName(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
         }
 
         // Check to make sure resultStatistic is valid
         if (resultStatistic.isBlank()) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
         }
-        // Check to make sure result statistics can be converted to Integer
         try {
             Integer statistics = Integer.parseInt(resultStatistic);
             // Update the FlashNotes Model with resultStatistics
@@ -57,6 +58,29 @@ class JsonAdaptedDeck {
             // If exception is found, throw IVE
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
         }
+    }
+    public Deck toModelType() throws IllegalValueException {
+        if (!Deck.isValidDeckLength(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!Deck.isValidDeckReservedName(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
+        }
+
+        // Check to make sure resultStatistic is valid
+        if (resultStatistic.isBlank()) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
+        }
+        try {
+            // Check to make sure result statistics can be converted to Integer
+            Integer.parseInt(resultStatistic);
+        } catch (NumberFormatException nfe) {
+            // If exception is found, throw IVE
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
+        }
+        Deck theDeck = new Deck(deckName);
+        theDeck.setResultStatistics(resultStatistic);
+
+        return theDeck;
     }
 
 }

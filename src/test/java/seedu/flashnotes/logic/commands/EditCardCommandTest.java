@@ -18,13 +18,12 @@ import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
-import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class EditCardCommandTest {
 
     private Model model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
 
@@ -95,36 +94,37 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }*/
 
-    @Test
-    public void execute_duplicateFlashcardUnfilteredList_failure() {
-        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(firstFlashcard).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD, descriptor);
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }
-
-    @Test
-    public void execute_duplicateFlashcardFilteredList_failure() {
-        showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
-
-        // edit flashcard in filtered list into a duplicate in flashnotes
-        Flashcard flashcardInList = model.getFlashNotes().getFlashcardList()
-                .get(INDEX_SECOND_FLASHCARD.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                new EditFlashcardDescriptorBuilder(flashcardInList).build());
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }
+    //    @Test
+    //    public void execute_duplicateFlashcardUnfilteredList_failure() {
+    //        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+    //        EditCardCommand.EditFlashcardDescriptor descriptor =
+    //        new EditFlashcardDescriptorBuilder(firstFlashcard).build();
+    //        EditCardCommand editCardCommand = new EditCardCommand(INDEX_SECOND_FLASHCARD, descriptor);
+    //
+    //        assertCommandFailure(editCardCommand, model, EditCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
+    //    }
+    //
+    //    @Test
+    //    public void execute_duplicateFlashcardFilteredList_failure() {
+    //        showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
+    //
+    //        // edit flashcard in filtered list into a duplicate in flashnotes
+    //        Flashcard flashcardInList = model.getFlashNotes().getFlashcardList()
+    //                .get(INDEX_SECOND_FLASHCARD.getZeroBased());
+    //        EditCardCommand editCardCommand = new EditCardCommand(INDEX_FIRST_FLASHCARD,
+    //                new EditFlashcardDescriptorBuilder(flashcardInList).build());
+    //
+    //        assertCommandFailure(editCardCommand, model, EditCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
+    //    }
 
     @Test
     public void execute_invalidFlashcardIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
-        EditCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
+        EditCardCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder()
                 .withQuestion(VALID_QUESTION_MACROECONS).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        EditCardCommand editCardCommand = new EditCardCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        assertCommandFailure(editCardCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     /**
@@ -138,19 +138,19 @@ public class EditCommandTest {
         // ensures that outOfBoundIndex is still in bounds of flashnotes list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashNotes().getFlashcardList().size());
 
-        EditCommand editCommand = new EditCommand(outOfBoundIndex,
+        EditCardCommand editCardCommand = new EditCardCommand(outOfBoundIndex,
                 new EditFlashcardDescriptorBuilder().withQuestion(VALID_QUESTION_MACROECONS).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        assertCommandFailure(editCardCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FLASHCARD, DESC_SKY);
+        final EditCardCommand standardCommand = new EditCardCommand(INDEX_FIRST_FLASHCARD, DESC_SKY);
 
         // same values -> returns true
-        EditCommand.EditFlashcardDescriptor copyDescriptor = new EditCommand.EditFlashcardDescriptor(DESC_SKY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_FLASHCARD, copyDescriptor);
+        EditCardCommand.EditFlashcardDescriptor copyDescriptor = new EditCardCommand.EditFlashcardDescriptor(DESC_SKY);
+        EditCardCommand commandWithSameValues = new EditCardCommand(INDEX_FIRST_FLASHCARD, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -163,10 +163,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FLASHCARD, DESC_SKY)));
+        assertFalse(standardCommand.equals(new EditCardCommand(INDEX_SECOND_FLASHCARD, DESC_SKY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FLASHCARD, DESC_MACROECONS)));
+        assertFalse(standardCommand.equals(new EditCardCommand(INDEX_FIRST_FLASHCARD, DESC_MACROECONS)));
     }
 
 }

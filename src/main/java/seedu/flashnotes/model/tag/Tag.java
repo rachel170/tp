@@ -2,6 +2,7 @@ package seedu.flashnotes.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
+import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
 
 /**
  * Represents a Tag in the flashnotes.
@@ -9,9 +10,13 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should not be blank";
+    public static final String RESERVED_TAG_NAME = RESERVED_DECK_NAME;
+
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should not be blank. "
+            + "Tag name should not use the reserved name: " + RESERVED_TAG_NAME;
 
     public final String tagName;
+
 
     /**
      * Constructs a {@code Tag}.
@@ -28,7 +33,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return !test.isBlank();
+        return !test.isBlank() && test.length() <= 140 && !test.equals(RESERVED_TAG_NAME);
     }
 
 

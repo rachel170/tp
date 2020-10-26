@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
+import static seedu.flashnotes.model.deck.Deck.DEFAULT_DECK_NAME;
+import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +26,9 @@ import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 /**
  * Edits the details of an existing flashcard in the flashnotes.
  */
-public class EditCommand extends Command {
+public class EditCardCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editCard";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the flashcard identified "
             + "by the index number used in the displayed flashcard list. "
@@ -48,7 +51,7 @@ public class EditCommand extends Command {
      * @param index of the flashcard in the filtered flashcard list to edit
      * @param editFlashcardDescriptor details to edit the flashcard with
      */
-    public EditCommand(Index index, EditFlashcardDescriptor editFlashcardDescriptor) {
+    public EditCardCommand(Index index, EditFlashcardDescriptor editFlashcardDescriptor) {
         requireNonNull(index);
         requireNonNull(editFlashcardDescriptor);
 
@@ -66,7 +69,13 @@ public class EditCommand extends Command {
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
-        String originalDeckName = model.getCurrentDeckName();
+        //TODO: list
+        String currentDeckName = model.getCurrentDeckName();
+        boolean isInList = false;
+        if (currentDeckName.equals(RESERVED_DECK_NAME)) {
+            currentDeckName = DEFAULT_DECK_NAME;
+            isInList = true;
+        }
         Flashcard editedFlashcard = createEditedFlashcard(flashcardToEdit, editFlashcardDescriptor);
 
         if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasFlashcard(editedFlashcard)) {
@@ -78,7 +87,11 @@ public class EditCommand extends Command {
         if (!model.hasDeck(new Deck(editedDeckName))) {
             model.addDeck(new Deck(editedDeckName));
         }
-        model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(originalDeckName));
+        if (isInList) {
+            model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        } else {
+            model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(currentDeckName));
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 
@@ -105,12 +118,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCardCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditCardCommand e = (EditCardCommand) other;
         return index.equals(e.index)
                 && editFlashcardDescriptor.equals(e.editFlashcardDescriptor);
     }

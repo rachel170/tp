@@ -14,9 +14,9 @@ import seedu.flashnotes.model.tag.Tag;
 /**
  * Adds a flashcard to the flashnotes.
  */
-public class AddCommand extends Command {
+public class AddCardCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addCard";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to the flashnotes. "
             + "Parameters: "
@@ -31,11 +31,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes";
 
     private final Flashcard toAdd;
+    private String additionalMessage = "";
 
     /**
      * Creates an AddCommand to add the specified {@code Flashcard}
      */
-    public AddCommand(Flashcard flashcard) {
+    public AddCardCommand(Flashcard flashcard) {
         requireNonNull(flashcard);
         toAdd = flashcard;
     }
@@ -53,13 +54,23 @@ public class AddCommand extends Command {
         }
 
         model.addFlashcard(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + additionalMessage);
+    }
+
+    /**
+     * Adds an additional message behind the feedback for Command Result.
+     *
+     * @param additionalMessage given by the caller.
+     */
+    public void setAdditionalMessage(String additionalMessage) {
+        requireNonNull(additionalMessage);
+        this.additionalMessage = additionalMessage;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddCardCommand // instanceof handles nulls
+                && toAdd.equals(((AddCardCommand) other).toAdd));
     }
 }

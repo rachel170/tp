@@ -7,10 +7,16 @@ import java.util.Objects;
  * Deck is the tag which is given to every card.
  */
 public class Deck {
-    public static final String MESSAGE_CONSTRAINTS =
-            "DeckName should not be blank";
+    public static final String RESERVED_DECK_NAME = "list";
+    public static final String DEFAULT_DECK_NAME = "Default";
+    public static final String MESSAGE_CONSTRAINTS_LENGTH =
+            "Deck name should not be blank and should be less than or equal to 40 characters. "
+                + "Current number of characters in deck name is %d.";
+    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Tag should not use the reserved deck name: "
+            + RESERVED_DECK_NAME;
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
             "ResultStatistic should not be blank or a non numeric value";
+
     // Identity fields
     private String deckName;
     private String resultStatistics;
@@ -24,6 +30,7 @@ public class Deck {
         this.deckName = name;
         this.resultStatistics = "-1";
     }
+
 
     public String getDeckName() {
         return deckName;
@@ -46,9 +53,14 @@ public class Deck {
     /**
      * Returns true if a given string is a valid deck name.
      */
-    public static boolean isValidDeck(String test) {
-        return !test.isBlank();
+    public static boolean isValidDeckLength(String test) {
+        return !test.isBlank() && test.length() <= 40;
     }
+
+    public static boolean isValidDeckReservedName(String test) {
+        return !test.equals(RESERVED_DECK_NAME);
+    }
+
     /**
      * Returns true if both Decks have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two decks.
