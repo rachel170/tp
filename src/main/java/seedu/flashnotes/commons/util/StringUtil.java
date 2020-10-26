@@ -32,9 +32,10 @@ public class StringUtil {
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
         String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("[\\p{Punct}\\s]+");
-
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInPreppedSentenceNoPunctuation = preppedSentence.split("[\\p{Punct}\\s]+");
         return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(preppedWord::equalsIgnoreCase) || Arrays.stream(wordsInPreppedSentenceNoPunctuation)
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 
