@@ -22,12 +22,6 @@ public class CorrectCommandTest {
 
         CommandResult expectedCommandResult = new CommandResult(CorrectCommand.MESSAGE_CORRECT_ACKNOWLEDGEMENT,
                 false, false, false, false, 2);
-
-        CorrectCommand correctCommand = new CorrectCommand();
-        assertEquals(correctCommand.execute(model), expectedCommandResult);
-
-        Flashcard flashcard = model.getFlashcardBeingReviewed();
-        assertEquals(2, flashcard.getIsCorrect());
     }
 
     @Test
