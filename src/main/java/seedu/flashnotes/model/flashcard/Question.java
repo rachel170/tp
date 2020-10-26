@@ -10,7 +10,7 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
 public class Question {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Questions should not be blank and should be fewer than 140 characters. "
+            "Questions should not be blank and should less than or equal to 140 characters. "
                 + "Current length of question is %d.";
 
     public final String question;
