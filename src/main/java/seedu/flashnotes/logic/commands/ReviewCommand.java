@@ -1,5 +1,4 @@
 package seedu.flashnotes.logic.commands;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_NO_CARDS_TO_REVIEW;
 
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
