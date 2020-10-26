@@ -263,6 +263,8 @@ public class ModelManager implements Model {
 
         // Store shuffled and trimmed list into flashcardsToReview list
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
+        // Set index of flashcard being reviewed in review mode to 0
+        this.flashcardBeingReviewed = 0;
     }
 
     /**
@@ -298,6 +300,9 @@ public class ModelManager implements Model {
         this.flashcardBeingReviewed += 1;
         if (flashcardBeingReviewed >= flashcardsToReview.size()) {
             flashcardBeingReviewed = 0;
+        } else {
+            Flashcard newFlashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
+            newFlashcard.resetFlip();
         }
     }
 
