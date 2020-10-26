@@ -104,8 +104,10 @@ public class ParserUtil {
     public static Deck parseDeckName(String deckName) throws ParseException {
         requireNonNull(deckName);
         String trimmedDeckName = deckName.trim();
-        if (!Deck.isValidDeck(trimmedDeckName)) {
-            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS, deckName.length()));
+        if (!Deck.isValidDeckLength(trimmedDeckName)) {
+            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS_LENGTH, deckName.length()));
+        } else if (!Deck.isValidDeckReservedName(trimmedDeckName)) {
+            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS_RESERVED, deckName.length()));
         }
         return new Deck(trimmedDeckName);
     }
