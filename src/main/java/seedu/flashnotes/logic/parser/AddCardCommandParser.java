@@ -3,6 +3,8 @@ package seedu.flashnotes.logic.parser;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.flashnotes.model.deck.Deck.DEFAULT_DECK_NAME;
+import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
 
 import java.util.stream.Stream;
 
@@ -29,6 +31,11 @@ public class AddCardCommandParser implements Parser<AddCardCommand> {
         String additionalMessage = "";
 
         assert deckName != null;
+
+        if (deckName.equals(RESERVED_DECK_NAME)) {
+            deckName = DEFAULT_DECK_NAME;
+        }
+
         if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ANSWER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCardCommand.MESSAGE_USAGE));
