@@ -41,8 +41,10 @@ class JsonAdaptedDeck {
      */
     public void updateModel(FlashNotes flashNotes) throws IllegalValueException {
         // Check to make sure deck name is valid
-        if (!Deck.isValidDeck(deckName)) {
-            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS);
+        if (!Deck.isValidDeckLength(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!Deck.isValidDeckReservedName(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
         }
 
         // Check to make sure resultStatistic is valid
@@ -59,9 +61,12 @@ class JsonAdaptedDeck {
         }
     }
     public Deck toModelType() throws IllegalValueException {
-        if (!Deck.isValidDeck(deckName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Deck.isValidDeckLength(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!Deck.isValidDeckReservedName(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
         }
+
         // Check to make sure resultStatistic is valid
         if (resultStatistic.isBlank()) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
