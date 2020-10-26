@@ -47,6 +47,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.AddCardCommand;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
 import seedu.flashnotes.logic.commands.ClearCommand;
@@ -99,12 +100,12 @@ public class FlashNotesParserTest {
 
     @Test
     public void homeScreen_deleteDeck_success() throws Exception {
-        String keyword = "foo";
-        Deck deck = new Deck(keyword);
+        int key = 1;
+        Index index = Index.fromZeroBased(key - 1);
         DeleteDeckCommand command = (DeleteDeckCommand) parser.parseCommand(
-                DeleteDeckCommand.COMMAND_WORD + " " + keyword,
+                DeleteDeckCommand.COMMAND_WORD + " " + key,
                 isNotReviewMode, isNotInDeck, DEFAULT);
-        assertEquals(new DeleteDeckCommand(deck), command);
+        assertEquals(new DeleteDeckCommand(index), command);
     }
 
     @Test
