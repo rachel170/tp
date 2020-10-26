@@ -66,6 +66,7 @@ public class EditCardCommand extends Command {
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
+        //TODO: list
         String originalDeckName = model.getCurrentDeckName();
         Flashcard editedFlashcard = createEditedFlashcard(flashcardToEdit, editFlashcardDescriptor);
 
