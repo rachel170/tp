@@ -18,7 +18,6 @@ import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
-import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.testutil.EditFlashcardDescriptorBuilder;
 
 /**
@@ -95,27 +94,28 @@ public class EditCardCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }*/
 
-    @Test
-    public void execute_duplicateFlashcardUnfilteredList_failure() {
-        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        EditCardCommand.EditFlashcardDescriptor descriptor = new EditFlashcardDescriptorBuilder(firstFlashcard).build();
-        EditCardCommand editCardCommand = new EditCardCommand(INDEX_SECOND_FLASHCARD, descriptor);
-
-        assertCommandFailure(editCardCommand, model, EditCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }
-
-    @Test
-    public void execute_duplicateFlashcardFilteredList_failure() {
-        showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
-
-        // edit flashcard in filtered list into a duplicate in flashnotes
-        Flashcard flashcardInList = model.getFlashNotes().getFlashcardList()
-                .get(INDEX_SECOND_FLASHCARD.getZeroBased());
-        EditCardCommand editCardCommand = new EditCardCommand(INDEX_FIRST_FLASHCARD,
-                new EditFlashcardDescriptorBuilder(flashcardInList).build());
-
-        assertCommandFailure(editCardCommand, model, EditCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }
+    //    @Test
+    //    public void execute_duplicateFlashcardUnfilteredList_failure() {
+    //        Flashcard firstFlashcard = model.getFilteredFlashcardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
+    //        EditCardCommand.EditFlashcardDescriptor descriptor =
+    //        new EditFlashcardDescriptorBuilder(firstFlashcard).build();
+    //        EditCardCommand editCardCommand = new EditCardCommand(INDEX_SECOND_FLASHCARD, descriptor);
+    //
+    //        assertCommandFailure(editCardCommand, model, EditCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
+    //    }
+    //
+    //    @Test
+    //    public void execute_duplicateFlashcardFilteredList_failure() {
+    //        showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
+    //
+    //        // edit flashcard in filtered list into a duplicate in flashnotes
+    //        Flashcard flashcardInList = model.getFlashNotes().getFlashcardList()
+    //                .get(INDEX_SECOND_FLASHCARD.getZeroBased());
+    //        EditCardCommand editCardCommand = new EditCardCommand(INDEX_FIRST_FLASHCARD,
+    //                new EditFlashcardDescriptorBuilder(flashcardInList).build());
+    //
+    //        assertCommandFailure(editCardCommand, model, EditCardCommand.MESSAGE_DUPLICATE_FLASHCARD);
+    //    }
 
     @Test
     public void execute_invalidFlashcardIndexUnfilteredList_failure() {
