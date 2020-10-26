@@ -20,9 +20,14 @@ public class WrongCommandTest {
         // To get a new flashcard
         model.updateFlashcardBeingReviewed(2);
 
-        CommandResult expectedCommandResult = new CommandResult(WrongCommand.MESSAGE_WRONG_ACKNOWLEDGEMENT,
+        CommandResult expectedCommandResult = new CommandResult(WrongCommand.MESSAGE_WRONG_ERROR,
                 false, false, false, false, 1);
 
+        WrongCommand wrongCommand = new WrongCommand();
+        assertEquals(wrongCommand.execute(model), expectedCommandResult);
+
+        Flashcard flashcard = model.getFlashcardBeingReviewed();
+        assertEquals(0, flashcard.getIsCorrect());
     }
 
     @Test
