@@ -1,5 +1,7 @@
 package seedu.flashnotes.logic;
 
+import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -121,7 +123,9 @@ public class LogicManager implements Logic {
      */
     @Override
     public void updateDeckPerformanceScore(Integer reviewScore) {
-        model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+        if (!model.getCurrentDeckName().equals(RESERVED_DECK_NAME)) {
+            model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+        }
     }
 
     /**

@@ -17,7 +17,7 @@ public class ListCommand extends Command {
             + " " + "Listed all flashcards";
 
     //TODO: change name
-    public static final String DECK_NAME = "Default";
+    public static final String DECK_NAME = "list";
 
 
     @Override

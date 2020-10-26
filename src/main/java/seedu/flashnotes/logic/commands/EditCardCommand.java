@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
+import static seedu.flashnotes.model.deck.Deck.DEFAULT_DECK_NAME;
+import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +70,12 @@ public class EditCardCommand extends Command {
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
         //TODO: list
-        String originalDeckName = model.getCurrentDeckName();
+        String currentDeckName = model.getCurrentDeckName();
+        boolean isInList = false;
+        if (currentDeckName.equals(RESERVED_DECK_NAME)) {
+            currentDeckName = DEFAULT_DECK_NAME;
+            isInList = true;
+        }
         Flashcard editedFlashcard = createEditedFlashcard(flashcardToEdit, editFlashcardDescriptor);
 
         if (!flashcardToEdit.isSameFlashcard(editedFlashcard) && model.hasFlashcard(editedFlashcard)) {
@@ -79,7 +87,11 @@ public class EditCardCommand extends Command {
         if (!model.hasDeck(new Deck(editedDeckName))) {
             model.addDeck(new Deck(editedDeckName));
         }
-        model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(originalDeckName));
+        if (isInList) {
+            model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        } else {
+            model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(currentDeckName));
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, editedFlashcard));
     }
 
