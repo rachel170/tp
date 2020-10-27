@@ -168,7 +168,6 @@ Example:
 * `deleteDeck 1` will delete the deck at index 1 and all its corresponding cards.
 
 Outcome Expected:
-Outcome Expected:
 
 ![DeleteDeckBefore](images/DeleteDeckBefore.png)
 
@@ -222,13 +221,13 @@ Outcome Expected:
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
 Outcome Expected:
 - Success message displayed is: `Opened help window.`
 - Help Window pop up with the link to user guide.
+
+![help message](images/helpMessage.png)
 
 ### Adding a flashcard : `addCard`
 
@@ -240,7 +239,9 @@ Examples:
 * `addCard q/When did Singapore gain independence? a/9th August 1965`
 
 Outcome Expected:
-- Success message displayed is: `New flashcard added: Question: When did Singapore gain independence? Answer: 9th August 1965 Tag: Singapore.`
+![Add Card Before](images/AddCardBefore.png)
+
+![Add Card After](images/AddCardAfter.png)
 
 ### Editing a flashcard : `editCard`
 
