@@ -156,11 +156,13 @@ Example:
 
 Outcome Expected:
 
-![EditDeckNameBefore](images/EditDeckNameBefore.png)
 1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
+![EditDeckNameBefore](images/EditDeckNameBefore.png)
 
-![EditDeckNameAfter](images/EditDeckNameAfter.png)
+
 2\. When successful, you will see that the name of the deck at index 1 has been changed to History.
+![EditDeckNameAfter](images/EditDeckNameAfter.png)
+
 
 <div markdown="block" class="alert alert-warning">
 
@@ -188,12 +190,12 @@ Example:
 
 Outcome Expected:
 
+1\. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted.
 ![DeleteDeckBefore](images/DeleteDeckBefore.png)
-1\. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted
 
 
-![DeleteDeckAfter](images/DeleteDeckAfter.png)
 2\. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
+![DeleteDeckAfter](images/DeleteDeckAfter.png)
 
 
 <div markdown="block" class="alert alert-warning">
@@ -246,8 +248,9 @@ Format: `help`
 
 Outcome Expected:
 
-![help message](images/helpMessage.png)
 1\. The help window will show you the link to our user guide.
+![help message](images/helpMessage.png)
+
 
 
 ### Adding a flashcard : `addCard`
@@ -260,11 +263,13 @@ Example:
 * `addCard q/Who was Singapore's First President? a/Yusok Ishak`
 
 Outcome Expected:
-![Add Card Before](images/AddCardBefore.png)
-1\. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
 
-![Add Card After](images/AddCardAfter.png)
+1\. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
+![Add Card Before](images/AddCardBefore.png)
+
+
 2\. When successful, you will see the newly added flashcard at the bottom of the list.
+![Add Card After](images/AddCardAfter.png)
 
 
 ### Editing a flashcard : `editCard`
