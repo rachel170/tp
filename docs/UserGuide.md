@@ -2,12 +2,24 @@
 layout: page
 title: User Guide
 ---
+## Introduction
+Welcome to the FlashNotes User Guide.
 
-FlashNotes is a **desktop app for flashcards**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Flashnotes can help you create word-based flashcards faster than traditional GUI apps.
+FlashNotes is a **desktop app for flashcards**, built for students who wish to utilise flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
 
-Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for.
+Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for. However, with FlashNotes, you can now keep track of your flashcards and their content with ease.
+FlashNotes allows you to organise your flashcards by topics or subjects using Decks. FlashNotes utilises a studying technique known as [Active Recall](https://en.wikipedia.org/wiki/Active_recall), allowing you to test yourself using flashcards to check if you have mastered your content.
+Furthermore, FlashNotes will also keep track of your progress and show you an overview of how well you have mastered your content using flashcards.
 
-This User Guide will help you find out how FlashNotes is able to help you study more efficiently using flashcards and how to use it. Let's get started.
+This User Guide is for students who have no prior knowledge on how to create and review flashcards. We will teach you how create and manage your flashcards more efficiently, and how to review your flashcards for studying using FlashNotes. 
+We will provide you with all the various features and commands of FlashNotes, and its details. We also have a quickstart section if you are eager to try out FlashNotes first. 
+Lastly, we also have a Command Summary section for easy reference of all the commands in case you have forgotten them.
+
+To get started, head over to the [Quick Start](#quick-start) section.
+
+To see the summary of all our commands, go to the [Command Summary](#command-summary) section.
+
+To help you get started, here's the Table of Contents for a brief overview of our User Guide, or for you to quick access other sections of our User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -17,23 +29,24 @@ This User Guide will help you find out how FlashNotes is able to help you study 
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
-## Overview
 
-When studying for any topics, you typically organize your notes by topics or the subjects.
+##Glossary
 
-You also want to be able to pull up information regarding those topics closer to examination date and review those topics.
+* Flashcard: A flashcard shows a question and the answer to the question.
+* Decks: A deck will contain flashcards.
+* Index: The number at the start of each deck or flashcard.
+* Review: A mode where only the question of the flashcard is shown; the answer will be hidden from you.
+* :information_source:: additional info
+* :warning:: warning
 
-If necessary, you may need to review it multiple times in order to track your progress and understanding. However, you don't want to have to manually update a spreadsheet everytime you review your content.
-
-Is studying with flashcards starting to seem like a massive chore already? Fret not, FlashNotes is here to help you!
-
-### Understanding the 3 different modes:
+## Understanding the 3 different modes:
+FlashNotes have 3 different modes that you have to take note of. You will always start in the Main Mode when you open FlashNotes.
 
 Available Modes | Functionality involved | Real Life Representation
 --------|------------------ | ------
-**Main Mode** | Holds the list of currently stored decks, which contains the list of cards internally. | Topics or Subjects of interest.
-**Card Mode** | Holds the list of cards from the selected deck, or the list of all cards currently available. | Sub-questions and content knowledge.
-**Review Mode** | Reads all cards from the card mode. It allows cards to be flipped and enables you to mark them correct or wrong. | Revision session.
+**Main Mode** | Shows you the decks you have created. | Topics or Subjects of interest
+**Card Mode** | Shows you all the list of cards that you have created, or the cards in each deck. | Sub-questions and content knowledge
+**Review Mode** | Allows you to review cards by flipping the card between question and answer, and allows you to make the card as correct or wrong. | Revision session
 
 This is a basic overview of what FlashNotes can do for you, but there are more features such as editing decks and cards.
 
@@ -69,7 +82,7 @@ Ready to dominate exams season? Let's get down to work.
 1. After executing each command, a success or failure message will be displayed in the region highlighted in the image below. This will help you to know if you have successfully executed relevant commands, it will also provide additional information on why the command failed, if you provide the correct command prefixes. <br>
     ![Main Mode](images/resultDisplay.png)
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#main-mode-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -135,12 +148,13 @@ Edit a deck name and the tags of all corresponding cards in the deck.
 
 Format: `editDeckName INDEX n/NEWDECKNAME`
 
-Examples:
+Example:
 * `editDeckName 1 n/History` will change the name of the deck at index `1` to `History`.
 
 Outcome Expected:
 
 ![EditDeckNameBefore](images/EditDeckNameBefore.png)
+
 
 ![EditDeckNameAfter](images/EditDeckNameAfter.png)
 
