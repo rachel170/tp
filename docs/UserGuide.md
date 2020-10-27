@@ -138,10 +138,14 @@ Examples:
 * `editDeckName 1 n/History` will change the name of the deck at index `1` to `History`.
 
 <div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
 * Edits the deck name of the deck at the specified `INDEX`
 * The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `NEWDECKNAME` is case-sensitive
+
 </div>
 
 Outcome Expected:
