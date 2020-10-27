@@ -165,7 +165,7 @@ Deletes the deck and all the associated cards in your specified deck.
 Format: `deleteDeck INDEX`
 
 Example:
-* `deleteDeck 1` will delete the deck at index 1 and all its corresponding cards.
+* `deleteDeck 3` will delete the deck at index 3 and all its corresponding cards.
 
 Outcome Expected:
 
@@ -235,8 +235,8 @@ Adds a card to the currently stored notes.
 
 Format: `addCard n/QUESTION a/ANSWER`
 
-Examples:
-* `addCard q/When did Singapore gain independence? a/9th August 1965`
+Example:
+* `addCard q/Who was Singapore's First President? a/Yusok Ishak`
 
 Outcome Expected:
 ![Add Card Before](images/AddCardBefore.png)
