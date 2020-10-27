@@ -20,7 +20,7 @@ To get started, head over to the [Quick Start](#quick-start) section.
 
 To see the summary of all our commands, go to the [Command Summary](#command-summary) section.
 
-Here's the Table of Contents for a brief overview of our User Guide, or for you to quick access other sections of our User Guide.
+Here's the Table of Contents for a brief overview of our User Guide, or for you to quickly access other sections of our User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
