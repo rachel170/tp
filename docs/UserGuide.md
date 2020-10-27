@@ -111,6 +111,7 @@ Examples:
 * `enterDeck Singapore` return cards with Tags `Singapore`
 
 Outcome expected:
+
 ![EnterDeck](images/cardmode.png)
 
 ### Create a new Deck : `addDeck`
@@ -137,6 +138,12 @@ Format: `editDeckName INDEX n/NEWDECKNAME`
 Examples:
 * `editDeckName 1 n/History` will change the name of the deck at index `1` to `History`.
 
+Outcome Expected:
+
+![EditDeckNameBefore](images/EditDeckNameBefore.png)
+
+![EditDeckNameAfter](images/EditDeckNameAfter.png)
+
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
@@ -148,8 +155,7 @@ Examples:
 
 </div>
 
-Outcome Expected:
-- `to be added`
+
 
 ### Delete a new Deck : `deleteDeck`
 
