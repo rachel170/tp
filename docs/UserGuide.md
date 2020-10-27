@@ -103,31 +103,51 @@ Lists flashcards within your chosen deck.
 
 Format: `enterDeck [DECKNAME]`
 
-* The search is case-sensitive. e.g. `GET1025` will not match `get1025`
-* **only full words will** be matched e.g. `GE` will not match `GET1025`
-* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
-
 Examples:
-* `enterDeck Singapore` return cards with Tags `Singapore`
+* `enterDeck Economics` return cards stored in the deck `Economics`
 
 Outcome expected:
-![EnterDeck](images/cardmode.png)
+1. Enter the command into the command bar
+![EnterDeckCommand](images/enterDeck_init.png)
+
+1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
+![EnterDeck](images/enterDeck_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* The search is **case-sensitive**. e.g. `GET1025` will not match `get1025`
+* only **full words will** be matched e.g. `GE` will not match `GET1025`
+
+</div>
 
 ### Create a new Deck : `addDeck`
 
-Lists flashcards within your chosen deck.
+Creates a new empty deck and adds to the list of decks displayed.
 
 Format: `addDeck n/DECKNAME`
 
-* The deck name is case-sensitive. e.g. `GET1025` will not match `get1025`
+Examples:
+* `addDeck Singapore History` creates an empty deck called `Singapore History`.
+
+Outcome expected:
+1. Enter the Add Deck Command into the command bar as per the example.
+![AddDeckCommand](images/addDeck_init.png)
+
+1. You should see the newly rendered list of decks. If there are more decks than the screen can fit, scroll down to find your newly created deck. It will be the last one in the list.
+![AddDeck](images/addDeck_success.png)
+1. After scrolling down, you will be able to see your newly created deck. It is empty though, waiting for you to fill it up with meaningful flashcards!
+![AddDeck](images/addDeck_successScrolled.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* The deck name is case-sensitive. e.g. future search queries of `GET1025` will not match `get1025`
 * if there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
 
-Examples:
-* `addDeck Singapore` creates an empty deck called `Singapore`.
-
-Outcome Expected:
-- Success message displayed is: `New Deck added: Singapore`
-
+</div>
 ### Rename a new Deck : `editDeck`
 
 Edit a deck name and the tags of all corresponding cards in the deck.
