@@ -36,6 +36,7 @@ To help you get started, here's the Table of Contents for a brief overview of ou
 * Decks: A deck will contain flashcards.
 * Index: The number at the start of each deck or flashcard.
 * Review: A mode where only the question of the flashcard is shown; the answer will be hidden from you.
+* Prefix: A reserved word that needs to be placed before your inputs to indicate the start of your input.
 * :information_source:: additional info
 * :warning:: warning
 
@@ -154,9 +155,10 @@ Example:
 Outcome Expected:
 
 ![EditDeckNameBefore](images/EditDeckNameBefore.png)
-
+1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
 
 ![EditDeckNameAfter](images/EditDeckNameAfter.png)
+2\. When successful, you will see that the name of the deck at index 1 has been changed to History.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -166,6 +168,7 @@ Outcome Expected:
 * The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `NEWDECKNAME` is case-sensitive
+* The `NEWDECKNAME` should not be a name that already exists as a deck.
 
 </div>
 
@@ -184,8 +187,10 @@ Example:
 Outcome Expected:
 
 ![DeleteDeckBefore](images/DeleteDeckBefore.png)
+1/. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted
 
 ![DeleteDeckAfter](images/DeleteDeckAfter.png)
+2/. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
 
 
 <div markdown="block" class="alert alert-warning">
@@ -195,7 +200,6 @@ Outcome Expected:
 * Deletes the deck at the specified `INDEX`
 * The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
-
 
 </div>
 
@@ -238,24 +242,26 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 Outcome Expected:
-- Success message displayed is: `Opened help window.`
-- Help Window pop up with the link to user guide.
 
 ![help message](images/helpMessage.png)
+1/. The help window will show you the link to our user guide.
 
 ### Adding a flashcard : `addCard`
 
 Adds a card to the currently stored notes.
 
-Format: `addCard n/QUESTION a/ANSWER`
+Format: `addCard q/QUESTION a/ANSWER`
 
 Example:
 * `addCard q/Who was Singapore's First President? a/Yusok Ishak`
 
 Outcome Expected:
 ![Add Card Before](images/AddCardBefore.png)
+1/. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
 
 ![Add Card After](images/AddCardAfter.png)
+2/. When successful, you will see the newly added flashcard at the bottom of the list.
+
 
 ### Editing a flashcard : `editCard`
 
