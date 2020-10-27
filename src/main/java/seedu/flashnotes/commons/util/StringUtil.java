@@ -33,8 +33,9 @@ public class StringUtil {
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
-
+        String[] wordsInPreppedSentenceNoPunctuation = preppedSentence.split("[\\p{Punct}\\s]+");
         return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(preppedWord::equalsIgnoreCase) || Arrays.stream(wordsInPreppedSentenceNoPunctuation)
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 

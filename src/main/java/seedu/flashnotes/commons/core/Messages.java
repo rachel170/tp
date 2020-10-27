@@ -19,27 +19,27 @@ public class Messages {
 
     // Messages for invalid commands used in home screen
     public static final String INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE = "You cannot add a flashcard in the home"
-            + " screen. Enter a deck by using the command `enterDeck n/DECKNAME` first.";
+            + " screen. Enter a deck by using the command `enterDeck DECKNAME` first.";
     public static final String INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE = "You cannot edit a flashcard in the home"
-            + " screen. Enter a deck by using the command `enterDeck n/DECKNAME` first.";
+            + " screen. Enter a deck by using the command `enterDeck DECKNAME` first.";
     public static final String INVALID_DELETECARD_COMMAND_IN_HOME_MESSAGE = "You cannot delete a flashcard in the"
-            + " home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first.";
+            + " home screen. Enter a deck by using the command `enterDeck DECKNAME` first.";
     public static final String INVALID_FIND_COMMAND_IN_HOME_MESSAGE = "You cannot find a flashcard in the"
-            + " home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first.";
+            + " home screen. Enter a deck by using the command `enterDeck DECKNAME` first.";
     public static final String INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE = "You cannot review a deck in the"
-            + " home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first.";
+            + " home screen. Enter a deck by using the command `enterDeck DECKNAME` first.";
     public static final String INVALID_CORRECT_COMMAND_IN_HOME_MESSAGE = "You cannot mark a flashcard as correct "
-            + "in the home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first and then enter "
+            + "in the home screen. Enter a deck by using the command `enterDeck DECKNAME` first and then enter "
             + "the review mode with the command `review`.";
     public static final String INVALID_FLIP_COMMAND_IN_HOME_MESSAGE = "You cannot flip a flashcard "
-            + "in the home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first and then enter "
+            + "in the home screen. Enter a deck by using the command `enterDeck DECKNAME` first and then enter "
             + "the review mode with the command `review`.";
     public static final String INVALID_HOME_COMMAND_IN_HOME_MESSAGE = "You are already in the home screen.";
     public static final String INVALID_WRONG_COMMAND_IN_HOME_MESSAGE = "You cannot mark a flashcard as wrong "
             + "in the home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first and then enter "
             + "the review mode with the command `review`.";
     public static final String INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE = "You cannot end a review "
-            + "in the home screen. Enter a deck by using the command `enterDeck n/DECKNAME` first and then enter "
+            + "in the home screen. Enter a deck by using the command `enterDeck DECKNAME` first and then enter "
             + "the review mode with the command `review`.";
 
     // Messages for invalid commands used in review mode
@@ -89,6 +89,6 @@ public class Messages {
             + "\nPlease try the command again without any arguments: %1$s";
     public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
     public static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
-            + "'add q/QUESTION a/ANSWER' first.";
+            + "'addCard q/QUESTION a/ANSWER' first.";
 
 }
