@@ -137,6 +137,7 @@ Outcome expected:
 
 1. You should see the newly rendered list of decks. If there are more decks than the screen can fit, scroll down to find your newly created deck. It will be the last one in the list.
 ![AddDeck](images/addDeck_success.png)
+
 1. After scrolling down, you will be able to see your newly created deck. It is empty though, waiting for you to fill it up with meaningful flashcards!
 ![AddDeck](images/addDeck_successScrolled.png)
 
@@ -148,6 +149,7 @@ Outcome expected:
 * if there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
 
 </div>
+
 ### Rename a new Deck : `editDeck`
 
 Edit a deck name and the tags of all corresponding cards in the deck.
@@ -187,9 +189,21 @@ Shows a list of all flashcards.
 Format: `list`
 
 Outcome Expected:
-- Success message displayed is: `Inside Deck. 9 flashcards listed! Listed all flashcards`
+1. Enter the List Command into the command bar as per the example.
+![ListCommand](images/list_init.png)
+
+1. You should see the newly rendered list of flashcards. The mode contains all flashcards currently stored in FlashNotes irrespective of the deck.
+![List](images/list_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
 
 * Any cards added while in the list mode will be added to the `Default` deck.
+* No additional inputs should be added behind the list command.
+* Note that starting a review in this screen will not attribute the review results to any deck. It will not be stored at the end of the review session.
+
+<div/>
 
 ### Clear all entries : `clear`
 
@@ -198,7 +212,22 @@ Clears all decks and flashcards from the program.
 Format: `clear`
 
 Outcome Expected:
-- Success message displayed is: `Flash Notes has been cleared!`
+1. Enter the Clear Command into the command bar as per the example.
+![ClearCommand](images/clear_init.png)
+
+1. You should now see that FlashNotes is empty.
+![Clear](images/clear_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* All cards and decks will be cleared, including any revision history.
+* No additional inputs should be added behind the clear command.
+* There is no undo command available in the system presently. Hence, the clear command is irreversible
+
+<div/>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -314,8 +343,20 @@ Return to Main mode with list of decks.
 Format: `home`
 
 Outcome Expected:
+1. Enter the Home Command into the command bar as per the example.
+![Home Mode](images/home_init.png)
 
-![Main Mode](images/mainmode-wo-redbox.png)
+1. You should now see the list of orange decks in the home screen.
+![Home Mode](images/home_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* It can only be activated from the card screen to navigate back to home.
+* No additional inputs should be added behind the clear command.
+
+<div/>
 
 ### Exiting the program : `exit`
 
