@@ -50,6 +50,7 @@ Available Modes | Functionality involved | Real Life Representation
 **Card Mode** | Shows you all the list of cards that you have created, or the cards in each deck. | Sub-questions and content knowledge
 **Review Mode** | Allows you to review cards by flipping the card between question and answer, and allows you to make the card as correct or wrong. | Revision session
 
+
 This is a basic overview of what FlashNotes can do for you, but there are more features such as editing decks and cards.
 
 Ready to dominate exams season? Let's get down to work.
@@ -190,6 +191,7 @@ Outcome Expected:
 ![DeleteDeckBefore](images/DeleteDeckBefore.png)
 1\. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted
 
+
 ![DeleteDeckAfter](images/DeleteDeckAfter.png)
 2\. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
 
@@ -245,7 +247,8 @@ Format: `help`
 Outcome Expected:
 
 ![help message](images/helpMessage.png)
-1. The help window will show you the link to our user guide.
+1\. The help window will show you the link to our user guide.
+
 
 ### Adding a flashcard : `addCard`
 
