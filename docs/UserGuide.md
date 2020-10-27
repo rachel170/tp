@@ -205,11 +205,11 @@ Exits FlashNotes.
 
 Format: `exit`
 
-Example:
+Outcome Expected:
+1. User enters `exit` command in **Home Mode**. <br>
 ![Exiting FlashNotes](images/UG_ExitCommand.png)
 
-Outcome Expected:
-- FlashNotes closes and saves all current data.
+1. FlashNotes closes and saves all current data.
 
 ### Saving the data
 
@@ -410,12 +410,11 @@ Ends the current review session and returns you to the **Card Mode** that the re
 
 Format: `endReview`
 
-Example Usage: <br>
-User has reached the end of the review session and entered the `endReview` command. <br>
+Outcome Expected: <br>
+1. User has reached the end of the review session and entered the `endReview` command. <br>
 ![End of Review Window](images/UG_EndOfReview.png)
 
-Outcome Expected: <br>
-Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
+1. Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
 ![Return to Main Window](images/UG_ReturnToCardMode.png)
 
 --------------------------------------------------------------------------------------------------------------------
