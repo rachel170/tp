@@ -211,6 +211,15 @@ Outcome Expected:
 
 1. FlashNotes closes and saves all current data.
 
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
+* No additional inputs should be added behind the `exit` command.
+
+</div>
+
 ### Saving the data
 
 FlashNotes saves its data into hard disk automatically after every command,  so there is no need to save its data manually.
@@ -416,6 +425,15 @@ Outcome Expected: <br>
 
 1. Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
 ![Return to Main Window](images/UG_ReturnToCardMode.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* `endReview` can only be activated from the Review Window to return to the **Card Mode** you started the review session from.
+* No additional inputs should be added behind the `endReview` command.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
