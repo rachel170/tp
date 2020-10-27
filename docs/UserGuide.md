@@ -49,7 +49,7 @@ Ready to dominate exams season? Let's get down to work.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
-1. Double-click the file to start the app. A GUI similar to the one below should appear in a few seconds.<br>
+1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds.<br>
    ![Figure 1: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
    _Figure 2A: Initial View of FlashNotes with GUI component labels._
    
@@ -58,19 +58,6 @@ Ready to dominate exams season? Let's get down to work.
    * **Result Box**: Where FlashNotes displays the resulting message to your last input in the Command Box.
    
    * **List of Decks**: Displayed list of decks currently in FlashNotes.
-   
-   <div markdown="block" class="alert alert-info">
-   
-   **:information_source: About the sample data:**<br>
-   
-   Initial launch of FlashNotes will result in the application loading in with our provided sample data. This is to accommodate first-time users wishing to familiarize themselves with FlashNotes before using it in-depth.
-    
-   Our provided sample data is not accurate nor necessary to the application. As such, you can easily delete the sample data in the following way:
-   
-   * Usage of the `clear` command.<br>
-     Clears all flashcard and deck data currently in FlashNotes. Refer under [Main Mode Features](#Main Mode Features) for further details about the command.
-     
-   </div>
 
 1. Type a command in the **Command Box** and press Enter to execute it. Some example commands you can try are:
 
@@ -89,6 +76,19 @@ Ready to dominate exams season? Let's get down to work.
 1. After executing each command, a success or failure message will be displayed in the **Result Box**. This will let you know if you have successfully executed the relevant commands or not. Given that you have provided the correct command prefixes, it can even provide additional information on why your command has failed.  <br>
 
 1. Refer to the [Features](#Main Mode Features) below for the details of each command.
+
+<div markdown="block" class="alert alert-info">
+   
+   **:information_source: About the sample data:**<br>
+   
+   Initial launch of FlashNotes will result in the application loading in with our provided sample data. This is to accommodate first-time users wishing to familiarize themselves with FlashNotes before using it in-depth.
+    
+   Our provided sample data is not accurate nor necessary to the application. As such, you can easily delete the sample data in the following way:
+   
+   * Usage of the `clear` command.<br>
+     Clears all flashcard and deck data currently in FlashNotes. Refer under [Main Mode Features](#Main Mode Features) for further details about the command.
+     
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
