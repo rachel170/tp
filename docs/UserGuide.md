@@ -94,10 +94,10 @@ Ready to dominate exams season? Let's get down to work.
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. in `addCard q/QUESTION`, `QUESTION` is a parameter which can be used as `add q/What is the question?`.
+* Words in `UPPER_CASE` are the inputs to be supplied by you.<br>
+  e.g. in `addCard q/QUESTION`, `QUESTION` is an input which can be used as `add q/What is the question?`.
 
-* Parameters can be in any order.<br>
+* Inputs can be in any order.<br>
   e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
 </div>
 
@@ -159,7 +159,7 @@ Outcome Expected:
 1. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
 
 ![EditDeckNameAfter](images/EditDeckNameAfter.png)
-2. When successful, you will see that the name of the deck at index 1 has been changed to History.
+2\. When successful, you will see that the name of the deck at index 1 has been changed to History.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -191,7 +191,7 @@ Outcome Expected:
 1. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted
 
 ![DeleteDeckAfter](images/DeleteDeckAfter.png)
-2. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
+2\. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
 
 
 <div markdown="block" class="alert alert-warning">
@@ -245,7 +245,7 @@ Format: `help`
 Outcome Expected:
 
 ![help message](images/helpMessage.png)
-1/. The help window will show you the link to our user guide.
+1. The help window will show you the link to our user guide.
 
 ### Adding a flashcard : `addCard`
 
@@ -261,7 +261,7 @@ Outcome Expected:
 1. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
 
 ![Add Card After](images/AddCardAfter.png)
-2. When successful, you will see the newly added flashcard at the bottom of the list.
+2\. When successful, you will see the newly added flashcard at the bottom of the list.
 
 
 ### Editing a flashcard : `editCard`
