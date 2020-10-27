@@ -31,7 +31,7 @@ To help you get started, here's the Table of Contents for a brief overview of ou
 
 --------------------------------------------------------------------------------------------------------------------
 
-##Glossary
+## Glossary
 
 * Flashcard: A flashcard shows a question and the answer to the question.
 * Decks: A deck will contain flashcards.
@@ -156,10 +156,10 @@ Example:
 Outcome Expected:
 
 ![EditDeckNameBefore](images/EditDeckNameBefore.png)
-1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
+1. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
 
 ![EditDeckNameAfter](images/EditDeckNameAfter.png)
-2\. When successful, you will see that the name of the deck at index 1 has been changed to History.
+2. When successful, you will see that the name of the deck at index 1 has been changed to History.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -188,10 +188,10 @@ Example:
 Outcome Expected:
 
 ![DeleteDeckBefore](images/DeleteDeckBefore.png)
-1/. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted
+1. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted
 
 ![DeleteDeckAfter](images/DeleteDeckAfter.png)
-2/. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
+2. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
 
 
 <div markdown="block" class="alert alert-warning">
@@ -258,10 +258,10 @@ Example:
 
 Outcome Expected:
 ![Add Card Before](images/AddCardBefore.png)
-1/. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
+1. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
 
 ![Add Card After](images/AddCardAfter.png)
-2/. When successful, you will see the newly added flashcard at the bottom of the list.
+2. When successful, you will see the newly added flashcard at the bottom of the list.
 
 
 ### Editing a flashcard : `editCard`
