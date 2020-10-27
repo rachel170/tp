@@ -128,19 +128,20 @@ Examples:
 Outcome Expected:
 - Success message displayed is: `New Deck added: Singapore`
 
-### Rename a new Deck : `editDeck`
+### Rename a new Deck : `editDeckName`
 
 Edit a deck name and the tags of all corresponding cards in the deck.
 
-Format: `editDeck INDEX n/NEWDECKNAME`
+Format: `editDeckName INDEX n/NEWDECKNAME`
 
 * Edits the deck name of the deck at the specified `INDEX`
 * The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `NEWDECKNAME` is case-sensitive
+{: .alert .alert-warning}
 
 Examples:
-* `editDeck 1 History` will change the name of the deck at index `1` to `History`.
+* `editDeckName 1 n/History` will change the name of the deck at index `1` to `History`.
 
 Outcome Expected:
 - `to be added`
@@ -149,13 +150,13 @@ Outcome Expected:
 
 Deletes the deck and all the associated cards in your specified deck.
 
-Format: `deleteDeck DECKNAME`
+Format: `deleteDeck INDEX`
 
 * Deletes the deck with the specified `DECKNAME`
 * Deletes all cards in the deck
 
 Example:
-* `deleteDeck Singapore` will delete the deck and all its corresponding cards.
+* `deleteDeck 1` will delete the deck at index 1 and all its corresponding cards.
 
 Outcome Expected:
 - Success message displayed is: `Deleted deck: Singapore`
@@ -412,7 +413,7 @@ Action | Format, Examples
 **Add Deck** | `Format: addDeck n/[DECKNAME]`<br> e.g., `addDeck Default`
 **Read Deck** | `Format: enterDeck [DECKNAME]` <br> e.g., `enterDeck Default`
 **Delete Deck** | `Format: delete [DECKNAME]`<br> e.g., `delete Default`
-**Edit Deck name** | `edit [n/NEWDECKNAME] [t/TARGETDECKNAME]`<br> e.g., `edit n/Default Deck t/Default`
+**Edit Deck name** | `Format: editDeckName INDEX [n/TARGETDECKNAME]`<br> e.g., `editDeckName 1 n/History`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
