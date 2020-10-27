@@ -8,12 +8,13 @@ Welcome to the FlashNotes User Guide.
 FlashNotes is a **desktop app for flashcards**, built for students who wish to utilise flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
 
 Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for. However, with FlashNotes, you can now keep track of your flashcards and their content with ease.
-FlashNotes allows you to organise your flashcards by topics or subjects using Decks. FlashNotes utilises a studying technique known as [Active Recall](https://en.wikipedia.org/wiki/Active_recall), allowing you to test yourself using flashcards to check if you have mastered your content.
+FlashNotes allows you to organise your flashcards by topics or subjects using Decks. 
+
+FlashNotes utilises a studying technique known as [Active Recall](https://en.wikipedia.org/wiki/Active_recall), allowing you to test yourself using flashcards to check if you have mastered your content.
 Furthermore, FlashNotes will also keep track of your progress and show you an overview of how well you have mastered your content using flashcards.
 
 This User Guide is for students who have no prior knowledge on how to create and review flashcards. We will teach you how create and manage your flashcards more efficiently, and how to review your flashcards for studying using FlashNotes. 
-We will provide you with all the various features and commands of FlashNotes, and its details. We also have a quickstart section if you are eager to try out FlashNotes first. 
-Lastly, we also have a Command Summary section for easy reference of all the commands in case you have forgotten them.
+We will provide you with all the various features and commands of FlashNotes, and its details. 
 
 To get started, head over to the [Quick Start](#quick-start) section.
 
