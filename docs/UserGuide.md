@@ -199,6 +199,26 @@ Format: `clear`
 Outcome Expected:
 - Success message displayed is: `Flash Notes has been cleared!`
 
+### Exiting the program : `exit`
+
+Exits FlashNotes.
+
+Format: `exit`
+
+Example:
+![Exiting FlashNotes](images/UG_ExitCommand.png)
+
+Outcome Expected:
+- FlashNotes closes and saves all current data.
+
+### Saving the data
+
+FlashNotes saves its data into hard disk automatically after every command,  so there is no need to save its data manually.
+
+The data of FlashNotes is contained in the `flashnotes.json` file. This save file can be found in the `data` folder contained inside of the _home folder_ that you installed FlashNotes into.
+
+For further details on how to transfer FlashNotes data, please refer to the [FAQ](#FAQ) section.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -316,19 +336,6 @@ Outcome Expected:
 
 ![Main Mode](images/mainmode-wo-redbox.png)
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-Outcome Expected:
-- Program closes down and saves all current data.
-
-### Saving the data
-
-FlashNotes saves data to the hard disk automatically after any command that changes the data. There is no need to save manually.
-
 ### Opens the review mode: `review`
 
 Opens the review mode to display cards one by one so that you can review them.
@@ -399,12 +406,17 @@ Outcome Expected:
 
 ### End current review session: `endReview`
 
-Ends the current review session and shows review statistics.
+Ends the current review session and returns you to the **Card Mode** that the review session started from.
 
 Format: `endReview`
 
-Outcome Expected:
-- Review Window is closed.
+Example Usage: <br>
+User has reached the end of the review session and entered the `endReview` command. <br>
+![End of Review Window](images/UG_EndOfReview.png)
+
+Outcome Expected: <br>
+Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
+![Return to Main Window](images/UG_ReturnToCardMode.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -435,6 +447,7 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
+**Exit** | `exit`
 
 ### Card Mode
 
