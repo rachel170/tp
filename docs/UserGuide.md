@@ -107,7 +107,7 @@ Examples:
 * `enterDeck Economics` return cards stored in the deck `Economics`
 
 Outcome expected:
-1. Enter the command into the command bar
+1. Enter the command into the command bar.
 ![EnterDeckCommand](images/enterDeck_init.png)
 
 1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
@@ -146,7 +146,7 @@ Outcome expected:
 :warning: Things to note:
 
 * The deck name is case-sensitive. e.g. future search queries of `GET1025` will not match `get1025`
-* if there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
+* If there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
 
 </div>
 
@@ -224,7 +224,7 @@ Outcome Expected:
 
 * All cards and decks will be cleared, including any revision history.
 * No additional inputs should be added behind the clear command.
-* There is no undo command available in the system presently. Hence, the clear command is irreversible
+* There is no undo command available in the system presently. Hence, the clear command is irreversible.
 
 <div/>
 
