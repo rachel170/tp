@@ -148,7 +148,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* Edits the deck name of the deck at the specified `INDEX`
+* Edits the deck at the specified `INDEX`
 * The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `NEWDECKNAME` is case-sensitive
@@ -161,16 +161,30 @@ Outcome Expected:
 
 Deletes the deck and all the associated cards in your specified deck.
 
-Format: `deleteDeck INDEX`
 
-* Deletes the deck with the specified `DECKNAME`
-* Deletes all cards in the deck
+Format: `deleteDeck INDEX`
 
 Example:
 * `deleteDeck 1` will delete the deck at index 1 and all its corresponding cards.
 
 Outcome Expected:
-- Success message displayed is: `Deleted deck: Singapore`
+Outcome Expected:
+
+![DeleteDeckBefore](images/DeleteDeckBefore.png)
+
+![DeleteDeckAfter](images/DeleteDeckAfter.png)
+
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Deletes the deck at the specified `INDEX`
+* The index refers to the index number shown in the currently displayed list of flashcards
+* The index **must be a positive integer** 1, 2, 3, …​
+
+
+</div>
 
 ### List all flashcards : `list`
 
