@@ -45,31 +45,50 @@ Ready to dominate exams season? Let's get down to work.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `flashnotes.jar` from [here](https://github.com/AY2021S1-T15-2/tp/releases).
+1. Download the latest version of `flashnotes.jar` from [here](https://github.com/AY2021S1-T15-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data and the `Command Box` has been identified with the red box. The box is where you can issue all your commands in FlashNotes.<br>
-   ![Main Mode](images/mainmode.png)
+1. Double-click the file to start the app. A GUI similar to the one below should appear in a few seconds.<br>
+   ![Figure 1: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
+   _Figure 2A: Initial View of FlashNotes with GUI component labels._
+   
+   * **Command Box**: Where you input commands for FlashNotes.
+   
+   * **Result Box**: Where FlashNotes displays the resulting message to your last input in the Command Box.
+   
+   * **List of Decks**: Displayed list of decks currently in FlashNotes.
+   
+   <div markdown="block" class="alert alert-info">
+   
+   **:information_source: About the sample data:**<br>
+   
+   Initial launch of FlashNotes will result in the application loading in with our provided sample data. This is to accommodate first-time users wishing to familiarize themselves with FlashNotes before using it in-depth.
+    
+   Our provided sample data is not accurate nor necessary to the application. As such, you can easily delete the sample data in the following way:
+   
+   * Usage of the `clear` command.<br>
+     Clears all flashcard and deck data currently in FlashNotes. Refer under [Main Mode Features](#Main Mode Features) for further details about the command.
+     
+   </div>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
+1. Type a command in the **Command Box** and press Enter to execute it. Some example commands you can try are:
 
-   * **`addDeck`**`n/Economics `: create new empty Deck named Economics.
+   * **`addDeck`**`n/Languages `: Creates a new (empty) Deck named 'Languages'.
 
-   * **`list`** : list all cards by going inside card mode.
+   * **`list`** : Lists all available flashcards in FlashNotes.
 
    * **`clear`** : Deletes all cards.
 
-   * **`find`**`question`: Returns all cards with description matching question.
+   * **`help`** : Opens the Help window.
 
-   * **`enterDeck`**`Singapore`: Returns all cards inside the deck 'Singapore'.
+   * **`enterDeck`**`Singapore `: Lists all cards inside the deck 'Singapore'.
 
    * **`exit`** : Exits the app.
 
-1. After executing each command, a success or failure message will be displayed in the region highlighted in the image below. This will help you to know if you have successfully executed relevant commands, it will also provide additional information on why the command failed, if you provide the correct command prefixes. <br>
-    ![Main Mode](images/resultDisplay.png)
+1. After executing each command, a success or failure message will be displayed in the **Result Box**. This will let you know if you have successfully executed the relevant commands or not. Given that you have provided the correct command prefixes, it can even provide additional information on why your command has failed.  <br>
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#Main Mode Features) below for the details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
