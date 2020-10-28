@@ -107,7 +107,7 @@ Examples:
 * `enterDeck Economics` return cards stored in the deck `Economics`
 
 Outcome expected:
-1. Enter the command into the command bar.
+1. Enter the Enter Deck command into the command bar.
 ![EnterDeckCommand](images/enterDeck_init.png)
 
 1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
