@@ -97,9 +97,9 @@ Ready to dominate exams season? Let's get down to work.
 * In order to manage flashcards directly, you will need to enter card mode using the `enterDeck` Command.
 </div>
 
-### Find all flashcards within the deck : `enterDeck`
+### Entering a specified deck: `enterDeck`
 
-Lists flashcards within your chosen deck.
+Enters card mode and lists flashcards within your chosen deck.
 
 Format: `enterDeck [DECKNAME]`
 
@@ -192,7 +192,7 @@ Outcome Expected:
 1. Enter the List Command into the command bar as per the example.
 ![ListCommand](images/list_init.png)
 
-1. You should see the newly rendered list of flashcards. The mode contains all flashcards currently stored in FlashNotes irrespective of the deck.
+1. You should see the newly rendered list of flashcards. The list contains all flashcards currently stored in FlashNotes irrespective of the deck.
 ![List](images/list_success.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -205,7 +205,7 @@ Outcome Expected:
 
 <div/>
 
-### Clear all entries : `clear`
+### Clear all cards and decks : `clear`
 
 Clears all decks and flashcards from the program.
 
