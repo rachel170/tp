@@ -25,7 +25,7 @@ Here's the Table of Contents for a brief overview of our User Guide, or for you 
 --------------------------------------------------------------------------------------------------------------------
 
 <details markdown="block">
-- Table of Contents
+<summary>Table of Contents</summary>
 {:toc}
 </details>
 
@@ -876,29 +876,32 @@ Outcome Expected: <br>
 <br>
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the 
 data of your previous FlashNotes home folder.
-<br>
+<br><br>
 </details>
+<br>
 
 <details>
 <summary>What should I do if I have problems launching the application?</summary>
 <br>
 Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application.
-<br>
+<br><br>
 </details>
+<br>
 
 <details>
 <summary>When I exit the program, will all my new flashcards and updates be saved?</summary>
 <br>
 Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To 
 ensure none of your data is lost, do not delete the data folder.
-<br>
+<br><br>
 </details>
+<br>
 
 <details>
 <summary>Is it possible to restore a deck that I just deleted?</summary>
 <br>
 Sorry but no. There is no such functionality at this point in time.
-<br>
+<br><br>
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
