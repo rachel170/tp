@@ -265,6 +265,7 @@ public class ModelManager implements Model {
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
         // Set index of flashcard being reviewed in review mode to 0
         this.flashcardBeingReviewed = 0;
+        resetFlipOfFlashcardBeingReviewed();
     }
 
     /**

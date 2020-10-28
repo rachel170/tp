@@ -17,7 +17,7 @@ public class AddDeckCommand extends Command {
             + PREFIX_DECK_NAME + "CNM1046 ";
 
     public static final String MESSAGE_SUCCESS = "New Deck added: %1$s";
-    public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the flashnotes";
+    public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the FlashNotes.";
     private final Deck toAdd;
 
     /**
