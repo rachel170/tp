@@ -295,7 +295,6 @@ Outcome Expected:
 * All cards and decks will be cleared, including any revision history.
 * No additional inputs should be added behind the clear command.
 * There is no undo command available in the system presently. Hence, the clear command is irreversible.
-
 </div>
 
 
@@ -463,7 +462,7 @@ Outcome Expected:
 * It can only be activated from the card screen to navigate back to home.
 * No additional inputs should be added behind the home command.
 
-<div/>
+</div>
 
 ### Opens the review mode: `review`
 
