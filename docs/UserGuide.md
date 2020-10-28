@@ -113,37 +113,60 @@ Ready to dominate exams season? Let's get down to work.
 * In order to manage flashcards directly, you will need to enter card mode using the `enterDeck` Command.
 </div>
 
-### Find all flashcards within the deck : `enterDeck`
+### Entering a specified deck: `enterDeck`
 
-Lists flashcards within your chosen deck.
+Enters card mode and shows your flashcards within your chosen deck.
 
 Format: `enterDeck [DECKNAME]`
 
-* The search is case-sensitive. e.g. `GET1025` will not match `get1025`
-* **only full words will** be matched e.g. `GE` will not match `GET1025`
-* Flashcards matching at least one tag keyword will be returned (e.g. `GET1025 philosophy` will return cards with tags`([GET1025], [scifi]`) and (`[phylosophy], [plato]`))
-
 Examples:
-* `enterDeck Singapore` return cards with Tags `Singapore`
+* `enterDeck Economics` return cards stored in the deck `Economics`
 
 Outcome expected:
 
-![EnterDeck](images/cardmode.png)
+1. Enter the Enter Deck command into the command bar.
+![EnterDeckCommand](images/enterDeck_init.png)
+
+1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
+![EnterDeck](images/enterDeck_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* The search is **case-sensitive**. e.g. `GET1025` will not match `get1025`
+* only **full words will** be matched e.g. `GE` will not match `GET1025`
+
+</div>
+
 
 ### Create a new Deck : `addDeck`
 
-Lists flashcards within your chosen deck.
+Creates a new empty deck and adds to the list of decks displayed.
 
 Format: `addDeck n/DECKNAME`
 
-* The deck name is case-sensitive. e.g. `GET1025` will not match `get1025`
-* if there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
-
 Examples:
-* `addDeck Singapore` creates an empty deck called `Singapore`.
+* `addDeck Singapore History` creates an empty deck called `Singapore History`.
 
-Outcome Expected:
-- Success message displayed is: `New Deck added: Singapore`
+Outcome expected:
+1. Enter the Add Deck Command into the command bar as per the example.
+![AddDeckCommand](images/addDeck_init.png)
+
+1. You should see the newly rendered list of decks. If there are more decks than the screen can fit, scroll down to find your newly created deck. It will be the last one in the list.
+![AddDeck](images/addDeck_success.png)
+
+1. After scrolling down, you will be able to see your newly created deck. It is empty though, waiting for you to fill it up with meaningful flashcards!
+![AddDeck](images/addDeck_successScrolled.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* The deck name is case-sensitive. e.g. future search queries of `GET1025` will not match `get1025`
+* If there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
+
+</div>
 
 ### Rename a new Deck : `editDeckName`
 
@@ -215,18 +238,45 @@ Shows a list of all flashcards.
 Format: `list`
 
 Outcome Expected:
-- Success message displayed is: `Inside Deck. 9 flashcards listed! Listed all flashcards`
+1. Enter the List Command into the command bar as per the example.
+![ListCommand](images/list_init.png)
+
+1. You should see the newly rendered list of flashcards. The list contains all flashcards currently stored in FlashNotes irrespective of the deck.
+![List](images/list_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
 
 * Any cards added while in the list mode will be added to the `Default` deck.
+* No additional inputs should be added behind the list command.
+* Note that starting a review in this screen will not attribute the review results to any deck. It will not be stored at the end of the review session.
 
-### Clear all entries : `clear`
+<div/>
+
+### Clear all cards and decks : `clear`
 
 Clears all decks and flashcards from the program.
 
 Format: `clear`
 
 Outcome Expected:
-- Success message displayed is: `Flash Notes has been cleared!`
+1. Enter the Clear Command into the command bar as per the example.
+![ClearCommand](images/clear_init.png)
+
+1. You should now see that FlashNotes is empty.
+![Clear](images/clear_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* All cards and decks will be cleared, including any revision history.
+* No additional inputs should be added behind the clear command.
+* There is no undo command available in the system presently. Hence, the clear command is irreversible.
+
+<div/>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -350,8 +400,20 @@ Return to Main mode with list of decks.
 Format: `home`
 
 Outcome Expected:
+1. Enter the Home Command into the command bar as per the example.
+![Home Mode](images/home_init.png)
 
-![Main Mode](images/mainmode-wo-redbox.png)
+1. You should now see the list of orange decks in the home screen.
+![Home Mode](images/home_success.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* It can only be activated from the card screen to navigate back to home.
+* No additional inputs should be added behind the home command.
+
+<div/>
 
 ### Exiting the program : `exit`
 
