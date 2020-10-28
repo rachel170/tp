@@ -21,7 +21,6 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_I
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_EXIT_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
@@ -139,7 +138,7 @@ public class FlashNotesParserTest {
     public void homeScreen_list_throwsParseException() throws Exception {
         // Throws ParseException if List command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ListCommand.COMMAND_WORD), ()
-                -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", isNotReviewMode, isNotInDeck, DEFAULT));
+            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", isNotReviewMode, isNotInDeck, DEFAULT));
     }
 
     @Test
@@ -152,21 +151,21 @@ public class FlashNotesParserTest {
     public void homeScreen_clear_throwsParseException() throws Exception {
         // Throws ParseException if Clear command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ClearCommand.COMMAND_WORD), ()
-                -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", isNotReviewMode, isNotInDeck, DEFAULT));
+            -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", isNotReviewMode, isNotInDeck, DEFAULT));
     }
 
     @Test
     public void homeScreen_setReviewLimit20_success() throws Exception {
-        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all", isNotReviewMode, isNotInDeck, DEFAULT)
-                instanceof SetReviewLimitCommand);
-        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " 20", isNotReviewMode, isNotInDeck, DEFAULT)
-                instanceof SetReviewLimitCommand);
+        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all", isNotReviewMode,
+                isNotInDeck, DEFAULT) instanceof SetReviewLimitCommand);
+        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " 20", isNotReviewMode,
+                isNotInDeck, DEFAULT) instanceof SetReviewLimitCommand);
     }
 
     @Test
     public void homeScreen_setReviewLimitAll_success() throws Exception {
-        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all", isNotReviewMode, isNotInDeck, DEFAULT)
-                instanceof SetReviewLimitCommand);
+        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all",
+                isNotReviewMode, isNotInDeck, DEFAULT) instanceof SetReviewLimitCommand);
     }
 
     @Test
@@ -287,7 +286,7 @@ public class FlashNotesParserTest {
     public void inDeck_exit_throwsParseException() throws Exception {
         // Throws ParseException if Exit command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ExitCommand.COMMAND_WORD), ()
-                -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", isNotReviewMode, isInDeck, DEFAULT));
+            -> parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", isNotReviewMode, isInDeck, DEFAULT));
     }
 
     @Test
@@ -310,7 +309,7 @@ public class FlashNotesParserTest {
     public void inDeck_help_throwsParseException() throws Exception {
         // Throws ParseException if Help command has any arguments
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, HelpCommand.COMMAND_WORD), ()
-                -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", isNotReviewMode, isInDeck, DEFAULT));
+            -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", isNotReviewMode, isInDeck, DEFAULT));
     }
 
     @Test
@@ -333,8 +332,8 @@ public class FlashNotesParserTest {
 
     @Test
     public void inDeck_setReviewLimitAll_success() throws Exception {
-        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all", isNotReviewMode, isNotInDeck, DEFAULT)
-                instanceof SetReviewLimitCommand);
+        assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all",
+                isNotReviewMode, isNotInDeck, DEFAULT) instanceof SetReviewLimitCommand);
     }
 
     @Test
