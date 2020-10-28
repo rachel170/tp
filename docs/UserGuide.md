@@ -252,7 +252,7 @@ Outcome Expected:
 * No additional inputs should be added behind the list command.
 * Note that starting a review in this screen will not attribute the review results to any deck. It will not be stored at the end of the review session.
 
-<div/>
+</div>
 
 ### Clear all cards and decks : `clear`
 
