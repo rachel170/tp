@@ -263,6 +263,13 @@ public class ModelManager implements Model {
 
         // Store shuffled and trimmed list into flashcardsToReview list
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
+        setUpFlashcardToReview();
+    }
+
+    /**
+     * Set up the first flashcard to be reviewed in the review mode and reset it's flip to false
+     */
+    private void setUpFlashcardToReview() {
         // Set index of flashcard being reviewed in review mode to 0
         this.flashcardBeingReviewed = 0;
         resetFlipOfFlashcardBeingReviewed();
