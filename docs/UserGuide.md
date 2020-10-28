@@ -82,7 +82,8 @@ Users can:
 * Mark a flashcard as correct or wrong to review the next card
 * View statistics at the end of the review session
 
-![Review Mode GUI Breakdown](images/ReviewMode_GUIBreakdown.png)<br>
+![Review Mode GUI Breakdown](images/ReviewMode_GUIBreakdown.png)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
