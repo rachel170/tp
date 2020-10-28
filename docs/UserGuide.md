@@ -2,12 +2,25 @@
 layout: page
 title: User Guide
 ---
+## Introduction
+Welcome to the FlashNotes User Guide.
 
-FlashNotes is a **desktop app for flashcards**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Flashnotes can help you create word-based flashcards faster than traditional GUI apps.
+FlashNotes is a **desktop app for flashcards**, built for students who wish to utilise flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
 
-Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for.
+Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for. However, with FlashNotes, you can now keep track of your flashcards and their content with ease.
+FlashNotes allows you to organise your flashcards by topics or subjects using Decks. 
 
-This User Guide will help you find out how FlashNotes is able to help you study more efficiently using flashcards and how to use it. Let's get started.
+FlashNotes utilises a studying technique known as [Active Recall](https://en.wikipedia.org/wiki/Active_recall), allowing you to test yourself using flashcards to check if you have mastered your content.
+Furthermore, FlashNotes will also keep track of your progress and show you an overview of how well you have mastered your content using flashcards.
+
+This User Guide is for students who have no prior knowledge on how to create and review flashcards. We will teach you how create and manage your flashcards more efficiently, and how to review your flashcards for studying using FlashNotes. 
+We will provide you with all the various features and commands of FlashNotes, and its details. 
+
+To get started, head over to the [Quick Start](#quick-start) section.
+
+To see the summary of all our commands, go to the [Command Summary](#command-summary) section.
+
+Here's the Table of Contents for a brief overview of our User Guide, or for you to quickly access other sections of our User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -17,23 +30,26 @@ This User Guide will help you find out how FlashNotes is able to help you study 
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
-## Overview
 
-When studying for any topics, you typically organize your notes by topics or the subjects.
+## Glossary
 
-You also want to be able to pull up information regarding those topics closer to examination date and review those topics.
+* Flashcard: A flashcard shows a question and the answer to the question.
+* Decks: A deck will contain flashcards.
+* Index: The number at the start of each deck or flashcard.
+* Review: A mode where only the question of the flashcard is shown; the answer will be hidden from you.
+* Prefix: A reserved word that needs to be placed before your inputs to indicate the start of your input.
+* :information_source:: additional info
+* :warning:: warning
 
-If necessary, you may need to review it multiple times in order to track your progress and understanding. However, you don't want to have to manually update a spreadsheet everytime you review your content.
-
-Is studying with flashcards starting to seem like a massive chore already? Fret not, FlashNotes is here to help you!
-
-### Understanding the 3 different modes:
+## Understanding the 3 different modes:
+FlashNotes have 3 different modes that you have to take note of. You will always start in the Main Mode when you open FlashNotes.
 
 Available Modes | Functionality involved | Real Life Representation
 --------|------------------ | ------
-**Main Mode** | Holds the list of currently stored decks, which contains the list of cards internally. | Topics or Subjects of interest.
-**Card Mode** | Holds the list of cards from the selected deck, or the list of all cards currently available. | Sub-questions and content knowledge.
-**Review Mode** | Reads all cards from the card mode. It allows cards to be flipped and enables you to mark them correct or wrong. | Revision session.
+**Main Mode** | Shows you the decks you have created. | Topics or Subjects of interest
+**Card Mode** | Shows you all the list of cards that you have created, or the cards in each deck. | Sub-questions and content knowledge
+**Review Mode** | Allows you to review cards by flipping the card between question and answer, and allows you to make the card as correct or wrong. | Revision session
+
 
 This is a basic overview of what FlashNotes can do for you, but there are more features such as editing decks and cards.
 
@@ -69,7 +85,7 @@ Ready to dominate exams season? Let's get down to work.
 1. After executing each command, a success or failure message will be displayed in the region highlighted in the image below. This will help you to know if you have successfully executed relevant commands, it will also provide additional information on why the command failed, if you provide the correct command prefixes. <br>
     ![Main Mode](images/resultDisplay.png)
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#main-mode-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,10 +95,10 @@ Ready to dominate exams season? Let's get down to work.
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
-  e.g. in `addCard q/QUESTION`, `QUESTION` is a parameter which can be used as `add q/What is the question?`.
+* Words in `UPPER_CASE` are the inputs to be supplied by you.<br>
+  e.g. in `addCard q/QUESTION`, `QUESTION` is an input which can be used as `add q/What is the question?`.
 
-* Parameters can be in any order.<br>
+* Inputs can be in any order.<br>
   e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
 </div>
 
@@ -111,6 +127,7 @@ Examples:
 * `enterDeck Singapore` return cards with Tags `Singapore`
 
 Outcome expected:
+
 ![EnterDeck](images/cardmode.png)
 
 ### Create a new Deck : `addDeck`
@@ -128,37 +145,68 @@ Examples:
 Outcome Expected:
 - Success message displayed is: `New Deck added: Singapore`
 
-### Rename a new Deck : `editDeck`
+### Rename a new Deck : `editDeckName`
 
 Edit a deck name and the tags of all corresponding cards in the deck.
 
-Format: `editDeck INDEX n/NEWDECKNAME`
+Format: `editDeckName INDEX n/NEWDECKNAME`
 
-* Edits the deck name of the deck at the specified `INDEX`
+Example:
+* `editDeckName 1 n/History` will change the name of the deck at index `1` to `History`.
+
+Outcome Expected:
+
+1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
+![EditDeckNameBefore](images/EditDeckNameBefore.png)
+
+
+2\. When successful, you will see that the name of the deck at index 1 has been changed to History.
+![EditDeckNameAfter](images/EditDeckNameAfter.png)
+
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Edits the deck at the specified `INDEX`
 * The index refers to the index number shown in the currently displayed list of flashcards
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `NEWDECKNAME` is case-sensitive
+* The `NEWDECKNAME` should not be a name that already exists as a deck.
 
-Examples:
-* `editDeck 1 History` will change the name of the deck at index `1` to `History`.
+</div>
 
-Outcome Expected:
-- `to be added`
+
 
 ### Delete a new Deck : `deleteDeck`
 
 Deletes the deck and all the associated cards in your specified deck.
 
-Format: `deleteDeck DECKNAME`
 
-* Deletes the deck with the specified `DECKNAME`
-* Deletes all cards in the deck
+Format: `deleteDeck INDEX`
 
 Example:
-* `deleteDeck Singapore` will delete the deck and all its corresponding cards.
+* `deleteDeck 3` will delete the deck at index 3 and all its corresponding cards.
 
 Outcome Expected:
-- Success message displayed is: `Deleted deck: Singapore`
+
+1\. Enter the deleteDeck command (`deleteDeck 3`) into the command box as shown in the example. The deck at the index 3 will be deleted.
+![DeleteDeckBefore](images/DeleteDeckBefore.png)
+
+
+2\. The deck at index 3 has been deleted and you will be shown the remaining set of decks (if any).
+![DeleteDeckAfter](images/DeleteDeckAfter.png)
+
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Deletes the deck at the specified `INDEX`
+* The index refers to the index number shown in the currently displayed list of flashcards
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
 
 ### List all flashcards : `list`
 
@@ -196,25 +244,33 @@ Outcome Expected:
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
 Outcome Expected:
-- Success message displayed is: `Opened help window.`
-- Help Window pop up with the link to user guide.
+
+1\. The help window will show you the link to our user guide.
+![help message](images/helpMessage.png)
+
+
 
 ### Adding a flashcard : `addCard`
 
 Adds a card to the currently stored notes.
 
-Format: `addCard n/QUESTION a/ANSWER`
+Format: `addCard q/QUESTION a/ANSWER`
 
-Examples:
-* `addCard q/When did Singapore gain independence? a/9th August 1965`
+Example:
+* `addCard q/Who was Singapore's First President? a/Yusok Ishak`
 
 Outcome Expected:
-- Success message displayed is: `New flashcard added: Question: When did Singapore gain independence? Answer: 9th August 1965 Tag: Singapore.`
+
+1\. Enter the addCard Command into the command box as shown. The question will precede after the prefix `q/` and the answer will precede after the prefix `a/`. 
+![Add Card Before](images/AddCardBefore.png)
+
+
+2\. When successful, you will see the newly added flashcard at the bottom of the list.
+![Add Card After](images/AddCardAfter.png)
+
 
 ### Editing a flashcard : `editCard`
 
@@ -412,7 +468,7 @@ Action | Format, Examples
 **Add Deck** | `Format: addDeck n/[DECKNAME]`<br> e.g., `addDeck Default`
 **Read Deck** | `Format: enterDeck [DECKNAME]` <br> e.g., `enterDeck Default`
 **Delete Deck** | `Format: delete [DECKNAME]`<br> e.g., `delete Default`
-**Edit Deck name** | `edit [n/NEWDECKNAME] [t/TARGETDECKNAME]`<br> e.g., `edit n/Default Deck t/Default`
+**Edit Deck name** | `Format: editDeckName INDEX [n/TARGETDECKNAME]`<br> e.g., `editDeckName 1 n/History`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
