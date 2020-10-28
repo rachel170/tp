@@ -373,7 +373,7 @@ public class FlashNotesParserTest {
     public void inDeck_editDeckName_throwsParseException() throws Exception {
         String keyword = "foo";
         assertThrows(ParseException.class, INVALID_EDITDECKNAME_COMMAND_IN_DECK_MESSAGE, ()
-                -> parser.parseCommand(EditDeckNameCommand.COMMAND_WORD + " " + keyword,
+            -> parser.parseCommand(EditDeckNameCommand.COMMAND_WORD + " " + keyword,
                 isNotReviewMode, isInDeck, DEFAULT));
     }
     public void inDeck_clear_throwsParseException() throws Exception {
@@ -544,7 +544,7 @@ public class FlashNotesParserTest {
     @Test
     public void inReview_editDeckName_throwsParseException() throws Exception {
         assertThrows(ParseException.class, INVALID_EDITDECKNAME_COMMAND_IN_REVIEW_MESSAGE, ()
-                -> parser.parseCommand(EditDeckNameCommand.COMMAND_WORD,
+            -> parser.parseCommand(EditDeckNameCommand.COMMAND_WORD,
                 isReviewMode, isInDeck, DEFAULT));
     }
 
