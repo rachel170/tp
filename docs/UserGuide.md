@@ -42,10 +42,25 @@ Here's the Table of Contents for a brief overview of our User Guide, or for you 
 * :warning:: Warning
 
 ## Understanding the 3 different modes:
-FlashNotes have 3 different modes that you have to take note of. You will always start in the Main Mode when you open FlashNotes.
+FlashNotes has 3 different modes, the main mode, card mode and review mode. Each mode has its own set of valid commands.  
+You will always start in the Main Mode when you open FlashNotes.
 
-###Mode 1: Main Mode
-###Mode 2: Card Mode
+### Mode 1: Main Mode
+Contains a list of decks of flashcards. <br>
+
+Users can: 
+* View a list of decks
+* Create, edit and delete decks
+* Open a deck to view flashcards in it (Enters card mode)
+* List all flashcards from all decks
+* Clear all decks
+* Set maximum number of cards to review
+* View help
+* Exit the program
+
+![Main Mode GUI Breakdown](images/MainMode_GUIBreakdown.png)<br>
+
+### Mode 2: Card Mode
 Contains a list of flashcards.
 <br><br>
 Users can:
@@ -59,7 +74,7 @@ Users can:
 
 ![Card Mode GUI Breakdown](images/CardMode_GUIBreakdown.png)<br>
 
-###Mode 3: Review Mode
+### Mode 3: Review Mode
 Displays flashcards one at a time for users to review.
 <br><br>
 Users can:
@@ -67,7 +82,8 @@ Users can:
 * Mark a flashcard as correct or wrong to review the next card
 * View statistics at the end of the review session
 
-![Review Mode GUI Breakdown](images/ReviewMode_GUIBreakdown.png)<br>
+![Review Mode GUI Breakdown](images/ReviewMode_GUIBreakdown.png)
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -471,15 +487,29 @@ Edits an existing flashcard in the flashcard deck.
 
 Format: `editCard INDEX [q/QUESTION] [a/ANSWER]`
 
-* Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed desk list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-
 Examples:
 *  `editCard 2 a/Lee Kuan Yew` Edits the answer of the 2nd flashcard to be `Lee Kuan Yew`
 
 Outcome Expected:
-- Success message displayed is: `Edited flashcard: Question: When did Singapore gain independence? Answer: LKY Tag: Singapore.`
+1. Initial view of card mode. <br>
+![Initial View](images/editCardCommandStep1.png)
+
+1. Type `editCard INDEX [q/QUESTION] [a/ANSWER]` into the command box and enter. <br>
+![Enter Edit Card Command](images/editCardCommandStep2.png)
+
+1. The result of executing the editCard command. The question and answer of the selected flashcard would have 
+changed. <br>
+![Result of Edit Card Command](images/editCardCommandStep3.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed desk list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+</div>
 
 ### Finding flashcards : `find`
 
@@ -681,20 +711,39 @@ Outcome Expected:
 </div>
 
 
-### Flip a flashcard: `flip`
+### Flip a flashcard: `f`
 
 Flips the flashcard which is being reviewed so that you can view the answer to the question.
 
-Format: `flip`
-
-* Flips the flashcard that is being reviewed to reveal the answer.
+Format: `f`
 
 Examples:
-* `flip` returns `The sea is blue because water absorbs colors in the red part of the light spectrum` 
+* `f` returns `The sea is blue because water absorbs colors in the red part of the light spectrum` 
  which is the answer to the question `Why is the sea blue?`.
 
 Outcome Expected:
-- Success message displayed is: `Flipping Flashcard as requested ...`
+1. Initial view of flashcard. <br>
+![Intitial View](images/flipCommandStep1.png)
+
+1. Type `f` into the command box and enter. <br>
+![Type Flip Command](images/flipCommandStep2.png)
+
+1. The result after flip command has been executed. The Answer to the question can now be seen. <br>
+![Result of Flip Command](images/flipCommandStep3.png)
+
+1. Type `f` into the command box again and enter to flip the card again. <br>
+![Type Flip Command](images/flipCommandStep4.png)
+
+1. The result after flip command has been executed. The Question is now visible instead of the answer. <br>
+![Result of Flip Command](images/flipCommandStep5.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Flashcard can be flipped as many times as the user wants, to alternate between the question and the answer.
+ 
+ </div>
 
 ### Mark a flashcard as correct: `c`
 
@@ -702,13 +751,49 @@ Marks the flashcard that is being reviewed as correct and proceeds to show the n
 
 Format: `c`
 
-* Marks flashcard as correct before moving on to show the question of the next flashcard.
-
 Examples:
 * `c` returns next card in deck if any.
 
 Outcome Expected:
-- Success message displayed is: `Marking Flashcard as correct as requested ...`
+1. Initial view of flashcard that has been flipped. <br>
+![Intitial View](images/correctCommandStep1.png)
+
+1. Type `c` into the command box and enter to mark the flashcard as correct. <br>
+![Type Correct Command](images/correctCommandStep2.png)
+
+1. The result after the correct command has been executed. The next flashcard will be shown and the progress bar will 
+show an increase in progress. <br>
+![Result of Correct Command](images/correctCommandStep3.png)
+
+Possible Error users might encounter:
+1. Typing `c` into the command box when flashcard has not been flipped. <br>
+![Type Correct Command](images/correctCommandStep4.png)
+
+1. Error message telling users to flip the card first before marking the card, is shown in the result display. <br>
+![Error Message](images/correctCommandStep5.png)
+
+1. Type `f` into the command box and enter. <br>
+![Type Flip Command](images/correctCommandStep6.png)
+
+1. The result after flip command has been executed. The Answer to the question can now be seen. <br>
+![Result of Flip Command](images/correctCommandStep7.png)
+
+1. Type `c` into the command box and enter to mark the flashcard as correct. <br>
+![Type Correct Command](images/correctCommandStep8.png)
+
+1. The result after the correct command has been executed. The next flashcard will be shown and the progress bar will 
+   show an increase in progress. <br>
+![Result of Correct Command](images/correctCommandStep9.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Flashcard can only be marked as correct after the card has been flipped to show the answer.
+* Flipping the flashcard even number of times will result in the question to be shown, and hence the flashcard cannot
+ be marked in this case.
+ 
+ </div>
 
 ### Mark a flashcard as wrong: `w`
 
@@ -721,8 +806,44 @@ Format: `w`
 Examples:
 * `w` returns next card in deck if any.
 
-Outcome Expected:
-- Success message displayed is: `Marking Flashcard as wrong as requested ...`
+Outcome Expected: <br>
+1. Initial view of flashcard that has been flipped. <br>
+![Intitial View](images/wrongCommandStep1.png)
+
+1. Type `w` into the command box and enter to mark the flashcard as wrong. <br>
+![Type Wrong Command](images/wrongCommandStep2.png)
+
+1. The result after the wrong command has been executed. The next flashcard will be shown. <br>
+![Result of Wrong Command](images/wrongCommandStep3.png)
+
+Possible Error users might encounter:
+1. Typing `w` into the command box when flashcard has not been flipped. <br>
+![Type Wrong Command](images/wrongCommandStep4.png)
+
+1. Error message telling users to flip the card first before marking the card, is shown in the result display. <br>
+![Error Message](images/wrongCommandStep5.png)
+
+1. Type `f` into the command box and enter. <br>
+![Type Flip Command](images/wrongCommandStep6.png)
+
+1. The result after flip command has been executed. The Answer to the question can now be seen. <br>
+![Result of Flip Command](images/wrongCommandStep7.png)
+
+1. Type `w` into the command box and enter to mark the flashcard as wrong. <br>
+![Type Wrong Command](images/wrongCommandStep8.png)
+
+1. The result after the wrong command has been executed. The next flashcard will be shown. <br>
+![Result of Wrong Command](images/wrongCommandStep9.png) 
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* Flashcard can only be marked as wrong after the card has been flipped to show the answer.
+* Flipping the flashcard even number of times will result in the question to be shown, and hence the flashcard cannot
+ be marked in this case.
+ 
+ </div>
 
 ### End current review session: `endReview`
 
@@ -750,15 +871,35 @@ Outcome Expected: <br>
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FlashNotes home folder.<br>
-**Q**: What should I do if I have problems launching the application? <br>
-**A**: Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application. <br>
-**Q**: When I exit the program, will all my new flashcards and updates be saved? <br>
-**A**: Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To ensure none of your data is lost, do not delete the data folder. <br>
-**Q**: Is it possible to restore a deck that I just deleted? <br>
-**A**: Sorry but no. There is no such functionality at this point in time. 
+<details>
+<summary>How do I transfer my data to another Computer?</summary>
+<br>
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the 
+data of your previous FlashNotes home folder.
+<br>
+</details>
 
+<details>
+<summary>What should I do if I have problems launching the application?</summary>
+<br>
+Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application.
+<br>
+</details>
+
+<details>
+<summary>When I exit the program, will all my new flashcards and updates be saved?</summary>
+<br>
+Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To 
+ensure none of your data is lost, do not delete the data folder.
+<br>
+</details>
+
+<details>
+<summary>Is it possible to restore a deck that I just deleted?</summary>
+<br>
+Sorry but no. There is no such functionality at this point in time.
+<br>
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -798,7 +939,7 @@ Action | Format, Examples
 
 Action | Format
 --------|------------------
-**Flip** | `flip`
+**Flip** | `f`
 **Correct** | `c`
 **Wrong** | `w`
 **End Review** | `endReview`
