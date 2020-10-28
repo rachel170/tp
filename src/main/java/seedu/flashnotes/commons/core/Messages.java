@@ -55,8 +55,8 @@ public class Messages {
             + " review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE = "You cannot set review limit in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
-    public static final String INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE = "You cannot check review " +
-            "limit in the review screen. Exit review mode by using the command `endReview` first.";
+    public static final String INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE = "You cannot check review "
+            + "limit in the review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE = "You cannot enter a deck in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE = "You cannot list flashcards in the"
