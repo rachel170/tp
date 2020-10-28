@@ -16,6 +16,8 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_
 import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITDECKNAME_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITDECKNAME_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE;
@@ -24,6 +26,8 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_EXIT_COMMAND_IN_REV
 import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
@@ -33,8 +37,6 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HO
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_EXTENDED_COMMAND_ERROR;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_HOME;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.flashnotes.testutil.Assert.assertThrows;
 import static seedu.flashnotes.testutil.FlashcardBuilder.DEFAULT_TAG;
@@ -55,6 +57,7 @@ import seedu.flashnotes.logic.commands.CorrectCommand;
 import seedu.flashnotes.logic.commands.DeleteCardCommand;
 import seedu.flashnotes.logic.commands.DeleteDeckCommand;
 import seedu.flashnotes.logic.commands.EditCardCommand;
+import seedu.flashnotes.logic.commands.EditDeckNameCommand;
 import seedu.flashnotes.logic.commands.EndReviewCommand;
 import seedu.flashnotes.logic.commands.EnterDeckCommand;
 import seedu.flashnotes.logic.commands.ExitCommand;
@@ -232,7 +235,7 @@ public class FlashNotesParserTest {
 
     @Test
     public void homeScreen_home_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, MESSAGE_INVALID_COMMAND_IN_HOME, ()
+        assertThrows(ParseException.class, INVALID_HOME_COMMAND_IN_HOME_MESSAGE, ()
             -> parser.parseCommand(HomeCommand.COMMAND_WORD,
                 isNotReviewMode, isNotInDeck, DEFAULT));
     }
@@ -367,6 +370,12 @@ public class FlashNotesParserTest {
     }
 
     @Test
+    public void inDeck_editDeckName_throwsParseException() throws Exception {
+        String keyword = "foo";
+        assertThrows(ParseException.class, INVALID_EDITDECKNAME_COMMAND_IN_DECK_MESSAGE, ()
+            -> parser.parseCommand(EditDeckNameCommand.COMMAND_WORD + " " + keyword,
+                isNotReviewMode, isInDeck, DEFAULT));
+    }
     public void inDeck_clear_throwsParseException() throws Exception {
         assertThrows(ParseException.class, INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE, ()
             -> parser.parseCommand(ClearCommand.COMMAND_WORD,
@@ -533,6 +542,13 @@ public class FlashNotesParserTest {
     }
 
     @Test
+    public void inReview_editDeckName_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, INVALID_EDITDECKNAME_COMMAND_IN_REVIEW_MESSAGE, ()
+            -> parser.parseCommand(EditDeckNameCommand.COMMAND_WORD,
+                isReviewMode, isInDeck, DEFAULT));
+    }
+
+    @Test
     public void inReview_deleteCard_throwsParseException() {
         assertThrows(ParseException.class, INVALID_DELETECARD_COMMAND_IN_REVIEW_MESSAGE, ()
             -> parser.parseCommand(DeleteCardCommand.COMMAND_WORD,
@@ -541,7 +557,7 @@ public class FlashNotesParserTest {
 
     @Test
     public void inReview_home_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNAVAILABLE_IN_REVIEW_MODE, ()
+        assertThrows(ParseException.class, INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE, ()
             -> parser.parseCommand(HomeCommand.COMMAND_WORD,
                 isReviewMode, isInDeck, DEFAULT));
     }
