@@ -411,7 +411,7 @@ Outcome Expected:
 :warning: Things to note:
 
 * It can only be activated from the card screen to navigate back to home.
-* No additional inputs should be added behind the clear command.
+* No additional inputs should be added behind the home command.
 
 <div/>
 
