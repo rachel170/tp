@@ -26,7 +26,7 @@ Here's the Table of Contents for a brief overview of our User Guide, or for you 
 
 <details markdown="block">
 <summary>Table of Contents</summary>
-{:toc}
+   <p>{:toc} </p>
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
