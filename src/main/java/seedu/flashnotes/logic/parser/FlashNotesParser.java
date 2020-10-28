@@ -289,7 +289,8 @@ public class FlashNotesParser {
             // There should be no arguments for clear command
             if (hasArguments(arguments)) {
                 // If arguments exist, throw ParseException
-                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, CheckReviewLimitCommand.COMMAND_WORD));
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR,
+                        CheckReviewLimitCommand.COMMAND_WORD));
             }
             return new CheckReviewLimitCommand();
 
@@ -405,7 +406,8 @@ public class FlashNotesParser {
             // There should be no arguments for clear command
             if (hasArguments(arguments)) {
                 // If arguments exist, throw ParseException
-                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, CheckReviewLimitCommand.COMMAND_WORD));
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR,
+                        CheckReviewLimitCommand.COMMAND_WORD));
             }
             return new CheckReviewLimitCommand();
 
