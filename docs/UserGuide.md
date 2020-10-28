@@ -61,31 +61,52 @@ Ready to dominate exams season? Let's get down to work.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `flashnotes.jar` from [here](https://github.com/AY2021S1-T15-2/tp/releases).
+1. Download the latest version of `flashnotes.jar` from [here](https://github.com/AY2021S1-T15-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data and the `Command Box` has been identified with the red box. The box is where you can issue all your commands in FlashNotes.<br>
-   ![Main Mode](images/mainmode.png)
+1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds.<br>
+   ![Figure 1: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
+   _Figure 2A: Initial View of FlashNotes with GUI component labels._
+   
+   * **Command Box**: Where you input commands for FlashNotes.
+   
+   * **Result Box**: Where FlashNotes displays the resulting message to your last input in the Command Box.
+   
+   * **List of Decks**: Displayed list of decks currently in FlashNotes.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window. Some example commands you can try:
+1. Type a command in the **Command Box** and press Enter to execute it. Some example commands you can try are:
 
-   * **`addDeck`**`n/Economics `: create new empty Deck named Economics.
+   * **`addDeck`**`n/Languages `: Creates a new (empty) Deck named 'Languages'.
 
-   * **`list`** : list all cards by going inside card mode.
+   * **`list`** : Lists all available flashcards in FlashNotes.
 
    * **`clear`** : Deletes all cards.
 
-   * **`find`**`question`: Returns all cards with description matching question.
+   * **`help`** : Opens the Help window.
 
-   * **`enterDeck`**`Singapore`: Returns all cards inside the deck 'Singapore'.
+   * **`enterDeck`**`Singapore `: Lists all cards inside the deck 'Singapore'.
 
    * **`exit`** : Exits the app.
 
-1. After executing each command, a success or failure message will be displayed in the region highlighted in the image below. This will help you to know if you have successfully executed relevant commands, it will also provide additional information on why the command failed, if you provide the correct command prefixes. <br>
-    ![Main Mode](images/resultDisplay.png)
+1. After executing each command, a success or failure message will be displayed in the **Result Box**. This will let you know if you have successfully executed the relevant commands or not. Given that you have provided the correct command prefixes, it can even provide additional information on why your command has failed.  <br>
 
-1. Refer to the [Features](#main-mode-features) below for details of each command.
+
+1. Refer to the [Features](#Main Mode Features) below for the details of each command.
+
+<div markdown="block" class="alert alert-info">
+   
+   **:information_source: About the sample data:**<br>
+   
+   Initial launch of FlashNotes will result in the application loading in with our provided sample data. This is to accommodate first-time users wishing to familiarize themselves with FlashNotes before using it in-depth.
+    
+   Our provided sample data is not accurate nor necessary to the application. As such, you can easily delete the sample data in the following way:
+   
+   * Usage of the `clear` command.<br>
+     Clears all flashcard and deck data currently in FlashNotes. Refer under [Main Mode Features](#Main Mode Features) for further details about the command.
+     
+</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -252,7 +273,7 @@ Outcome Expected:
 * No additional inputs should be added behind the list command.
 * Note that starting a review in this screen will not attribute the review results to any deck. It will not be stored at the end of the review session.
 
-<div/>
+</div>
 
 ### Clear all cards and decks : `clear`
 
@@ -277,6 +298,35 @@ Outcome Expected:
 
 <div/>
 
+
+### Exiting the program : `exit`
+
+Exits FlashNotes.
+
+Format: `exit`
+
+Outcome Expected:
+1. User enters `exit` command in **Home Mode**. <br>
+![Exiting FlashNotes](images/UG_ExitCommand.png)
+
+1. FlashNotes closes and saves all current data.
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
+* No additional inputs should be added behind the `exit` command.
+
+</div>
+
+### Saving the data
+
+FlashNotes saves its data into hard disk automatically after every command,  so there is no need to save its data manually.
+
+The data of FlashNotes is contained in the `flashnotes.json` file. This save file can be found in the `data` folder contained inside of the _home folder_ that you installed FlashNotes into.
+
+For further details on how to transfer FlashNotes data, please refer to the [FAQ](#FAQ) section.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -415,19 +465,6 @@ Outcome Expected:
 
 <div/>
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-Outcome Expected:
-- Program closes down and saves all current data.
-
-### Saving the data
-
-FlashNotes saves data to the hard disk automatically after any command that changes the data. There is no need to save manually.
-
 ### Opens the review mode: `review`
 
 Opens the review mode to display cards one by one so that you can review them.
@@ -498,12 +535,25 @@ Outcome Expected:
 
 ### End current review session: `endReview`
 
-Ends the current review session and shows review statistics.
+Ends the current review session and returns you to the **Card Mode** that the review session started from.
 
 Format: `endReview`
 
-Outcome Expected:
-- Review Window is closed.
+Outcome Expected: <br>
+1. User has reached the end of the review session and entered the `endReview` command. <br>
+![End of Review Window](images/UG_EndOfReview.png)
+
+1. Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
+![Return to Main Window](images/UG_ReturnToCardMode.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* `endReview` can only be activated from the Review Window to return to the **Card Mode** you started the review session from.
+* No additional inputs should be added behind the `endReview` command.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -534,6 +584,7 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
+**Exit** | `exit`
 
 ### Card Mode
 
