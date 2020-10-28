@@ -8,7 +8,7 @@ import seedu.flashnotes.model.Model;
 public class FlipCommand extends Command {
     public static final String COMMAND_WORD = "f";
 
-    public static final String MESSAGE_FLIP_ACKNOWLEDGEMENT = "Flipping Flashcard as requested...";
+    public static final String MESSAGE_FLIP_ACKNOWLEDGEMENT = "Flashcard is flipped!";
 
     @Override
     public CommandResult execute(Model model) {

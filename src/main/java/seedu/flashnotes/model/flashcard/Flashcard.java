@@ -128,11 +128,11 @@ public class Flashcard {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Question: ")
+        builder.append("\nQuestion: ")
                 .append(getQuestion())
-                .append(" Answer: ")
+                .append("\nAnswer: ")
                 .append(getAnswer())
-                .append(" Tag: ")
+                .append("\nDeck: ")
                 .append(getTag());
         return builder.toString();
     }

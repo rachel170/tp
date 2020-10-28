@@ -4,6 +4,7 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CORRECT_COMMAND_IN_DECK_MESSAGE;
@@ -93,16 +94,16 @@ public class FlashNotesParser {
         final String arguments = matcher.group("arguments");
 
         if (isReviewMode) {
-            //assert isInDeck : "Program should be in card mode before entering review mode";
+            assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
         if (!isInDeck) {
-            //assert !isReviewMode : "Program should not be in review mode";
+            assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
+            assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
-            //assert !isReviewMode : "Program should not be in review mode";
         }
     }
 
@@ -118,10 +119,10 @@ public class FlashNotesParser {
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
+        case CheckReviewLimitCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
         case DeleteDeckCommand.COMMAND_WORD:
             return parseInvalidCommandInReviewMode(commandWord);
-        case CheckReviewLimitCommand.COMMAND_WORD:
         case EditDeckNameCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
@@ -194,6 +195,9 @@ public class FlashNotesParser {
 
         case FindCommand.COMMAND_WORD:
             throw new ParseException(INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE);
+
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE);
 
         case SetReviewLimitCommand.COMMAND_WORD:
             throw new ParseException(INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE);
@@ -277,10 +281,17 @@ public class FlashNotesParser {
 
         case EditDeckNameCommand.COMMAND_WORD:
             return new EditDeckNameCommandParser().parse(arguments);
+
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
 
         case CheckReviewLimitCommand.COMMAND_WORD:
+            // There should be no arguments for clear command
+            if (hasArguments(arguments)) {
+                // If arguments exist, throw ParseException
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR,
+                        CheckReviewLimitCommand.COMMAND_WORD));
+            }
             return new CheckReviewLimitCommand();
 
         default:
@@ -346,8 +357,10 @@ public class FlashNotesParser {
 
         case AddCardCommand.COMMAND_WORD:
             return new AddCardCommandParser().parse(arguments, deckName);
+
         case DeleteCardCommand.COMMAND_WORD:
             return new DeleteCardCommandParser().parse(arguments);
+
         case EditCardCommand.COMMAND_WORD:
             return new EditCardCommandParser().parse(arguments);
 
@@ -371,7 +384,12 @@ public class FlashNotesParser {
             return new HelpCommand();
 
         case HomeCommand.COMMAND_WORD:
-            return new HomeCommandParser().parse(arguments);
+            // There should be no arguments for clear command
+            if (hasArguments(arguments)) {
+                // If arguments exist, throw ParseException
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, HomeCommand.COMMAND_WORD));
+            }
+            return new HomeCommand();
 
         case ReviewCommand.COMMAND_WORD:
             // There should be no arguments for review command
@@ -383,7 +401,14 @@ public class FlashNotesParser {
 
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
+
         case CheckReviewLimitCommand.COMMAND_WORD:
+            // There should be no arguments for clear command
+            if (hasArguments(arguments)) {
+                // If arguments exist, throw ParseException
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR,
+                        CheckReviewLimitCommand.COMMAND_WORD));
+            }
             return new CheckReviewLimitCommand();
 
         default:
