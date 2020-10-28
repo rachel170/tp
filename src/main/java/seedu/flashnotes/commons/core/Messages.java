@@ -12,7 +12,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The flashcard index provided is invalid";
     public static final String MESSAGE_INVALID_COMMAND_IN_HOME = "Cannot call command in home screen.";
-    public static final String MESSAGE_INVALID_DECK_DISPLAYED_INDEX = "The deck index provided is invalid";
+    public static final String MESSAGE_INVALID_DECK_DISPLAYED_INDEX = "The deck index provided is invalid.";
     public static final String MESSAGE_INVALID_COMMAND_IN_CARD = "Cannot call command in card screen.";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "Inside Deck. %1$d flashcards listed!";
     public static final String MESSAGE_DECK_OVERVIEW = "Back Home.";
@@ -65,8 +65,8 @@ public class Messages {
             + " command. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE = "You cannot delete a deck in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
-    public static final String INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE = "You cannot check review limit in "
-            + "the review screen. Exit review mode by using the command `endReview` first.";
+    public static final String INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE = "You cannot check review "
+            + "limit in the review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_EDITDECKNAME_COMMAND_IN_REVIEW_MESSAGE = "You cannot edit deck name in "
             + "the review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE = "You cannot enter home command in "
