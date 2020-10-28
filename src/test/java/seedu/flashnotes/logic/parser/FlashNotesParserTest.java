@@ -154,7 +154,7 @@ public class FlashNotesParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ClearCommand.COMMAND_WORD), ()
                 -> parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", isNotReviewMode, isNotInDeck, DEFAULT));
     }
-    
+
     @Test
     public void homeScreen_setReviewLimit20_success() throws Exception {
         assertTrue(parser.parseCommand(SetReviewLimitCommand.COMMAND_WORD + " all", isNotReviewMode, isNotInDeck, DEFAULT)
