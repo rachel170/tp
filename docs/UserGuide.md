@@ -296,7 +296,7 @@ Outcome Expected:
 * No additional inputs should be added behind the clear command.
 * There is no undo command available in the system presently. Hence, the clear command is irreversible.
 
-<div/>
+</div>
 
 
 ### Exiting the program : `exit`
