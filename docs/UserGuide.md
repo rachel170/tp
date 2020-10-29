@@ -132,7 +132,7 @@ Users can:
    Our provided sample data is not accurate nor necessary to the application. As such, you can easily delete the sample data in the following way:
    
    * Usage of the `clear` command.<br>
-     Clears all flashcard and deck data currently in FlashNotes. Refer under [Main Mode Features](#Main Mode Features) for further details about the command.
+     Clears all flashcard and deck data currently in FlashNotes. Refer under **Main Mode Features** for further details about the command.
      
 </div>
 
@@ -428,7 +428,7 @@ FlashNotes saves its data into hard disk automatically after every command,  so 
 
 The data of FlashNotes is contained in the `flashnotes.json` file. This save file can be found in the `data` folder contained inside of the _home folder_ that you installed FlashNotes into.
 
-For further details on how to transfer FlashNotes data, please refer to the [FAQ](#FAQ) section.
+For further details on how to transfer FlashNotes data, please refer to the **FAQ** section.
 
 
 --------------------------------------------------------------------------------------------------------------------
