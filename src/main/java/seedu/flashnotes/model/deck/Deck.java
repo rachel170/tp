@@ -12,7 +12,7 @@ public class Deck {
     public static final String MESSAGE_CONSTRAINTS_LENGTH =
             "Deck name should not be blank and should be less than or equal to 40 characters. "
                 + "Current number of characters in deck name is %d.";
-    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Tag should not use the reserved deck name: "
+    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Deck name should not be the reserved deck name: "
             + RESERVED_DECK_NAME;
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
             "ResultStatistic should not be blank or a non numeric value";

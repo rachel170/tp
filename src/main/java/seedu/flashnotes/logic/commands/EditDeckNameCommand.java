@@ -32,8 +32,8 @@ public class EditDeckNameCommand extends Command {
             + PREFIX_NEW_DECK_NAME + "History ";
 
     public static final String MESSAGE_SUCCESS = "Deck edited successfully: %1$s";
-    public static final String MESSAGE_DUPLICATE_DECK = "The deck name that you are trying to edit to already exists. "
-            + "Please enter a new deck name";
+    public static final String MESSAGE_DUPLICATE_DECK = "The deck name that you are trying to use already exists. "
+            + "Please enter a new deck name.";
 
 
     private final Index index;

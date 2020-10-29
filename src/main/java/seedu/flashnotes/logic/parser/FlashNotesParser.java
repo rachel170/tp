@@ -4,6 +4,7 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CLEAR_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_CORRECT_COMMAND_IN_DECK_MESSAGE;
@@ -14,6 +15,8 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_
 import static seedu.flashnotes.commons.core.Messages.INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_EDITCARD_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITDECKNAME_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_EDITDECKNAME_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE;
@@ -24,6 +27,7 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_FIND_COMMAND_IN_REV
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_HOME_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_DECK_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
@@ -33,8 +37,6 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_HO
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_ALREADY_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_EXTENDED_COMMAND_ERROR;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_CARD;
-import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_IN_HOME;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNAVAILABLE_IN_REVIEW_MODE;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -93,16 +95,16 @@ public class FlashNotesParser {
         final String arguments = matcher.group("arguments");
 
         if (isReviewMode) {
-            //assert isInDeck : "Program should be in card mode before entering review mode";
+            assert isInDeck : "Program should be in card mode before entering review mode";
             return parseCommandInReviewMode(commandWord, arguments);
         }
 
         if (!isInDeck) {
-            //assert !isReviewMode : "Program should not be in review mode";
+            assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInHomeMode(commandWord, arguments);
         } else {
+            assert !isReviewMode : "Program should not be in review mode";
             return parseCommandInCardMode(commandWord, arguments, deckName);
-            //assert !isReviewMode : "Program should not be in review mode";
         }
     }
 
@@ -118,16 +120,13 @@ public class FlashNotesParser {
         case ClearCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD:
         case SetReviewLimitCommand.COMMAND_WORD:
+        case CheckReviewLimitCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
         case DeleteDeckCommand.COMMAND_WORD:
-            return parseInvalidCommandInReviewMode(commandWord);
-        case CheckReviewLimitCommand.COMMAND_WORD:
         case EditDeckNameCommand.COMMAND_WORD:
         case HomeCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
-
         case ReviewCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
+            return parseInvalidCommandInReviewMode(commandWord);
 
         case FlipCommand.COMMAND_WORD:
             // There should be no arguments for flip command
@@ -195,6 +194,9 @@ public class FlashNotesParser {
         case FindCommand.COMMAND_WORD:
             throw new ParseException(INVALID_FIND_COMMAND_IN_REVIEW_MESSAGE);
 
+        case CheckReviewLimitCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_CHECKREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE);
+
         case SetReviewLimitCommand.COMMAND_WORD:
             throw new ParseException(INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE);
 
@@ -213,6 +215,15 @@ public class FlashNotesParser {
         case DeleteDeckCommand.COMMAND_WORD:
             throw new ParseException(INVALID_DELETEDECK_COMMAND_IN_REVIEW_MESSAGE);
 
+        case EditDeckNameCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_EDITDECKNAME_COMMAND_IN_REVIEW_MESSAGE);
+
+        case HomeCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE);
+
+        case ReviewCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_ALREADY_IN_REVIEW_MODE);
+
         default:
             throw new ParseException(MESSAGE_UNAVAILABLE_IN_REVIEW_MODE);
         }
@@ -230,9 +241,8 @@ public class FlashNotesParser {
         case CorrectCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
-            return parseInvalidCommandInHomeMode(commandWord);
         case HomeCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_INVALID_COMMAND_IN_HOME);
+            return parseInvalidCommandInHomeMode(commandWord);
 
         case AddDeckCommand.COMMAND_WORD:
             return new AddDeckCommandParser().parse(arguments);
@@ -277,10 +287,17 @@ public class FlashNotesParser {
 
         case EditDeckNameCommand.COMMAND_WORD:
             return new EditDeckNameCommandParser().parse(arguments);
+
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
 
         case CheckReviewLimitCommand.COMMAND_WORD:
+            // There should be no arguments for clear command
+            if (hasArguments(arguments)) {
+                // If arguments exist, throw ParseException
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR,
+                        CheckReviewLimitCommand.COMMAND_WORD));
+            }
             return new CheckReviewLimitCommand();
 
         default:
@@ -292,7 +309,6 @@ public class FlashNotesParser {
             String commandWord) throws ParseException {
 
         switch (commandWord) {
-
         case AddCardCommand.COMMAND_WORD:
             throw new ParseException(INVALID_ADDCARD_COMMAND_IN_HOME_MESSAGE);
 
@@ -340,14 +356,15 @@ public class FlashNotesParser {
         case ListCommand.COMMAND_WORD:
         case EndReviewCommand.COMMAND_WORD:
         case WrongCommand.COMMAND_WORD:
-            return parseInvalidCommandInDeckMode(commandWord);
         case EditDeckNameCommand.COMMAND_WORD:
-            throw new ParseException(MESSAGE_INVALID_COMMAND_IN_CARD);
+            return parseInvalidCommandInDeckMode(commandWord);
 
         case AddCardCommand.COMMAND_WORD:
             return new AddCardCommandParser().parse(arguments, deckName);
+
         case DeleteCardCommand.COMMAND_WORD:
             return new DeleteCardCommandParser().parse(arguments);
+
         case EditCardCommand.COMMAND_WORD:
             return new EditCardCommandParser().parse(arguments);
 
@@ -371,7 +388,12 @@ public class FlashNotesParser {
             return new HelpCommand();
 
         case HomeCommand.COMMAND_WORD:
-            return new HomeCommandParser().parse(arguments);
+            // There should be no arguments for clear command
+            if (hasArguments(arguments)) {
+                // If arguments exist, throw ParseException
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, HomeCommand.COMMAND_WORD));
+            }
+            return new HomeCommand();
 
         case ReviewCommand.COMMAND_WORD:
             // There should be no arguments for review command
@@ -383,7 +405,14 @@ public class FlashNotesParser {
 
         case SetReviewLimitCommand.COMMAND_WORD:
             return new SetReviewLimitCommandParser().parse(arguments);
+
         case CheckReviewLimitCommand.COMMAND_WORD:
+            // There should be no arguments for clear command
+            if (hasArguments(arguments)) {
+                // If arguments exist, throw ParseException
+                throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR,
+                        CheckReviewLimitCommand.COMMAND_WORD));
+            }
             return new CheckReviewLimitCommand();
 
         default:
@@ -411,22 +440,34 @@ public class FlashNotesParser {
         switch (commandWord) {
         case AddDeckCommand.COMMAND_WORD:
             throw new ParseException(INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE);
+
         case ClearCommand.COMMAND_WORD:
             throw new ParseException(INVALID_CLEAR_COMMAND_IN_DECK_MESSAGE);
+
         case CorrectCommand.COMMAND_WORD:
             throw new ParseException(INVALID_CORRECT_COMMAND_IN_DECK_MESSAGE);
+
         case DeleteDeckCommand.COMMAND_WORD:
             throw new ParseException(INVALID_DELETEDECK_COMMAND_IN_DECK_MESSAGE);
+
         case EnterDeckCommand.COMMAND_WORD:
             throw new ParseException(INVALID_ENTERDECK_COMMAND_IN_DECK_MESSAGE);
+
         case FlipCommand.COMMAND_WORD:
             throw new ParseException(INVALID_FLIP_COMMAND_IN_DECK_MESSAGE);
+
         case ListCommand.COMMAND_WORD:
             throw new ParseException(INVALID_LIST_COMMAND_IN_DECK_MESSAGE);
+
         case EndReviewCommand.COMMAND_WORD:
             throw new ParseException(INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE);
+
         case WrongCommand.COMMAND_WORD:
             throw new ParseException(INVALID_WRONG_COMMAND_IN_DECK_MESSAGE);
+
+        case EditDeckNameCommand.COMMAND_WORD:
+            throw new ParseException(INVALID_EDITDECKNAME_COMMAND_IN_DECK_MESSAGE);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
