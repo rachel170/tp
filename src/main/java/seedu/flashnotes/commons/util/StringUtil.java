@@ -5,7 +5,6 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 /**
  * Helper functions for handling strings.
@@ -37,7 +36,7 @@ public class StringUtil {
         // return Arrays.stream(wordsInPreppedSentence)
         //    .anyMatch(preppedWord::equalsIgnoreCase) || Arrays.stream(wordsInPreppedSentenceNoPunctuation)
         //    .anyMatch(preppedWord::equalsIgnoreCase);
-        return preppedSentence.toLowerCase().contains(word.toLowerCase());
+        return preppedSentence.toLowerCase().contains(preppedWord.toLowerCase());
     }
 
     /**

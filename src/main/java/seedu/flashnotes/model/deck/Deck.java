@@ -10,15 +10,18 @@ import seedu.flashnotes.model.Model;
  * Deck is the tag which is given to every card.
  */
 public class Deck {
-    private static final String RESERVED_DECK_NAME = "list";
-    private static final String DEFAULT_DECK_NAME = "Default";
+
     public static final String MESSAGE_CONSTRAINTS_LENGTH =
             "Deck name should not be blank and should be less than or equal to 40 characters. "
                     + "Current number of characters in deck name is %d.";
-    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Deck name should not be the reserved deck name: "
-            + RESERVED_DECK_NAME;
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
             "ResultStatistic should not be blank or a non numeric value";
+
+    private static final String RESERVED_DECK_NAME = "list";
+    private static final String DEFAULT_DECK_NAME = "Default";
+
+    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Deck name should not be the reserved deck name: "
+            + RESERVED_DECK_NAME;
 
     // Identity fields
     private String deckName;

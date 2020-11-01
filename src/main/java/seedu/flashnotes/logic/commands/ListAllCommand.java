@@ -9,9 +9,9 @@ import seedu.flashnotes.model.Model;
 /**
  * Lists all flashcards in the flashnotes to the user.
  */
-public class ListCommand extends Command {
+public class ListAllCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "listAll";
 
     public static final String MESSAGE_SUCCESS = Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW
             + " " + "Listed all flashcards";
