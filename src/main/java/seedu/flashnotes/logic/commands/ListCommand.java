@@ -16,8 +16,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW
             + " " + "Listed all flashcards";
 
-    //TODO: change name
-    public static final String DECK_NAME = "list";
+    public static final String DECK_NAME = Model.getReservedDeckName();
 
 
     @Override

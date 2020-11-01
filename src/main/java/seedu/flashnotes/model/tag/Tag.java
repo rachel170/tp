@@ -2,7 +2,8 @@ package seedu.flashnotes.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
-import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
+
+import seedu.flashnotes.model.deck.Deck;
 
 /**
  * Represents a Tag in the flashnotes.
@@ -10,7 +11,7 @@ import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
  */
 public class Tag {
 
-    public static final String RESERVED_TAG_NAME = RESERVED_DECK_NAME;
+    public static final String RESERVED_TAG_NAME = Deck.getReservedDeckName();
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should not be blank. "
             + "Tag name should not use the reserved name: " + RESERVED_TAG_NAME;
