@@ -108,7 +108,7 @@ Users can:
 
    * **`addDeck`**`n/Languages `: Creates a new (empty) Deck named 'Languages'.
 
-   * **`list`** : Lists all available flashcards in FlashNotes.
+   * **`listAll`** : Lists all available flashcards in FlashNotes.
 
    * **`clear`** : Deletes all cards.
 
@@ -284,11 +284,11 @@ Outcome Expected:
 
 </div>
 
-### List all flashcards : `list`
+### List all flashcards : `listAll`
 
 Shows a list of all flashcards, and enters card mode.
 
-Format: `list`
+Format: `listAll`
 
 Outcome Expected:
 1. Enter the List Command into the command bar as per the example.
@@ -302,7 +302,7 @@ Outcome Expected:
 :warning: Things to note:
 
 * Any cards added while in the list mode will be added to the `Default` deck.
-* No additional inputs should be added behind the list command.
+* No additional inputs should be added behind the `listAll` command.
 * Note that starting a review in this screen will not attribute the review results to any deck. It will not be stored at the end of the review session.
 
 </div>
@@ -538,6 +538,14 @@ Outcome Expected:
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 </div>
+
+### Listing all flashcards in a deck: `list`
+
+Lists all flashcards in the deck.
+
+Typically used after the `find` command when you want to see all cards in the deck again.
+
+format: `list`
 
 ### Deleting a flashcard : `deleteCard`
 
@@ -916,7 +924,7 @@ Action | Format, Examples
 **Open Deck** | `Format: enterDeck DECKNAME` <br> e.g., `enterDeck Default`
 **Delete Deck** | `Format: deleteDeck INDEX`<br> e.g., `deleteDeck 1`
 **Edit Deck Name** | `Format: editDeckName INDEX n/NEWDECKNAME`<br> e.g., `editDeckName 1 n/History`
-**List** | `list`
+**ListAll** | `listAll`
 **Help** | `help`
 **Clear** | `clear`
 **Set Review Limit** | `setReviewLimit LIMIT` <br> e.g., `setReviewLimit 30`, `setReviewLimit all`
@@ -931,6 +939,7 @@ Action | Format, Examples
 **Delete Card** | `deleteCard INDEX`<br> e.g., `deleteCard 3`
 **Edit Card** | `editCard INDEX q/QUESTION a/ANSWER`<br> e.g.,`editCard 2 q/What is the real question? a/This is a real question.`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
 **Help** | `help`
 **Home** | `home`
 **Start Review** | `review`
