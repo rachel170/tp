@@ -13,7 +13,7 @@ FlashNotes allows you to organise your flashcards by topics or subjects using De
 FlashNotes utilises a studying technique known as [Active Recall](https://en.wikipedia.org/wiki/Active_recall), allowing you to test yourself using flashcards to check if you have mastered your content.
 Furthermore, FlashNotes will also keep track of your progress and show you an overview of how well you have mastered your content using flashcards.
 
-This User Guide is for students who have no prior knowledge on how to create and review flashcards. We will teach you how create and manage your flashcards more efficiently, and how to review your flashcards for studying using FlashNotes. 
+This User Guide is for user who have no prior knowledge on how to create and review flashcards using FlashNotes. We will teach you how create and manage your flashcards more efficiently, and how to review your flashcards for studying using FlashNotes. 
 We will provide you with all the various features and commands of FlashNotes, and its details. 
 
 To get started, head over to the [Quick Start](#quick-start) section.
