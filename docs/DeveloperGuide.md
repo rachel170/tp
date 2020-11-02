@@ -41,7 +41,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck Singapore`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck n/Singapore`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagramUpdated.png)
 
@@ -60,7 +60,7 @@ The Root Node contains the scene, which is composed of UI parts like`CommandBox`
 There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism
 Note that the Review Window is a component of the FlashCardListRoot and not a component of the DeckCardListRoot. As a result, the review window can only be initiated from the FlashCardListRoot.
 
-The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display.
+The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#Implementation-of-UI-(3-Different-Modes))
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -133,63 +133,24 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 
 ## Implementation
 
-### Implementation of UI - 3 Different Modes
+### Implementation of UI (3 Different Modes)
 
 Both of the root nodes represent the types of scenes available to the main window:
 * FlashCardListRoot contains FlashCardListPanel which will display a list of flashcards available to the user.
 * DeckCardListRoot contains DeckCardListPanel which will display a list of decks available to the user.
 
-The reasoning for splitting out the two different types of scenes is to allow for the user to
+The reasoning for splitting out the two different types of scenes is to allow the MainWindow to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
+This provides better cohesion and utilizes the single responsibility principle as the classes are individually responsible for a smaller part of the UI rendered. It also improves the extensibility for the future if more modes and screens are to be added to the product.
 
 
-### Create Deck feature
-
-
-`FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
-
-* `Flashnotes#addDeck()` — Add a new Deck with a unique deck name.
-
-`Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
-
-#### Given below is an example usage scenario.
-
-Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
-
-Step 2. The user executes `addDeck n/Deck1` command to add a new Deck in the FlashNotes. The `addDeck` command calls `Model#addDeck()`, which executes the command and saves it to `FlashNotes`.
-
-Step 3. The user is now able to see the new `Deck1` added.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
-
-</div>
-
-#### Corresponding sequence diagram for `AddDeck`:
-
-The following sequence diagram shows how AddDeck operation works:
-
-![AddDeckSequenceDiagram](images/AddDeckSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `addDeckCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
+### Implementation of commands
 
 The following general activity diagram summarizes what happens when a user executes a new command:
 
 ![CommandActivityDiagram](images/CommandActivityDiagram.png)
 
-#### Design consideration:
-
-##### 2 possible designs for Adding Deck
-
-* **Alternative 1 (current choice):** Contain a list of deck names and uses it to search up relevant flashcards.
-  * Pros: Easy to implement. Suitable at this current stage because there is at most 4 cards shown at any point in time on screen. Over-optimisation is unnecessary.
-  * Cons: May have performance issues if trying to find a large number cards contained by the deck.
-
-* **Alternative 2:** Store Flashcards within deck.
-  * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
-  * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
-
 ### Handle invalid inputs/commands
+
 #### Deck vs Card related commands
 * The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the home screen.
 * The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
@@ -209,10 +170,98 @@ The following general activity diagram summarizes what happens when a user execu
     * Pros; Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
 
+### Implementation of Deck
+
+##### 3 possible design for Deck
+
+In the planning phrase, our team came up with 3 possible alternatives for how we wanted to implement decks in our flashcard app, and the details were as follows:
+
+* **Alternative 1 (current choice):** List of Decks and list of flashcards stored independently
+  * Pros:
+    * Pro 1: Initialization of flashcard list and deck list is very fast using the stored data.
+    * Pro 2: Easy to improve into a many to many type relationship in the future between deck and cards by using database functions.
+    * Pro 3: Reduce space needed for storing new flashcards and decks.
+    * Pro 4: Increase ease of implementation of future deck related commands by isolating the relevant object types by list
+  * Cons: 
+    * Con 1: May have performance issues if trying to find a large number cards contained by the deck at once. However, the effect of this is minimal since at any point in the current FlashNotes implementation, as for all screens the maximum number of cards visible are only 4.
+
+* **Alternative 2:** Store Flashcards within the deck.
+  * Pros: 
+    * Pro 1:  Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
+    * Pro 2: Easy to verify correctness of implementation.
+  * Cons:
+    * Con 1: Requires an overhaul of the code base and all references of flashcards.
+    * Con 2: If a card needs to belong to more than 1 deck, then duplicate cards need to be created for that purpose. This results in unnecessary space wasted.
+
+* **Alternative 3:** Decks to be read from the flashcards' tags and updated whenever a new flashcard has been created with a new tag
+  * Pros: 
+    * Pro 1: Easy to implement by transforming AB3.
+    * Pro 2: Also easy to verify correctness of implementation.
+  * Cons: 
+    * Con 1: Slow to render if there are too many cards to be searched through.
+    * Con 2: Need to create a default card that stores the relevant tags since tags are indicators for the presence of decks, which is unintuitive and unnecessary.
+    
+Alternative 1 and 2 were the strongest candidates, but alternative 1 eventually won out due to ease of implementation and extensibility. 
+With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
+
+#### Adding a new Deck feature
+
+`FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
+
+* `Flashnotes#addDeck()`  —  Add a new Deck with a unique deck name.
+
+`Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
+
+#### Given below is an example usage scenario.
+
+Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
+
+Step 2. The user executes `addDeck n/Deck1` command to add a new Deck in the FlashNotes. The `addDeck` command calls `Model#addDeck()`, which executes the command and saves it to `FlashNotes`.
+
+Step 3. The user is now able to see the new `Deck1` added.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** <br>
+
+* If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
+* The AddDeckCommandParser has been removed from the sequence diagram to simplify the diagram.
+</div>
+
+#### Corresponding sequence diagram for `addDeck` command:
+
+The following sequence diagram shows how Add Deck operation works:
+
+![AddDeckSequenceDiagram](images/AddDeckSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `addDeckCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
+Our team looked at the 2 different ways addDeck can interact with model-related objects. 
+* **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
+    *Pros:
+        * Pro 1: This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
+        * Pro 2: This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
+        * Pro 3: This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
+        * Pro 4: Consistency of implementation with the other commands in FlashNotes makes it easy for developers to trace and worth the slight increment in abstraction.
+    * Cons:
+        * Con 1: Some might view that the ModelManager is taking on too much work and turning into a "fat" class
+
+* **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
+    *Pros:
+        * Pro 1: Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
+    * Cons:
+        * Con 1: Violates the Law of Demeter.
+        * Con 2: Separation of concern principle would be violated. More than 1 object (ModelManager and FlashNotes) are able to interact with commands directly.
+        * Con 3: Increases the number of dependencies on underlying FlashNotes objects and other objects contained in Model, hence reducing testability and maintainability.
+
+As alternative 1 was clearly superior, with the minor drawback of having an additional layer of abstraction, our team chose to keep implementation consistent and continue to interact with model-related objects through Model instead of accessing the underlying objects directly.
+Furthermore, the class here may not be considered too heavy with methods since there are only a 2 types of objects involved and hence the cons of using alternative 1 is limited.
+
 ### Review Mode 
 Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
 
-#### Implementation
+#### Implementation of Review Mode Features
 The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users type in commands)
 and result display box (where the application displays messages to the user). On top of that, there is also the Individual Flashcard section
 of the window that shows the question of 1 flashcard. When the "flip" command is executed, 
@@ -395,6 +444,33 @@ The following sequence diagram shows how the endReview command operation works:
 * **Alternative 2:** Store review statistics as an attribute of Tag
   * Pros: Easier to implement, simply expand tag feature to include review statistics data of the deck that the tag is representing.
   * Cons: Will result in storing several repetitions of the statistics since it is an add-on to each instance of a unique tag in the json file. This can needlessly take up more space if there are a huge amount of flashcards and only a few decks.
+
+
+### Implementation of Critical Classes:
+
+#### Implementation of FlashNotesParser
+
+FlashNotesParser is the overall parser that is used to handle the commands from any of the command boxes in the various modes.
+
+As a result, it needs to be able to take in the commands and also know what are the modes that it is in in order to trigger the correct commands in the 3 different modes.
+
+Note that in our project architecture, the Model component is responsible for storing the state and data related to the application in general. 
+FlashNotesParser is purely an object that determines the commands that are accepted based on the current state of the Model's underlying FlashNotes object.
+
+While inside of the LogicManager#execute(...) method, the method checks with Model for the booleans related to mode.
+Afterwards, FlashNotesParser takes in the mode checking booleans obtained from model in FlashNotesParser#parseCommand(...). 
+The booleans regarding the modes enables FlashNotes to be able to decide which of the 3 following methods to use:
+* parseCommandInReviewMode(...)
+* parseCommandInHomeMode(...)
+* parseCommandInCardMode(...)
+
+Note that the HomeMode here refers to the Main Mode specified in the User Guide, if there are any confusions.
+
+##### Corresponding activity diagram for `FlashNotesParser`:
+
+The following activity diagram shows how the FlashNotesParser works:
+
+![FlashNotesParserSequenceDiagram](images/FlashNotesParserActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 

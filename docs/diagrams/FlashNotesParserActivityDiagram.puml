@@ -1,0 +1,20 @@
+@startuml
+start
+:FlashNotesParser checks mode of application;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([in Review Mode])
+    :Parses Command in Review Mode;
+else ([else])
+    if () then ([in Home Mode])
+            :Parses Command in Home Mode;
+        else ([else must be in Card Mode])
+        :Parses Command in Card Mode;
+    endif
+endif
+:Returns Parsed Command to be executed;
+
+stop
+@enduml
