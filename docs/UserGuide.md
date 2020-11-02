@@ -946,3 +946,4 @@ Action | Format
 **Correct** | `c`
 **Wrong** | `w`
 **End Review** | `endReview`
+**Help** | `help`

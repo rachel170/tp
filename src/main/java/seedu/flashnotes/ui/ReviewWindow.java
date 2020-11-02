@@ -7,6 +7,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.logic.Logic;
@@ -101,6 +102,7 @@ public class ReviewWindow extends UiPart<Stage> {
         this.individualFlashcard.init();
         this.individualFlashcard.displayFlashcard();
         getRoot().setAlwaysOnTop(true);
+        getRoot().initStyle(StageStyle.UTILITY);
         getRoot().showAndWait();
         // After manual closing
         this.handleExit();
