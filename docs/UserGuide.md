@@ -180,16 +180,6 @@ Outcome expected:
 1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
 ![EnterDeck](images/enterDeck_success.png)
 
-<div markdown="block" class="alert alert-warning">
-
-:warning: Things to note:
-
-* The search is **case-sensitive**. e.g. `GET1025` will not match `get1025`
-* only **full words will** be matched e.g. `GE` will not match `GET1025`
-
-</div>
-
-
 ### Create a new Deck : `addDeck`
 
 Creates a new empty deck and adds to the list of decks displayed.
@@ -626,28 +616,11 @@ review window is closed.
 :warning: Things to note:
 
 * This command is only valid in the **Card** mode.
-
-</div>
-
-
-### Exiting the program : `exit`
-
-Exits FlashNotes.
-
-Format: `exit`
-
-Outcome Expected:
-1. User enters `exit` command in **Home Mode**. <br>
-![Exiting FlashNotes](images/UG_ExitCommand.png)
-
-1. FlashNotes closes and saves all current data.
-
-<div markdown="block" class="alert alert-warning">
-
-:warning: Things to note:
-
-* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
-* No additional inputs should be added behind the `exit` command.
+* The cards to be reviewed is determined by the list of cards currently displayed in the **Card** screen.
+Eg. If there were originally 10 cards in the deck, and you use the `find` command to search for specific cards. 
+If only 1 card matches your search query, and you use the `review` command, only that 1 card will be reviewed.
+To review all the 10 cards in the deck, you can use the `list` command to display all cards in the **Card** screen
+again before using the `review` command.
 
 </div>
 
