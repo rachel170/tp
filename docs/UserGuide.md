@@ -55,7 +55,7 @@ Users can:
 * List all flashcards from all decks
 * Clear all decks
 * Set maximum number of cards to review
-* View help
+* View User Guide
 * Exit the program
 
 ![Main Mode GUI Breakdown](images/MainMode_GUIBreakdown.png)<br>
@@ -182,16 +182,6 @@ Outcome expected:
 1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
 ![EnterDeck](images/enterDeck_success.png)
 
-<div markdown="block" class="alert alert-warning">
-
-:warning: Things to note:
-
-* The search is **case-sensitive**. e.g. `GET1025` will not match `get1025`
-* only **full words will** be matched e.g. `GE` will not match `GET1025`
-
-</div>
-
-
 ### Create a new Deck : `addDeck`
 
 Creates a new empty deck and adds to the list of decks displayed.
@@ -312,6 +302,14 @@ Outcome Expected:
 ### Set card limit for review session : `setReviewLimit`
 
 Sets the maximum number of cards that can be reviewed in a single review session.
+ 
+If the review card limit is greater than or equal to the number of cards in the deck you want to review:
+* Eg. Review limit is 20 while there are 10 cards in the deck, then all the cards in the deck will be 
+shuffled and put in the queue for you to review in the review window.
+
+If the review card limit is smaller than the number of cards in the deck you want to review:
+* Eg. review limit is 3 while there are 10 cards in the deck, then 3 cards will be randomly chosen 
+from the deck and put in the queue for you to review in the review window. 
 
 Format: `setReviewLimit REVIEW_LIMIT`
 
@@ -322,23 +320,34 @@ Examples:
 
 Outcome Expected:
 1. Enter the `setReviewLimit` command with the `REVIEW_LIMIT` you want into the command box as shown. 
-![Set Review Limit Before Main](images/SetReviewLimitBefore_Main.png)
+![Set Review Limit Before Main](images/setReviewLimit3Before_Main.png)
 
 1. When successful, the following success message will be displayed.
-![Set Review Limit After Main](images/SetReviewLimitAfter_Main.png)
+![Set Review Limit After Main](images/setReviewLimit3After_Main.png)
+
+1. You can check that the review_limit is indeed 3 by entering the commands
+`enterDeck Singapore` (which contains 4 flashcards in total) and type `review`.
+(3 flashcards will be chosen randomly from the deck of 4 cards) Use the `f` and `c` commands to review the flashcards. 
+After reviewing the 3rd flashcard, you should have reached the end of the review session as shown below.
+![Set Review Limit After](images/setReviewLimit3ReviewAfter.png)
 
 1. When an invalid `REVIEW_LIMIT` is entered, the following error message will be displayed.
 ![Set Review Limit Error Main](images/SetReviewLimitError_Main.png)
+
 
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
 
-* `REVIEW_LIMIT` can be an integer greater than 0
+* `REVIEW_LIMIT` can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
+review limit greater than 2147483647.
 * `REVIEW_LIMIT` can be the string `all`. (case insensitive)
+* Note that when the `REVIEW_LIMIT` is set to `all`, the `REVIEW_LIMIT` is maximum number of cards you can review.
+(Which is 2147483647 cards)
 * This review card limit applies to all decks once it is set. 
 * This review card limit is remembered by the program. (You do not have to set the card limit 
 again after he/she closes and reopens the application)
+* This command be used in both the *Main* and *Card* modes.
 
 </div>
 
@@ -367,6 +376,7 @@ Outcome Expected:
 * This review card limit applies to all decks. 
 * This review card limit is remembered by the program. (You do not have to set the card limit 
 again after he/she closes and reopens the application)
+* This command be used in both the *Main* and *Card* modes.
 
 </div>
 
@@ -379,6 +389,14 @@ Format: `help`
 Outcome Expected:
 1. The help window will show you the link to our user guide.
 ![help message](images/helpMessage.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* This command be used in the *Main*, *Card* and *Review* modes.
+
+</div>
 
 ### Clear all cards and decks : `clear`
 
@@ -443,18 +461,6 @@ For further details on how to transfer FlashNotes data, please refer to the **FA
 * Card Mode primarily allows management of flashcards.
 * In order to manage decks directly, need to return to main mode via home command.
 </div>
-
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-Format: `help`
-
-Outcome Expected:
-
-1\. The help window will show you the link to our user guide.
-![help message](images/helpMessage.png)
-
 
 
 ### Adding a flashcard : `addCard`
@@ -581,66 +587,6 @@ Outcome Expected:
 
 </div>
 
-### Set card limit for review session : `setReviewLimit`
-
-Sets the maximum number of cards that can be reviewed in a single review session.
-
-Format: `setReviewLimit REVIEW_LIMIT`
-
-Examples:
-* `setReviewLimit 20` sets a limit of 20 cards per review session.
-* `setReviewLimit all` removes the card limit and lets you review all cards in the deck.
-
-
-Outcome Expected:
-1. Enter the `setReviewLimit` command with the `REVIEW_LIMIT` you want into the command box as shown. 
-![Set Review Limit Before Card](images/SetReviewLimitBefore_Card.png)
-
-1. When successful, the following success message will be displayed.
-![Set Review Limit After Card](images/SetReviewLimitAfter_Card.png)
-
-1. When an invalid `REVIEW_LIMIT` is entered, the following error message will be displayed.
-![Set Review Limit Error Card](images/SetReviewLimitError_Card.png)
-
-<div markdown="block" class="alert alert-warning">
-
-:warning: Things to note:
-
-* `REVIEW_LIMIT` can be an integer greater than 0
-* `REVIEW_LIMIT` can be the string `all`. (case insensitive)
-* This review card limit applies to all decks once it is set. 
-* This review card limit is remembered by the program. (You do not have to set the card limit 
-again after he/she closes and reopens the application)
-
-</div>
-
-
-### Check card limit for review session : `checkReviewLimit`
-
-Checks the maximum number of cards that can be reviewed in a single review session.
-
-Format: `checkReviewLimit`
-
-Examples:
-* `checkReviewLimit` 
-
-Outcome Expected:
-1. Enter the `checkReviewLimit` command into the command box as shown below. 
-![Check Review Limit Before Main](images/CheckReviewLimitBefore_Card.png)
-
-1. When successful, the following success message will be displayed.
-![Check Review Limit After Main](images/CheckReviewLimitAfter_Card.png)
-
-<div markdown="block" class="alert alert-warning">
-
-:warning: Things to note:
-
-* This review card limit applies to all decks. 
-* This review card limit is remembered by the program. (You do not have to set the card limit 
-again after he/she closes and reopens the application)
-
-</div>
-
 ### Return to Main Mode : `home`
 
 Return to Main mode with list of decks.
@@ -685,28 +631,11 @@ review window is closed.
 :warning: Things to note:
 
 * This command is only valid in the **Card** mode.
-
-</div>
-
-
-### Exiting the program : `exit`
-
-Exits FlashNotes.
-
-Format: `exit`
-
-Outcome Expected:
-1. User enters `exit` command in **Home Mode**. <br>
-![Exiting FlashNotes](images/UG_ExitCommand.png)
-
-1. FlashNotes closes and saves all current data.
-
-<div markdown="block" class="alert alert-warning">
-
-:warning: Things to note:
-
-* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
-* No additional inputs should be added behind the `exit` command.
+* The cards to be reviewed is determined by the list of cards currently displayed in the **Card** screen.
+Eg. If there were originally 10 cards in the deck, and you use the `find` command to search for specific cards. 
+If only 1 card matches your search query, and you use the `review` command, only that 1 card will be reviewed.
+To review all the 10 cards in the deck, you can use the `list` command to display all cards in the **Card** screen
+again before using the `review` command.
 
 </div>
 
@@ -924,7 +853,7 @@ Sorry but no. There is no such functionality at this point in time.
 
 Action | Format, Examples
 --------|------------------
-**Add Deck** | `Format: addDeck n/DECKNAME`<br> e.g., `addDeck Default`
+**Add Deck** | `Format: addDeck n/DECKNAME`<br> e.g., `addDeck n/Default`
 **Open Deck** | `Format: enterDeck DECKNAME` <br> e.g., `enterDeck Default`
 **Delete Deck** | `Format: deleteDeck INDEX`<br> e.g., `deleteDeck 1`
 **Edit Deck Name** | `Format: editDeckName INDEX n/NEWDECKNAME`<br> e.g., `editDeckName 1 n/History`
@@ -959,3 +888,4 @@ Action | Format
 **Correct** | `c`
 **Wrong** | `w`
 **End Review** | `endReview`
+**Help** | `help`

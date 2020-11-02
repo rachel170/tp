@@ -106,12 +106,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return model.getReviewCardLimit();
     }
 
     @Override
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         model.setReviewCardLimit(reviewCardLimit);
     }
 

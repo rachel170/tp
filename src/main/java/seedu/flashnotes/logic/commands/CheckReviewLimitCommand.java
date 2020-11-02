@@ -25,9 +25,9 @@ public class CheckReviewLimitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Integer reviewLimit = model.getReviewCardLimit();
+        long reviewLimit = model.getReviewCardLimit();
 
-        if (reviewLimit.equals(Integer.MAX_VALUE)) {
+        if (reviewLimit == Integer.MAX_VALUE) {
             return new CommandResult(String.format(MESSAGE_SUCCESS_NO_LIMIT));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, reviewLimit));

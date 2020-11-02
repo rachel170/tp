@@ -75,5 +75,4 @@ public class FindCommandTest {
     private QuestionContainsKeywordsPredicate preparePredicate(String userInput) {
         return new QuestionContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
-
 }

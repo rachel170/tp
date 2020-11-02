@@ -85,13 +85,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the specified integer is invalid (not greater than 0).
      */
-    public static Integer parseReviewLimit(String integerString) throws ParseException {
-        String trimmedInteger = integerString.trim().toLowerCase();
-        if (trimmedInteger.equals("all")) {
+    public static long parseReviewLimit(String reviewLimitString) throws ParseException {
+        String trimmedReviewLimit = reviewLimitString.trim().toLowerCase();
+        if (trimmedReviewLimit.equals("all")) {
             return Integer.MAX_VALUE;
         } else {
             try {
-                return Integer.parseInt(trimmedInteger);
+                return (long) Long.parseLong(trimmedReviewLimit);
             } catch (NumberFormatException e) {
                 throw new ParseException(MESSAGE_INVALID_LIMIT);
             }

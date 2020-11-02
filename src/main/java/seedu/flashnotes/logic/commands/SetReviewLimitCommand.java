@@ -22,16 +22,17 @@ public class SetReviewLimitCommand extends Command {
             + "Review limit is now %d.";
     public static final String MESSAGE_SUCCESS_NO_LIMIT = "Review card limit successfully updated! "
             + "There is now no review limit.";
-    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
+    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater "
+            + "than 0 and smaller than 2147483648.";
 
 
-    private final Integer reviewCardLimit;
+    private final long reviewCardLimit;
 
     /**
      * Constructor to set review card limit
      * @param reviewCardLimit
      */
-    public SetReviewLimitCommand(Integer reviewCardLimit) {
+    public SetReviewLimitCommand(long reviewCardLimit) {
         requireNonNull(reviewCardLimit);
         this.reviewCardLimit = reviewCardLimit;
     }
@@ -45,9 +46,9 @@ public class SetReviewLimitCommand extends Command {
         }
 
         model.setReviewCardLimit(reviewCardLimit);
-        Integer newReviewLimit = model.getReviewCardLimit();
+        long newReviewLimit = model.getReviewCardLimit();
 
-        if (newReviewLimit.equals(Integer.MAX_VALUE)) {
+        if (newReviewLimit == Integer.MAX_VALUE) {
             return new CommandResult(String.format(MESSAGE_SUCCESS_NO_LIMIT));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, newReviewLimit));
@@ -57,6 +58,6 @@ public class SetReviewLimitCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SetReviewLimitCommand // instanceof handles nulls
-                && reviewCardLimit.equals(((SetReviewLimitCommand) other).reviewCardLimit));
+                && reviewCardLimit == (((SetReviewLimitCommand) other).reviewCardLimit));
     }
 }

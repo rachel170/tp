@@ -51,12 +51,12 @@ public interface Model {
     /**
      * Returns the user prefs' review card limit.
      */
-    Integer getReviewCardLimit();
+    long getReviewCardLimit();
 
     /**
      * Sets the user prefs' review card limit.
      */
-    void setReviewCardLimit(Integer reviewCardLimit);
+    void setReviewCardLimit(long reviewCardLimit);
 
     /**
      * Replaces flashnotes data with the data in {@code flashNotes}.
