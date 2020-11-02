@@ -3,6 +3,7 @@ package seedu.flashnotes.logic.parser;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.flashnotes.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,8 @@ public class DeleteCardCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT + "\n"
+                        + MESSAGE_INVALID_INDEX,
                 DeleteCardCommand.MESSAGE_USAGE));
     }
 }

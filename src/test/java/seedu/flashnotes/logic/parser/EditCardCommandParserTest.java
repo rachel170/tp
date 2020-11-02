@@ -16,6 +16,7 @@ import static seedu.flashnotes.logic.commands.CommandTestUtil.VALID_TAG_NATURE;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.flashnotes.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
 import static seedu.flashnotes.testutil.TypicalIndexes.INDEX_THIRD_FLASHCARD;
@@ -42,28 +43,34 @@ public class EditCardCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_QUESTION_SKY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_QUESTION_SKY, MESSAGE_INVALID_FORMAT + "\n"
+                + MESSAGE_INVALID_INDEX);
 
         // no field specified
         assertParseFailure(parser, "1", EditCardCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT + "\n"
+                + MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + QUESTION_DESC_SKY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + QUESTION_DESC_SKY, MESSAGE_INVALID_FORMAT + "\n"
+                + MESSAGE_INVALID_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + QUESTION_DESC_SKY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + QUESTION_DESC_SKY, MESSAGE_INVALID_FORMAT + "\n"
+                + MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT + "\n"
+                + MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT + "\n"
+                + MESSAGE_INVALID_INDEX);
     }
 
     @Test
