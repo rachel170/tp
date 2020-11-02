@@ -31,9 +31,9 @@ public class DeckTest {
     @Test
     public void isValidDeckLength_success() {
         //incorrect input of empty deck name
-        assertEquals(false, Deck.isValidDeckLength(""));
+        assertEquals(false, Deck.isValidDeckName(""));
         //correct input of non-empty deck name
-        assertEquals(true, Deck.isValidDeckLength("funky"));
+        assertEquals(true, Deck.isValidDeckName("funky"));
     }
 
     @Test

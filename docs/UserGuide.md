@@ -197,7 +197,7 @@ Creates a new empty deck and adds to the list of decks displayed.
 Format: `addDeck n/DECKNAME`
 
 Examples:
-* `addDeck Singapore History` creates an empty deck called `Singapore History`.
+* `addDeck n/Singapore History` creates an empty deck called `Singapore History`.
 
 Outcome expected:
 1. Enter the Add Deck Command into the command bar as per the example.
@@ -217,6 +217,8 @@ Outcome expected:
 * If there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
 * There is a 40 character limit for DECKNAME.
 * Reserved names (such as `list`) can't be used as DECKNAME.
+* If multiple name prefixes are in the command text, only the last one would be selected.
+* If you are in card mode, you need to navigate back to the home screen via the Home command before adding new deck.
 
 </div>
 

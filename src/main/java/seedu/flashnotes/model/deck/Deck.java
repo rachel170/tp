@@ -53,7 +53,7 @@ public class Deck {
     /**
      * Returns true if a given string is a valid deck name.
      */
-    public static boolean isValidDeckLength(String test) {
+    public static boolean isValidDeckName(String test) {
         return !test.isBlank() && test.length() <= 40;
     }
 

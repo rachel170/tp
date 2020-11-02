@@ -149,9 +149,8 @@ public class ReviewWindow extends UiPart<Stage> {
 
     /**
      * Flips the flashcard to show the answer/question
-     * @throws IllegalStateException when review session has already ended.
      */
-    public void handleFlip() throws IllegalStateException {
+    public void handleFlip() {
         this.individualFlashcard.flipFlashcard();
     }
 
@@ -220,7 +219,7 @@ public class ReviewWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             if (isComplete && !(commandResult.isExit())) {
                 // If session has ended, ban the usage of next command
-                throw new IllegalStateException(MESSAGE_END_OF_REVIEW);
+                throw new CommandException(MESSAGE_END_OF_REVIEW);
             }
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -244,7 +243,7 @@ public class ReviewWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException | IllegalStateException e) {
+        } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

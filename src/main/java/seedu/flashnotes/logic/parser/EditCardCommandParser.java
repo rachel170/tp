@@ -9,6 +9,7 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
+import seedu.flashnotes.model.deck.Deck;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -48,6 +49,8 @@ public class EditCardCommandParser implements Parser<EditCardCommand> {
         if (!editFlashcardDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCardCommand.MESSAGE_NOT_EDITED);
         }
+
+        ParserUtil.parseDeckName(editFlashcardDescriptor.getTag().toString());
 
         return new EditCardCommand(index, editFlashcardDescriptor);
     }

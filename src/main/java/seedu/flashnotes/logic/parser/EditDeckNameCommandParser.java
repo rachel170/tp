@@ -33,7 +33,6 @@ public class EditDeckNameCommandParser implements Parser<EditDeckNameCommand> {
 
         Deck newDeck = ParserUtil.parseDeckName(argMultiMap.getValue(PREFIX_NEW_DECK_NAME).get());
 
-
         return new EditDeckNameCommand(index, newDeck);
 
     }
