@@ -5,7 +5,7 @@ title: User Guide
 ## Introduction
 Welcome to the FlashNotes User Guide.
 
-FlashNotes is a **desktop app for flashcards**, built for students who wish to utilise flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
+FlashNotes is a **desktop app for text-based flashcards**, built for students who wish to utilise English flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
 
 Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for. However, with FlashNotes, you can now keep track of your flashcards and their content with ease.
 FlashNotes allows you to organise your flashcards by topics or subjects using Decks. 
@@ -184,8 +184,8 @@ Outcome expected:
 
 :warning: Things to note:
 
-* The search is **case-sensitive**. e.g. `GET1025` will not match `get1025`
-* only **full words will** be matched e.g. `GE` will not match `GET1025`
+* The deck name entered is **case-sensitive**. e.g. `GET1025` will not match `get1025`
+* only **full phrases** will be matched with the relevant decks e.g. `GE` will not match `GET1025`
 
 </div>
 
@@ -538,7 +538,7 @@ Outcome Expected:
 :warning: Things to note:
 
 * The search is **case-insensitive**. e.g `test` will match `Test`
-* **Only full words will** be matched e.g. `Art` will not match `Artifact`
+* **Only full phrases will** be matched e.g. `Art` will not match `Artifact`
 * Find command only searches keywords from the questions, since the purpose of using flashcards is to self test.
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
