@@ -325,7 +325,7 @@ Outcome Expected:
 
 1. You can check that the review_limit is indeed 3 by entering the commands
 `enterDeck Singapore` (which contains 4 flashcards in total) and type `review`.
-(3 flashcards will be chosen randomly from the deck of 4 cards)Use the `f` and `c` commands to review the flashcards. 
+(3 flashcards will be chosen randomly from the deck of 4 cards) Use the `f` and `c` commands to review the flashcards. 
 After reviewing the 3rd flashcard, you should have reached the end of the review session as shown below.
 ![Set Review Limit After](images/setReviewLimit3ReviewAfter.png)
 
@@ -337,8 +337,11 @@ After reviewing the 3rd flashcard, you should have reached the end of the review
 
 :warning: Things to note:
 
-* `REVIEW_LIMIT` can be an integer greater than 0
+* `REVIEW_LIMIT` can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
+review limit greater than 2147483647.
 * `REVIEW_LIMIT` can be the string `all`. (case insensitive)
+* Note that when the `REVIEW_LIMIT` is set to `all`, the `REVIEW_LIMIT` is maximum number of cards you can review.
+(Which is 2147483647 cards)
 * This review card limit applies to all decks once it is set. 
 * This review card limit is remembered by the program. (You do not have to set the card limit 
 again after he/she closes and reopens the application)
