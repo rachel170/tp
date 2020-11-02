@@ -225,7 +225,8 @@ Outcome expected:
 
 ### Rename a new Deck : `editDeckName`
 
-Edit a deck name and the tags of all corresponding cards in the deck.
+Edit a deck name and the tags of all corresponding cards in the deck. 
+Note that all cards' tag correspond to the deck that they belong to.
 
 Format: `editDeckName INDEX n/NEWDECKNAME`
 
@@ -234,7 +235,7 @@ Example:
 
 Outcome Expected:
 
-1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
+1\. Enter the Edit Deck Name command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
 ![EditDeckNameBefore](images/EditDeckNameBefore.png)
 
 
@@ -510,12 +511,13 @@ changed. <br>
 * Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed desk list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Note that editing the tag of the card will cause the card to move to the Deck with the name exactly as per the new tag name.
 
 </div>
 
 ### Finding flashcards : `find`
 
-Finds flashcards which contain any of the given keywords.
+Finds flashcards which contain any of the given keywords in their respective questions.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -528,7 +530,7 @@ Outcome Expected:
 1. Enter the find Command into the command box as shown. 
 ![Find Before](images/FindCommandBefore.png)
 
-1. When successful, the flashcard(s) matching the keywords will be displayed.
+1. When successful, the flashcard(s) with questions that contains the matching keywords will be displayed.
 ![Find After](images/FindCommandAfter.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -537,6 +539,7 @@ Outcome Expected:
 
 * The search is **case-insensitive**. e.g `test` will match `Test`
 * **Only full words will** be matched e.g. `Art` will not match `Artifact`
+* Find command only searches keywords from the questions, since the purpose of using flashcards is to self test.
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 </div>
