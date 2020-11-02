@@ -78,6 +78,8 @@ The `model`,
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
 * Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the home page of the Ui.
 * Does not depend on any of the other three components.
+* The Tag of each Flashcard refers to which Deck the Flashcard belongs to.
+* FlashNotes will handle the association between Tag and Deck.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -128,6 +130,8 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 
 ## Implementation
 
+## Implementation of Home (Deck) Mode Features
+
 ### Create Deck feature
 
 
@@ -175,25 +179,99 @@ The following general activity diagram summarizes what happens when a user execu
   * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
   * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
 
-### Handle invalid inputs/commands
-#### Deck vs Card related commands
-* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the home screen.
-* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
-* Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
-* The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
+### Listing all flashcards, Reserved Deck Name and Default Deck
 
-#### Review related commands
-* The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
-* Flashnotes also keeps track of whether the user is currently inside review mode.
-* The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
+As the `listAll` command is available on the home screen, entering the list of all flashcards will be treated as entering a deck.
+
+In order to differentiate the deck that the user is in, the reserved deck name of "list" is used to inform the model that the user is currently looking at the list of all the cards.
+
+However, in order to allow users to perform card-level operations in the reserved deck "list", any cards created will be sent to the "Default" deck.
+Also, to prevent any conflicts with the model, users will not be able to create a deck called "list".
+
+The deck class stores the Reserved Deck Name and Default Deck Name. The logic component will reference the these names from the model component.
 
 #### Design considerations:
+
+##### Possible designs 
+
+**Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
+* Pros:
+    * User has increased flexibility
+* Cons:
+    * Need to check for reserved deck name 
+    
+**Alternative 2:** Prevent users to list all flashcards or add flashcards in this list**
+* Pros:
+    * System does not have to check and reserve a deck name
+* Cons:
+    * User will not be able to see a list of all flashcards
+    
+## Implementation of Card Mode Features
+
+### Overview of Card-Mode Features
+
+Card methods that are supported in Card Mode by `FlashNotes`:
+* `FlashNotes#addFlashcard(Flashcard flashcard)`: Adds a flashcard
+* `FlashNotes#removeFlashcard(Flashcard key)`: Deletes a flashcard
+* `FlashNotes#setFlashcard(Flashcard target, Flashcard editedFlashcard)`: Updates the information of a flashcard
+
+These operations are exposed in the Model interface as `Model#addFlashcard(Flashcard flashcard)`, `Model#deleteFlashcard(Flashcard target)` and `Model#setFlashcard(Flashcard target, Flashcard editedFlashcard) respectively.`
+
+Given below is an example usage scenario.
+
+The user executes `deleteCard 2` to delete the card at index 2 from the observed list.
+
+The following sequence diagram shows how the `deleteCard` operation works:
+
+![DeleteCardDiagram](images/DeleteCardSequenceDiagram.png)
+
+#### Design Considerations:
+##### Possible Designs
+
+**Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
+* Pros:
+    * Easy to implement as all logic is implemented in FlashNotes.
+* Cons:
+    * Deck class does not know when the flashcards are modified.
+    
+**Alternative 2:** Implement logic of card-level operations in Deck
+* Pros:
+    * Deck can modify its own cards.
+* Cons:
+    * Need to redesign Flashcard list to be a composition of Deck.
+
+
+
+
+### Handle invalid inputs/commands
+
+#### Deck vs Card vs Review related commands
+
+The software only allows 
+* card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is inside a deck.
+* deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is in the home mode.
+* review-related commands (e.g. flip, correct, wrong, endReview) when the user is in Review mode.
+
+The model keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
+The model also keeps track of whether the user is currently inside review mode.
+
+The Parser (logic) will check the state of FlashNotes through the model, and disables certain commands depending on the mode the user is in.
+
+
+#### Design considerations: 
+
+##### Possible designs for handing invalid commands
+
 * Alternative 1 (current choice): Checking of commands are done in the logic component.
-    * Pros: Model component does not need to keep track and handle invalid inputs by user
-    * Cons: Coupling between logic and model is increased
+    * Pros: 
+        * Model component does not need to keep track and handle invalid inputs by user 
+    * Cons: 
+        * Coupling between logic and model is increased as logic will check with model on the state of FlashNotes
 * Alternative 2: Checking of commands are done in the model component.
-    * Pros; Reduced coupling
-    * Cons: Model has to handle commands, reducing cohesion.
+    * Pros: 
+        * Reduced coupling as logic will not need to check the state of the model component.
+    * Cons: 
+        * Model has to handle commands and check for invalid commands, reducing cohesion.
 
 ### Review Mode 
 Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
