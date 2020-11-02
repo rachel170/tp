@@ -85,12 +85,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return userPrefs.getReviewCardLimit();
     }
 
     @Override
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         requireNonNull(reviewCardLimit);
         userPrefs.setReviewCardLimit(reviewCardLimit);
     }
@@ -255,10 +255,10 @@ public class ModelManager implements Model {
         FXCollections.shuffle(flashcardsToReviewList);
 
         // Trim review list using card limit from user prefs
-        Integer reviewCardLimit = userPrefs.getReviewCardLimit();
+        long reviewCardLimit = userPrefs.getReviewCardLimit();
         if (reviewCardLimit < flashcardsToReviewList.size() && reviewCardLimit >= 1) {
             flashcardsToReviewList = FXCollections.observableArrayList(
-                    flashcardsToReviewList.subList(0, reviewCardLimit));
+                    flashcardsToReviewList.subList(0, (int) reviewCardLimit));
         }
 
         // Store shuffled and trimmed list into flashcardsToReview list

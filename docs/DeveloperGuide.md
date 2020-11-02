@@ -133,6 +133,15 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 
 ## Implementation
 
+### Implementation of UI - 3 Different Modes
+
+Both of the root nodes represent the types of scenes available to the main window:
+* FlashCardListRoot contains FlashCardListPanel which will display a list of flashcards available to the user.
+* DeckCardListRoot contains DeckCardListPanel which will display a list of decks available to the user.
+
+The reasoning for splitting out the two different types of scenes is to allow for the user to
+
+
 ### Create Deck feature
 
 

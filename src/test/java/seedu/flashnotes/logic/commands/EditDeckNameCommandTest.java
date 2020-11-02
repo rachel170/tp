@@ -241,12 +241,12 @@ public class EditDeckNameCommandTest {
         }
 
         @Override
-        public Integer getReviewCardLimit() {
+        public long getReviewCardLimit() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setReviewCardLimit(Integer reviewCardLimit) {
+        public void setReviewCardLimit(long reviewCardLimit) {
             throw new AssertionError("This method should not be called.");
         }
 
