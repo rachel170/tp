@@ -150,6 +150,8 @@ Users can:
 
 * Inputs can be in any order.<br>
   e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
+  
+ * Inputs in square brackets `[ ]` represent optional inputs for the command.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -485,7 +487,7 @@ Outcome Expected:
 
 Edits an existing flashcard in the flashcard deck.
 
-Format: `editCard INDEX [q/QUESTION] [a/ANSWER]`
+Format: `editCard INDEX [q/QUESTION] [a/ANSWER] [t/TAG]`
 
 Examples:
 *  `editCard 2 a/Lee Kuan Yew` Edits the answer of the 2nd flashcard to be `Lee Kuan Yew`
@@ -508,6 +510,8 @@ changed. <br>
 * Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed desk list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* `TAG` refers to the deck which the card belongs to.
+* When the `TAG` of the card is edited into a tag/deck that does not exist yet, FlashNotes will create that deck and place the flashcard into that deck.
 
 </div>
 
@@ -937,7 +941,7 @@ Action | Format, Examples
 --------|------------------
 **Add Card** | `Format: addCard q/QUESTION a/ANSWER `
 **Delete Card** | `deleteCard INDEX`<br> e.g., `deleteCard 3`
-**Edit Card** | `editCard INDEX q/QUESTION a/ANSWER`<br> e.g.,`editCard 2 q/What is the real question? a/This is a real question.`
+**Edit Card** | `editCard INDEX [q/QUESTION] [a/ANSWER] [t/TAG]`<br> e.g.,`editCard 2 q/What is the real question? a/This is a real question.`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
