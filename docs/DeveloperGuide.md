@@ -785,8 +785,6 @@ Saving window preferences
 
 
 
-
-
 ### Entering a deck
 Entering a deck
 
@@ -800,6 +798,19 @@ Entering a deck
 
    4. Test case: `enterDeck Singapore Malaysia` <br>
        Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
+       
+### Deleting a deck
+Deleting a deck
+
+   1. Prerequisites: User is in Home mode and FLashNotes contains a deck.
+   
+   2. Test case: `deleteDeck 1`
+   
+         Expected: First deck is deleted from the list. 
+   
+   3. Test case: `deleteDeck 0`
+   
+         Expected: No deck is deleted. Error details shown in the status message. 
        
 ### Editing a deck name
 Editing a deck name
@@ -820,13 +831,13 @@ Deleting a card
 
    1. Prerequisites: Enter a deck using the `enterDeck` Multiple cards in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `deleteCard 1`<br>
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. 
+   
+   3. Test case: `deleteCard 0`<br>
+      Expected: No card is deleted. Error details shown in the status message. 
 
-   3. Test case: `delete 0`<br>
-      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
-
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `deleteCard`, `deleteCard x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Adding a card
