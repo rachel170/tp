@@ -830,7 +830,7 @@ At the end of a review session, FlashNotes will calculate your score for the ses
 As shown in the above image, the Review Window will display the following information:
  * The **total number of questions** you undertook in the review session.
  * The **number of questions marked as correct during your first attempt** at the question.
- * The calculated **percentage of questions answered correctly on your first attempt**.
+ * The calculated **percentage of questions answered correctly on your first attempt** rounded to 1 decimal place.
 
 Of the three types of information, only the calculated percentage will be saved by FlashNotes. This is so that you can track your revision progress for any deck that you conduct a review session in.
 
