@@ -1,7 +1,5 @@
 package seedu.flashnotes.logic;
 
-import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -49,7 +47,7 @@ public class LogicManager implements Logic {
         boolean isInDeck = model.getIsInDeck();
         String deckName = model.getCurrentDeckName();
         if (deckName == null) {
-            deckName = "Default";
+            deckName = Model.getDefaultDeckName();
         }
         Command command = flashNotesParser.parseCommand(commandText, isReviewMode, isInDeck, deckName);
         commandResult = command.execute(model);
@@ -123,7 +121,7 @@ public class LogicManager implements Logic {
      */
     @Override
     public void updateDeckPerformanceScore(Integer reviewScore) {
-        if (!model.getCurrentDeckName().equals(RESERVED_DECK_NAME)) {
+        if (!model.getCurrentDeckName().equals(Model.getReservedDeckName())) {
             model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
         }
     }
