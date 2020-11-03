@@ -172,7 +172,7 @@ The following general activity diagram summarizes what happens when a user execu
 
 ### Implementation of Deck
 
-##### 3 possible design for Deck
+#### 3 possible design for Deck
 
 In the planning phrase, our team came up with 3 possible alternatives for how we wanted to implement decks in our flashcard app, and the details were as follows:
 
@@ -201,7 +201,7 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
     * Con 1: Slow to render if there are too many cards to be searched through.
     * Con 2: Need to create a default card that stores the relevant tags since tags are indicators for the presence of decks, which is unintuitive and unnecessary.
     
-Alternative 1 and 2 were the strongest candidates, but alternative 1 eventually won out due to ease of implementation and extensibility. 
+Alternative 1 and 2 were the strongest candidates, but alternative 1 won out due to ease of implementation and extensibility. 
 With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
 
 #### Adding a new Deck feature
@@ -212,7 +212,7 @@ With alternative 1, it saves more space, and the performance difference is negli
 
 `Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
 
-#### Given below is an example usage scenario.
+##### Given below is an example usage scenario.
 
 Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
 
@@ -226,7 +226,7 @@ Step 3. The user is now able to see the new `Deck1` added.
 * The AddDeckCommandParser has been removed from the sequence diagram to simplify the diagram.
 </div>
 
-#### Corresponding sequence diagram for `addDeck` command:
+##### Corresponding sequence diagram for `addDeck` command:
 
 The following sequence diagram shows how Add Deck operation works:
 
@@ -236,7 +236,7 @@ The following sequence diagram shows how Add Deck operation works:
 
 </div>
 
-#### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
+##### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
 Our team looked at the 2 different ways addDeck can interact with model-related objects. 
 * **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
     *Pros:
