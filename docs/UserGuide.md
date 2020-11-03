@@ -842,7 +842,8 @@ To view the statistics of your last review session for any deck, simply navigate
 
 :warning: Things to note:
 
-Regarding the review statistics of any review session started after the usage of the `list` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
+* FlashNotes will calculate and save your review statistics only if you have marked all the questions in the review session as correct. Exiting or ending the review session early will not generate or save the result statistics of the incomplete review session.
+* Regarding the review statistics of any review session started after the usage of the `list` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
 
 </div>
 
