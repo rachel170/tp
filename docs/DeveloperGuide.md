@@ -741,24 +741,21 @@ Extensions
 2.  Should be able to hold up to 1000 cards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Interactions should not take more than 2 seconds.
-5.  The user can directly edit the data file to add or edit flashcards.
-6.  The user can import or export the flashcards by adding/copying a new json file with the same name.
+5.  The user can directly edit the data file.
+6.  The user can import or export the data of FlashNotes.
 7.  Should be usable by someone not used to CLI.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **FlashNotes**: The software that stores flashcards.
-* **Flashcard**: A card with a question and answer, and may contain a tag.
+* **FlashNotes**: The software that stores flashcards and decks.
+* **Flashcard**: A card with a question and answer.
 * **Deck**: A collection of flashcards.
-* **Home mode**: The home screen displays a list of decks of flashcards.
-* **Card mode**: The card screen displays a list of flashcards in a specific deck.
+* **Home mode**: A mode which displays a list of decks
+* **Card mode**: A mode which displays a list of cards
 * **Review mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
-* **Tag**: A note to group cards of a certain category together.
+* **Tag**: A note to indicate which deck the card belongs to.
 * **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
-* **Review Mode**: a mode which displays cards from a deck individually in shuffled order.
-* **Card Mode**: A mode which displays a list of cards
-* **Home Mode**: A mode which displays a list of decks
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -788,11 +785,40 @@ Saving window preferences
 
 
 
+
+
+### Entering a deck
+Entering a deck
+
+   1. Prerequisites: User is in Home mode and FlashNotes contains decks with names 'Singapore' and 'Malaysia'
+    
+   2. Test case: `enterDeck Singapore` <br>
+       Expected: All cards in the deck 'Singapore' will be shown. Cards in the deck 'Malaysia' will not be shown.    
+    
+   3. Test case: `enterDeck singapore` <br>
+       Expected: None of the cards are shown (as the keyword is case-sensitive)       
+
+   4. Test case: `enterDeck Singapore Malaysia` <br>
+       Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
+       
+### Editing a deck name
+Editing a deck name
+    
+   1. Prerequisites: User is in Home mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
+   
+   1. Test case: `editDeckName 1 n/Econs`
+   
+        Expected: The deck at Index 1 is changed to Econs
+        
+   2. Test case: `editDeckName 1 n/Singapore`
+   
+        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singpaore" already exists.
+
 ### Deleting a card
 
-Deleting a card while all persons are being shown
+Deleting a card
 
-   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   1. Prerequisites: Enter a deck using the `enterDeck` Multiple cards in the list.
 
    2. Test case: `delete 1`<br>
       Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
@@ -803,21 +829,24 @@ Deleting a card while all persons are being shown
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Adding a card
+1. Adding a card in a normal deck created by user
 
-
-### Entering a deck
-Entering a deck
-
-   1. Prerequisites: Flashnotes have decks with names 'Singapore' and 'Malaysia'
+    1. Prerequisites: Enter a deck using the command `enterDeck DECK_NAME`. 
     
-   2. Test case: `enterDeck Singapore` <br>
-       Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.    
+    2. Test case: `addCard q/question1 a/answer1`
     
-   3. Test case: `enterDeck singapore` <br>
-       Expected: None of the cards are shown (as the keyword is case-sensitive)       
-
-   4. Test case: `enterDeck Singapore Malaysia` <br>
-       Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
+        Expected: The specified card is added and shown to the user.
+        
+1. Adding a card while in the list of all flashcards 
+    
+    1. Prereuisites: Enter the list of all flashcards using the command `listAll`.
+    
+    2. Test case: `addCard q/question1 a/answer1`
+    
+        Expected: The flashcard is added to the list of flashcards shown.
+        The specified card is added to a deck called "Default". 
+        The "Default" deck will be created in the Home mode if the deck does not exists.
 
 ### Reviewing a deck of cards
 1. Opening the review window
