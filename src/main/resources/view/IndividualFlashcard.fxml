@@ -7,21 +7,21 @@
 <?import javafx.geometry.Insets?>
 
 <?import javafx.scene.control.Label?>
-<StackPane xmlns="http://javafx.com/javafx/8"
+<StackPane maxWidth="600" xmlns="http://javafx.com/javafx/8"
            xmlns:fx="http://javafx.com/fxml/1" styleClass="individualFlashcard">
     <VBox alignment="CENTER">
         <children>
-            <Label fx:id="question" text="Question" styleClass="individualFlashcard">
-                <HBox.margin>
-                    <Insets right="5.0" />
-                </HBox.margin>
+            <Label fx:id="question" text="Question" styleClass="individualFlashcard" wrapText="true">
+                <padding>
+                    <Insets top="5" right="5" bottom="5" left="15" />
+                </padding>
             </Label>
         </children>
         <children>
-            <Label fx:id="answer" text="Answer" styleClass="individualFlashcard">
-                <HBox.margin>
-                    <Insets right="5.0" />
-                </HBox.margin>
+            <Label fx:id="answer" text="Answer" styleClass="individualFlashcard" wrapText="true">
+                <padding>
+                    <Insets top="5" right="5" bottom="5" left="15" />
+                </padding>
             </Label>
         </children>
         <opaqueInsets>

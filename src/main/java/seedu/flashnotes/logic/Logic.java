@@ -48,6 +48,9 @@ public interface Logic {
      */
     ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
 
+    /** Reset flashcard being reviewed back to false */
+    public void resetFlipOfFlashcardBeingReviewed();
+
     /**
      * Returns the user prefs' flashnotes file path.
      */
@@ -66,16 +69,21 @@ public interface Logic {
     /**
      * Returns the user prefs' review card limit.
      */
-    Integer getReviewCardLimit();
+    long getReviewCardLimit();
 
     /**
      * Set the user prefs' review card limit.
      */
-    void setReviewCardLimit(Integer reviewCardLimit);
+    void setReviewCardLimit(long reviewCardLimit);
 
     /**
      * Update the user's review score for deck used in review.
      * @param reviewScore Integer value of user's review session score.
      */
     void updateDeckPerformanceScore(Integer reviewScore);
+
+    /**
+     * Turn off review mode.
+     */
+    void setIsReviewModeFalse();
 }

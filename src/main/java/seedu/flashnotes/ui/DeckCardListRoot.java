@@ -191,6 +191,9 @@ public class DeckCardListRoot extends UiPart<Region> implements RootNode {
                 throw new CommandException("Already in the Home Screen!");
             }
             if (commandResult.isDeck()) {
+                GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                        (int) primaryStage.getX(), (int) primaryStage.getY());
+                logic.setGuiSettings(guiSettings);
                 RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
 
                 Region root = rootNode.getFxmlLoader().getRoot();

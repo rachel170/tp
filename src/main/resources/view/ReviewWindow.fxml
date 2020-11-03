@@ -7,7 +7,7 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.image.Image?>
-<fx:root resizable="false" title="Review" minWidth="500" minHeight="300" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Review" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/review_icon.png" />
     </icons>
@@ -32,7 +32,7 @@
                 </StackPane>
 
                 <StackPane VBox.vgrow="NEVER" fx:id="individualFlashcardPlaceholder" styleClass="pane-with-border"
-                           minHeight="200" prefHeight="100" maxHeight="400">
+                           minHeight="200" prefHeight="300" maxHeight="500">
                     <padding>
                         <Insets top="5" right="10" bottom="5" left="10" />
                     </padding>

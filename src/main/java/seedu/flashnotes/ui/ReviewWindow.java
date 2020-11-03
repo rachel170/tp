@@ -7,6 +7,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.flashnotes.commons.core.GuiSettings;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.logic.Logic;
@@ -101,7 +102,10 @@ public class ReviewWindow extends UiPart<Stage> {
         this.individualFlashcard.init();
         this.individualFlashcard.displayFlashcard();
         getRoot().setAlwaysOnTop(true);
+        getRoot().initStyle(StageStyle.UTILITY);
         getRoot().showAndWait();
+        // After manual closing
+        this.handleExit();
         getRoot().centerOnScreen();
     }
 
@@ -113,14 +117,15 @@ public class ReviewWindow extends UiPart<Stage> {
     }
 
     /**
-     * Hides the help window.
+     * Hides the review window.
      */
     public void hide() {
+        // Hide review window
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the review window.
      */
     public void focus() {
         getRoot().requestFocus();
@@ -133,7 +138,7 @@ public class ReviewWindow extends UiPart<Stage> {
      */
     public void displayStatistics() {
         // Log
-        logger.fine("Showing statistics page of current review session.");
+        logger.info("Displaying statistics of current review session.");
         // Update IndividualFlashcard UI
         String message = this.individualFlashcard.displayStatistics();
         // Update resultDisplay
@@ -146,9 +151,8 @@ public class ReviewWindow extends UiPart<Stage> {
 
     /**
      * Flips the flashcard to show the answer/question
-     * @throws IllegalStateException when review session has already ended.
      */
-    public void handleFlip() throws IllegalStateException {
+    public void handleFlip() {
         this.individualFlashcard.flipFlashcard();
     }
 
@@ -161,15 +165,12 @@ public class ReviewWindow extends UiPart<Stage> {
      */
     public void handleNextCard(int isCorrect) {
         assert(isCorrect > 0);
-        if (individualFlashcard.isCardFlipped()) {
-            String result = individualFlashcard.handleNextCard(isCorrect);
-            if (result.equals("exit")) {
-                displayStatistics();
-            } else {
-                progressBar.setProgress(Double.parseDouble(result));
-            }
+        logic.resetFlipOfFlashcardBeingReviewed();
+        String result = individualFlashcard.handleNextCard(isCorrect);
+        if (result.equals("exit")) {
+            displayStatistics();
         } else {
-            resultDisplay.setFeedbackToUser("Need to flip card before marking it as correct or wrong");
+            progressBar.setProgress(Double.parseDouble(result));
         }
     }
 
@@ -193,10 +194,11 @@ public class ReviewWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        // Turn off review mode in logic
+        logic.setIsReviewModeFalse();
 
-        // hide the review and help windows
+        // Hide help window
         helpWindow.hide();
-        this.hide();
 
         // Return to FlashcardListRoot
         RootNode rootNode = new FlashcardListRoot(primaryStage, logic);
@@ -219,7 +221,7 @@ public class ReviewWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             if (isComplete && !(commandResult.isExit())) {
                 // If session has ended, ban the usage of next command
-                throw new IllegalStateException(MESSAGE_END_OF_REVIEW);
+                throw new CommandException(MESSAGE_END_OF_REVIEW);
             }
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -228,13 +230,10 @@ public class ReviewWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isExit()) {
-                if (isComplete) {
-                    // If session has ended, invoke unique exit function
-                    handleExit();
-                } else {
-                    // Else invoke normal exit function
-                    handleExit();
-                }
+                // Hide review window
+                this.hide();
+                // Return to Card View
+                handleExit();
             }
 
             if (commandResult.isNext() != 0) {
@@ -246,10 +245,11 @@ public class ReviewWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException | IllegalStateException e) {
+        } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
+
 }

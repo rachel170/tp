@@ -17,6 +17,7 @@ Class XYZListPanel
 Class XYZCard
 Class StatusBarFooter
 Class CommandBox
+Class ReviewWindow
 }
 
 package Model <<Rectangle>> {
@@ -32,15 +33,16 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> MainWindow
-MainWindow --> RootNode
+MainWindow  -- "1" RootNode
 RootNode --> XYZListRoot
-XYZListRoot --> HelpWindow
+XYZListRoot *-down-> ReviewWindow
+XYZListRoot *-down-> HelpWindow
 XYZListRoot *-down-> CommandBox
 XYZListRoot *-down-> ResultDisplay
 XYZListRoot *-down-> XYZListPanel
 XYZListRoot *-down-> StatusBarFooter
 
-XYZListPanel -down-> XYZCard
+XYZListPanel -down-> "*" XYZCard
 
 MainWindow -left-|> UiPart
 
@@ -50,9 +52,11 @@ XYZListPanel --|> UiPart
 XYZCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
+ReviewWindow --|> UiPart
 
 XYZListPanel ..> Model
 UiManager -right-> Logic
+HelpWindow -[hidden]right-> ReviewWindow
 MainWindow -left-> Logic
 
 XYZListPanel -[hidden]left- HelpWindow

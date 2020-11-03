@@ -13,7 +13,7 @@ public class FlashcardBuilder {
 
     public static final String DEFAULT_QUESTION = "Who am I?";
     public static final String DEFAULT_ANSWER = "85355255";
-    public static final String DEFAULT_TAG = "Singapore";
+    public static final String DEFAULT_TAG = "singapore";
 
     private Question question;
     private Answer answer;
