@@ -35,7 +35,7 @@ public class Deck {
     public Deck(String name) {
         requireNonNull(name);
         this.deckName = name;
-        this.resultStatistics = "-1";
+        this.resultStatistics = "-1.0";
     }
 
 

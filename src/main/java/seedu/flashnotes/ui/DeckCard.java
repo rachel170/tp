@@ -46,7 +46,7 @@ public class DeckCard extends UiPart<Region> {
         this.cardDeck = cardDeck;
         deckName.setText(cardDeck.getDeckName());
         id.setText(displayedIndex + ". ");
-        if (Integer.parseInt(cardDeck.getResultStatistics()) == -1) {
+        if (cardDeck.getResultStatistics().equals("-1.0")) {
             // Update result display with no statistics available yet.
             resultStatistics.setText(NO_RESULT_STATISTIC_LABEL);
         } else {
