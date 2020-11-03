@@ -3,7 +3,6 @@ package seedu.flashnotes.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
@@ -24,8 +23,7 @@ public class AddCardCommand extends Command {
             + PREFIX_ANSWER + "ANSWER \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_QUESTION + "Why is the sky blue? "
-            + PREFIX_ANSWER + "Because it's a reflection of the sea "
-            + PREFIX_TAG + "friends";
+            + PREFIX_ANSWER + "Because it's a reflection of the sea";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the flashnotes";

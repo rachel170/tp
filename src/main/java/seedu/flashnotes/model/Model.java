@@ -111,6 +111,14 @@ public interface Model {
      */
     void updateFilteredDeckList(Predicate<Deck> predicate);
 
+    static String getDefaultDeckName() {
+        return FlashNotes.getDefaultDeckName();
+    }
+
+    static String getReservedDeckName() {
+        return FlashNotes.getReservedDeckName();
+    }
+
     /**
      * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes.
      */

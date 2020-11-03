@@ -5,8 +5,6 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
-import static seedu.flashnotes.model.deck.Deck.DEFAULT_DECK_NAME;
-import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
 
 import java.util.List;
 import java.util.Optional;
@@ -69,11 +67,10 @@ public class EditCardCommand extends Command {
         }
 
         Flashcard flashcardToEdit = lastShownList.get(index.getZeroBased());
-        //TODO: list
         String currentDeckName = model.getCurrentDeckName();
         boolean isInList = false;
-        if (currentDeckName.equals(RESERVED_DECK_NAME)) {
-            currentDeckName = DEFAULT_DECK_NAME;
+        if (currentDeckName.equals(Model.getReservedDeckName())) {
+            currentDeckName = Model.getDefaultDeckName();
             isInList = true;
         }
         Flashcard editedFlashcard = createEditedFlashcard(flashcardToEdit, editFlashcardDescriptor);

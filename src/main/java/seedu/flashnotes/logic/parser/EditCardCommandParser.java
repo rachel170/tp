@@ -30,7 +30,8 @@ public class EditCardCommandParser implements Parser<EditCardCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT
+                    + "\n" + pe.getMessage(), EditCardCommand.MESSAGE_USAGE), pe);
         }
 
         EditCardCommand.EditFlashcardDescriptor editFlashcardDescriptor = new EditCardCommand.EditFlashcardDescriptor();
