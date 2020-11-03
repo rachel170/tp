@@ -16,18 +16,21 @@ Given below are my contributions to the project.
   * Highlights: This enhancement affects existing and future commands as many actions revolves around the object. It required an in-depth analysis of design alternatives to weigh the tradeoff between the value and the speed of development. Implementation in particular was challenging because creating a new object affects every single package in the original architecture. Caution needed to be exercised in developing the 
   * Credits: Jackson Json was used in the process of storing all objects in FlashNotes
   
-* **New Feature 2**: Added the ability to Add New Decks.
+* **New Feature 2**: Added the ability to add new Decks via addDeck Command.
   
 * **New Feature 3**: Created a new UI for Home Screen to render Decks
     * What it does: Enable the user to visually separate a list of decks from list of cards
     * Justification: Having 2 visually separate screen to view flashcards in gives a sense of the hierarchical relationship between Decks and Flashcards. This helps to separate the 2 different types of objects rendered and the logic of operating in those differing modes.
     * Highlights: Deciding to split the root nodes out from the Main screen was important in allowing scene swaps to happen. Additionally, it enabled the further extension of including review window into the card mode screen, while excluding it from the main mode. The implementation of decks was also important in this process.
-    * Credits: Oracle's JavaFx tutorial was helpful in explaining the hierarchy of nodes in the object rendering process. Due to the observer pattern used in the original implementation of AddressBook 3, it was easier to design a similar flow for Deck lists which was rendered in the main mode.
+    * Credits: Oracle's JavaFx tutorial was helpful in explaining the hierarchy of nodes in the object rendering process. Additionally, due to the observer pattern used in the original implementation of AddressBook 3, it was easy to reference and design a similar flow for Deck lists which was rendered in the main mode.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=chuyou&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=chuyouchia&tabRepo=AY2021S1-CS2103T-T15-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code)
 
 * **Project management**:
     * Managed the release from v1.2 to v1.4 (4 releases) as the Project Lead
+    * Led discussion on prioritization of issues and features and user interface
+    * Organized weekly merge sessions to finalize features and iron out bugs
+    * Provided input and decision-making when needed outside of organized merge sessions
 
 * **Enhancements to existing features**:
     * Modified the GUI color scheme to provide visual separation between Decks and Flashcards
@@ -45,4 +48,4 @@ Given below are my contributions to the project.
 
 * **Community**:
     * Contributed to forum discussions (example: [1](https://github.com/nus-cs2103-AY2021S1/forum/issues/103))
-    * Review teammate commits (example: [1](https://github.com/AY2021S1-CS2103T-T15-2/tp/pull/139))
+    * Reviewed teammate commits in detail when needed (example: [1](https://github.com/AY2021S1-CS2103T-T15-2/tp/pull/139))
