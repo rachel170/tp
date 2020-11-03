@@ -15,7 +15,7 @@ import seedu.flashnotes.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class ListAllCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,14 +28,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, String.format(ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ListAllCommand(), model, String.format(ListAllCommand.MESSAGE_SUCCESS,
                 model.getFilteredFlashcardList().size()), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showFlashcardAtIndex(model, INDEX_FIRST_FLASHCARD);
-        assertCommandSuccess(new ListCommand(), model, String.format(ListCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new ListAllCommand(), model, String.format(ListAllCommand.MESSAGE_SUCCESS,
                 7), expectedModel);
     }
 }

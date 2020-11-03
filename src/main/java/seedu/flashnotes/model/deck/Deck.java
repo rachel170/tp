@@ -1,21 +1,27 @@
 package seedu.flashnotes.model.deck;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+
+import seedu.flashnotes.model.Model;
 
 /**
  * Deck is the tag which is given to every card.
  */
 public class Deck {
-    public static final String RESERVED_DECK_NAME = "list";
-    public static final String DEFAULT_DECK_NAME = "Default";
+
     public static final String MESSAGE_CONSTRAINTS_LENGTH =
             "Deck name should not be blank and should be less than or equal to 40 characters. "
-                + "Current number of characters in deck name is %d.";
-    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Deck name should not be the reserved deck name: "
-            + RESERVED_DECK_NAME;
+                    + "Current number of characters in deck name is %d.";
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
             "ResultStatistic should not be blank or a non numeric value";
+
+    private static final String RESERVED_DECK_NAME = "list";
+    private static final String DEFAULT_DECK_NAME = "Default";
+
+    public static final String MESSAGE_CONSTRAINTS_RESERVED = "Deck name should not be the reserved deck name: "
+            + RESERVED_DECK_NAME;
 
     // Identity fields
     private String deckName;
@@ -23,9 +29,10 @@ public class Deck {
 
     /**
      * Initializes a Deck that contains the Deck Name and Result Statistics if any.
+     *
      * @param name description of deck
      */
-    public Deck (String name) {
+    public Deck(String name) {
         requireNonNull(name);
         this.deckName = name;
         this.resultStatistics = "-1";
@@ -38,6 +45,14 @@ public class Deck {
 
     public String getResultStatistics() {
         return resultStatistics;
+    }
+
+    public static String getDefaultDeckName() {
+        return DEFAULT_DECK_NAME;
+    }
+
+    public static String getReservedDeckName() {
+        return RESERVED_DECK_NAME;
     }
 
     public void setDeckName(String deckName) {
@@ -58,7 +73,7 @@ public class Deck {
     }
 
     public static boolean isValidDeckReservedName(String test) {
-        return !test.equals(RESERVED_DECK_NAME);
+        return !test.equals(Model.getReservedDeckName());
     }
 
     /**
@@ -73,6 +88,7 @@ public class Deck {
         return otherDeck != null
                 && otherDeck.getDeckName().equals(getDeckName());
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

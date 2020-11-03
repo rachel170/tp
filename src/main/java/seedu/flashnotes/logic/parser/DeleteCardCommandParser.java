@@ -23,7 +23,8 @@ public class DeleteCardCommandParser implements Parser<DeleteCardCommand> {
             return new DeleteCardCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCardCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT + "\n"
+                            + pe.getMessage(), DeleteCardCommand.MESSAGE_USAGE), pe);
         }
     }
 

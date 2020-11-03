@@ -41,6 +41,8 @@ public class Messages {
     public static final String INVALID_ENDREVIEW_COMMAND_IN_HOME_MESSAGE = "You cannot end a review "
             + "in the home screen. Enter a deck by using the command `enterDeck DECKNAME` first and then enter "
             + "the review mode with the command `review`.";
+    public static final String INVALID_LIST_COMMAND_IN_HOME_MESSAGE = "You cannot list cards in home screen. "
+            + "You try the listAll command instead.";
 
     // Messages for invalid commands used in review mode
     public static final String INVALID_ADDCARD_COMMAND_IN_REVIEW_MESSAGE = "You cannot add a flashcard in the"
@@ -57,7 +59,7 @@ public class Messages {
             + " review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_ENTERDECK_COMMAND_IN_REVIEW_MESSAGE = "You cannot enter a deck in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
-    public static final String INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE = "You cannot list flashcards in the"
+    public static final String INVALID_LISTALL_COMMAND_IN_REVIEW_MESSAGE = "You cannot list all flashcards in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_ADDDECK_COMMAND_IN_REVIEW_MESSAGE = "You cannot add a deck in the"
             + " review screen. Exit review mode by using the command `endReview` first.";
@@ -71,6 +73,8 @@ public class Messages {
             + "the review screen. Exit review mode by using the command `endReview` first.";
     public static final String INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE = "You cannot enter home command in "
             + "the review screen. Exit review mode by using the command `endReview` first.";
+    public static final String INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE = "You cannot list flashcards in the"
+            + " review screen. Exit review mode by using the command `endReview` first.";
 
     // Messages for invalid commands used in deck screen
     public static final String INVALID_ADDDECK_COMMAND_IN_DECK_MESSAGE = "You cannot add a deck in the"
@@ -85,7 +89,7 @@ public class Messages {
             + " deck screen. If you want to view another deck, exit deck mode by using the command `home` first.";
     public static final String INVALID_FLIP_COMMAND_IN_DECK_MESSAGE = "You cannot flip a flashcard "
             + "in the deck screen. Enter the review mode with the command `review`.";
-    public static final String INVALID_LIST_COMMAND_IN_DECK_MESSAGE = "You cannot list in the"
+    public static final String INVALID_LISTALL_COMMAND_IN_DECK_MESSAGE = "You cannot list all in the"
             + " deck screen. Exit deck mode by using the command `home` first.";
     public static final String INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE = "You cannot end a review "
             + "in the deck screen. Enter the review mode with the command `review`.";
