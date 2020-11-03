@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.flashnotes.logic.commands.CommandResult;
-import seedu.flashnotes.logic.commands.ListCommand;
+import seedu.flashnotes.logic.commands.ListAllCommand;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.Model;
@@ -56,8 +56,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, String.format(ListCommand.MESSAGE_SUCCESS,
+        String listCommand = ListAllCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, String.format(ListAllCommand.MESSAGE_SUCCESS,
                 0), model);
     }
 

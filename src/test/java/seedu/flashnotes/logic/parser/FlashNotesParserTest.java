@@ -28,8 +28,8 @@ import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_DEC
 import static seedu.flashnotes.commons.core.Messages.INVALID_FLIP_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_HOME_COMMAND_IN_REVIEW_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_DECK_MESSAGE;
-import static seedu.flashnotes.commons.core.Messages.INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_LISTALL_COMMAND_IN_DECK_MESSAGE;
+import static seedu.flashnotes.commons.core.Messages.INVALID_LISTALL_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_REVIEW_COMMAND_IN_HOME_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_SETREVIEWLIMIT_COMMAND_IN_REVIEW_MESSAGE;
 import static seedu.flashnotes.commons.core.Messages.INVALID_WRONG_COMMAND_IN_DECK_MESSAGE;
@@ -65,7 +65,7 @@ import seedu.flashnotes.logic.commands.FindCommand;
 import seedu.flashnotes.logic.commands.FlipCommand;
 import seedu.flashnotes.logic.commands.HelpCommand;
 import seedu.flashnotes.logic.commands.HomeCommand;
-import seedu.flashnotes.logic.commands.ListCommand;
+import seedu.flashnotes.logic.commands.ListAllCommand;
 import seedu.flashnotes.logic.commands.ReviewCommand;
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.commands.WrongCommand;
@@ -133,15 +133,17 @@ public class FlashNotesParserTest {
 
     @Test
     public void homeScreen_list_success() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, isNotReviewMode, isNotInDeck, DEFAULT)
-                instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListAllCommand.COMMAND_WORD, isNotReviewMode, isNotInDeck, DEFAULT)
+                instanceof ListAllCommand);
     }
 
     @Test
     public void homeScreen_list_throwsParseException() throws Exception {
         // Throws ParseException if List command has any arguments
-        assertThrows(ParseException.class, String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ListCommand.COMMAND_WORD), ()
-            -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3", isNotReviewMode, isNotInDeck, DEFAULT));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_EXTENDED_COMMAND_ERROR, ListAllCommand.COMMAND_WORD), ()
+                -> parser.parseCommand(ListAllCommand.COMMAND_WORD + " 3",
+                        isNotReviewMode, isNotInDeck, DEFAULT));
     }
 
     @Test
@@ -384,8 +386,8 @@ public class FlashNotesParserTest {
 
     @Test
     public void inDeck_list_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, INVALID_LIST_COMMAND_IN_DECK_MESSAGE, ()
-            -> parser.parseCommand(ListCommand.COMMAND_WORD,
+        assertThrows(ParseException.class, INVALID_LISTALL_COMMAND_IN_DECK_MESSAGE, ()
+            -> parser.parseCommand(ListAllCommand.COMMAND_WORD,
                 isNotReviewMode, isInDeck, DEFAULT));
     }
 
@@ -494,8 +496,8 @@ public class FlashNotesParserTest {
 
     @Test
     public void inReview_list_throwsParseException() {
-        assertThrows(ParseException.class, INVALID_LIST_COMMAND_IN_REVIEW_MESSAGE, ()
-            -> parser.parseCommand(ListCommand.COMMAND_WORD,
+        assertThrows(ParseException.class, INVALID_LISTALL_COMMAND_IN_REVIEW_MESSAGE, ()
+            -> parser.parseCommand(ListAllCommand.COMMAND_WORD,
                 isReviewMode, isInDeck, DEFAULT));
     }
 
