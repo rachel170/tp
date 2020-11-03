@@ -133,8 +133,7 @@ public class ReviewWindow extends UiPart<Stage> {
 
     /**
      * Shows the final statistics of the review session.
-     * Marks the session to be at its end
-     * @throws IllegalStateException
+     * Updates model with new review statistic for the deck.
      */
     public void displayStatistics() {
         // Log
