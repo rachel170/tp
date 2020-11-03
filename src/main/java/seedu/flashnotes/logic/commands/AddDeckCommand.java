@@ -6,7 +6,9 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
-
+/**
+ * Adds a deck to the flashnotes.
+ */
 public class AddDeckCommand extends Command {
     public static final String COMMAND_WORD = "addDeck";
 

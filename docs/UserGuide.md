@@ -5,7 +5,7 @@ title: User Guide
 ## Introduction
 Welcome to the FlashNotes User Guide.
 
-FlashNotes is a **desktop app for flashcards**, built for students who wish to utilise flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
+FlashNotes is a **desktop app for text-based flashcards**, built for students who wish to utilise English flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
 
 Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for. However, with FlashNotes, you can now keep track of your flashcards and their content with ease.
 FlashNotes allows you to organise your flashcards by topics or subjects using Decks. 
@@ -182,6 +182,15 @@ Outcome expected:
 1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
 ![EnterDeck](images/enterDeck_success.png)
 
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* The deck name entered is **case-sensitive**. e.g. `GET1025` will not match `get1025`
+* only **full phrases** will be matched with the relevant decks e.g. `GE` will not match `GET1025`
+
+</div>
+
 ### Create a new Deck : `addDeck`
 
 Creates a new empty deck and adds to the list of decks displayed.
@@ -189,7 +198,7 @@ Creates a new empty deck and adds to the list of decks displayed.
 Format: `addDeck n/DECKNAME`
 
 Examples:
-* `addDeck Singapore History` creates an empty deck called `Singapore History`.
+* `addDeck n/Singapore History` creates an empty deck called `Singapore History`.
 
 Outcome expected:
 1. Enter the Add Deck Command into the command bar as per the example.
@@ -209,13 +218,16 @@ Outcome expected:
 * If there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
 * There is a 40 character limit for DECKNAME.
 * Reserved names (such as `list`) can't be used as DECKNAME.
+* If multiple name prefixes are in the command text, only the last one would be selected.
+* If you are in card mode, you need to navigate back to the home screen via the Home command before adding new deck.
 
 </div>
 
 
 ### Rename a new Deck : `editDeckName`
 
-Edit a deck name and the tags of all corresponding cards in the deck.
+Edit a deck name and the tags of all corresponding cards in the deck. 
+Note that all cards' tag correspond to the deck that they belong to.
 
 Format: `editDeckName INDEX n/NEWDECKNAME`
 
@@ -224,7 +236,7 @@ Example:
 
 Outcome Expected:
 
-1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
+1\. Enter the Edit Deck Name command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
 ![EditDeckNameBefore](images/EditDeckNameBefore.png)
 
 
@@ -516,6 +528,7 @@ changed. <br>
 * Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed desk list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Note that editing the tag of the card will cause the card to move to the Deck with the name exactly as per the new tag name.
 * `TAG` refers to the deck which the card belongs to.
 * When the `TAG` of the card is edited into a tag/deck that does not exist yet, FlashNotes will create that deck and place the flashcard into that deck.
 
@@ -523,7 +536,7 @@ changed. <br>
 
 ### Finding flashcards : `find`
 
-Finds flashcards which contain any of the given keywords.
+Finds flashcards which contain any of the given keywords in their respective questions.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -536,7 +549,7 @@ Outcome Expected:
 1. Enter the find Command into the command box as shown. 
 ![Find Before](images/FindCommandBefore.png)
 
-1. When successful, the flashcard(s) matching the keywords will be displayed.
+1. When successful, the flashcard(s) with questions that contains the matching keywords will be displayed.
 ![Find After](images/FindCommandAfter.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -544,7 +557,8 @@ Outcome Expected:
 :warning: Things to note:
 
 * The search is **case-insensitive**. e.g `test` will match `Test`
-* **Only full words will** be matched e.g. `Art` will not match `Artifact`
+* **Only full phrases will** be matched e.g. `Art` will not match `Artifact`
+* Find command only searches keywords from the questions, since the purpose of using flashcards is to self test.
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 </div>
