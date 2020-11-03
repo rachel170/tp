@@ -175,9 +175,13 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping FlashNotes ] =============================");
         try {
+            logger.info("Saving User Pref...");
             storage.saveUserPrefs(model.getUserPrefs());
+            logger.info("Saving FlashNotes data...");
+            storage.saveFlashNotes(model.getFlashNotes(), model.getUniqueDeckList());
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.severe("Failed to save preferences or data to file " + StringUtil.getDetails(e));
         }
+        logger.info("============================ [ FlashNotes Exited ] =============================");
     }
 }
