@@ -24,6 +24,7 @@ public class ArgumentMultimap {
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
      * If the map previously contained a mapping for the key, the new value is appended to the list of existing values.
+     * The relevant count of occurrences are updated in the argMultimapCounter accordingly if there are repeats.
      *
      * @param prefix   Prefix key with which the specified argument value is to be associated
      * @param argValue Argument value to be associated with the specified prefix key

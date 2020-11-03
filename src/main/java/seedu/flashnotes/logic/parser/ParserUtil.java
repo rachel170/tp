@@ -105,7 +105,7 @@ public class ParserUtil {
         requireNonNull(deckName);
         String tagDeckRelationNote = "\nNote that the cards' tag correspond to the deck they belong to.";
         String trimmedDeckName = deckName.trim();
-        if (!Deck.isValidDeckName(trimmedDeckName)) {
+        if (!Deck.isValidDeckLength(trimmedDeckName)) {
             throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS_LENGTH
                     + tagDeckRelationNote, deckName.length()));
         } else if (!Deck.isValidDeckReservedName(trimmedDeckName)) {

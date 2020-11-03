@@ -4,7 +4,7 @@ import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
-/*
+/**
  * Format full help instructions for every command for display.
  */
 public class ReviewCommand extends Command {

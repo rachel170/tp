@@ -40,7 +40,7 @@ class JsonAdaptedDeck {
      */
     public void updateModel(FlashNotes flashNotes) throws IllegalValueException {
         // Check to make sure deck name is valid
-        if (!Deck.isValidDeckName(deckName)) {
+        if (!Deck.isValidDeckLength(deckName)) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!Deck.isValidDeckReservedName(deckName)) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
@@ -60,7 +60,7 @@ class JsonAdaptedDeck {
         }
     }
     public Deck toModelType() throws IllegalValueException {
-        if (!Deck.isValidDeckName(deckName)) {
+        if (!Deck.isValidDeckLength(deckName)) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!Deck.isValidDeckReservedName(deckName)) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
