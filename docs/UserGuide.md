@@ -821,6 +821,31 @@ Outcome Expected: <br>
 
 </div>
 
+### About Review Statistics
+
+At the end of a review session, FlashNotes will calculate your score for the session and display in a format similar to the image shown below. <br>
+
+![Review Window with Review Statistics](images/UG_ReviewStatistics.png)
+
+As shown in the above image, the Review Window will display the following information:
+ * The **total number of questions** you undertook in the review session.
+ * The **number of questions marked as correct during your first attempt** at the question.
+ * The calculated **percentage of questions answered correctly on your first attempt**.
+
+Of the three types of information, only the calculated percentage will be saved by FlashNotes. This is so that you can track your revision progress for any deck that you conduct a review session in.
+
+To view the statistics of your last review session for any deck, simply navigate back to the **Main Mode** and look under the Deck's name as indicated in the image below.
+
+![Review Statistics In Home Mode](images/UG_ReviewStatisticsInHome.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+Regarding the review statistics of any review session started after the usage of the `list` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
