@@ -5,7 +5,7 @@ title: User Guide
 ## Introduction
 Welcome to the FlashNotes User Guide.
 
-FlashNotes is a **desktop app for flashcards**, built for students who wish to utilise flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
+FlashNotes is a **desktop app for text-based flashcards**, built for students who wish to utilise English flashcards for studying. FlashNotes is also optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FlashNotes will be faster than traditional GUI apps.
 
 Flashcards are one of the oldest forms of studying methods, but it is also remarkably difficult to keep track of the vast amount of content to study for. However, with FlashNotes, you can now keep track of your flashcards and their content with ease.
 FlashNotes allows you to organise your flashcards by topics or subjects using Decks. 
@@ -94,7 +94,7 @@ Users can:
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
-1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds.<br>
+1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds. Note how FlashNotes contains some sample data after initial launch.<br>
    ![Figure 1: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
    _Figure 2A: Initial View of FlashNotes with GUI component labels._
    
@@ -120,8 +120,7 @@ Users can:
 
 1. After executing each command, a success or failure message will be displayed in the **Result Box**. This will let you know if you have successfully executed the relevant commands or not. Given that you have provided the correct command prefixes, it can even provide additional information on why your command has failed.  <br>
 
-
-1. Refer to the [Features](#Main Mode Features) below for the details of each command.
+1. Refer to the **Features** section below for the details of each command.
 
 <div markdown="block" class="alert alert-info">
    
@@ -182,6 +181,15 @@ Outcome expected:
 1. You will see the list of cards stored in the deck named Economics. The result display will also show the number of cards in the list.
 ![EnterDeck](images/enterDeck_success.png)
 
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* The deck name entered is **case-sensitive**. e.g. `GET1025` will not match `get1025`
+* only **full phrases** will be matched with the relevant decks e.g. `GE` will not match `GET1025`
+
+</div>
+
 ### Create a new Deck : `addDeck`
 
 Creates a new empty deck and adds to the list of decks displayed.
@@ -189,7 +197,7 @@ Creates a new empty deck and adds to the list of decks displayed.
 Format: `addDeck n/DECKNAME`
 
 Examples:
-* `addDeck Singapore History` creates an empty deck called `Singapore History`.
+* `addDeck n/Singapore History` creates an empty deck called `Singapore History`.
 
 Outcome expected:
 1. Enter the Add Deck Command into the command bar as per the example.
@@ -209,13 +217,16 @@ Outcome expected:
 * If there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
 * There is a 40 character limit for DECKNAME.
 * Reserved names (such as `list`) can't be used as DECKNAME.
+* If multiple name prefixes are in the command text, only the last one would be selected.
+* If you are in card mode, you need to navigate back to the home screen via the Home command before adding new deck.
 
 </div>
 
 
 ### Rename a new Deck : `editDeckName`
 
-Edit a deck name and the tags of all corresponding cards in the deck.
+Edit a deck name and the tags of all corresponding cards in the deck. 
+Note that all cards' tag correspond to the deck that they belong to.
 
 Format: `editDeckName INDEX n/NEWDECKNAME`
 
@@ -224,7 +235,7 @@ Example:
 
 Outcome Expected:
 
-1\. Enter the editDeckName command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
+1\. Enter the Edit Deck Name command (`editDeckName 1 n/History`) into the command bar as shown in the example. The name of the deck at index 1 will be edited.
 ![EditDeckNameBefore](images/EditDeckNameBefore.png)
 
 
@@ -516,6 +527,7 @@ changed. <br>
 * Edits the flashcard at the specified `INDEX`. The index refers to the index number shown in the displayed desk list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Note that editing the tag of the card will cause the card to move to the Deck with the name exactly as per the new tag name.
 * `TAG` refers to the deck which the card belongs to.
 * When the `TAG` of the card is edited into a tag/deck that does not exist yet, FlashNotes will create that deck and place the flashcard into that deck.
 
@@ -523,7 +535,7 @@ changed. <br>
 
 ### Finding flashcards : `find`
 
-Finds flashcards which contain any of the given keywords.
+Finds flashcards which contain any of the given keywords in their respective questions.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -536,7 +548,7 @@ Outcome Expected:
 1. Enter the find Command into the command box as shown. 
 ![Find Before](images/FindCommandBefore.png)
 
-1. When successful, the flashcard(s) matching the keywords will be displayed.
+1. When successful, the flashcard(s) with questions that contains the matching keywords will be displayed.
 ![Find After](images/FindCommandAfter.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -544,7 +556,8 @@ Outcome Expected:
 :warning: Things to note:
 
 * The search is **case-insensitive**. e.g `test` will match `Test`
-* **Only full words will** be matched e.g. `Art` will not match `Artifact`
+* **Only full phrases will** be matched e.g. `Art` will not match `Artifact`
+* Find command only searches keywords from the questions, since the purpose of using flashcards is to self test.
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 </div>
@@ -805,6 +818,32 @@ Outcome Expected: <br>
 
 * `endReview` can only be activated from the Review Window to return to the **Card Mode** you started the review session from.
 * No additional inputs should be added behind the `endReview` command.
+
+</div>
+
+### About Review Statistics
+
+At the end of a review session, FlashNotes will calculate your score for the session and display in a format similar to the image shown below. <br>
+
+![Review Window with Review Statistics](images/UG_ReviewStatistics.png)
+
+As shown in the above image, the Review Window will display the following information:
+ * The **total number of questions** you undertook in the review session.
+ * The **number of questions marked as correct during your first attempt** at the question.
+ * The calculated **percentage of questions answered correctly on your first attempt** rounded to 1 decimal place.
+
+Of the three types of information, only the calculated percentage will be saved by FlashNotes. This is so that you can track your revision progress for any deck that you conduct a review session in.
+
+To view the statistics of your last review session for any deck, simply navigate back to the **Main Mode** and look under the Deck's name as indicated in the image below.
+
+![Review Statistics In Home Mode](images/UG_ReviewStatisticsInHome.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* FlashNotes will calculate and save your review statistics only if you have marked all the questions in the review session as correct. Exiting or ending the review session early will not generate or save the result statistics of the incomplete review session.
+* Regarding the review statistics of any review session started after the usage of the `list` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
 
 </div>
 

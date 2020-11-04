@@ -251,7 +251,7 @@ public class EditDeckNameCommandTest {
         }
 
         @Override
-        public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+        public void updateDeckPerformanceScore(Double reviewScore, String deckName) {
             throw new AssertionError("This method should not be called.");
         }
 

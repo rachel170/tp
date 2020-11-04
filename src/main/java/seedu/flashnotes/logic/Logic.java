@@ -80,7 +80,7 @@ public interface Logic {
      * Update the user's review score for deck used in review.
      * @param reviewScore Integer value of user's review session score.
      */
-    void updateDeckPerformanceScore(Integer reviewScore);
+    void updateDeckPerformanceScore(Double reviewScore);
 
     /**
      * Turn off review mode.

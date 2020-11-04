@@ -50,6 +50,8 @@ public class EditCardCommandParser implements Parser<EditCardCommand> {
             throw new ParseException(EditCardCommand.MESSAGE_NOT_EDITED);
         }
 
+        ParserUtil.parseDeckName(editFlashcardDescriptor.getTag().toString());
+
         return new EditCardCommand(index, editFlashcardDescriptor);
     }
 

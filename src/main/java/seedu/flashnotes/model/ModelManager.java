@@ -179,7 +179,7 @@ public class ModelManager implements Model {
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+    public void updateDeckPerformanceScore(Double reviewScore, String deckName) {
         requireNonNull(reviewScore);
         requireNonNull(deckName);
         flashNotes.updateDeckPerformanceScore(reviewScore, deckName);

@@ -41,7 +41,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck Singapore`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck n/Singapore`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagramUpdated.png)
 
@@ -56,6 +56,11 @@ The sections below give more details of each component.
 
 The UI consists of a `MainWindow` which acts as a stage, and the `MainWindow` that references a `RootNode` to display the scene.
 The Root Node contains the scene, which is composed of UI parts like`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism
+Note that the Review Window is a component of the FlashCardListRoot and not a component of the DeckCardListRoot. As a result, the review window can only be initiated from the FlashCardListRoot.
+
+The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#Implementation-of-UI-(3-Different-Modes))
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -130,18 +135,98 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 
 ## Implementation
 
-## Implementation of Home (Deck) Mode Features
+### Implementation of UI (3 Different Modes)
 
-### Create Deck feature
+Both of the root nodes represent the types of scenes available to the main window:
+* FlashCardListRoot contains FlashCardListPanel which will display a list of flashcards available to the user.
+* DeckCardListRoot contains DeckCardListPanel which will display a list of decks available to the user.
 
+The reasoning for splitting out the two different types of scenes is to allow the MainWindow to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
+This provides better cohesion and utilizes the single responsibility principle as the classes are individually responsible for a smaller part of the UI rendered. It also improves the extensibility for the future if more modes and screens are to be added to the product.
+
+Similarly, we also chose to separate the review mode from the Main and Card mode. However, we decided to open a new 
+JavaFX window for users to review their cards in instead. This is because opening a new window allows us to 
+differentiates the review mode from the other modes better visually. This way, the UI for the review mode can also be 
+more minimalistic, reducing distractions for users when reviewing their flashcards.
+
+We also fixed the review window to be a small size. Since there is a 140 character limit for questions and answers, we 
+thought that there would be no need for users to maximize the review window, so we disabled that ability.
+
+When the review window is open, there would be a total of 2 command boxes on the user's screen, (one in the main 
+window and one in the review window). We did not think that it would make sense for the user to be interacting with the 
+main window when they are in review mode, so we decided to disable the command box in the main window when the review 
+window is open. This is so that users can focus more on the review session.
+    
+### Implementation of commands
+
+The following general activity diagram summarizes what happens when a user executes a new command:
+
+![CommandActivityDiagram](images/CommandActivityDiagram.png)
+
+### Handle invalid inputs/commands
+
+#### Deck vs Card related commands
+* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the home screen.
+* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
+* Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
+* The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
+
+#### Review related commands
+* The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
+* Flashnotes also keeps track of whether the user is currently inside review mode.
+* The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
+
+#### Design considerations:
+* Alternative 1 (current choice): Checking of commands are done in the logic component.
+    * Pros: Model component does not need to keep track and handle invalid inputs by user
+    * Cons: Coupling between logic and model is increased
+* Alternative 2: Checking of commands are done in the model component.
+    * Pros; Reduced coupling
+    * Cons: Model has to handle commands, reducing cohesion.
+
+### Implementation of Deck
+
+#### 3 possible design for Deck
+
+In the planning phrase, our team came up with 3 possible alternatives for how we wanted to implement decks in our flashcard app, and the details were as follows:
+
+* **Alternative 1 (current choice):** List of Decks and list of flashcards stored independently
+  * Pros:
+    * Pro 1: Initialization of flashcard list and deck list is very fast using the stored data.
+    * Pro 2: Easy to improve into a many to many type relationship in the future between deck and cards by using database functions.
+    * Pro 3: Reduce space needed for storing new flashcards and decks.
+    * Pro 4: Increase ease of implementation of future deck related commands by isolating the relevant object types by list
+  * Cons: 
+    * Con 1: May have performance issues if trying to find a large number cards contained by the deck at once. However, the effect of this is minimal since at any point in the current FlashNotes implementation, as for all screens the maximum number of cards visible are only 4.
+
+* **Alternative 2:** Store Flashcards within the deck.
+  * Pros: 
+    * Pro 1:  Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
+    * Pro 2: Easy to verify correctness of implementation.
+  * Cons:
+    * Con 1: Requires an overhaul of the code base and all references of flashcards.
+    * Con 2: If a card needs to belong to more than 1 deck, then duplicate cards need to be created for that purpose. This results in unnecessary space wasted.
+
+* **Alternative 3:** Decks to be read from the flashcards' tags and updated whenever a new flashcard has been created with a new tag
+  * Pros: 
+    * Pro 1: Easy to implement by transforming AB3.
+    * Pro 2: Also easy to verify correctness of implementation.
+  * Cons: 
+    * Con 1: Slow to render if there are too many cards to be searched through.
+    * Con 2: Need to create a default card that stores the relevant tags since tags are indicators for the presence of decks, which is unintuitive and unnecessary.
+    
+Alternative 1 and 2 were the strongest candidates, but alternative 1 won out due to ease of implementation and extensibility. 
+With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
+
+#### Adding a new Deck feature
 
 `FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
 
-* `Flashnotes#addDeck()` — Add a new Deck with a unique deck name.
+* `Flashnotes#addDeck()`  —  Add a new Deck with a unique deck name.
 
 `Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
 
-#### Given below is an example usage scenario.
+##### Given below is an example usage scenario.
 
 Step 1. The user launches the application for the first time. The `FlashNotes` will be initialized with the stored FlashNote state.
 
@@ -149,13 +234,15 @@ Step 2. The user executes `addDeck n/Deck1` command to add a new Deck in the Fla
 
 Step 3. The user is now able to see the new `Deck1` added.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** <br>
 
+* If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
+* The AddDeckCommandParser has been removed from the sequence diagram to simplify the diagram.
 </div>
 
-#### Corresponding sequence diagram for `AddDeck`:
+##### Corresponding sequence diagram for `addDeck` command:
 
-The following sequence diagram shows how AddDeck operation works:
+The following sequence diagram shows how Add Deck operation works:
 
 ![AddDeckSequenceDiagram](images/AddDeckSequenceDiagram.png)
 
@@ -163,23 +250,29 @@ The following sequence diagram shows how AddDeck operation works:
 
 </div>
 
-The following general activity diagram summarizes what happens when a user executes a new command:
+##### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
+Our team looked at the 2 different ways addDeck can interact with model-related objects. 
+* **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
+    *Pros:
+        * Pro 1: This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
+        * Pro 2: This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
+        * Pro 3: This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
+        * Pro 4: Consistency of implementation with the other commands in FlashNotes makes it easy for developers to trace and worth the slight increment in abstraction.
+    * Cons:
+        * Con 1: Some might view that the ModelManager is taking on too much work and turning into a "fat" class
 
-![CommandActivityDiagram](images/CommandActivityDiagram.png)
+* **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
+    *Pros:
+        * Pro 1: Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
+    * Cons:
+        * Con 1: Violates the Law of Demeter.
+        * Con 2: Separation of concern principle would be violated. More than 1 object (ModelManager and FlashNotes) are able to interact with commands directly.
+        * Con 3: Increases the number of dependencies on underlying FlashNotes objects and other objects contained in Model, hence reducing testability and maintainability.
 
-#### Design consideration:
+As alternative 1 was clearly superior, with the minor drawback of having an additional layer of abstraction, our team chose to keep implementation consistent and continue to interact with model-related objects through Model instead of accessing the underlying objects directly.
+Furthermore, the class here may not be considered too heavy with methods since there are only a 2 types of objects involved and hence the cons of using alternative 1 is limited.
 
-##### 2 possible designs for Adding Deck
-
-* **Alternative 1 (current choice):** Contain a list of deck names and uses it to search up relevant flashcards.
-  * Pros: Easy to implement. Suitable at this current stage because there is at most 4 cards shown at any point in time on screen. Over-optimisation is unnecessary.
-  * Cons: May have performance issues if trying to find a large number cards contained by the deck.
-
-* **Alternative 2:** Store Flashcards within deck.
-  * Pros: Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
-  * Cons: We must ensure that the implementation of each deck contains a direct reference to the flashcards.
-
-### Listing all flashcards, Reserved Deck Name and Default Deck
+#### Listing all flashcards, Reserved Deck Name and Default Deck
 
 As the `listAll` command is available on the home screen, entering the list of all flashcards will be treated as entering a deck.
 
@@ -190,9 +283,7 @@ Also, to prevent any conflicts with the model, users will not be able to create 
 
 The deck class stores the Reserved Deck Name and Default Deck Name. The logic component will reference the these names from the model component.
 
-#### Design considerations:
-
-##### Possible designs 
+##### Design considerations: 
 
 **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
 * Pros:
@@ -205,114 +296,39 @@ The deck class stores the Reserved Deck Name and Default Deck Name. The logic co
     * System does not have to check and reserve a deck name
 * Cons:
     * User will not be able to see a list of all flashcards
-    
-## Implementation of Card Mode Features
-
-### Overview of Card-Mode Features
-
-Card methods that are supported in Card Mode by `FlashNotes`:
-* `FlashNotes#addFlashcard(Flashcard flashcard)`: Adds a flashcard
-* `FlashNotes#removeFlashcard(Flashcard key)`: Deletes a flashcard
-* `FlashNotes#setFlashcard(Flashcard target, Flashcard editedFlashcard)`: Updates the information of a flashcard
-
-These operations are exposed in the Model interface as `Model#addFlashcard(Flashcard flashcard)`, `Model#deleteFlashcard(Flashcard target)` and `Model#setFlashcard(Flashcard target, Flashcard editedFlashcard) respectively.`
-
-Given below is an example usage scenario.
-
-The user executes `deleteCard 2` to delete the card at index 2 from the observed list.
-
-The following sequence diagram shows how the `deleteCard` operation works:
-
-![DeleteCardDiagram](images/DeleteCardSequenceDiagram.png)
-
-#### Design Considerations:
-##### Possible Designs
-
-**Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
-* Pros:
-    * Easy to implement as all logic is implemented in FlashNotes.
-* Cons:
-    * Deck class does not know when the flashcards are modified.
-    
-**Alternative 2:** Implement logic of card-level operations in Deck
-* Pros:
-    * Deck can modify its own cards.
-* Cons:
-    * Need to redesign Flashcard list to be a composition of Deck.
-
-
-
-
-### Handle invalid inputs/commands
-
-#### Deck vs Card vs Review related commands
-
-The software only allows 
-* card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is inside a deck.
-* deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is in the home mode.
-* review-related commands (e.g. flip, correct, wrong, endReview) when the user is in Review mode.
-
-The model keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
-The model also keeps track of whether the user is currently inside review mode.
-
-The Parser (logic) will check the state of FlashNotes through the model, and disables certain commands depending on the mode the user is in.
-
-
-#### Design considerations: 
-
-##### Possible designs for handing invalid commands
-
-* Alternative 1 (current choice): Checking of commands are done in the logic component.
-    * Pros: 
-        * Model component does not need to keep track and handle invalid inputs by user 
-    * Cons: 
-        * Coupling between logic and model is increased as logic will check with model on the state of FlashNotes
-* Alternative 2: Checking of commands are done in the model component.
-    * Pros: 
-        * Reduced coupling as logic will not need to check the state of the model component.
-    * Cons: 
-        * Model has to handle commands and check for invalid commands, reducing cohesion.
 
 ### Review Mode 
 Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
 
-#### Implementation
-The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users type in commands)
-and result display box (where the application displays messages to the user). On top of that, there is also the Individual Flashcard section
-of the window that shows the question of 1 flashcard. When the "flip" command is executed, 
-the answer to that question will be showed instead.
+#### Opening the review mode
+The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users 
+type in commands) and result display box (where the application displays messages to the user). On top of that, there is
+also the Individual Flashcard section of the window that shows the question of 1 flashcard. When the "flip" command is 
+executed, the answer to that question will be showed instead.
 
-To support the opening of this review session, the following commands were added:
+The following activity diagram shows the typical workflow when a user reviews flashcards in the review mode.
+![ReviewWorkflowActivityDiagram](images/ReviewWorkflowActivityDiagram.png)
+
+To support the opening of this review session, we added the following command:
 * `review` - A command that sets up the list of flashcards to review and opens a new review window displaying those cards.
 
 The following is a sequence diagram that demonstrates how a review command sets up the review session:
 ![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
 
-`ModelManager#shuffleReviewFlashcards` method sets up the list of flashcards to review inside `Model`.
+`ModelManager#shuffleReviewFlashcards()` method sets up the list of flashcards to review inside `Model`.
 It duplicates the list of filtered flashcards in the model as of the moment that the review command was
 called, it then shuffles these cards using the `FXCollections.shuffle()` method, and it trims the list of
 flashcards to review according to the review limit set by users.
 
-#### Design considerations:
-* Alternative 1 (current choice): Open a new JavaFX window
-    * Pros: Differentiates the review mode from the other modes better visually, 
-    allows the UI for the review mode to be minimalistic, reducing distractions for users when reviewing their flashcards.
-    * Cons: We would have to create a new window with another command box and result display, and display
-    the main command box.
-* Alternative 2: Implement the review session in the same window as the rest of the application.
-    * Pros: Can use the same command box and result display so that we would not have to create new command boxes and result
-    display boxes and disable main command box. 
-    * Cons: The UI looks more cluttered and users might get distracted when reviewing their flashcards
 
-### Set Review Limit feature
+#### Setting and Checking Review Limit feature
 Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
 review session (review limit). 
 
-#### Implementation
 Users only have to set the review limit once and it will be saved as user preferences in a storage file. Users will
 then only need to use this feature again when they want to change the review limit again in the future.
 
-The initial value for the review limit is set to 0 in `preferences.json`, which tells the program that the user did not
+The initial value for the review limit is set to `Integer.MAX_VALUE` in `preferences.json`, which tells the program that the user did not
 set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
 session. 
 
@@ -323,6 +339,16 @@ The following is an activity diagram showing how the set review command is inten
 when a user wants to use FlashNotes to review a deck of flashcards.
 
 ![SetReviewLimitActivityDiagram](images/SetReviewLimitActivityDiagram.png)
+
+We also implemented a command `checkReviewLimit` for users to check the review limit that they have set, in case they
+forgot what the current review limit is.
+
+We stored the review limit using the `long` data type. If we stored the review limit using an `Integer` data type, when 
+a user inputs a review limit greater than `Integer.MAX_VALUE`, the program will recognise the review limit as not an Integer
+and tell users that the command format is invalid. We solved this problem by storing the review limit using a `long` data type.
+Now, when the user inputs a review limit greater than `Integer.MAX_VALUE`, the parser will notice this and throw a relevant 
+`ParseException` telling users that their review limit is out of range, instead of telling users that the command format is invalid. 
+
 
 #### Design considerations:
 * Alternative 1 (current choice): Save review limit in the user preferences file.
@@ -460,6 +486,53 @@ The following sequence diagram shows how the endReview command operation works:
   * Pros: Easier to implement, simply expand tag feature to include review statistics data of the deck that the tag is representing.
   * Cons: Will result in storing several repetitions of the statistics since it is an add-on to each instance of a unique tag in the json file. This can needlessly take up more space if there are a huge amount of flashcards and only a few decks.
 
+
+### Implementation of Critical Classes:
+
+#### Implementation of CommandResult
+
+FlashNotes interacts with users using the `CommandResult` object. When users pass commands into FlashNotes, FlashNotes 
+will execute those commands and give users feedback according to the commands passed in. 
+
+`CommandResult` objects are generated when Command objects are executed by the `LogicManager#execute(…)` method. Upon 
+generation, all CommandResult objects contain a string `feedbackToUser` which contains success or error messages that will
+be shown to the user. This CommandResult object is then passed to UI classes, such as `MainWindow` and `ReviewWindow`. The 
+UI classes will then show this `feedbackToUser` in the `ResultDisplay` box.
+
+Upon execution of the Commands, users might request a change of modes, such as moving from main mode to deck mode, or 
+deck mode to review mode. This information is passed to the UI classes using the `CommandResult` object too. Some commands
+such as the `enterDeck` or `review` will generate a `CommandResult` object with more arguments such as `showHelp`, `exit`,
+`startReview`. These arguments will be accessed by UI classes using the public getter methods `CommandResult#isShowHelp()`,
+`CommandResult#isExit()` etc. The correct UI screens will be rendered accordingly by respective methods such as 
+`DeckCardListRoot#handleExit()`, `ReviewWindow#handleHelp()` etc.
+
+The following class diagram shows how the UI classes are related to the commandResult class, and their relevant methods.
+![UiCommandResultClassDiagram](images/UiCommandResultClassDiagram.png)
+
+#### Implementation of FlashNotesParser
+
+FlashNotesParser is the overall parser that is used to handle the commands from any of the command boxes in the various modes.
+
+As a result, it needs to be able to take in the commands and also know what are the modes that it is in in order to trigger the correct commands in the 3 different modes.
+
+Note that in our project architecture, the Model component is responsible for storing the state and data related to the application in general. 
+FlashNotesParser is purely an object that determines the commands that are accepted based on the current state of the Model's underlying FlashNotes object.
+
+While inside of the LogicManager#execute(...) method, the method checks with Model for the booleans related to mode.
+Afterwards, FlashNotesParser takes in the mode checking booleans obtained from model in FlashNotesParser#parseCommand(...). 
+The booleans regarding the modes enables FlashNotes to be able to decide which of the 3 following methods to use:
+* parseCommandInReviewMode(...)
+* parseCommandInHomeMode(...)
+* parseCommandInCardMode(...)
+
+Note that the HomeMode here refers to the Main Mode specified in the User Guide, if there are any confusions.
+
+##### Corresponding activity diagram for `FlashNotesParser`:
+
+The following activity diagram shows how the FlashNotesParser works:
+
+![FlashNotesParserSequenceDiagram](images/FlashNotesParserActivityDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
@@ -500,240 +573,191 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-####**Use case: UC01 - Create new Deck**
+####**Use case: UC01 - Review cards**
 
-#####Precondition: User is in the Home Mode, and is not in review mode.
+####Precondition: Cards that will be reviewed are already selected; User sees the full list of cards in the given deck.
 
 **MSS:**
 
-1. User creates a new deck.
-1. FlashNotes shows the newly created deck.
+1. Deck selects the relevant number of cards from current storage and displays it.
+1. User start reviewing using the cards that are currently being displayed in deck.
+1. Start review in a different window.
+1. Card appears.
+1. Card flipped.
+1. Card marked as correct or wrong.
+1. Repeat steps 4 to 6 until Deck ends.
+1. Show Review statistics.
+1. Close Window.
+1. Return to list view of deck in the main window.
+
+    Use case ends.
+
+**Extension:**
+
+* 6a. User marks the card as correct.
+   * 6a.1. System shows next card. <br>
+   Use case resumes from Step 4.
+
+* 6b. User marks card as wrong.
+   * 6b.1. System adds card back into the queue.
+   * 6b.2. System shows the next card. <br>
+   Use case resumes from Step 4.
+
+* *User ends the review session prematurely.
+    * *a. Review statistics screen not shown.
+    * *b. Review statistics not updated in the deck list. <br>
+    Use case resumes from Step 10.
+
+####**Use case: UC02 - Create new Deck**
+#####Precondition: User is in the Home Screen, and is not in review mode.
+
+**MSS:**
+
+1. User enters command to create a new deck.
+1. User enters empty deck view.
+1. User returns to main screen.
 
     Use Case Ends.
 
 **Extension:**
 
-* 1a. Deck name already exist.
-    * 1a.1. FlashNotes shows an error message 
-    
+* 1a. Deck name is a duplicate of existing decks.
+    * 1a.1. Raise error and stay in Home Screen. <br>
     Use case ends.
     
-#####**Use case: UC02 - Open a Deck**
+* 2a. User creates new card in deck view (UC04).
+    * 2a.1.  Card tagged with the deck name. <br>
+    Use case resumes from Step 3.
 
-#####Precondition: User is in the Home Mode.
+* 2b. User deletes card (UC03). <br>
+    Use case resumes from Step 3.
+
+* 2c. User edits card (UC05). <br>
+    Use case resumes from Step 3.
+
+####**Use case: UC03 - Delete a Card**
+#####Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS**
 
-1. User opens a deck
-1. FlashNotes shows a list of cards in the deck.
+1. User requests to list cards.
+1. Flashnotes shows a list of cards.
+1. User requests to delete a specific card in the list.
+1. Flashnotes deletes the card.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User opens a deck that does not exist.
-    * 1a.1. FlashNotes shows an error message. 
-    
+* 2a. The list is empty.
     Use case ends.
     
-* 2a. Deck is empty.
-    * 2a.1. FlashNotes displays an empty list.
-    
-    Use case ends.
-    
-####**Use case: UC03 - Delete a Deck**
+* 3a. The given index is invalid.
+    * 3a.1. Flashnotes shows an error message. <br>
+    Use case resumes at Step 2.
 
-#####Precondition: User is in the Home Mode.
-
-**MSS:**
-
-1. User deletes a deck.
-1. FlashNotes deletes the deck and shows the updated list of decks.
-
-    Use Case ends.
-
-**Extension:**
-
-* 2a. The given index is invalid.
-    * 2a.1 FlashNotes shows an error message.
-
-    Use Case ends.   
-    
-####**Use case: UC04 - Rename a Deck**
-
-#####Precondition: User is in the Home mode.
-
-**MSS:**
-
-1. User renames a deck.
-1. FlashNotes shows the deck with the new name.
-
-    Use Case ends.
-
-**Extension:**
-
-* 2a. User renames deck to the same name as an already existing deck.
-    * 2a.1 FlashNotes shows an error message. 
-    
-    Use Case ends.    
-    
-
-####**Use case: UC05 - Show all cards**
-
-#####Precondition: User is in the Home mode.
-
-**MSS:**
-1. User requests to see all the cards.
-1. FlashNotes shows all the cards to the user.
-    
-    Use Case ends.
-
-Extensions
-    
-* 2a. User adds a card.
-    * 2a1. FlashNotes adds the card into a default deck.
-    
-    Use Case ends.
-
-
-####**Use case: UC06 - Add a card**
-
-#####Precondition: User is in Home Mode.
+####**Use case: UC04 - Add a card**
+#####Precondition: Must be inside the deck view.
 
 **MSS**
 
-1. User opens a deck (UC02).
-1. User adds a card.
-1. FlashNotes adds the card into the current deck.
+1. User add card.
+1. Flashnotes adds the card.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a.1. FlashNotes shows an error message. <br>
+    * 2a.1. Flashnotes shows an error message. <br>
     Use case resumes at Step 2.
 
-####**Use case: UC07 - Delete a Card**
+####**Use case: UC05 - Edit a card**
+#####Precondition: Must be inside the card mode.
 
+**MSS**
+
+1. User requests to list cards.
+1. Flashnotes shows a list of cards.
+1. User requests to edit a specific card in the list.
+1. Flashnotes edits the card.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. <br>
+    Use case ends.
+* 3a. The given index is invalid.
+    * 3a.1. Flashnotes shows an error message.<br>
+    Use case resumes at step 2.
+
+#####**Use case: UC06 - Open Existing Deck**
 #####Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS**
 
-1. User opens a deck (UC02).
-1. User requests to delete a card 
-1. FlashNotes deletes teh card.
-
-    Use case ends.
-
-**Extensions**
-    
-* 2a. The given index is invalid.
-    * 2a.1. FlashNotes shows an error message.
-    
-    Use case resumes at Step 2.
-
-
-####**Use case: UC08 - Edit a card**
-
-#####Precondition: User is in Home Mode.
-
-**MSS**
-
-1. User opens a deck (UC02).
-1. User requests to edit a specific card in the deck.
-1. FlashNotes edits the card.
+1. User filters all cards belonging to a particular deck.
+1. Flashnotes shows a list of cards using the card mode.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
-    * 2a.1. FlashNotes shows an error message.
-    
-    Use case resumes at step 2.
-    
-
-####**Use case: UC09 - Find keywords in card**
-
-#####Precondition: User is in Home mode.
-
-**MSS**
-1. User opens a deck (UC02).
-1. User searches for keyword(s) of cards in the deck.
-1. FlashNotes shows the cards that contain the keyword in the question.
-
+* 1a. User enters a tag that is not found.
+    * 1a.1. Flashnotes returns empty card list. <br>
     Use case ends.
 
-**Extensions**
-* 2a. The keyword does not exist in any card.
-    *2a.1. FlashNotes shows an empty list.
-    
-    Use case ends.
-    
-####**Use case: UC10 - Seeing a list of cards in the deck**
-
-####Precondition: User is in Card mode.
-
-**MSS**
-1. User find for cards using keyword(s) (UC09).
-1. User requests to see a list of cards in the deck again.
-1. FlashNotes shows the list of all cards in the deck again.
-
-    Use case ends.
-
-####**Use case: UC11 - Return to Home mode**
-
-#####Precondition: User is in Card mode.
+####**Use case: UC07 - Delete current Deck**
+#####Precondition: User is in the Home Mode, and is not in review mode. If in deck view mode, cannot delete.
 
 **MSS:**
 
-1. User requests to return to Home mode.
-1. FlashNotes shows the list of decks to the user.
+1. User enters command to delete an existing deck.
+1. Deck delete success message shown in main screen.
 
     Use Case ends.
 
+**Extension:**
 
-####**Use case: UC12 - Review cards**
+* 2a. Tries to delete deck.
+    * 2a.1 Deck not found.
+    * 2a.2 Display Error Message. <br>
+    Use Case ends.
 
-#####Precondition: User is in Home Mode.
+####**Use case: UC07 - Rename current Deck**
+#####Precondition: User is in the Home mode, and is not in review mode.
 
 **MSS:**
 
-1. User opens a deck (UC02).
-1. User requests to start a review on the cards shown.
-1. FlashNotes starts a review session.
-1. FlashNotes displays a card with only the question to the user.
-1. User flips the card to see the answer.
-1. FlashNotes displays the answer to the user.
-1. User marks the card as correct or wrong.
-1. Repeat steps 3 to 6 until there are no more cards.
-1. FlashNotes displays the statistics of the review. 
-1. User ends the review.
-1. FlashNotes returns User back to the original page.
+1. User enters command to rename an existing deck.
+1. Deck renamed with success message shown.
+1. User returns to the main screen.
 
-    Use case ends.
+    Use Case ends.
 
 **Extension:**
 
-* 7a. User correct remembers the answer of the flashcard.
-    * 7a.1. User marks the card as correct.
-    * 7a.1. FlashNotes shows next card.
-    
-   Use case resumes from Step 4.
+* 2a. User renames deck to the same name as an already existing deck.
+    * 2a.1 Error message is shown in the main screen and the deck will not be renamed.  <br>
+    Use Case ends.
 
-* 7b. User unable to remember the correct answer of the flashcard.
-    *7b.1. User marks card as wrong.
-   * 6b.2. FlashNotes adds card back into the lists of card to be reviewed again.
-   * 7b.3. FlashNotes shows the next card.
-   
-   Use case resumes from Step 4.
+####**Use case: UC08 - Return to Home mode**
+#####Precondition: User is not in Home mode and not in review mode.
 
-* *User ends the review session prematurely.
-    * *a. FlashNotes does not show user the Review statistics.
-    * *b. FlashNotes does not update the Review statistics of the deck reviewed.
-    
-    Use case resumes from Step 10.
+**MSS:**
+
+1. User enters Home Command.
+1. User returns to main screen.
+
+    Use Case ends.
+
+**Extension:**
+
+* 2a. Already in the Home screen.
+    * 2a.1. Return message to remind user. <br>
+    Use Case ends.
+
 
 ### Non-Functional Requirements
 
@@ -741,21 +765,24 @@ Extensions
 2.  Should be able to hold up to 1000 cards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Interactions should not take more than 2 seconds.
-5.  The user can directly edit the data file.
-6.  The user can import or export the data of FlashNotes.
+5.  The user can directly edit the data file to add or edit flashcards.
+6.  The user can import or export the flashcards by adding/copying a new json file with the same name.
 7.  Should be usable by someone not used to CLI.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **FlashNotes**: The software that stores flashcards and decks.
-* **Flashcard**: A card with a question and answer.
+* **Flashnotes**: The software that stores flashcards.
+* **Flashcard**: A card with a question and answer, and may contain a tag.
 * **Deck**: A collection of flashcards.
-* **Home mode**: A mode which displays a list of decks
-* **Card mode**: A mode which displays a list of cards
+* **Home screen**: The home screen displays a list of decks of flashcards.
+* **Card screen**: The card screen displays a list of flashcards in a specific deck.
 * **Review mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
-* **Tag**: A note to indicate which deck the card belongs to.
+* **Tag**: A note to group cards of a certain category together.
 * **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
+* **Review Mode**: a mode which displays cards from a deck individually in shuffled order.
+* **Card Mode**: A mode which displays a list of cards
+* **Home Mode**: A mode which displays a list of decks
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -785,79 +812,36 @@ Saving window preferences
 
 
 
+### Deleting a card
+
+Deleting a card while all persons are being shown
+
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+
+   2. Test case: `delete 1`<br>
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case: `delete 0`<br>
+      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+
+
 ### Entering a deck
 Entering a deck
 
-   1. Prerequisites: User is in Home mode and FlashNotes contains decks with names 'Singapore' and 'Malaysia'
+   1. Prerequisites: Flashnotes have decks with names 'Singapore' and 'Malaysia'
     
    2. Test case: `enterDeck Singapore` <br>
-       Expected: All cards in the deck 'Singapore' will be shown. Cards in the deck 'Malaysia' will not be shown.    
+       Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.    
     
    3. Test case: `enterDeck singapore` <br>
        Expected: None of the cards are shown (as the keyword is case-sensitive)       
 
    4. Test case: `enterDeck Singapore Malaysia` <br>
        Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
-       
-### Deleting a deck
-Deleting a deck
-
-   1. Prerequisites: User is in Home mode and FLashNotes contains a deck.
-   
-   2. Test case: `deleteDeck 1`
-   
-         Expected: First deck is deleted from the list. 
-   
-   3. Test case: `deleteDeck 0`
-   
-         Expected: No deck is deleted. Error details shown in the status message. 
-       
-### Editing a deck name
-Editing a deck name
-    
-   1. Prerequisites: User is in Home mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
-   
-   1. Test case: `editDeckName 1 n/Econs`
-   
-        Expected: The deck at Index 1 is changed to Econs
-        
-   2. Test case: `editDeckName 1 n/Singapore`
-   
-        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singpaore" already exists.
-
-### Deleting a card
-
-Deleting a card
-
-   1. Prerequisites: Enter a deck using the `enterDeck` Multiple cards in the list.
-
-   2. Test case: `deleteCard 1`<br>
-      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. 
-   
-   3. Test case: `deleteCard 0`<br>
-      Expected: No card is deleted. Error details shown in the status message. 
-
-   4. Other incorrect delete commands to try: `deleteCard`, `deleteCard x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-### Adding a card
-1. Adding a card in a normal deck created by user
-
-    1. Prerequisites: Enter a deck using the command `enterDeck DECK_NAME`. 
-    
-    2. Test case: `addCard q/question1 a/answer1`
-    
-        Expected: The specified card is added and shown to the user.
-        
-1. Adding a card while in the list of all flashcards 
-    
-    1. Prereuisites: Enter the list of all flashcards using the command `listAll`.
-    
-    2. Test case: `addCard q/question1 a/answer1`
-    
-        Expected: The flashcard is added to the list of flashcards shown.
-        The specified card is added to a deck called "Default". 
-        The "Default" deck will be created in the Home mode if the deck does not exists.
 
 ### Reviewing a deck of cards
 1. Opening the review window
@@ -868,53 +852,84 @@ Deleting a card
        Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
     
     1. Test case: `review 7` <br>
-       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
+       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: review" should appear in the result display box.
         
-    1. Test case: `review hello` <br>
-       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
-            
-1. Flipping a card
+1. Flipping a card that is being reviewed
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    
+    1. Test case: `flip` when the card is showing the question<br>
+        Expected: The card should be flipped to show the answer for this question <br>
+        
+    1. Test case: `flip` when the card is showing the answer <br>
+        Expected: The card should be flipped to show the question for this answer <br>
 
-1. _{ more test cases …​ }
+1. Marking flashcard that is being reviewed as correct
 
-### Setting the review card limit
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    
+    1. Test case: `c` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
+    
+    1. Test case: `c` when the card is showing the answer <br>
+        Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
+
+1. Marking flashcard that is being reviewed as wrong
+
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    
+    1. Test case: `w` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
+    
+    1. Test case: `w` when the card is showing the answer <br>
+        Expected: It should show the question of the next card and the progress bar should still have the same progress.
+
+### Setting and checking the review card limit
 1. Setting the maximum number of cards that can be reviewed in a single review session.
 
     1. Prerequisites: User is in Home screen or Card screen.
     
-    1. Test case: `set-review-limit 20` <br>
-       Expected: The message "Review card limit successfully updated!" should appear in the result display box.
+    1. Test case: `setReviewLimit 20` <br>
+       Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
        
-    1. Test case: `set-review-limit 0` <br>
-       Expected: The message "Review card limit must be an integer greater than 0." should appear in the result display box.
+    1. Test case: `setReviewLimit 0` <br>
+       Expected: The message "Review card limit must be an integer greater than 0 and smaller than 2147483648." should appear in the result display box.
         
-    1. Test case: `set-review-limit all` <br>
-       Expected: The message "Review card limit successfully updated!" should appear in the result display box.
+    1. Test case: `setReviewLimit all` <br>
+       Expected: The message "Review card limit successfully updated! There is now no review limit." should appear in the result display box.
        
-    1. Test case: `set-review-limit 20` from the review window <br>
+    1. Test case: `setReviewLimit 20` from the review window <br>
        Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
 
-### Flipping flashcard that is being reviewed
-1. Type `flip` in the command box
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
-    1. Test case: `flip` when the card is showing the question<br>
-        Expected: The card should be flipped to show the answer for this question <br>
-    1. Test case: `flip` when the card is showing the answer <br>
-        Expected: The card should be flipped to show the question for this answer <br>
+1. Checking the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
     
+    1. Test case: `checkReviewLimit` <br>
+       Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)
+       
+    1. Test case: `checkReviewLimit 7` <br>
+       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: checkReviewLimit" should appear in the result display box.
 
-### Marking flashcard that is being reviewed as correct
-1. Type `c` in the command box
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
-    1. Test case: `c` when the card is showing the question<br>
-        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
-    1. Test case: `c` when the card is showing the answer <br>
-        Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
+-------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
-### Marking flashcard that is being reviewed as wrong
-1. Type `w` in the command box
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
-    1. Test case: `w` when the card is showing the question<br>
-        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
-    1. Test case: `w` when the card is showing the answer <br>
-        Expected: It should show the question of the next card and the progress bar should still have the same progress.
+###Challenge 1: UI Modes
+At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
+their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
+separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
+with finding a good way to allow users to perform all these actions using the single interface that came with AB3. 
+
+The easiest method we explored to achieve this was to modify the "list" command to let users view their flashcards in specific 
+decks, and show the cards one by one when users want to review them. However, we were not satisfied with the visual effect of 
+this solution. We wanted to let users differentiate their interactions when making/editing the decks and flashcards, and when 
+reviewing flashcards more clearly.
+
+The next method we explored required far more effort but was worth it in the end. We decided to implement 3 different interfaces 
+for our application,  the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
+In the main mode, the different decks would be displayed to the users. Users can then make new decks or edit current decks in 
+this mode. They can also choose a specific deck to open and see the cards it contains. This brings users into the Card mode, 
+where they can make new flashcards or edit current cards. They can also review their cards by using the review command that brings 
+them to the review mode. Implementing this required us to redesign the entire UI component into something with more layers of 
+abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
+sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
+we ended up with a highly effective and user friendly flashcard application.
