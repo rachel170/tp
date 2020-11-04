@@ -45,7 +45,4 @@ CommandResult <-[dashed]- DeckCardListRoot
 RootNode <|-[dashed]- FlashcardListRoot
 RootNode <|-[dashed]- DeckCardListRoot
 
-
-
-
 @enduml
