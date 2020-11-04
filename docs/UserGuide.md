@@ -94,8 +94,19 @@ Users can:
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
+1. For Mac Users: <br>
+
+    * Open your 'System Preferences'
+    
+    * Click on 'Security & Privacy'
+    
+    * Click on 'Privacy' tab and click on 'Input Monitoring' section
+    
+    * Enable java to monitor input from your keyboard even while using other apps as shown in the image below.
+    ![Figure 1: Mac users System Preferences](images/systemPreference.png)<br>
+
 1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds. Note how FlashNotes contains some sample data after initial launch.<br>
-   ![Figure 1: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
+   ![Figure 2: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
    _Figure 2A: Initial View of FlashNotes with GUI component labels._
    
    * **Command Box**: Where you input commands for FlashNotes.
@@ -881,6 +892,20 @@ ensure none of your data is lost, do not delete the data folder.
 <summary>Is it possible to restore a deck that I just deleted?</summary>
 <br>
 Sorry but no. There is no such functionality at this point in time.
+<br><br>
+</details>
+
+<details>
+<summary>What should I do when I get a 'Java Quit unexpectedly' error. (For Mac Users)</summary>
+<br>
+
+![Figure 1: Mac error](images/macError.png)<br>
+
+Open System Preferences in you computer,  click on ‘Security & Privacy’ and then proceed to click on Privacy Tab and 
+the ‘Input Monitoring’ section. Enable java to monitor input from your keyboard even while using other apps as shown 
+in the image below.
+
+![Figure 2: Mac users System Preferences](images/systemPreference.png)<br>
 <br><br>
 </details>
 
