@@ -142,7 +142,19 @@ Both of the root nodes represent the types of scenes available to the main windo
 The reasoning for splitting out the two different types of scenes is to allow the MainWindow to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
 This provides better cohesion and utilizes the single responsibility principle as the classes are individually responsible for a smaller part of the UI rendered. It also improves the extensibility for the future if more modes and screens are to be added to the product.
 
+Similarly, we also chose to separate the review mode from the Main and Card mode. However, we decided to open a new 
+JavaFX window for users to review their cards in instead. This is because opening a new window allows us to 
+differentiates the review mode from the other modes better visually. This way, the UI for the review mode can also be 
+more minimalistic, reducing distractions for users when reviewing their flashcards.
 
+We also fixed the review window to be a small size. Since there is a 140 character limit for questions and answers, we 
+thought that there would be no need for users to maximize the review window, so we disabled that ability.
+
+When the review window is open, there would be a total of 2 command boxes on the user's screen, (one in the main 
+window and one in the review window). We did not think that it would make sense for the user to be interacting with the 
+main window when they are in review mode, so we decided to disable the command box in the main window when the review 
+window is open. This is so that users can focus more on the review session.
+    
 ### Implementation of commands
 
 The following general activity diagram summarizes what happens when a user executes a new command:
@@ -261,43 +273,35 @@ Furthermore, the class here may not be considered too heavy with methods since t
 ### Review Mode 
 Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
 
-#### Implementation of Review Mode Features
-The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users type in commands)
-and result display box (where the application displays messages to the user). On top of that, there is also the Individual Flashcard section
-of the window that shows the question of 1 flashcard. When the "flip" command is executed, 
-the answer to that question will be showed instead.
+#### Opening the review mode
+The review session is implemented by opening a new JavaFX window. This new window has its own command box (where users 
+type in commands) and result display box (where the application displays messages to the user). On top of that, there is
+also the Individual Flashcard section of the window that shows the question of 1 flashcard. When the "flip" command is 
+executed, the answer to that question will be showed instead.
 
-To support the opening of this review session, the following commands were added:
+The following activity diagram shows the typical workflow when a user reviews flashcards in the review mode.
+![ReviewWorkflowActivityDiagram](images/ReviewWorkflowActivityDiagram.png)
+
+To support the opening of this review session, we added the following command:
 * `review` - A command that sets up the list of flashcards to review and opens a new review window displaying those cards.
 
 The following is a sequence diagram that demonstrates how a review command sets up the review session:
 ![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
 
-`ModelManager#shuffleReviewFlashcards` method sets up the list of flashcards to review inside `Model`.
+`ModelManager#shuffleReviewFlashcards()` method sets up the list of flashcards to review inside `Model`.
 It duplicates the list of filtered flashcards in the model as of the moment that the review command was
 called, it then shuffles these cards using the `FXCollections.shuffle()` method, and it trims the list of
 flashcards to review according to the review limit set by users.
 
-#### Design considerations:
-* Alternative 1 (current choice): Open a new JavaFX window
-    * Pros: Differentiates the review mode from the other modes better visually, 
-    allows the UI for the review mode to be minimalistic, reducing distractions for users when reviewing their flashcards.
-    * Cons: We would have to create a new window with another command box and result display, and display
-    the main command box.
-* Alternative 2: Implement the review session in the same window as the rest of the application.
-    * Pros: Can use the same command box and result display so that we would not have to create new command boxes and result
-    display boxes and disable main command box. 
-    * Cons: The UI looks more cluttered and users might get distracted when reviewing their flashcards
 
-### Set Review Limit feature
+#### Setting and Checking Review Limit feature
 Our FlashNotes application allows users to set the maximum number of cards that they want to review in a single
 review session (review limit). 
 
-#### Implementation
 Users only have to set the review limit once and it will be saved as user preferences in a storage file. Users will
 then only need to use this feature again when they want to change the review limit again in the future.
 
-The initial value for the review limit is set to 0 in `preferences.json`, which tells the program that the user did not
+The initial value for the review limit is set to `Integer.MAX_VALUE` in `preferences.json`, which tells the program that the user did not
 set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
 session. 
 
@@ -308,6 +312,16 @@ The following is an activity diagram showing how the set review command is inten
 when a user wants to use FlashNotes to review a deck of flashcards.
 
 ![SetReviewLimitActivityDiagram](images/SetReviewLimitActivityDiagram.png)
+
+We also implemented a command `checkReviewLimit` for users to check the review limit that they have set, in case they
+forgot what the current review limit is.
+
+We stored the review limit using the `long` data type. If we stored the review limit using an `Integer` data type, when 
+a user inputs a review limit greater than `Integer.MAX_VALUE`, the program will recognise the review limit as not an Integer
+and tell users that the command format is invalid. We solved this problem by storing the review limit using a `long` data type.
+Now, when the user inputs a review limit greater than `Integer.MAX_VALUE`, the parser will notice this and throw a relevant 
+`ParseException` telling users that their review limit is out of range, instead of telling users that the command format is invalid. 
+
 
 #### Design considerations:
 * Alternative 1 (current choice): Save review limit in the user preferences file.
@@ -447,6 +461,26 @@ The following sequence diagram shows how the endReview command operation works:
 
 
 ### Implementation of Critical Classes:
+
+#### Implementation of CommandResult
+
+FlashNotes interacts with users using the `CommandResult` object. When users pass commands into FlashNotes, FlashNotes 
+will execute those commands and give users feedback according to the commands passed in. 
+
+`CommandResult` objects are generated when Command objects are executed by the `LogicManager#execute(…)` method. Upon 
+generation, all CommandResult objects contain a string `feedbackToUser` which contains success or error messages that will
+be shown to the user. This CommandResult object is then passed to UI classes, such as `MainWindow` and `ReviewWindow`. The 
+UI classes will then show this `feedbackToUser` in the `ResultDisplay` box.
+
+Upon execution of the Commands, users might request a change of modes, such as moving from main mode to deck mode, or 
+deck mode to review mode. This information is passed to the UI classes using the `CommandResult` object too. Some commands
+such as the `enterDeck` or `review` will generate a `CommandResult` object with more arguments such as `showHelp`, `exit`,
+`startReview`. These arguments will be accessed by UI classes using the public getter methods `CommandResult#isShowHelp()`,
+`CommandResult#isExit()` etc. The correct UI screens will be rendered accordingly by respective methods such as 
+`DeckCardListRoot#handleExit()`, `ReviewWindow#handleHelp()` etc.
+
+The following class diagram shows how the UI classes are related to the commandResult class, and their relevant methods.
+![UiCommandResultClassDiagram](images/UiCommandResultClassDiagram.png)
 
 #### Implementation of FlashNotesParser
 
@@ -791,53 +825,84 @@ Entering a deck
        Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
     
     1. Test case: `review 7` <br>
-       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
+       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: review" should appear in the result display box.
         
-    1. Test case: `review hello` <br>
-       Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
-            
-1. Flipping a card
+1. Flipping a card that is being reviewed
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    
+    1. Test case: `flip` when the card is showing the question<br>
+        Expected: The card should be flipped to show the answer for this question <br>
+        
+    1. Test case: `flip` when the card is showing the answer <br>
+        Expected: The card should be flipped to show the question for this answer <br>
 
-1. _{ more test cases …​ }
+1. Marking flashcard that is being reviewed as correct
 
-### Setting the review card limit
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    
+    1. Test case: `c` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
+    
+    1. Test case: `c` when the card is showing the answer <br>
+        Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
+
+1. Marking flashcard that is being reviewed as wrong
+
+    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    
+    1. Test case: `w` when the card is showing the question<br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
+    
+    1. Test case: `w` when the card is showing the answer <br>
+        Expected: It should show the question of the next card and the progress bar should still have the same progress.
+
+### Setting and checking the review card limit
 1. Setting the maximum number of cards that can be reviewed in a single review session.
 
     1. Prerequisites: User is in Home screen or Card screen.
     
-    1. Test case: `set-review-limit 20` <br>
-       Expected: The message "Review card limit successfully updated!" should appear in the result display box.
+    1. Test case: `setReviewLimit 20` <br>
+       Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
        
-    1. Test case: `set-review-limit 0` <br>
-       Expected: The message "Review card limit must be an integer greater than 0." should appear in the result display box.
+    1. Test case: `setReviewLimit 0` <br>
+       Expected: The message "Review card limit must be an integer greater than 0 and smaller than 2147483648." should appear in the result display box.
         
-    1. Test case: `set-review-limit all` <br>
-       Expected: The message "Review card limit successfully updated!" should appear in the result display box.
+    1. Test case: `setReviewLimit all` <br>
+       Expected: The message "Review card limit successfully updated! There is now no review limit." should appear in the result display box.
        
-    1. Test case: `set-review-limit 20` from the review window <br>
+    1. Test case: `setReviewLimit 20` from the review window <br>
        Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
 
-### Flipping flashcard that is being reviewed
-1. Type `flip` in the command box
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
-    1. Test case: `flip` when the card is showing the question<br>
-        Expected: The card should be flipped to show the answer for this question <br>
-    1. Test case: `flip` when the card is showing the answer <br>
-        Expected: The card should be flipped to show the question for this answer <br>
+1. Checking the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
     
+    1. Test case: `checkReviewLimit` <br>
+       Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)
+       
+    1. Test case: `checkReviewLimit 7` <br>
+       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: checkReviewLimit" should appear in the result display box.
 
-### Marking flashcard that is being reviewed as correct
-1. Type `c` in the command box
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
-    1. Test case: `c` when the card is showing the question<br>
-        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
-    1. Test case: `c` when the card is showing the answer <br>
-        Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
+-------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
-### Marking flashcard that is being reviewed as wrong
-1. Type `w` in the command box
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
-    1. Test case: `w` when the card is showing the question<br>
-        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
-    1. Test case: `w` when the card is showing the answer <br>
-        Expected: It should show the question of the next card and the progress bar should still have the same progress.
+###Challenge 1: UI Modes
+At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
+their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
+separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
+with finding a good way to allow users to perform all these actions using the single interface that came with AB3. 
+
+The easiest method we explored to achieve this was to modify the "list" command to let users view their flashcards in specific 
+decks, and show the cards one by one when users want to review them. However, we were not satisfied with the visual effect of 
+this solution. We wanted to let users differentiate their interactions when making/editing the decks and flashcards, and when 
+reviewing flashcards more clearly.
+
+The next method we explored required far more effort but was worth it in the end. We decided to implement 3 different interfaces 
+for our application,  the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
+In the main mode, the different decks would be displayed to the users. Users can then make new decks or edit current decks in 
+this mode. They can also choose a specific deck to open and see the cards it contains. This brings users into the Card mode, 
+where they can make new flashcards or edit current cards. They can also review their cards by using the review command that brings 
+them to the review mode. Implementing this required us to redesign the entire UI component into something with more layers of 
+abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
+sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
+we ended up with a highly effective and user friendly flashcard application.

@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR
+skinparam classBackgroundColor UI_COLOR
+skinparam defaultFontColor white
+show members
+hide RootNode members
+
+Interface RootNode <<Interface>> {
+
+}
+class FlashcardListRoot {
+    executeCommand(String)
+    handleHelp()
+    handleReview()
+    handleExit()
+}
+
+class DeckCardListRoot {
+    executeCommand(String)
+    handleHelp()
+    handleExit()
+}
+
+class ReviewWindow {
+    executeCommand(String)
+    handleFlip()
+    handleNextCard(int)
+    handleHelp()
+    handleExit()
+}
+
+class CommandResult #3333C4 {
+    feedbackToUser
+    isShowHelp()
+    isShowExit()
+}
+
+FlashcardListRoot *-- ReviewWindow
+CommandResult <-[dashed]- ReviewWindow
+CommandResult <-[dashed]- FlashcardListRoot
+CommandResult <-[dashed]- DeckCardListRoot
+
+RootNode <|-[dashed]- FlashcardListRoot
+RootNode <|-[dashed]- DeckCardListRoot
+
+@enduml
