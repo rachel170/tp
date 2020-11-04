@@ -546,7 +546,8 @@ changed. <br>
 
 ### Finding flashcards : `find`
 
-Finds flashcards which contain any of the given keywords in their respective questions.
+Finds flashcards which contain any of the given keywords in their respective questions. 
+Find returns full word matches, excluding punctuation.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -755,6 +756,8 @@ Possible Error users might encounter:
 :warning: Things to note:
 
 * Flashcard can only be marked as correct after the card has been flipped to show the answer.
+* Even if the user has flipped to view the answer, and flips back to view the question, the user has to 
+flip back to the answer again before they can mark the flashcard as correct.
 * Flipping the flashcard even number of times will result in the question to be shown, and hence the flashcard cannot
  be marked in this case.
  
@@ -805,6 +808,8 @@ Possible Error users might encounter:
 :warning: Things to note:
 
 * Flashcard can only be marked as wrong after the card has been flipped to show the answer.
+* Even if the user has flipped to view the answer, and flips back to view the question, the user has to 
+flip back to the answer again before they can mark the flashcard as wrong.
 * Flipping the flashcard even number of times will result in the question to be shown, and hence the flashcard cannot
  be marked in this case.
  
