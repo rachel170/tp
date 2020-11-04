@@ -58,7 +58,7 @@ Users can:
 * View User Guide
 * Exit the program
 
-![Main Mode GUI Breakdown](images/MainMode_GUIBreakdown.png)<br>
+![Main Mode GUI Breakdown](images/Mainmode_GUIBreakdown.png)<br>
 
 ### Mode 2: Card Mode
 Contains a list of flashcards.
