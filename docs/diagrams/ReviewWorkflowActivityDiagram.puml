@@ -1,0 +1,25 @@
+@startuml
+start
+:User is in Card Mode;
+:User enters the Review Mode;
+repeat: Question displayed, user tries to answer the question mentally;
+:User flips the card to verify answer;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([correct answer])
+    :User marks answer as correct;
+    :Flashcard is removed from the list of flashcards to review;
+else ([else])
+    :Throws CommandException;
+    :Displays error message
+    in Result Display;
+
+endif
+
+repeat while (any more flashcards to review?) is (yes)
+-> no;
+:FlashNotes displays review statistics;
+:User ends the review session and returns to Card Mode;
+stop
+@enduml

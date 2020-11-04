@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.flashnotes.commons.exceptions.IllegalValueException;
-import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.deck.Deck;
 
 /**
@@ -30,33 +29,40 @@ class JsonAdaptedDeck {
      */
     public JsonAdaptedDeck(Deck source) {
         deckName = source.getDeckName();
-        resultStatistic = source.getResultStatistics().toString();
+        resultStatistic = source.getResultStatistics();
     }
 
     /**
-     * Reads from this Jackson-friendly adapted deck object, and update the model's {@code Deck} object.
+     * Reads from this Jackson-friendly adapted deck object, and turn it into model's {@code Deck} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public void updateModel(FlashNotes flashNotes) throws IllegalValueException {
-        // Check to make sure deck name is valid
-        if (!Deck.isValidDeck(deckName)) {
-            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS);
+    public Deck toModelType() throws IllegalValueException {
+        // Check to make sure deckName is valid
+        if (!Deck.isValidDeckLength(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!Deck.isValidDeckReservedName(deckName)) {
+            throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_RESERVED);
         }
+
+        //If deckName is valid, create a new Deck object with it
+        Deck theDeck = new Deck(deckName);
 
         // Check to make sure resultStatistic is valid
         if (resultStatistic.isBlank()) {
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
         }
-        // Check to make sure result statistics can be converted to Integer
         try {
-            Integer statistics = Integer.parseInt(resultStatistic);
-            // Update the FlashNotes Model with resultStatistics
-            flashNotes.updateDeckPerformanceScore(statistics, deckName);
+            // Check to make sure result statistics can be converted to Double
+            double statistic = Double.parseDouble(resultStatistic);
+            // Update the created Deck object with the retrieved result statistics
+            theDeck.setResultStatistics(String.format("%.1f", statistic));
         } catch (NumberFormatException nfe) {
             // If exception is found, throw IVE
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
         }
+
+        return theDeck;
     }
 
 }

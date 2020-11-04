@@ -6,7 +6,9 @@ import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_DECK_NAME;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
-
+/**
+ * Adds a deck to the flashnotes.
+ */
 public class AddDeckCommand extends Command {
     public static final String COMMAND_WORD = "addDeck";
 
@@ -17,7 +19,7 @@ public class AddDeckCommand extends Command {
             + PREFIX_DECK_NAME + "CNM1046 ";
 
     public static final String MESSAGE_SUCCESS = "New Deck added: %1$s";
-    public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the flashnotes";
+    public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the FlashNotes.";
     private final Deck toAdd;
 
     /**
@@ -34,14 +36,16 @@ public class AddDeckCommand extends Command {
         if (model.hasDeck(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
-        //todo change the dummy initialisation of flashcards - PX
-
-        //Tag tag = new Tag(toAdd.getDeckName());
-        //model.addFlashcard(new Flashcard(new Question(String.format("dummy qn in %s", toAdd.getDeckName())),
-        //new Answer(String.format("dummy answer in %s", toAdd.getDeckName())), tag));
 
         model.addDeck(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDeckName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddDeckCommand // instanceof handles nulls
+                && toAdd.equals(((AddDeckCommand) other).toAdd));
     }
 }

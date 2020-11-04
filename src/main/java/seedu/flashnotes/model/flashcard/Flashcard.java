@@ -16,6 +16,8 @@ public class Flashcard {
     private final Question question;
     private final Answer answer;
     private final Tag tag;
+    private boolean isFlipped = false;
+    private int isCorrect = 0;
 
     /**
      * Every field must be present and not null.
@@ -35,12 +37,51 @@ public class Flashcard {
         return answer;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
     public Tag getTag() {
         return tag;
+    }
+
+    /**
+     * Returns whether the flashcard has been flipped in review mode
+     *
+     * @return boolean
+     */
+    public boolean getIsFlipped() {
+        return isFlipped;
+    }
+
+    /**
+     * Flips flashcard being reviewed in the review mode
+     */
+    public void flipFlashcard() {
+        if (this.isFlipped) {
+            this.isFlipped = false;
+        } else {
+            this.isFlipped = true;
+        }
+    }
+
+    /**
+     * Resets the value of isFlipped to false
+     */
+    public void resetFlip() {
+        isFlipped = false;
+    }
+
+    /**
+     * Marks whether the card was reviewed correctly in the review mode
+     * @param result
+     */
+    public void markCard(int result) {
+        this.isCorrect = result;
+    }
+
+    /**
+     * Returns the value of isCorrect
+     * @return int
+     */
+    public int getIsCorrect() {
+        return this.isCorrect;
     }
 
     /**
@@ -87,11 +128,11 @@ public class Flashcard {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Question: ")
+        builder.append("\nQuestion: ")
                 .append(getQuestion())
-                .append(" Answer: ")
+                .append("\nAnswer: ")
                 .append(getAnswer())
-                .append(" Tag: ")
+                .append("\nDeck: ")
                 .append(getTag());
         return builder.toString();
     }

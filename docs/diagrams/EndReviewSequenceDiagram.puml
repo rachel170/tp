@@ -33,6 +33,12 @@ deactivate storage
 logic -[LOGIC_COLOR]-> review
 deactivate logic
 
+review -[UI_COLOR]> review: hide()
+activate review UI_COLOR_T2
+
+review --[UI_COLOR]> review
+deactivate review
+
 review -[UI_COLOR]> review: handleExit()
 activate review UI_COLOR_T2
 

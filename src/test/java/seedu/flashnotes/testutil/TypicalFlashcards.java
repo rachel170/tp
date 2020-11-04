@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.flashnotes.model.FlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
 /**
@@ -63,9 +64,19 @@ public class TypicalFlashcards {
             ab.addFlashcard(flashcard);
         }
 
-        //TODO used to set the Deck, remove after proper deck impl done - PX
-        FlashNotes a = new FlashNotes(ab);
-        return a;
+        for (Deck deck: getTypicalDecks()) {
+            ab.addDeck(deck);
+        }
+        return ab;
+    }
+
+    private static List<Deck> getTypicalDecks() {
+        Deck friends = new Deck ("friends");
+        Deck oweMoney = new Deck ("owesMoney");
+        Deck time = new Deck("Time");
+        Deck place = new Deck("place");
+        Deck math = new Deck("Math");
+        return new ArrayList<>(Arrays.asList(friends, oweMoney, time, place, math));
     }
 
     public static List<Flashcard> getTypicalFlashcards() {

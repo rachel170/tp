@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Flashcard> filteredFlashcards;
     private FilteredList<Flashcard> flashcardsToReview;
     private final FilteredList<Deck> filteredDecks;
+    private int flashcardBeingReviewed = 0;
 
     /**
      * Initializes a ModelManager with the given flashNotes and userPrefs.
@@ -84,12 +85,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return userPrefs.getReviewCardLimit();
     }
 
     @Override
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         requireNonNull(reviewCardLimit);
         userPrefs.setReviewCardLimit(reviewCardLimit);
     }
@@ -129,7 +130,6 @@ public class ModelManager implements Model {
     @Override
     public void setDeck(Deck target, Deck editedDeck) {
         flashNotes.setDeck(target, editedDeck);
-
     }
 
     @Override
@@ -179,7 +179,7 @@ public class ModelManager implements Model {
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+    public void updateDeckPerformanceScore(Double reviewScore, String deckName) {
         requireNonNull(reviewScore);
         requireNonNull(deckName);
         flashNotes.updateDeckPerformanceScore(reviewScore, deckName);
@@ -228,7 +228,22 @@ public class ModelManager implements Model {
         filteredFlashcards.setPredicate(predicate);
     }
 
-    //=========== Shuffled Flashcard List Operations =============================================================
+    //=========== Review Operations =============================================================
+
+    @Override
+    public boolean getIsReviewMode() {
+        return flashNotes.getIsReviewMode();
+    }
+
+    @Override
+    public void setIsReviewModeTrue() {
+        flashNotes.setIsReviewModeTrue();
+    }
+
+    @Override
+    public void setIsReviewModeFalse() {
+        flashNotes.setIsReviewModeFalse();
+    }
 
     /**
      * Shuffles and trims the list of flashcards to review.
@@ -240,14 +255,24 @@ public class ModelManager implements Model {
         FXCollections.shuffle(flashcardsToReviewList);
 
         // Trim review list using card limit from user prefs
-        Integer reviewCardLimit = userPrefs.getReviewCardLimit();
+        long reviewCardLimit = userPrefs.getReviewCardLimit();
         if (reviewCardLimit < flashcardsToReviewList.size() && reviewCardLimit >= 1) {
             flashcardsToReviewList = FXCollections.observableArrayList(
-                    flashcardsToReviewList.subList(0, reviewCardLimit));
+                    flashcardsToReviewList.subList(0, (int) reviewCardLimit));
         }
 
         // Store shuffled and trimmed list into flashcardsToReview list
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
+        setUpFlashcardToReview();
+    }
+
+    /**
+     * Set up the first flashcard to be reviewed in the review mode and reset it's flip to false
+     */
+    private void setUpFlashcardToReview() {
+        // Set index of flashcard being reviewed in review mode to 0
+        this.flashcardBeingReviewed = 0;
+        resetFlipOfFlashcardBeingReviewed();
     }
 
     /**
@@ -255,7 +280,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Flashcard> getFlashcardsToReview() {
-        System.out.println("getter " + flashcardsToReview);
         return flashcardsToReview;
     }
 
@@ -271,6 +295,66 @@ public class ModelManager implements Model {
         flashcardsToReviewList.add(flashcard);
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
         return flashcardsToReview;
+    }
+
+    /**
+     * Updates the flashcard being reviewed in the review mode
+     */
+    @Override
+    public void updateFlashcardBeingReviewed(int result) {
+        resetFlipOfFlashcardBeingReviewed();
+        Flashcard flashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
+        markFlashcardBeingReviewed(flashcard, result);
+        this.flashcardBeingReviewed += 1;
+        if (flashcardBeingReviewed >= flashcardsToReview.size()) {
+            flashcardBeingReviewed = 0;
+        } else {
+            Flashcard newFlashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
+            newFlashcard.resetFlip();
+        }
+    }
+
+    /**
+     * Reset flashcard being reviewed back to false
+     */
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        this.flashcardsToReview.get(flashcardBeingReviewed).resetFlip();
+    }
+
+    /**
+     * Gets the flashcard being reviewed in the review mode and returns it.
+     * @return Flashcard being reviewed
+     */
+    @Override
+    public Flashcard getFlashcardBeingReviewed() {
+        return this.flashcardsToReview.get(flashcardBeingReviewed);
+    }
+
+    /**
+     * Checks whether the flashcard being reviewed is flipped
+     * @return
+     */
+    @Override
+    public boolean getIsFlashcardFlipped() {
+        return this.flashcardsToReview.get(flashcardBeingReviewed).getIsFlipped();
+    }
+
+    /**
+     * Flip the flashcard currently being reviewed
+     */
+    @Override
+    public void carryOutFlipCommand() {
+        Flashcard flashcard = this.flashcardsToReview.get(flashcardBeingReviewed);
+        flashcard.flipFlashcard();
+    }
+
+    /**
+     * Marks flashcard being reviewed as correct or wrong
+     */
+    @Override
+    public void markFlashcardBeingReviewed(Flashcard flashcard, int result) {
+        flashcard.markCard(result);
     }
 
     // =========== Util methods =============================================================

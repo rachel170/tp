@@ -8,10 +8,20 @@ import seedu.flashnotes.model.Model;
 public class CorrectCommand extends Command {
     public static final String COMMAND_WORD = "c";
 
-    public static final String MESSAGE_CORRECT_ACKNOWLEDGEMENT = "Marking Flashcard as correct as requested ...";
+    public static final String MESSAGE_CORRECT_ACKNOWLEDGEMENT = "Marked Flashcard as correct.";
+    public static final String MESSAGE_CORRECT_ERROR = "Please flip the card to check your answer before marking"
+            + " it as correct or wrong. \nEnter `f` to flip.";
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_CORRECT_ACKNOWLEDGEMENT, false, false, true, false, 2);
+        if (model.getIsFlashcardFlipped()) {
+            model.updateFlashcardBeingReviewed(2);
+        } else {
+            return new CommandResult(MESSAGE_CORRECT_ERROR, false, false,
+                    true, false, 0);
+        }
+
+        return new CommandResult(MESSAGE_CORRECT_ACKNOWLEDGEMENT, false, false,
+                true, false, 2);
     }
 }
