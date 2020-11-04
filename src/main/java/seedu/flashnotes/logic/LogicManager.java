@@ -120,7 +120,7 @@ public class LogicManager implements Logic {
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore) {
+    public void updateDeckPerformanceScore(Double reviewScore) {
         if (!model.getCurrentDeckName().equals(Model.getReservedDeckName())) {
             model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
         }

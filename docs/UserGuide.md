@@ -94,7 +94,7 @@ Users can:
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FlashNotes.
 
-1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds.<br>
+1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds. Note how FlashNotes contains some sample data after initial launch.<br>
    ![Figure 1: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
    _Figure 2A: Initial View of FlashNotes with GUI component labels._
    
@@ -120,8 +120,7 @@ Users can:
 
 1. After executing each command, a success or failure message will be displayed in the **Result Box**. This will let you know if you have successfully executed the relevant commands or not. Given that you have provided the correct command prefixes, it can even provide additional information on why your command has failed.  <br>
 
-
-1. Refer to the [Features](#Main Mode Features) below for the details of each command.
+1. Refer to the **Features** section below for the details of each command.
 
 <div markdown="block" class="alert alert-info">
    
@@ -819,6 +818,32 @@ Outcome Expected: <br>
 
 * `endReview` can only be activated from the Review Window to return to the **Card Mode** you started the review session from.
 * No additional inputs should be added behind the `endReview` command.
+
+</div>
+
+### About Review Statistics
+
+At the end of a review session, FlashNotes will calculate your score for the session and display in a format similar to the image shown below. <br>
+
+![Review Window with Review Statistics](images/UG_ReviewStatistics.png)
+
+As shown in the above image, the Review Window will display the following information:
+ * The **total number of questions** you undertook in the review session.
+ * The **number of questions marked as correct during your first attempt** at the question.
+ * The calculated **percentage of questions answered correctly on your first attempt** rounded to 1 decimal place.
+
+Of the three types of information, only the calculated percentage will be saved by FlashNotes. This is so that you can track your revision progress for any deck that you conduct a review session in.
+
+To view the statistics of your last review session for any deck, simply navigate back to the **Main Mode** and look under the Deck's name as indicated in the image below.
+
+![Review Statistics In Home Mode](images/UG_ReviewStatisticsInHome.png)
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* FlashNotes will calculate and save your review statistics only if you have marked all the questions in the review session as correct. Exiting or ending the review session early will not generate or save the result statistics of the incomplete review session.
+* Regarding the review statistics of any review session started after the usage of the `list` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
 
 </div>
 

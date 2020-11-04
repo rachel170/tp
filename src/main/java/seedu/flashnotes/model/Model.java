@@ -191,7 +191,7 @@ public interface Model {
     /**
      * Update the user's review score for deck used in review.
      */
-    void updateDeckPerformanceScore(Integer reviewScore, String deckName);
+    void updateDeckPerformanceScore(Double reviewScore, String deckName);
 
     /** Returns an unmodifiable view of the unique deck list */
     UniqueDeckList getUniqueDeckList();
