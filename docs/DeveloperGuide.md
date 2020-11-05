@@ -389,24 +389,26 @@ Now, when the user inputs a review limit greater than `Integer.MAX_VALUE`, the p
 #### Design considerations:
 * Alternative 1 (current choice): Save review limit in the user preferences file.
     * Pros: Users would not have to set review limit every time they start up the application.
-    * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in model.
-* Alternative 2: Save review limit internally in Model
+    * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in 
+    model.
+* Alternative 2: Save review limit internally in Model.
     * Pros: Do not have to write into a data file.
     * Cons: Users would have to set review limit every time they start up the application.
 
 ### Flip Card feature
 Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
-see the answer for the question on the flashcard.    
+see the answer for the question on the flashcard. 
 
 #### Implementation
-Users only have to type the `flip` command to flip their flashcard. Users can flip the flashcard as many times as they
+Users only have to type the `flip` command to flip their flashcard. Users can flip the flashcard as many times as they 
 would like to in the review mode.
 
-The initial value of `isFlipped` is set to false, so that the review mode is showing the question on the flashcard first.
+The initial value of `isFlipped` is set to false, so that the review mode is showing the question on the flashcard 
+first.
 
 To support the flipping of flashcards, the following commands were added:
-* `flip` - A command that flips the flashcard being reviewed and displays the question or answer depending on the number
- of times the card was flipped.
+* `f` - A command that flips the flashcard currently being reviewed and displays the question or answer depending on 
+the number of times the card had been flipped.
 
 The following is a sequence diagram that demonstrates how a flip command flips a card in the review session:
 ![FlipCommandSequenceDiagram](images/FlipCommandSequenceDiagram.png)
@@ -416,14 +418,14 @@ a function call is made from the `ModelManager#carryOutFlipCommand()` which is c
 when it is created from the `FlashNotesParser`.
 
 #### Design considerations:
-* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been flipped in
-    the review mode.
-    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI
-    * Cons: Increases coupling
+* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model.
+    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    flipped in the review mode.
+    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI.
+    * Cons: Increases coupling.
 * Alternative 2: Implement the boolean isFlipped in the UI part, IndividualFlashcard.
-    * Pros: No need for extra function calls as flipping is directly done in the UI
-    * Cons: Logic is being done in the UI section
+    * Pros: No need for extra function calls as flipping is directly done in the UI.
+    * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
     
 ### Next Card feature
@@ -452,13 +454,13 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
 
 #### Design considerations:
 * Alternative 1 (current choice): Change isCorrect int in the flashcard model
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been reviewed 
-    correctly by the user in the review mode.
-    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI
-    * Cons: Increases coupling
+    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    reviewed correctly by the user in the review mode.
+    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
+    * Cons: Increases coupling.
 * Alternative 2: Implement the int isCorrect in the UI part, IndividualFlashcard.
-    * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI
-    * Cons: Logic is being done in the UI section
+    * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
+    * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
 ### Review Statistics feature
@@ -919,13 +921,13 @@ Deleting a card while all persons are being shown
 
    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
-   2. Test case: `delete 1`<br>
+   2. Test case: `deleteCard 1`<br>
       Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `deleteCard 0`<br>
       Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `deleteCard`, `deleteCard x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 
@@ -986,10 +988,10 @@ Editing a deck name
 1. Flipping a card that is being reviewed
     1. Prerequisites: User is in review mode, and the review session is still ongoing
     
-    1. Test case: `flip` when the card is showing the question<br>
+    1. Test case: `f` when the card is showing the question<br>
         Expected: The card should be flipped to show the answer for this question <br>
         
-    1. Test case: `flip` when the card is showing the answer <br>
+    1. Test case: `f` when the card is showing the answer <br>
         Expected: The card should be flipped to show the question for this answer <br>
 
 1. Marking flashcard that is being reviewed as correct
