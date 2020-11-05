@@ -6,6 +6,24 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+This documentation contains an overview of the structure and implementation of FlashNotes. It is made for 
+developers who wish to maintain, modify or understand the software development behind FlashNotes.
+
+There are a total of 4 sections in this Developer Guide:<br>
+
+* Design: Discusses the high-level design of FlashNotes.
+
+* Links: Consists of links to guides used in Documentation, logging, testing, configuration and dev-ops.
+
+* Implementation: Covers the additional key features and considerations behind each design decision made in 
+    FlashNotes.
+
+* Appendix: Consists of 3 sections which are: Requirement, Manual Testing and Effort. 
+    * Requirement: Covers the product Scope, user stories, use cases, non-functional requirements and glossary.
+    * Manual Testing: Covers how to test each additional feature we added to FlashNotes.
+    * Effort: Covers challenges faced.
+
 ## **Design**
 
 ### Architecture
@@ -298,7 +316,7 @@ The deck class stores the Reserved Deck Name and Default Deck Name. The logic co
     * User will not be able to see a list of all flashcards
 
 
-###Implementation of Card Mode Features
+### Implementation of Card Mode Features
 
 #### Overview of Card-Mode Features
 
@@ -611,9 +629,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-####**Use case: UC01 - Create new Deck**
+#### **Use case: UC01 - Create new Deck**
 
-#####Precondition: User is in the Home Mode, and is not in review mode.
+##### Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS:**
 
@@ -629,9 +647,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-#####**Use case: UC02 - Open a Deck**
+##### **Use case: UC02 - Open a Deck**
 
-#####Precondition: User is in the Home Mode.
+##### Precondition: User is in the Home Mode.
 
 **MSS**
 
@@ -652,9 +670,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-####**Use case: UC03 - Delete a Deck**
+#### **Use case: UC03 - Delete a Deck**
 
-#####Precondition: User is in the Home Mode.
+##### Precondition: User is in the Home Mode.
 
 **MSS:**
 
@@ -670,9 +688,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use Case ends.   
     
-####**Use case: UC04 - Rename a Deck**
+#### **Use case: UC04 - Rename a Deck**
 
-#####Precondition: User is in the Home mode.
+##### Precondition: User is in the Home mode.
 
 **MSS:**
 
@@ -689,9 +707,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use Case ends.    
     
 
-####**Use case: UC05 - Show all cards**
+#### **Use case: UC05 - Show all cards**
 
-#####Precondition: User is in the Home mode.
+##### Precondition: User is in the Home mode.
 
 **MSS:**
 1. User requests to see all the cards.
@@ -707,9 +725,9 @@ Extensions
     Use Case ends.
 
 
-####**Use case: UC06 - Add a card**
+#### **Use case: UC06 - Add a card**
 
-#####Precondition: User is in Home Mode.
+##### Precondition: User is in Home Mode.
 
 **MSS**
 
@@ -725,9 +743,9 @@ Extensions
     * 2a.1. FlashNotes shows an error message. <br>
     Use case resumes at Step 2.
 
-####**Use case: UC07 - Delete a Card**
+#### **Use case: UC07 - Delete a Card**
 
-#####Precondition: User is in the Home Mode, and is not in review mode.
+##### Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS**
 
@@ -745,9 +763,9 @@ Extensions
     Use case resumes at Step 2.
 
 
-####**Use case: UC08 - Edit a card**
+#### **Use case: UC08 - Edit a card**
 
-#####Precondition: User is in Home Mode.
+##### Precondition: User is in Home Mode.
 
 **MSS**
 
@@ -765,9 +783,9 @@ Extensions
     Use case resumes at step 2.
     
 
-####**Use case: UC09 - Find keywords in card**
+#### **Use case: UC09 - Find keywords in card**
 
-#####Precondition: User is in Home mode.
+##### Precondition: User is in Home mode.
 
 **MSS**
 1. User opens a deck (UC02).
@@ -782,9 +800,9 @@ Extensions
     
     Use case ends.
     
-####**Use case: UC10 - Seeing a list of cards in the deck**
+#### **Use case: UC10 - Seeing a list of cards in the deck**
 
-####Precondition: User is in Card mode.
+#### Precondition: User is in Card mode.
 
 **MSS**
 1. User find for cards using keyword(s) (UC09).
@@ -793,9 +811,9 @@ Extensions
 
     Use case ends.
 
-####**Use case: UC11 - Return to Home mode**
+#### **Use case: UC11 - Return to Home mode**
 
-#####Precondition: User is in Card mode.
+##### Precondition: User is in Card mode.
 
 **MSS:**
 
@@ -805,9 +823,9 @@ Extensions
     Use Case ends.
 
 
-####**Use case: UC12 - Review cards**
+#### **Use case: UC12 - Review cards**
 
-#####Precondition: User is in Home Mode.
+##### Precondition: User is in Home Mode.
 
 **MSS:**
 
