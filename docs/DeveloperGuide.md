@@ -707,7 +707,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User creates a new deck.
 1. FlashNotes shows the newly created deck.
 
-    Use Case Ends.
+    Use Case ends.
 
 **Extension:**
 
