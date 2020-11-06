@@ -191,7 +191,6 @@ The following general activity diagram summarizes what happens when a user execu
 * FlashNotes also keeps track of whether the user is currently inside review mode.
 * The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
 
-<<<<<<< HEAD
 #### Design considerations: How to check for invalid commands
 * **Alternative 1 (current choice):** Checking of commands are done in the logic component.
     * Pros: Model component does not need to keep track and handle invalid inputs by user
@@ -543,7 +542,7 @@ view their last review session's statistic for the deck whenever they open Flash
 
 ###### Design Consideration: Storage Implementation for Deck
 
-* **Current choice:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
+* **Alternative 1:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
   * Pros: Partial implementation by teammates already exist.
   * Pros: Implementation can provide base code for future addition to the `Deck` class.
   * Cons: Design and implementation for `Deck` and `UniqueDeckList` is not concrete yet. Changes done now may clash with future changes to the classes.
