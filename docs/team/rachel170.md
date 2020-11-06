@@ -47,6 +47,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added details about the `Storage` component with a class diagram for the section.
     * Provided implementation details for the 'Review Statistics Feature' under 'Implementation of Review Mode Features'.
+    * Added Efforts section.
 
 * **Community**:
   * Reviewed and approved PR for teammates. (example: [1](https://github.com/AY2021S1-CS2103T-T15-2/tp/pull/249))
