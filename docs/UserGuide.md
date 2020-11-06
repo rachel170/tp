@@ -229,7 +229,7 @@ Outcome expected:
 * There is a 40 character limit for DECKNAME.
 * Reserved names (such as `list`) can't be used as DECKNAME.
 * If multiple name prefixes are in the command text, only the last one would be selected.
-* If you are in card mode, you need to navigate back to the home screen via the Home command before adding new deck.
+* If you are in card mode, you need to navigate back to the Main Mode via the Home command before adding new deck.
 
 </div>
 
@@ -578,9 +578,20 @@ Outcome Expected:
 
 Lists all flashcards in the deck.
 
-Typically used after the `find` command when you want to see all cards in the deck again.
-
 format: `list`
+
+Outcome Expected:
+Shows all flashcards in the deck that the user is in.
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* No additional inputs should be added behind the `listAll` command.
+* Typically used after the `find` command when you want to see all cards in the deck again.
+
+</div>
+
 
 ### Deleting a flashcard : `deleteCard`
 
