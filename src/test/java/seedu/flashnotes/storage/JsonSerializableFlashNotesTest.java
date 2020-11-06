@@ -1,14 +1,14 @@
 package seedu.flashnotes.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static seedu.flashnotes.testutil.Assert.assertThrows;
+import static seedu.flashnotes.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.flashnotes.commons.exceptions.IllegalValueException;
+import seedu.flashnotes.commons.exceptions.IllegalValueException;
 import seedu.flashnotes.commons.util.JsonUtil;
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.testutil.TypicalFlashcards;
@@ -33,19 +33,19 @@ public class JsonSerializableFlashNotesTest {
         assertEquals(flashNotesFromFile, typicalFlashcardsFlashNotes);
     }
 
-    //    @Test
-    //    public void toModelType_invalidFlashcardFile_throwsIllegalValueException() throws Exception {
-    //        JsonSerializableFlashNotes dataFromFile = JsonUtil.readJsonFile(INVALID_FLASHCARD_FILE,
-    //                JsonSerializableFlashNotes.class).get();
-    //        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
-    //    }
+    @Test
+    public void toModelType_invalidFlashcardFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableFlashNotes dataFromFile = JsonUtil.readJsonFile(INVALID_FLASHCARD_FILE,
+                JsonSerializableFlashNotes.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
 
-    //    @Test
-    //    public void toModelType_duplicateFlashcards_throwsIllegalValueException() throws Exception {
-    //        JsonSerializableFlashNotes dataFromFile = JsonUtil.readJsonFile(DUPLICATE_FLASHCARD_FILE,
-    //                JsonSerializableFlashNotes.class).get();
-    //        assertThrows(IllegalValueException.class, JsonSerializableFlashNotes.MESSAGE_DUPLICATE_FLASHCARD,
-    //                dataFromFile::toModelType);
-    //    }
+    @Test
+    public void toModelType_duplicateFlashcards_throwsIllegalValueException() throws Exception {
+        JsonSerializableFlashNotes dataFromFile = JsonUtil.readJsonFile(DUPLICATE_FLASHCARD_FILE,
+                JsonSerializableFlashNotes.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableFlashNotes.MESSAGE_DUPLICATE_FLASHCARD,
+                dataFromFile::toModelType);
+    }
 
 }

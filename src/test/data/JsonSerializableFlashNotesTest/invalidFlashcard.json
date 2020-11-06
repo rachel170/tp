@@ -1,9 +1,15 @@
 {
   "flashcards": [ {
     "question": " ",
-    "answer": ""
+    "answer": "",
+    "tag": ""
   }, {
     "question": "valid question",
-    "answer": "valid answer"
+    "answer": "valid answer",
+    "tag": "valid tag"
+  } ],
+  "decks": [ {
+    "deckName": "valid tag",
+    "resultStatistic": "-1.0"
   } ]
 }
