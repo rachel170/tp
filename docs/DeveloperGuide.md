@@ -129,7 +129,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
+**API** : 
+[`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects and general data within FlashNotes in json format.
@@ -481,66 +482,122 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
-### Review Statistics feature
+#### Review Statistics feature
 
-#### Implementation
+FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. 
+In addition to this, as a user wants to be able to see how many cards they got correct after a review session, so that
+they can track their topics' mastery and feel a sense of accomplishment for studying efficiently (user story). Due to
+this user story, FlashNotes will incorporate a review statistics feature to fulfill the user's needs.
 
-FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. To provide more value to the review session, FlashNotes should be able to track the number of cards answered correctly by the user on their first attempt at the question during the review session. This statistical value will be displayed to the user at the end of the review session and saved only when the user ends the review session properly.
+##### Tracking and generation of the review statistics feature
 
-To support this feature, a new command have been added to FlashNotes:
+During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
+first try at the question. As the handling of progress through the review session implementation was done by Sruthi, my
+code is designed to compliment her implementation. This is done through the addition of `IndividualFlashcard::correctAnswers` 
+attribute, which keeps track of the count of questions answered correctly on the first attempt. 
+
+To ensure the variable incrementation is done only if the current flashcard contains a question that the user is attempting
+for the first time in the review session, a check for the `IndividualFlashcard::index` is done to ensure it is within 
+the range of `IndividualFlashcard::numOfFlashcards`.
+
+To ensure the variable incrementation is done only if the current flashcard contains a question that the user answered 
+correctly, a check is done for the `isCorrect` variable to ensure that the current flashcard has been marked as
+correct by the user.
+
+At the end of the review session, FlashNotes will display:
+ * `IndividualFlashcard::correctAnswers` - The total number of questions marked correct on the user's first attempt at it.
+ * `IndividualFlashcard::numOfFlashcards` - The total number of unique questions utilized in the review session.
+ * A calculated percentage value generated from `IndividualFlashcard::correctAnswers` and `IndividualFlashcard::numOfFlashcards`.
+
+The calculated percentage value from a review session will be considered as the 'Review Statistics' in FlashNotes.
+To provide a measure of accuracy, the percentage value will be calculated as a `double` value, which will be rounded off 
+to the nearest 1 decimal place for display or storage purposes.
+
+##### Relationship of review statistics and deck
+
+To further help the user keep track of their topic mastery, FlashNotes will save the calculated percentage from the 
+last review session initiated in the deck to the `Deck` class, which will be displayed in the Home Mode of FlashNotes, 
+under the relevant Deck's name.
+
+Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the `Deck` class implemented 
+by Peng Xiang and Jacob. As a String, it can be easily retrieved and displayed to the user through the UI component.
+As such, only review sessions initiated from an existing deck will be saved to the relevant deck.
+
+In the event that a user initiated a review session for all of FlashNotes' flashcards, the review statistics will only
+be generated and displayed for the user's benefit, but not save to FlashNotes.
+
+##### Extending Storage to include Deck
+
+Seeing as FlashNotes already saves Flashcard data for the user, it seemed reasonable to expand the storage component to 
+save FlashNotes' deck data as well, since it will also allow the user to better track their topic's mastery if they can 
+view their last review session's statistic for the deck whenever they open FlashNotes.
+
+###### Design consideration:
+
+* **Current choice:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
+  * Pros: Partial implementation by teammates already exist.
+  * Pros: Implementation can provide base code for future addition to the `Deck` class.
+  * Cons: Design and implementation for `Deck` and `UniqueDeckList` is not concrete yet. Changes done now may clash with future changes to the classes.
+
+* **Alternative 2:** Store review statistics as an attribute of Tag
+  * Pros: Easier to implement, simply expand tag feature to include review statistics data of the deck that the tag is representing.
+  * Cons: Will result in storing several repetitions of the data since it is an add-on to each instance of a unique tag in the json file. This can needlessly take up more space if there are a huge amount of flashcards and only a few decks.  
+
+##### Returning to Card Mode from Review mode
+
+Upon completing the review session, a new command (`endReview`) was added to FlashNotes to allow the user to return to 
+the main window of FlashNotes that displays the Card Mode they initiated the review session from. This is to allow the 
+user to easily continue using FlashNotes should they wish to leave the Review Mode for any reason.
+
+##### Implementation
+
+To support the above features, the following code changes were added:
+
+A new command have been added to FlashNotes to allow return to Card Mode from Review Mode:
 * `endReview` - A command that closes the review session's window at the end of the review session, and handles the ending process of review session. (Only available in review mode.)
 
 To support the storage of each deck's review statistic, a new class has been added to the Storage component in FlashNotes:
 * `JsonAdaptedDeck` object contain two variable for Deck Storage, `String deckName` to identify the deck, and `String resultStatistics` to contain the deck's review statistics.
 * `JsonAdaptedDeck#updateModel(FlashNotes flashNotes)` is a method used to update the generated model from reading the flashcard data with the deck's data. It depends on `FlashNotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` to update the generated model with the deck data from the save file.
 
-`JsonSerializableFlashNotes` object has been adjusted to depend on a list of `JsonAdaptedDeck` objects to read and write each deck's data to the FlashNotes save file.
+`JsonSerializableFlashNotes` object has been adjusted to depend on a list of `JsonAdaptedDeck` objects to read and write 
+each deck's data to the FlashNotes save file.
 
-Additionally, the following operations have been implemented to support this feature:
+Additionally, the following operations have been implemented to support the storage of result statistics feature:
 * Model component:
     * `FlashNotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` - Updates the reviewStatistics attribute of a specific deck (through deckName) with the given Integer value (reviewScore).
     * `FlashNotes#getUniqueDeckList()` - Return the FlashNotes' model's `UnqiueDeckList`.
     * `UniqueDeckList#findDeck(String deck)` - Returns an existing `Deck` object from its `internalList` with the same `deckName` as the given String input. If no such `Deck` object exist, a `null` object is returned instead.
 * UI component:
-    * `IndividualFlashcard#displayStatistics()` - Calculates the user's review session's score, updates the model with the generated statistics and set display of the end of the review session.
+    * `IndividualFlashcard#displayStatistics()` - Calculates the user's review session's score, updates the model with the generated statistics and update display at the end of the review session.
 
 Further more, the following operations have been adjusted to support the feature:
 * `Storage#saveFlashNotes(ReaOnlyFlashNotes flashNotes)` - This operation, and all methods dependent on it, has been expanded to accept an additional parameter `UniqueDeckList decklist` to facilitate the saving of the deck data in FlashNotes.
 * `FlashNotes#resetData(ReadOnlyFlashNotes newData)` - This operation has been adjusted to include the recreation of the FlashNotes model's deck data read from Storage.
 
-To provide the UI display and changes related to review statistics, the following UI component have received several code additions:
-* `DeckCard` - Changed constructor method to for display of review statistics at the end of a review session.
+To provide the UI display and changes related to review statistics, the following UI component have received a few code additions:
+* `DeckCard` - Changed constructor method to account for display of review statistics of the last review session in that deck.
 * `ReviewWindow#handleExit()` - Adjusted to return to card view upon execution of `endReview` command.
 
-##### Given below is a basic description of the backend process of the feature:
+###### Basic description of the backend process of the end of a review session:
 
 1. User reaches the end of the review session (by correctly answering the last of the questions that has not been answered yet or has been answered wrongly before). 
 
-2. The UI component will calculate the user's score by generating the percentage of cards the user answered correctly on the first try during the session.
+1. The UI component will calculate the user's score by generating the percentage of cards the user answered correctly on the first try during the session.
 
-3. The generated review session statistic is passed to the Model component through the Logic component, where the `FlashNotes` model updates the relevant deck with the generated value.
+1. The generated review session statistic is conveyed to the Model component, where the `FlashNotes` model updates the relevant deck with the generated value.
 
-4. FlashNotes' UI component will display the review statistics generated as part of the end of review session message.
+1. FlashNotes' UI component will display the review statistics generated as part of the end of review session message.
 
-5. User enters `endReview` command to end the review session.
+1. User enters `endReview` command to end the review session.
 
-6. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
+1. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
 
-##### Corresponding sequence diagram for `endReview`:
+###### Corresponding sequence diagram for `endReview`:
 
 The following sequence diagram shows how the endReview command operation works:
 
 ![EndReviewSequenceDiagram](images/EndReviewSequenceDiagram.png)
-
-#### Design consideration:
-
-* **Current choice:** Expand save feature to include decks' data instead of only saving flashcards' data.
-  * Pros: Partial implementation available to build on. Implementation can provide base code for future addition to Deck data that needs to be saved as well.
-  * Cons: Design and implementation for Deck and UniqueDeckList is not a concrete feature yet, changes done now may clash with future expansion of the feature.
-
-* **Alternative 2:** Store review statistics as an attribute of Tag
-  * Pros: Easier to implement, simply expand tag feature to include review statistics data of the deck that the tag is representing.
-  * Cons: Will result in storing several repetitions of the statistics since it is an add-on to each instance of a unique tag in the json file. This can needlessly take up more space if there are a huge amount of flashcards and only a few decks.
 
 
 ### Implementation of Critical Classes:
