@@ -81,9 +81,11 @@ public class EditCardCommand extends Command {
 
         model.setFlashcard(flashcardToEdit, editedFlashcard);
         String editedDeckName = editedFlashcard.getTag().tagName;
+
         if (!model.hasDeck(new Deck(editedDeckName))) {
             model.addDeck(new Deck(editedDeckName));
         }
+
         if (isInList) {
             model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         } else {

@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.logic.parser.CliSyntax.PREFIX_NEW_DECK_NAME;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
@@ -35,9 +37,11 @@ public class EditDeckNameCommand extends Command {
     public static final String MESSAGE_DUPLICATE_DECK = "The deck name that you are trying to use already exists. "
             + "Please enter a new deck name.";
 
+    private final Logger logger = LogsCenter.getLogger(EditDeckNameCommand.class);
 
     private final Index index;
     private final Deck newDeck;
+
 
     /**
      * @param index of deck to be edited.
@@ -64,10 +68,14 @@ public class EditDeckNameCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
 
+        // Transfer Results Statistics from old deck to new deck
         Deck deckToEdit = lastShownList.get(index.getZeroBased());
         String resultStatistics = deckToEdit.getResultStatistics();
         newDeck.setResultStatistics(resultStatistics);
         model.setDeck(deckToEdit, newDeck);
+        logger.info("Old Deck: " + deckToEdit.getDeckName() + " with stats: " + deckToEdit.getResultStatistics()
+                + ". New Deck: " + newDeck.getDeckName() + " with stats: " + newDeck.getResultStatistics());
+
 
         changeTagOfCards(deckToEdit.getDeckName(), newDeck.getDeckName(), model);
         model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
@@ -76,6 +84,10 @@ public class EditDeckNameCommand extends Command {
 
     }
 
+
+    /**
+     * Updates the tags of the cards with the new deck name
+     */
     private void changeTagOfCards(String deckName, String newDeckName, Model model) {
         model.updateFilteredFlashcardList(new TagContainsKeywordsPredicate(deckName));
         List<Flashcard> cardsWithTag = model.getFilteredFlashcardList();

@@ -78,9 +78,9 @@ The Root Node contains the scene, which is composed of UI parts like`CommandBox`
 There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism
 Note that the Review Window is a component of the FlashCardListRoot and not a component of the DeckCardListRoot. As a result, the review window can only be initiated from the FlashCardListRoot.
 
-The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#Implementation-of-UI-(3-Different-Modes))
+The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#implementation-of-ui-3-different-modes)
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -292,6 +292,7 @@ Furthermore, the class here may not be considered too heavy with methods since t
 
 #### Listing all flashcards, Reserved Deck Name and Default Deck
 
+The `listAll` command allows Users to enter a list showing all flashcards in FlashNotes.
 As the `listAll` command is available on the home screen, entering the list of all flashcards will be treated as entering a deck.
 
 In order to differentiate the deck that the user is in, the reserved deck name of "list" is used to inform the model that the user is currently looking at the list of all the cards.
@@ -299,7 +300,13 @@ In order to differentiate the deck that the user is in, the reserved deck name o
 However, in order to allow users to perform card-level operations in the reserved deck "list", any cards created will be sent to the "Default" deck.
 Also, to prevent any conflicts with the model, users will not be able to create a deck called "list".
 
-The deck class stores the Reserved Deck Name and Default Deck Name. The logic component will reference the these names from the model component.
+The following activity diagrams summarizes what happens when a user adds a new card:
+
+![AddCardDiagram](images/AddCardListAllDiagram.png)
+
+
+The model has the methods `Model#getDefaultDeckName` and `Model#getReservedDeckName` to retrieve the default and reserved deck names. 
+The logic component will reference the these names from the model component during command executions.
 
 ##### Design considerations: 
 
@@ -330,6 +337,11 @@ These operations are exposed in the Model interface as `Model#addFlashcard(Flash
 Given below is an example usage scenario.
 
 The user executes `deleteCard 2` to delete the card at index 2 from the observed list.
+
+1. the `deleteCard` command will get the card at the index of the currently displayed list.
+1. The `Model#deleteFlashcard(target)` is called.
+1. The `ModelManager` will call `FlashNotes#removeFlashcard(key)`
+1. Then `FlashNotes` will call the `UniqueFlashcardList#remove(toRemove)`, which will remove the flashcard from the list of flashcards.
 
 The following sequence diagram shows how the `deleteCard` operation works:
 
@@ -1076,7 +1088,7 @@ testers are expected to do more *exploratory* testing.
 -------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
-###Challenge 1: UI Modes
+### Challenge 1: UI Modes
 At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
 their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
 separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
