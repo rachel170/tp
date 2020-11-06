@@ -542,7 +542,7 @@ view their last review session's statistic for the deck whenever they open Flash
 
 ###### Design Consideration: Storage Implementation for Deck
 
-* **Alternative 1:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
+* **Alternative 1 (current choice):** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
   * Pros: Partial implementation by teammates already exist.
   * Pros: Implementation can provide base code for future addition to the `Deck` class.
   * Cons: Design and implementation for `Deck` and `UniqueDeckList` is not concrete yet. Changes done now may clash with future changes to the classes.
