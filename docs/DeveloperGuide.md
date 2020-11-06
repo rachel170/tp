@@ -31,9 +31,7 @@ There are a total of 4 sections in this Developer Guide:<br>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
-<div markdown="span" class="alert alert-primary">
 
-</div>
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -698,7 +696,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-#### **Use case: UC01 - Create new Deck**
+#### Use case: UC01 - Create new Deck
 
 ##### Precondition: User is in the Home Mode, and is not in review mode.
 
@@ -716,7 +714,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-##### **Use case: UC02 - Open a Deck**
+##### Use case: UC02 - Open a Deck
 
 ##### Precondition: User is in the Home Mode.
 
@@ -739,7 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-#### **Use case: UC03 - Delete a Deck**
+#### Use case: UC03 - Delete a Deck
 
 ##### Precondition: User is in the Home Mode.
 
@@ -757,7 +755,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use Case ends.   
     
-#### **Use case: UC04 - Rename a Deck**
+#### Use case: UC04 - Rename a Deck
 
 ##### Precondition: User is in the Home mode.
 
@@ -776,7 +774,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use Case ends.    
     
 
-#### **Use case: UC05 - Show all cards**
+#### Use case: UC05 - Show all cards
 
 ##### Precondition: User is in the Home mode.
 
@@ -794,7 +792,7 @@ Extensions
     Use Case ends.
 
 
-#### **Use case: UC06 - Add a card**
+#### Use case: UC06 - Add a card
 
 ##### Precondition: User is in Home Mode.
 
@@ -812,7 +810,7 @@ Extensions
     * 2a.1. FlashNotes shows an error message. <br>
     Use case resumes at Step 2.
 
-#### **Use case: UC07 - Delete a Card**
+#### Use case: UC07 - Delete a Card
 
 ##### Precondition: User is in the Home Mode, and is not in review mode.
 
@@ -832,7 +830,7 @@ Extensions
     Use case resumes at Step 2.
 
 
-#### **Use case: UC08 - Edit a card**
+#### Use case: UC08 - Edit a card
 
 ##### Precondition: User is in Home Mode.
 
@@ -852,7 +850,7 @@ Extensions
     Use case resumes at step 2.
     
 
-#### **Use case: UC09 - Find keywords in card**
+#### Use case: UC09 - Find keywords in card
 
 ##### Precondition: User is in Home mode.
 
@@ -869,7 +867,7 @@ Extensions
     
     Use case ends.
     
-#### **Use case: UC10 - Seeing a list of cards in the deck**
+#### Use case: UC10 - Seeing a list of cards in the deck
 
 #### Precondition: User is in Card mode.
 
@@ -880,7 +878,7 @@ Extensions
 
     Use case ends.
 
-#### **Use case: UC11 - Return to Home mode**
+#### Use case: UC11 - Return to Home mode
 
 ##### Precondition: User is in Card mode.
 
@@ -892,7 +890,7 @@ Extensions
     Use Case ends.
 
 
-#### **Use case: UC12 - Review cards**
+#### Use case: UC12 - Review cards
 
 ##### Precondition: User is in Home Mode.
 
