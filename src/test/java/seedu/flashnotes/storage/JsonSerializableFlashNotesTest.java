@@ -24,13 +24,13 @@ public class JsonSerializableFlashNotesTest {
 
     @Test
     public void toModelType_typicalFlashcardsFile_success() throws Exception {
-         JsonSerializableFlashNotes dataFromFile = JsonUtil.readJsonFile(TYPICAL_FLASHCARDS_FILE,
-                 JsonSerializableFlashNotes.class).get();
-         FlashNotes flashNotesFromFile = dataFromFile.toModelType();
-         FlashNotes typicalFlashcardsFlashNotes = TypicalFlashcards.getTypicalFlashNotes();
-         System.out.println(flashNotesFromFile);
-         System.out.println(typicalFlashcardsFlashNotes);
-         assertEquals(flashNotesFromFile, typicalFlashcardsFlashNotes);
+        JsonSerializableFlashNotes dataFromFile = JsonUtil.readJsonFile(TYPICAL_FLASHCARDS_FILE,
+                JsonSerializableFlashNotes.class).get();
+        FlashNotes flashNotesFromFile = dataFromFile.toModelType();
+        FlashNotes typicalFlashcardsFlashNotes = TypicalFlashcards.getTypicalFlashNotes();
+        System.out.println(flashNotesFromFile);
+        System.out.println(typicalFlashcardsFlashNotes);
+        assertEquals(flashNotesFromFile, typicalFlashcardsFlashNotes);
     }
 
     //    @Test
