@@ -15,7 +15,7 @@ public class Deck {
             "Deck name should not be blank and should be less than or equal to 40 characters. "
                     + "Current number of characters in deck name is %d.";
     public static final String MESSAGE_CONSTRAINTS_STATISTIC =
-            "ResultStatistic should not be blank or a non numeric value";
+            "ResultStatistic should be a numeric value between 0 and 100.";
 
     private static final String RESERVED_DECK_NAME = "list";
     private static final String DEFAULT_DECK_NAME = "Default";
