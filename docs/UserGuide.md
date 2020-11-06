@@ -341,19 +341,19 @@ Examples:
 
 
 Outcome Expected:
-1. Enter the `setReviewLimit` command with the `REVIEW_LIMIT` you want into the command box as shown. 
+1. Enter the `setReviewLimit` command with the review limit you want into the command box as shown. 
 ![Set Review Limit Before Main](images/setReviewLimit3Before_Main.png)
 
 1. When successful, the following success message will be displayed.
 ![Set Review Limit After Main](images/setReviewLimit3After_Main.png)
 
-1. You can check that the review_limit is indeed 3 by entering the commands
+1. You can check that the review limit is indeed 3 by entering the commands
 `enterDeck Singapore` (which contains 4 flashcards in total) and type `review`.
 (3 flashcards will be chosen randomly from the deck of 4 cards) Use the `f` and `c` commands to review the flashcards. 
 After reviewing the 3rd flashcard, you should have reached the end of the review session as shown below.
 ![Set Review Limit After](images/setReviewLimit3ReviewAfter.png)
 
-1. When an invalid `REVIEW_LIMIT` is entered, the following error message will be displayed.
+1. When an invalid review limit is entered, the following error message will be displayed.
 ![Set Review Limit Error Main](images/SetReviewLimitError_Main.png)
 
 
@@ -361,10 +361,10 @@ After reviewing the 3rd flashcard, you should have reached the end of the review
 
 :warning: Things to note:
 
-* `REVIEW_LIMIT` can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
+* The review limit can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
 review limit greater than 2147483647.
-* `REVIEW_LIMIT` can be the string `all`. (case insensitive)
-* Note that when the `REVIEW_LIMIT` is set to `all`, the `REVIEW_LIMIT` is maximum number of cards you can review.
+* The review limit can be the string `all`. (case insensitive)
+* Note that when the review limit is set to `all`, the review limit is maximum number of cards you can review.
 (Which is 2147483647 cards)
 * This review card limit applies to all decks once it is set. 
 * This review card limit is remembered by the program. (You do not have to set the card limit 
