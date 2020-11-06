@@ -43,12 +43,14 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        boolean isReviewMode = model.getIsReviewMode();
         boolean isInDeck = model.getIsInDeck();
         String deckName = model.getCurrentDeckName();
+
         if (deckName == null) {
-            deckName = "Default";
+            deckName = Model.getDefaultDeckName();
         }
-        Command command = flashNotesParser.parseCommand(commandText, isInDeck, deckName);
+        Command command = flashNotesParser.parseCommand(commandText, isReviewMode, isInDeck, deckName);
         commandResult = command.execute(model);
 
         try {
@@ -80,9 +82,16 @@ public class LogicManager implements Logic {
         return model.addFlashcardToReview(flashcard);
     }
 
+    @Override
+    public void resetFlipOfFlashcardBeingReviewed() {
+        model.resetFlipOfFlashcardBeingReviewed();
+    }
+
     public ObservableList<Deck> getFilteredCardDeckList() {
         return model.getFilteredDeckList();
     };
+
+    // User preferences methods
 
     @Override
     public Path getFlashNotesFilePath() {
@@ -100,12 +109,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return model.getReviewCardLimit();
     }
 
     @Override
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         model.setReviewCardLimit(reviewCardLimit);
     }
 
@@ -114,7 +123,17 @@ public class LogicManager implements Logic {
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore) {
-        model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+    public void updateDeckPerformanceScore(Double reviewScore) {
+        if (!model.getCurrentDeckName().equals(Model.getReservedDeckName())) {
+            model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
+        }
+    }
+
+    /**
+     * Turn off review mode.
+     */
+    @Override
+    public void setIsReviewModeFalse() {
+        model.setIsReviewModeFalse();
     }
 }

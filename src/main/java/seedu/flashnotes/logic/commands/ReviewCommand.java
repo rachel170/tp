@@ -1,9 +1,11 @@
 package seedu.flashnotes.logic.commands;
 
+import seedu.flashnotes.commons.core.Messages;
+import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Starts a review session.
  */
 public class ReviewCommand extends Command {
 
@@ -14,9 +16,15 @@ public class ReviewCommand extends Command {
 
     public static final String SHOWING_REVIEW_MESSAGE = "Opened review window.";
 
+
     @Override
-    public CommandResult execute(Model model) {
-        model.shuffleReviewFlashcards();
+    public CommandResult execute(Model model) throws CommandException {
+        boolean isReviewListEmpty = model.getFilteredFlashcardList().size() == 0;
+        if (isReviewListEmpty) {
+            throw new CommandException(Messages.MESSAGE_NO_CARDS_TO_REVIEW);
+        }
+        model.setUpReviewList();
+        model.setIsReviewModeTrue();
         return new CommandResult(SHOWING_REVIEW_MESSAGE, false, false, true, false, 0);
     }
 }

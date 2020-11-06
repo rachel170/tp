@@ -3,30 +3,32 @@ package seedu.flashnotes.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.flashnotes.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
-import seedu.flashnotes.commons.core.Messages;
+import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
+import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
 /**
- * Lists all flashcards in the flashnotes to the user.
+ * Lists all the cards in a deck to the user. Only works when the user is already in the deck.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW
-            + " " + "Listed all flashcards";
-
-    public static final String DECK_NAME = "Default";
-
+    public static final String MESSAGE_SUCCESS = "Showing flashcards in deck. %1$d flashcard(s) listed.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-        model.setIsInDeckTrue();
-        model.setCurrentDeckName(DECK_NAME);
+
+        String currentDeckName = model.getCurrentDeckName();
+
+        if (currentDeckName.equals(Model.getReservedDeckName())) {
+            model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        } else {
+            TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(currentDeckName);
+            model.updateFilteredFlashcardList(predicate);
+        }
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS,
-                        model.getFilteredFlashcardList().size()));
+                String.format(MESSAGE_SUCCESS, model.getFilteredFlashcardList().size()));
     }
 }

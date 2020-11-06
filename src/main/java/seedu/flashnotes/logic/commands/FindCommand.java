@@ -18,7 +18,7 @@ public class FindCommand extends Command {
             + "of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " where";
-    public static final String MESSAGE_SUCCESS = "%1$d flashcards found";
+    public static final String MESSAGE_SUCCESS = "%1$d flashcard(s) found";
 
     private final QuestionContainsKeywordsPredicate predicate;
 
@@ -30,7 +30,13 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         String currentDeckName = model.getCurrentDeckName();
-        model.updateFilteredFlashcardList(predicate.and(new TagContainsKeywordsPredicate(currentDeckName)));
+
+        if (currentDeckName.equals(ListAllCommand.DECK_NAME)) {
+            model.updateFilteredFlashcardList(predicate);
+        } else {
+            model.updateFilteredFlashcardList(predicate.and(new TagContainsKeywordsPredicate(currentDeckName)));
+        }
+
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredFlashcardList().size()));
     }

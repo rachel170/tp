@@ -10,7 +10,8 @@ import static seedu.flashnotes.commons.util.AppUtil.checkArgument;
 public class Question {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Questions should not be blank";
+            "Questions should not be blank and should less than or equal to 140 characters. "
+                + "Current length of question is %d.";
 
     public final String question;
 
@@ -29,9 +30,11 @@ public class Question {
      * Returns true if a given string is a valid question.
      */
     public static boolean isValidQuestion(String test) {
-        return !test.isBlank();
-    }
+        boolean isQuestionBlank = test.isBlank();
+        boolean isQuestionLengthValid = test.length() <= 140;
 
+        return !isQuestionBlank && isQuestionLengthValid;
+    }
 
     @Override
     public String toString() {

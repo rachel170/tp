@@ -13,5 +13,5 @@ public interface ReadOnlyUserPrefs {
 
     Path getFlashNotesFilePath();
 
-    Integer getReviewCardLimit();
+    long getReviewCardLimit();
 }

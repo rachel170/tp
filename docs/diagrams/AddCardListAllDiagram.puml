@@ -1,0 +1,18 @@
+@startuml
+start
+:User executes addCard command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([User in the list that shows
+all cards (listAll command)])
+    :Card is added to "Default" Deck;
+else ([User in normal deck])
+    :Card is added to the deck
+    that the user is in;
+
+endif
+
+stop
+@enduml
