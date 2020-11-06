@@ -647,10 +647,8 @@ While inside of the `LogicManager#execute(...)` method, the method checks with M
 Afterwards, FlashNotesParser takes in the mode checking booleans obtained from model in `FlashNotesParser#parseCommand(...)`. 
 The booleans regarding the modes enables FlashNotes to be able to decide which of the 3 following methods to use:
 * `parseCommandInReviewMode(...)`
-* `parseCommandInHomeMode(...)`
+* `parseCommandInMainMode(...)`
 * `parseCommandInCardMode(...)`
-
-Note that the Home Mode here refers to the Main Mode specified in the User Guide, if there are any confusions.
 
 ##### Corresponding activity diagram for `FlashNotesParser`:
 
