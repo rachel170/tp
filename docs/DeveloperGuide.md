@@ -1203,7 +1203,8 @@ section for the entire listing of all the commands.
 
 ### Achievement of Project
 
-1. User story - Of the 13 [User Stories](###User-stories) listed, we managed to fulfill 12 of them in various ways.
+1. User story - Of the 13 [User Stories](https://ay2021s1-cs2103t-t15-2.github.io/tp/DeveloperGuide.html#user-stories) 
+listed, we managed to fulfill 12 of them in various ways.
 
 1. Maintain the simplicity and cohesiveness of the features from the original AB3 project.
 
