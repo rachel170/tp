@@ -152,10 +152,17 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
         reviewWindow.hide();
         primaryStage.hide();
     }
+
+    /**
+     * Removes functionality for users to enter commands in the command box temporarily.
+     */
     private void disableCommandBox() {
         this.commandBox.disable();
     }
 
+    /**
+     * Restores functionality for users to enter commands in the command box temporarily.
+     */
     private void enableCommandBox() {
         this.commandBox.enable();
     }
@@ -181,6 +188,7 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
             if (commandResult.isStartReview()) {
                 handleReview();
             }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -195,9 +203,6 @@ public class FlashcardListRoot extends UiPart<Region> implements RootNode {
                 Region root = rootNode.getFxmlLoader().getRoot();
                 primaryStage.getScene().setRoot(root);
                 primaryStage.show();
-
-
-
 
                 rootNode.fillInnerParts();
                 rootNode.setFeedbackToUser(commandResult.getFeedbackToUser());

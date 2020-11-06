@@ -184,9 +184,9 @@ public interface Model {
     void setIsReviewModeFalse();
 
     /**
-     * Shuffles the flashcards for the review session.
+     * Sets up the flashcards for the review session.
      */
-    void shuffleReviewFlashcards();
+    void setUpReviewList();
 
     /**
      * Update the user's review score for deck used in review.

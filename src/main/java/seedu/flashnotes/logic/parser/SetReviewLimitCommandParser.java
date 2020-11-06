@@ -5,8 +5,6 @@ import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FOR
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses input arguments and creates a new SetReviewLimitCommand object
  */

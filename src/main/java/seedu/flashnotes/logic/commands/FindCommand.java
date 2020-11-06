@@ -30,11 +30,13 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         String currentDeckName = model.getCurrentDeckName();
+
         if (currentDeckName.equals(ListAllCommand.DECK_NAME)) {
             model.updateFilteredFlashcardList(predicate);
         } else {
             model.updateFilteredFlashcardList(predicate.and(new TagContainsKeywordsPredicate(currentDeckName)));
         }
+
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredFlashcardList().size()));
     }

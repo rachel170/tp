@@ -80,7 +80,7 @@ public class ParserUtil {
 
 
     /**
-     * Parses integer and returns it. Leading and trailing whitespaces will be
+     * Parses a review limit input and returns it. Leading and trailing whitespaces will be
      * trimmed.
      *
      * @throws ParseException if the specified integer is invalid (not greater than 0).

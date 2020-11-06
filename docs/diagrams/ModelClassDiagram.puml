@@ -48,7 +48,7 @@ FlashNotes *--> "1" UniqueFlashcardList
 UniqueFlashcardList o--> "*" Flashcard
 Flashcard *--> Question
 Flashcard *--> Answer
-Flashcard *--> "*" Tag
+Flashcard *--> Tag
 FlashNotes *--> "1" UniqueDeckList
 UniqueDeckList o--> "*" Deck
 

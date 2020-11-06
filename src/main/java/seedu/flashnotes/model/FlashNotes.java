@@ -225,6 +225,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     }
 
     //// Review methods
+
     public boolean getIsReviewMode() {
         return isReviewMode;
     }
@@ -241,8 +242,6 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     @Override
     public String toString() {
-        //return flashcards.asUnmodifiableObservableList().size() + " flashcards";
-        // TODO: refine later
         return flashcards.asUnmodifiableObservableList().toString() + decks.asUnmodifiableObservableList().toString();
     }
 
