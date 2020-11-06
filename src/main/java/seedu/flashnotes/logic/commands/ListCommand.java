@@ -11,7 +11,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Showing flashcards in deck. %1$d flashcards listed.";
+    public static final String MESSAGE_SUCCESS = "Showing flashcards in deck. %1$d flashcard(s) listed.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
