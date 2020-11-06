@@ -90,7 +90,7 @@ public class Messages {
     public static final String INVALID_FLIP_COMMAND_IN_DECK_MESSAGE = "You cannot flip a flashcard "
             + "in the deck screen. Enter the review mode with the command `review`.";
     public static final String INVALID_LISTALL_COMMAND_IN_DECK_MESSAGE = "You cannot list all in the"
-            + " deck screen. Exit deck mode by using the command `home` first.";
+            + " deck screen. Use the `list` command or exit deck mode by using the command `home` first.";
     public static final String INVALID_ENDREVIEW_COMMAND_IN_DECK_MESSAGE = "You cannot end a review "
             + "in the deck screen. Enter the review mode with the command `review`.";
     public static final String INVALID_WRONG_COMMAND_IN_DECK_MESSAGE = "You cannot mark a flashcard as wrong "
