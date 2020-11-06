@@ -72,7 +72,7 @@ The sections below give more details of each component.
 The UI consists of a `MainWindow` which acts as a stage, and the `MainWindow` that references a `RootNode` to display the scene.
 The Root Node contains the scene, which is composed of UI parts like`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism
+There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism.
 Note that the Review Window is a component of the FlashCardListRoot and not a component of the DeckCardListRoot. As a result, the review window can only be initiated from the FlashCardListRoot.
 
 The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#implementation-of-ui-3-different-modes)
@@ -200,36 +200,36 @@ The following general activity diagram summarizes what happens when a user execu
     * Pros: Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
 
-### Implementation of Deck
+### Implementation of Main Mode
 
-#### 3 possible design for Deck
+#### 3 possible designs for Decks in Main Mode
 
 In the planning phrase, our team came up with 3 possible alternatives for how we wanted to implement decks in our flashcard app, and the details were as follows:
 
 * **Alternative 1 (current choice):** List of Decks and list of flashcards stored independently
   * Pros:
-    * Pro 1: Initialization of flashcard list and deck list is very fast using the stored data.
-    * Pro 2: Easy to improve into a many to many type relationship in the future between deck and cards by using database functions.
-    * Pro 3: Reduce space needed for storing new flashcards and decks.
-    * Pro 4: Increase ease of implementation of future deck related commands by isolating the relevant object types by list
+    * Initialization of flashcard list and deck list is very fast using the stored data.
+    * Easy to improve into a many to many type relationship in the future between deck and cards by using database functions.
+    * Reduce space needed for storing new flashcards and decks.
+    * Increase ease of implementation of future deck related commands by isolating the relevant object types by list
   * Cons: 
-    * Con 1: May have performance issues if trying to find a large number cards contained by the deck at once. However, the effect of this is minimal since at any point in the current FlashNotes implementation, as for all screens the maximum number of cards visible are only 4.
+    * May have performance issues if trying to find a large number cards contained by the deck at once. However, the effect of this is minimal since at any point in the current FlashNotes implementation, as for all screens the maximum number of cards visible are only 4.
 
 * **Alternative 2:** Store Flashcards within the deck.
   * Pros: 
-    * Pro 1:  Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
-    * Pro 2: Easy to verify correctness of implementation.
+    * Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
+    * Easy to verify correctness of implementation.
   * Cons:
-    * Con 1: Requires an overhaul of the code base and all references of flashcards.
-    * Con 2: If a card needs to belong to more than 1 deck, then duplicate cards need to be created for that purpose. This results in unnecessary space wasted.
+    * Requires an overhaul of the code base and all references of flashcards.
+    * If a card needs to belong to more than 1 deck, then duplicate cards need to be created for that purpose. This results in unnecessary space wasted.
 
 * **Alternative 3:** Decks to be read from the flashcards' tags and updated whenever a new flashcard has been created with a new tag
   * Pros: 
-    * Pro 1: Easy to implement by transforming AB3.
-    * Pro 2: Also easy to verify correctness of implementation.
+    * Easy to implement by transforming AB3.
+    * Also easy to verify correctness of implementation.
   * Cons: 
-    * Con 1: Slow to render if there are too many cards to be searched through.
-    * Con 2: May need to create a default card that stores the relevant tags for decks that are empty, which is unintuitive and unnecessary.
+    * Slow to render if there are too many cards to be searched through.
+    * May need to create a default card that stores the relevant tags for decks that are empty, which is unintuitive and unnecessary.
     
 Alternative 1 and 2 were the strongest candidates, but alternative 1 won out due to ease of implementation and extensibility. 
 With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
@@ -266,24 +266,24 @@ The following sequence diagram shows how Add Deck operation works:
 
 </div>
 
-##### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
+##### Design Consideration: How Add Deck Command interacts with Model and underlying FlashNotes object
 Our team looked at the 2 different ways addDeck can interact with model-related objects. 
 * **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
     * Pros:
-        * Pro 1: This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
-        * Pro 2: This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
-        * Pro 3: This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
-        * Pro 4: Consistency of implementation with the other commands in FlashNotes makes it easy for developers to trace and worth the slight increment in abstraction.
+        * This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
+        * This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
+        * This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
+        * Consistency of implementation with the other commands in FlashNotes makes it easy for developers to trace and worth the slight increment in abstraction.
     * Cons:
-        * Con 1: Some might view that the ModelManager is taking on too much work and turning into a "fat" class
+        * Some might view that the ModelManager is taking on too much work and turning into a "fat" class
 
 * **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
     * Pros:
-        * Pro 1: Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
+        * Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
     * Cons:
-        * Con 1: Violates the Law of Demeter.
-        * Con 2: Separation of concern principle would be violated. More than 1 object (ModelManager and FlashNotes) are able to interact with commands directly.
-        * Con 3: Increases the number of dependencies on underlying FlashNotes objects and other objects contained in Model, hence reducing testability and maintainability.
+        * Violates the Law of Demeter.
+        * Separation of concern principle would be violated. More than 1 object (ModelManager and FlashNotes) are able to interact with commands directly.
+        * Increases the number of dependencies on underlying FlashNotes objects and other objects contained in Model, hence reducing testability and maintainability.
 
 As alternative 1 was clearly superior, with the minor drawback of having an additional layer of abstraction, our team chose to keep implementation consistent and continue to interact with model-related objects through Model instead of accessing the underlying objects directly.
 Furthermore, the class here may not be considered too heavy with methods since there are only a 2 types of objects involved and hence the cons of using alternative 1 is limited.
@@ -641,12 +641,12 @@ As a result, it needs to be able to take in the commands and also know what are 
 Note that in our project architecture, the Model component is responsible for storing the state and data related to the application in general. 
 FlashNotesParser is purely an object that determines the commands that are accepted based on the current state of the Model's underlying FlashNotes object.
 
-While inside of the LogicManager#execute(...) method, the method checks with Model for the booleans related to mode.
-Afterwards, FlashNotesParser takes in the mode checking booleans obtained from model in FlashNotesParser#parseCommand(...). 
+While inside of the `LogicManager#execute(...)` method, the method checks with Model for the booleans related to mode.
+Afterwards, FlashNotesParser takes in the mode checking booleans obtained from model in `FlashNotesParser#parseCommand(...)`. 
 The booleans regarding the modes enables FlashNotes to be able to decide which of the 3 following methods to use:
-* parseCommandInReviewMode(...)
-* parseCommandInHomeMode(...)
-* parseCommandInCardMode(...)
+* `parseCommandInReviewMode(...)`
+* `parseCommandInMainMode(...)`
+* `parseCommandInCardMode(...)`
 
 
 ##### Corresponding activity diagram for `FlashNotesParser`:
