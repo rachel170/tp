@@ -230,7 +230,7 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
     * Pro 2: Also easy to verify correctness of implementation.
   * Cons: 
     * Con 1: Slow to render if there are too many cards to be searched through.
-    * Con 2: Need to create a default card that stores the relevant tags since tags are indicators for the presence of decks, which is unintuitive and unnecessary.
+    * Con 2: May need to create a default card that stores the relevant tags for decks that are empty, which is unintuitive and unnecessary.
     
 Alternative 1 and 2 were the strongest candidates, but alternative 1 won out due to ease of implementation and extensibility. 
 With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
@@ -270,7 +270,7 @@ The following sequence diagram shows how Add Deck operation works:
 ##### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
 Our team looked at the 2 different ways addDeck can interact with model-related objects. 
 * **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
-    *Pros:
+    * Pros:
         * Pro 1: This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
         * Pro 2: This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
         * Pro 3: This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
@@ -279,7 +279,7 @@ Our team looked at the 2 different ways addDeck can interact with model-related 
         * Con 1: Some might view that the ModelManager is taking on too much work and turning into a "fat" class
 
 * **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
-    *Pros:
+    * Pros:
         * Pro 1: Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
     * Cons:
         * Con 1: Violates the Law of Demeter.
@@ -648,7 +648,7 @@ The booleans regarding the modes enables FlashNotes to be able to decide which o
 * parseCommandInHomeMode(...)
 * parseCommandInCardMode(...)
 
-Note that the HomeMode here refers to the Main Mode specified in the User Guide, if there are any confusions.
+Note that the Home Mode here refers to the Main Mode specified in the User Guide, if there are any confusions.
 
 ##### Corresponding activity diagram for `FlashNotesParser`:
 
@@ -691,7 +691,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | review a deck                  | test my knowledge about the content of the cards in that deck          |
 | `* * *`  | user                                       | mark a flashcard as right or wrong | keep track of which cards I have already mastered and which cards I still need to review again |
 | `* * *`  | user                                       | see how many cards I got correct after a review session | track my topics mastery and feel a sense of accomplishment for studying efficiently |
-| `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
+| `* `    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
 | `*`      | user with many related cards in the app    | nest the card decks by tags    | locate a cards of the same group easily when reviewing                 |
 
 ### Use cases
@@ -809,7 +809,8 @@ Extensions
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a.1. FlashNotes shows an error message. <br>
+    * 2a.1. FlashNotes shows an error message.
+    
     Use case resumes at Step 2.
 
 #### Use case: UC07 - Delete a Card
@@ -820,7 +821,7 @@ Extensions
 
 1. User opens a deck (UC02).
 1. User requests to delete a card 
-1. FlashNotes deletes teh card.
+1. FlashNotes deletes the card.
 
     Use case ends.
 
@@ -865,7 +866,7 @@ Extensions
 
 **Extensions**
 * 2a. The keyword does not exist in any card.
-    *2a.1. FlashNotes shows an empty list.
+    * 2a.1. FlashNotes shows an empty list.
     
     Use case ends.
     
