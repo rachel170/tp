@@ -823,7 +823,7 @@ Format: `endReview`
 
 Outcome Expected: <br>
 1. User has reached the end of the review session and entered the `endReview` command. <br>
-![End of Review Window](images/UG_EndOfReview.png)
+![End of Review Window](images/UG_ReviewStatistics.png)
 
 1. Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
 ![Return to Main Window](images/UG_ReturnToCardMode.png)
