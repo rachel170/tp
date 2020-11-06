@@ -57,7 +57,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleFlashcardsFound() {
-        String expectedMessage = String.format("%1$d flashcards found", 3);
+        String expectedMessage = String.format("%1$d flashcard(s) found", 3);
         QuestionContainsKeywordsPredicate predicate = preparePredicate("who why how");
         FindCommand command = new FindCommand(predicate);
         model.setIsInDeckTrue();
