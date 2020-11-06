@@ -97,7 +97,7 @@ The `model`,
 * Stores the Flashnotes data
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes. This list is to show cards in the card page of the Ui.
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
-* Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the home page of the Ui.
+* Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the Main Mode of the Ui.
 * Does not depend on any of the other three components.
 * The Tag of each Flashcard refers to which Deck the Flashcard belongs to.
 * FlashNotes will handle the association between Tag and Deck.
@@ -183,7 +183,7 @@ The following general activity diagram summarizes what happens when a user execu
 ### Handle invalid inputs/commands
 
 #### Deck vs Card related commands
-* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the home screen.
+* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the Main Mode.
 * The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
 * Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
 * The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
@@ -193,7 +193,7 @@ The following general activity diagram summarizes what happens when a user execu
 * Flashnotes also keeps track of whether the user is currently inside review mode.
 * The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
 
-#### Design considerations:
+#### Design Considerations: How to check for invalid commands
 * Alternative 1 (current choice): Checking of commands are done in the logic component.
     * Pros: Model component does not need to keep track and handle invalid inputs by user
     * Cons: Coupling between logic and model is increased
@@ -292,7 +292,7 @@ Furthermore, the class here may not be considered too heavy with methods since t
 #### Listing all flashcards, Reserved Deck Name and Default Deck
 
 The `listAll` command allows Users to enter a list showing all flashcards in FlashNotes.
-As the `listAll` command is available on the home screen, entering the list of all flashcards will be treated as entering a deck.
+As the `listAll` command is available on the Main Mode, entering the list of all flashcards will be treated as entering a deck.
 
 In order to differentiate the deck that the user is in, the reserved deck name of "list" is used to inform the model that the user is currently looking at the list of all the cards.
 
@@ -307,7 +307,7 @@ The following activity diagrams summarizes what happens when a user adds a new c
 The model has the methods `Model#getDefaultDeckName` and `Model#getReservedDeckName` to retrieve the default and reserved deck names. 
 The logic component will reference the these names from the model component during command executions.
 
-##### Design considerations: 
+##### Design Considerations: How to implement showing all cards.
 
 **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
 * Pros:
@@ -324,7 +324,7 @@ The logic component will reference the these names from the model component duri
 
 ### Implementation of Card Mode Features
 
-#### Overview of Card-Mode Features
+#### Overview of Card Mode Features
 
 Card methods that are supported in Card Mode by `FlashNotes`:
 * `FlashNotes#addFlashcard(Flashcard flashcard)`: Adds a flashcard
@@ -346,7 +346,7 @@ The following sequence diagram shows how the `deleteCard` operation works:
 
 ![DeleteCardDiagram](images/DeleteCardSequenceDiagram.png)
 
-##### Design Considerations: Possible Designs
+##### Design Considerations: How to implement Card Mode Commands
 
 **Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
 * Pros:
@@ -622,8 +622,8 @@ generation, all CommandResult objects contain a string `feedbackToUser` which co
 be shown to the user. This CommandResult object is then passed to UI classes, such as `MainWindow` and `ReviewWindow`. The 
 UI classes will then show this `feedbackToUser` in the `ResultDisplay` box.
 
-Upon execution of the Commands, users might request a change of modes, such as moving from main mode to deck mode, or 
-deck mode to review mode. This information is passed to the UI classes using the `CommandResult` object too. Some commands
+Upon execution of the Commands, users might request a change of modes, such as moving from Main Mode to Card Mode, or 
+Card Mode to Review Mode. This information is passed to the UI classes using the `CommandResult` object too. Some commands
 such as the `enterDeck` or `review` will generate a `CommandResult` object with more arguments such as `showHelp`, `exit`,
 `startReview`. These arguments will be accessed by UI classes using the public getter methods `CommandResult#isShowHelp()`,
 `CommandResult#isExit()` etc. The correct UI screens will be rendered accordingly by respective methods such as 
@@ -648,7 +648,6 @@ The booleans regarding the modes enables FlashNotes to be able to decide which o
 * parseCommandInHomeMode(...)
 * parseCommandInCardMode(...)
 
-Note that the Home Mode here refers to the Main Mode specified in the User Guide, if there are any confusions.
 
 ##### Corresponding activity diagram for `FlashNotesParser`:
 
@@ -696,29 +695,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the System is the AddressBook and the Actor is the user, unless specified otherwise)
+(For all use cases below, the System is the FlashNotes and the Actor is the user, unless specified otherwise)
 
-#### Use case: UC01 - Create new Deck
+##### Use case: UC01 - Create new Deck
 
-##### Precondition: User is in the Home Mode, and is not in review mode.
+**Precondition**: User is in the Main Mode, and is not in review mode.
 
 **MSS:**
 
 1. User creates a new deck.
 1. FlashNotes shows the newly created deck.
 
-    Use Case Ends.
+    Use Case ends.
 
 **Extension:**
 
 * 1a. Deck name already exist.
-    * 1a.1. FlashNotes shows an error message 
+    * 1a1. FlashNotes shows an error message 
     
     Use case ends.
     
 ##### Use case: UC02 - Open a Deck
 
-##### Precondition: User is in the Home Mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS**
 
@@ -735,13 +734,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
     
 * 2a. Deck is empty.
-    * 2a.1. FlashNotes displays an empty list.
+    * 2a1. FlashNotes displays an empty list.
     
     Use case ends.
     
-#### Use case: UC03 - Delete a Deck
+##### Use case: UC03 - Delete a Deck
 
-##### Precondition: User is in the Home Mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS:**
 
@@ -753,13 +752,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 2a. The given index is invalid.
-    * 2a.1 FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
 
     Use Case ends.   
     
-#### Use case: UC04 - Rename a Deck
+##### Use case: UC04 - Rename a Deck
 
-##### Precondition: User is in the Home mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS:**
 
@@ -771,14 +770,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 2a. User renames deck to the same name as an already existing deck.
-    * 2a.1 FlashNotes shows an error message. 
+    * 2a1. FlashNotes shows an error message. 
     
     Use Case ends.    
     
 
-#### Use case: UC05 - Show all cards
+##### Use case: UC05 - Show all cards
 
-##### Precondition: User is in the Home mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS:**
 1. User requests to see all the cards.
@@ -794,13 +793,13 @@ Extensions
     Use Case ends.
 
 
-#### Use case: UC06 - Add a card
+##### Use case: UC06 - Add a card
 
-##### Precondition: User is in Home Mode.
+**Precondition**: User is in Main Mode.
 
 **MSS**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User adds a card.
 1. FlashNotes adds the card into the current deck.
 
@@ -809,17 +808,17 @@ Extensions
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a.1. FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
     
     Use case resumes at Step 2.
 
-#### Use case: UC07 - Delete a Card
+##### Use case: UC07 - Delete a Card
 
-##### Precondition: User is in the Home Mode, and is not in review mode.
+**Precondition**: User is in the Main Mode, and is not in review mode.
 
 **MSS**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User requests to delete a card 
 1. FlashNotes deletes the card.
 
@@ -828,18 +827,18 @@ Extensions
 **Extensions**
     
 * 2a. The given index is invalid.
-    * 2a.1. FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
     
     Use case resumes at Step 2.
 
 
-#### Use case: UC08 - Edit a card
+##### Use case: UC08 - Edit a card
 
-##### Precondition: User is in Home Mode.
+**Precondition**: User is in Main Mode.
 
 **MSS**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User requests to edit a specific card in the deck.
 1. FlashNotes edits the card.
 
@@ -848,17 +847,17 @@ Extensions
 **Extensions**
 
 * 2a. The given index is invalid.
-    * 2a.1. FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
     
     Use case resumes at step 2.
     
 
-#### Use case: UC09 - Find keywords in card
+##### Use case: UC09 - Find keywords in card
 
-##### Precondition: User is in Home mode.
+**Precondition**: User is in Main Mode.
 
 **MSS**
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User searches for keyword(s) of cards in the deck.
 1. FlashNotes shows the cards that contain the keyword in the question.
 
@@ -866,40 +865,40 @@ Extensions
 
 **Extensions**
 * 2a. The keyword does not exist in any card.
-    * 2a.1. FlashNotes shows an empty list.
+    * 2a1. FlashNotes shows an empty list.
     
     Use case ends.
     
-#### Use case: UC10 - Seeing a list of cards in the deck
+##### Use case: UC10 - Seeing a list of cards in the deck
 
-#### Precondition: User is in Card mode.
+**Precondition**: User is in Card mode.
 
 **MSS**
-1. User find for cards using keyword(s) (UC09).
+1. User <u>find for cards using keyword(s) (UC09)</u>.
 1. User requests to see a list of cards in the deck again.
 1. FlashNotes shows the list of all cards in the deck again.
 
     Use case ends.
 
-#### Use case: UC11 - Return to Home mode
+##### Use case: UC11 - Return to Main Mode
 
-##### Precondition: User is in Card mode.
+**Precondition**: User is in Card mode.
 
 **MSS:**
 
-1. User requests to return to Home mode.
+1. User requests to return to Main Mode.
 1. FlashNotes shows the list of decks to the user.
 
     Use Case ends.
 
 
-#### Use case: UC12 - Review cards
+##### Use case: UC12 - Review cards
 
-##### Precondition: User is in Home Mode.
+**Precondition**: User is in Main Mode.
 
 **MSS:**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User requests to start a review on the cards shown.
 1. FlashNotes starts a review session.
 1. FlashNotes displays a card with only the question to the user.
@@ -916,21 +915,21 @@ Extensions
 **Extension:**
 
 * 7a. User correct remembers the answer of the flashcard.
-    * 7a.1. User marks the card as correct.
-    * 7a.1. FlashNotes shows next card.
+    * 7a1. User marks the card as correct.
+    * 7a2. FlashNotes shows next card.
     
    Use case resumes from Step 4.
 
 * 7b. User unable to remember the correct answer of the flashcard.
-    *7b.1. User marks card as wrong.
-   * 6b.2. FlashNotes adds card back into the lists of card to be reviewed again.
-   * 7b.3. FlashNotes shows the next card.
+   * 7b1. User marks card as wrong.
+   * 7b2. FlashNotes adds card back into the lists of card to be reviewed again.
+   * 7b3. FlashNotes shows the next card.
    
    Use case resumes from Step 4.
 
-* *User ends the review session prematurely.
-    * *a. FlashNotes does not show user the Review statistics.
-    * *b. FlashNotes does not update the Review statistics of the deck reviewed.
+* *a. User ends the review session prematurely.
+    * *a1. FlashNotes does not show user the Review statistics.
+    * *a2. FlashNotes does not update the Review statistics of the deck reviewed.
     
     Use case resumes from Step 10.
 
@@ -942,8 +941,7 @@ Extensions
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Interactions should not take more than 2 seconds.
 5.  The user can directly edit the data file.
-6.  The user can import or export the data of FlashNotes.
-7.  Should be usable by someone not used to CLI.
+6.  Should be usable by someone not used to CLI.
 
 ### Glossary
 
@@ -951,9 +949,9 @@ Extensions
 * **FlashNotes**: The software that stores flashcards and decks.
 * **Flashcard**: A card with a question and answer.
 * **Deck**: A collection of flashcards.
-* **Home mode**: A mode which displays a list of decks
-* **Card mode**: A mode which displays a list of cards
-* **Review mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
+* **Main Mode**: A mode which displays a list of decks
+* **Card Mode**: A mode which displays a list of cards
+* **Review Mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
 * **Tag**: A note to indicate which deck the card belongs to.
 * **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
 
@@ -996,7 +994,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a deck name.
     
-   1. Prerequisites: User is in Home mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
+   1. Prerequisites: User is in Main Mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
    
    1. Test case: `editDeckName 1 n/Econs`<br>
         Expected: The name of deck at Index 1 is changed to Econs.
@@ -1008,7 +1006,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a deck.
 
-   1. Prerequisites: User is in Main mode and FLashNotes contains at least one deck.
+   1. Prerequisites: User is in Main mode and FlashNotes contains at least one deck.
    
    2. Test case: `deleteDeck 1` <br>
         Expected: First deck is deleted from the list.
@@ -1086,7 +1084,7 @@ testers are expected to do more *exploratory* testing.
     
         Expected: The flashcard is added to the list of flashcards shown.
         The specified card is added to a deck called "Default". 
-        The "Default" deck will be created in the Home mode if the deck does not exists.       
+        The "Default" deck will be created in the Main Mode if the deck does not exists.       
 
 ### Editing a card
 
@@ -1144,7 +1142,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: User is in card mode.
     
     1. Test case: `home` <br>
-       Expected: The list of orange decks in the home screen can now be seen.
+       Expected: The list of orange decks in the Main Mode can now be seen.
 
 ### Reviewing a deck of cards
 
