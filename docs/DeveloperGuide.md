@@ -1181,7 +1181,7 @@ Furthermore, editing the name of a `Deck` required us to identify all `Flashcard
 editing it `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
 direct composition between `Deck` and `Flashcard` in our current implementation design.
 
-Finally, as part of our 'Review Statistics Feature', we wanted to be able to save the data in the `Deck` class as well. 
+Finally, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
 To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
 `Deck` class. 
 
