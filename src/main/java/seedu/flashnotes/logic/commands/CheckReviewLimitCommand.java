@@ -2,7 +2,6 @@ package seedu.flashnotes.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
 

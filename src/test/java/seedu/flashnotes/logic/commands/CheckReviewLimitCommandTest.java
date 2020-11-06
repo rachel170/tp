@@ -2,13 +2,11 @@ package seedu.flashnotes.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
