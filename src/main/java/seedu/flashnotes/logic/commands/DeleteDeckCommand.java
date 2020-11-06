@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.commons.core.index.Index;
-import seedu.flashnotes.logic.LogicManager;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
