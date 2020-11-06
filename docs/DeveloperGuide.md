@@ -696,6 +696,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+(For all use cases below, the System is the AddressBook and the Actor is the user, unless specified otherwise)
+
 #### Use case: UC01 - Create new Deck
 
 ##### Precondition: User is in the Home Mode, and is not in review mode.
