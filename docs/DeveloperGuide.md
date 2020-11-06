@@ -516,7 +516,7 @@ to the nearest 1 decimal place for display or storage purposes.
 ##### Relationship of review statistics and deck
 
 To further help the user keep track of their topic mastery, FlashNotes will save the calculated percentage from the 
-last review session initiated in the deck to the `Deck` class, which will be displayed in the Home Mode of FlashNotes, 
+last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
 under the relevant Deck's name.
 
 Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the `Deck` class implemented 
@@ -1133,7 +1133,7 @@ testers are expected to do more *exploratory* testing.
 -------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
-###Challenge 1: UI Modes
+### Challenge 1: UI Modes
 At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
 their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
 separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
@@ -1153,3 +1153,47 @@ them to the review mode. Implementing this required us to redesign the entire UI
 abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
 we ended up with a highly effective and user friendly flashcard application.
+
+### Challenge 2: One object-type versus Two object-types with composition relationship
+
+At the start of our team project, refactoring AB3 into FlashNotes resulting in the `Person` object changing into 
+the `Flashcard` object. As out project progressed, there was a need to include a second object, which was the `Deck`
+object in the Model component of FlashNotes. Our team faced several challenges with our choice to implement the `Deck` class.
+
+Due to the perceived composition relationship between `Deck` and `Flashcard` and the chosen design for `Deck` implementation, 
+deletion of a `Deck` object meant that there was a need to look through all of the `Flashcard` objects in FlashNotes to
+identify and delete any `Flashcard` object with a `Tag` that marked it as a part of the deleted `Deck`.
+
+Furthermore, editing the name of a `Deck` required us to identify all `Flashcard` objects belonging to that `Deck` before
+editing it `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
+direct composition between `Deck` and `Flashcard` in our current implementation design.
+
+Finally, as part of our 'Review Statistics Feature', we wanted to be able to save the data in the `Deck` class as well. 
+To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
+`Deck` class. 
+
+To prevent confusion, there was a need to ensure the implementation saved all the decks' data in FlashNotes
+to the existing save file used for the `Flashcard` data. This was a challenge as not only did we need to implement new 
+methods and classes to facilitate the saving of `Deck` data to the `flashnotes.json` save file, we also had to make 
+adjustments to existing code, so that we will be able accurately read in the newly stored `Deck` data from the save file
+whenever FlashNotes is launched.
+
+### Challenge 3: Increment of the number of accessible features
+
+There are at least 4 accessible commands in each of the three modes of FlashNotes, in comparison to the 7 total commands in AB3.
+ * Main Mode has 10 accessible commands unique to it.
+ * Card Mode has at least 10 accessible commands unique to it.
+ * Review Mode has 4 accessible commands unique to it.
+ 
+Refer to the [User Guide's Command Summary](https://ay2021s1-cs2103t-t15-2.github.io/tp/UserGuide.html#command-summary)
+section for the entire listing of all the commands.
+
+### Achievement of Project
+
+1. User story - Of the 13 [User Stories](###User-stories) listed, we managed to fulfill 12 of them in various ways.
+
+1. Maintain the simplicity and cohesiveness of the features from the original AB3 project.
+
+1. Provided extensive unit and manual testing on the product, making it reliable and efficient for production usage.
+
+
