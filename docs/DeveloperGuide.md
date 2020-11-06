@@ -502,9 +502,9 @@ this user story, FlashNotes will incorporate a review statistics feature to fulf
 ##### Tracking and Generation of the Review Statistics Feature
 
 During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
-first try at the question. As the handling of progress through the review session implementation was done by Sruthi, my
-code is designed to compliment her implementation. This is done through the addition of `IndividualFlashcard::correctAnswers` 
-attribute, which keeps track of the count of questions answered correctly on the first attempt. 
+first try at the question. In order to compliment the implementation of Review Mode, my implementation made use of the 
+addition of `IndividualFlashcard::correctAnswers` attribute to keep track of the count of questions answered 
+correctly on the first attempt. 
 
 To ensure the variable incrementation is done only if the current flashcard contains a question that the user is attempting
 for the first time in the review session, a check for the `IndividualFlashcard::index` is done to ensure it is within 
@@ -529,8 +529,8 @@ To further help the user keep track of their topic mastery, FlashNotes will save
 last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
 under the relevant Deck's name.
 
-Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the `Deck` class implemented 
-by Peng Xiang and Jacob. As a String, it can be easily retrieved and displayed to the user through the UI component.
+Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the current `Deck` class 
+design implementation. As a String, it can be easily retrieved and displayed to the user through the UI component.
 As such, only review sessions initiated from an existing deck will be saved to the relevant deck.
 
 In the event that a user initiated a review session for all of FlashNotes' flashcards, the review statistics will only
