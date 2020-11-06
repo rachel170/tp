@@ -66,7 +66,7 @@ class JsonAdaptedDeck {
                     // Update the created Deck object with the retrieved result statistics
                     theDeck.setResultStatistics(String.format("%.1f", statistic));
                 } else {
-                    // Throw an exception 
+                    // Throw an exception
                     throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
                 }
             } catch (NumberFormatException nfe) {
