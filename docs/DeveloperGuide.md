@@ -20,7 +20,7 @@ There are a total of 4 sections in this Developer Guide:<br>
     FlashNotes.
 
 * Appendix: Consists of 3 sections which are: Requirement, Manual Testing and Effort. 
-    * Requirement: Covers the product Scope, user stories, use cases, non-functional requirements and glossary.
+    * Requirement: Covers the product scope, user stories, use cases, non-functional requirements and glossary.
     * Manual Testing: Covers how to test each additional feature we added to FlashNotes.
     * Effort: Covers challenges faced.
 
