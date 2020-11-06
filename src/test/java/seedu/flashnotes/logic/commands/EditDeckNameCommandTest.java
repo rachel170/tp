@@ -87,7 +87,7 @@ public class EditDeckNameCommandTest {
         }
 
         @Override
-        public void shuffleReviewFlashcards() {
+        public void setUpReviewList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -241,17 +241,17 @@ public class EditDeckNameCommandTest {
         }
 
         @Override
-        public Integer getReviewCardLimit() {
+        public long getReviewCardLimit() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setReviewCardLimit(Integer reviewCardLimit) {
+        public void setReviewCardLimit(long reviewCardLimit) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+        public void updateDeckPerformanceScore(Double reviewScore, String deckName) {
             throw new AssertionError("This method should not be called.");
         }
 

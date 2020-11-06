@@ -1,7 +1,5 @@
 package seedu.flashnotes.logic;
 
-import static seedu.flashnotes.model.deck.Deck.RESERVED_DECK_NAME;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -48,8 +46,9 @@ public class LogicManager implements Logic {
         boolean isReviewMode = model.getIsReviewMode();
         boolean isInDeck = model.getIsInDeck();
         String deckName = model.getCurrentDeckName();
+
         if (deckName == null) {
-            deckName = "Default";
+            deckName = Model.getDefaultDeckName();
         }
         Command command = flashNotesParser.parseCommand(commandText, isReviewMode, isInDeck, deckName);
         commandResult = command.execute(model);
@@ -92,6 +91,8 @@ public class LogicManager implements Logic {
         return model.getFilteredDeckList();
     };
 
+    // User preferences methods
+
     @Override
     public Path getFlashNotesFilePath() {
         return model.getFlashNotesFilePath();
@@ -108,12 +109,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return model.getReviewCardLimit();
     }
 
     @Override
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         model.setReviewCardLimit(reviewCardLimit);
     }
 
@@ -122,8 +123,8 @@ public class LogicManager implements Logic {
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore) {
-        if (!model.getCurrentDeckName().equals(RESERVED_DECK_NAME)) {
+    public void updateDeckPerformanceScore(Double reviewScore) {
+        if (!model.getCurrentDeckName().equals(Model.getReservedDeckName())) {
             model.updateDeckPerformanceScore(reviewScore, model.getCurrentDeckName());
         }
     }

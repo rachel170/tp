@@ -5,8 +5,6 @@ import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FOR
 import seedu.flashnotes.logic.commands.SetReviewLimitCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses input arguments and creates a new SetReviewLimitCommand object
  */
@@ -19,11 +17,12 @@ public class SetReviewLimitCommandParser implements Parser<SetReviewLimitCommand
      */
     public SetReviewLimitCommand parse(String args) throws ParseException {
         try {
-            Integer reviewCardLimit = ParserUtil.parseReviewLimit(args);
+            long reviewCardLimit = ParserUtil.parseReviewLimit(args);
             return new SetReviewLimitCommand(reviewCardLimit);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetReviewLimitCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetReviewLimitCommand.MESSAGE_USAGE
+                            + "\n" + pe.getMessage()), pe);
         }
     }
 

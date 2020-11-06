@@ -148,8 +148,8 @@ public class FlashNotes implements ReadOnlyFlashNotes {
      * Adds a deck to the flashnotes.
      * The deck must not already exist in the flashnotes.
      */
-    public void addDeck(Deck card) {
-        decks.add(card);
+    public void addDeck(Deck deck) {
+        decks.add(deck);
     }
 
     /**
@@ -161,7 +161,6 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     public void setDeck(Deck target, Deck editedDeck) {
         requireNonNull(editedDeck);
         decks.setDeck(target, editedDeck);
-        //TODO update the flashcards if there are existing flashcards
     }
 
     /**
@@ -196,19 +195,27 @@ public class FlashNotes implements ReadOnlyFlashNotes {
         return currentDeckName;
     }
 
+    public static String getDefaultDeckName() {
+        return Deck.getDefaultDeckName();
+    }
+
+    public static String getReservedDeckName() {
+        return Deck.getReservedDeckName();
+    }
+
     /**
      * Update the user's review score for deck used in review.
      * @param reviewScore Integer value of user's review session score.
      * @param deckName String value of deck to update
      */
-    public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+    public void updateDeckPerformanceScore(Double reviewScore, String deckName) {
         requireNonNull(reviewScore);
         // Fetch the right deck to update
         Deck currentDeck = decks.findDeck(deckName);
         // Make sure it is an existing deck
         if (currentDeck != null) {
             // Update the deck's statistics
-            currentDeck.setResultStatistics(reviewScore.toString());
+            currentDeck.setResultStatistics(String.format("%.1f", reviewScore));
         }
     }
 
@@ -218,6 +225,7 @@ public class FlashNotes implements ReadOnlyFlashNotes {
     }
 
     //// Review methods
+
     public boolean getIsReviewMode() {
         return isReviewMode;
     }
@@ -234,8 +242,6 @@ public class FlashNotes implements ReadOnlyFlashNotes {
 
     @Override
     public String toString() {
-        //return flashcards.asUnmodifiableObservableList().size() + " flashcards";
-        // TODO: refine later
         return flashcards.asUnmodifiableObservableList().toString() + decks.asUnmodifiableObservableList().toString();
     }
 

@@ -51,12 +51,12 @@ public interface Model {
     /**
      * Returns the user prefs' review card limit.
      */
-    Integer getReviewCardLimit();
+    long getReviewCardLimit();
 
     /**
      * Sets the user prefs' review card limit.
      */
-    void setReviewCardLimit(Integer reviewCardLimit);
+    void setReviewCardLimit(long reviewCardLimit);
 
     /**
      * Replaces flashnotes data with the data in {@code flashNotes}.
@@ -110,6 +110,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDeckList(Predicate<Deck> predicate);
+
+    static String getDefaultDeckName() {
+        return FlashNotes.getDefaultDeckName();
+    }
+
+    static String getReservedDeckName() {
+        return FlashNotes.getReservedDeckName();
+    }
 
     /**
      * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes.
@@ -176,14 +184,14 @@ public interface Model {
     void setIsReviewModeFalse();
 
     /**
-     * Shuffles the flashcards for the review session.
+     * Sets up the flashcards for the review session.
      */
-    void shuffleReviewFlashcards();
+    void setUpReviewList();
 
     /**
      * Update the user's review score for deck used in review.
      */
-    void updateDeckPerformanceScore(Integer reviewScore, String deckName);
+    void updateDeckPerformanceScore(Double reviewScore, String deckName);
 
     /** Returns an unmodifiable view of the unique deck list */
     UniqueDeckList getUniqueDeckList();

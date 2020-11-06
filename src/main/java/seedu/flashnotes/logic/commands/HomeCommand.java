@@ -3,7 +3,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.model.Model;
-
+/**
+ * Returns FlashNotes from card mode back into the main mode.
+ */
 public class HomeCommand extends Command {
     public static final String COMMAND_WORD = "home";
 

@@ -15,12 +15,16 @@ import seedu.flashnotes.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Current index is not a non-zero unsigned integer "
+            + "(less than 2147483648).";
+    public static final String MESSAGE_INVALID_LIMIT_LARGE = "Current review limit is not a non-zero unsigned integer "
+            + "(less than 2147483648).";
     public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -78,17 +82,21 @@ public class ParserUtil {
 
 
     /**
-     * Parses integer and returns it. Leading and trailing whitespaces will be
+     * Parses a review limit input and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified integer is invalid (not greater than 0).
      */
-    public static Integer parseReviewLimit(String integerString) throws ParseException {
-        String trimmedInteger = integerString.trim().toLowerCase();
-        if (trimmedInteger.equals("all")) {
+    public static long parseReviewLimit(String reviewLimitString) throws ParseException {
+        String trimmedReviewLimit = reviewLimitString.trim().toLowerCase();
+        if (trimmedReviewLimit.equals("all")) {
             return Integer.MAX_VALUE;
         } else {
             try {
-                return Integer.parseInt(trimmedInteger);
+                if (!StringUtil.isNonZeroUnsignedInteger(trimmedReviewLimit)) {
+                    throw new ParseException(MESSAGE_INVALID_LIMIT_LARGE);
+                }
+                return (long) Long.parseLong(trimmedReviewLimit);
             } catch (NumberFormatException e) {
                 throw new ParseException(MESSAGE_INVALID_LIMIT);
             }
@@ -103,11 +111,13 @@ public class ParserUtil {
      */
     public static Deck parseDeckName(String deckName) throws ParseException {
         requireNonNull(deckName);
+        String tagDeckRelationNote = "\nNote that the cards' tag correspond to the deck they belong to.";
         String trimmedDeckName = deckName.trim();
         if (!Deck.isValidDeckLength(trimmedDeckName)) {
-            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS_LENGTH, deckName.length()));
+            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS_LENGTH
+                    + tagDeckRelationNote, deckName.length()));
         } else if (!Deck.isValidDeckReservedName(trimmedDeckName)) {
-            throw new ParseException(String.format(Deck.MESSAGE_CONSTRAINTS_RESERVED, deckName.length()));
+            throw new ParseException(Deck.MESSAGE_CONSTRAINTS_RESERVED + tagDeckRelationNote);
         }
         return new Deck(trimmedDeckName);
     }

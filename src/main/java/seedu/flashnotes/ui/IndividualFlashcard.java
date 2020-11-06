@@ -10,6 +10,9 @@ import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.logic.Logic;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
+/**
+ * The UI component that is responsible for showing the flashcard being reviewed.
+ */
 public class IndividualFlashcard extends UiPart<Region> {
     private static final String FXML = "IndividualFlashcard.fxml";
     private final Logger logger = LogsCenter.getLogger(IndividualFlashcard.class);
@@ -70,15 +73,15 @@ public class IndividualFlashcard extends UiPart<Region> {
      */
     public String displayStatistics() {
         // Calculate Performance percentage
-        int performance = (this.correctAnswers * 100) / this.numOfFlashcards;
+        double performance = (this.correctAnswers * 100.00) / (this.numOfFlashcards * 1.0);
         // Store the performance value
         logic.updateDeckPerformanceScore(performance);
         // Log the new statistics
         logger.info(String.format("Statistic for review session: %1$d/%2$d",
                 this.correctAnswers, this.numOfFlashcards));
-        logger.info(String.format("Calculated statistic for review session: %d percent correct", performance));
+        logger.info(String.format("Calculated statistic for review session: %.1f percent correct", performance));
         // Use the question label to list total percentage of first time right
-        question.setText(String.format("Percentage of questions answered correctly on the first try: %d%s",
+        question.setText(String.format("Percentage of questions answered correctly on the first try: %.1f%s",
                 performance,
                 "%"));
         // Use the question label to list total questions right on first time right/total card

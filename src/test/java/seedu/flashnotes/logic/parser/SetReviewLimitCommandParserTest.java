@@ -3,6 +3,7 @@ package seedu.flashnotes.logic.parser;
 import static seedu.flashnotes.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.flashnotes.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.flashnotes.logic.parser.ParserUtil.MESSAGE_INVALID_LIMIT_LARGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class SetReviewLimitCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SetReviewLimitCommand.MESSAGE_USAGE));
+                SetReviewLimitCommand.MESSAGE_USAGE + "\n" + MESSAGE_INVALID_LIMIT_LARGE));
     }
 }
 

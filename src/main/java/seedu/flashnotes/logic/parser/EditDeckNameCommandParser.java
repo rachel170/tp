@@ -27,12 +27,11 @@ public class EditDeckNameCommandParser implements Parser<EditDeckNameCommand> {
         try {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT + "\n" + pe.getMessage(),
                     EditDeckNameCommand.MESSAGE_USAGE), pe);
         }
 
         Deck newDeck = ParserUtil.parseDeckName(argMultiMap.getValue(PREFIX_NEW_DECK_NAME).get());
-
 
         return new EditDeckNameCommand(index, newDeck);
 

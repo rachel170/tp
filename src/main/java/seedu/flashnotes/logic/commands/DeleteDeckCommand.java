@@ -3,13 +3,18 @@ package seedu.flashnotes.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.commons.core.index.Index;
 import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.deck.Deck;
 
+/**
+ * Deletes a deck and all its corresponding cards from FlashNotes.
+ */
 public class DeleteDeckCommand extends Command {
     public static final String COMMAND_WORD = "deleteDeck";
 
@@ -20,9 +25,12 @@ public class DeleteDeckCommand extends Command {
             + "1 ";
 
     public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted deck: %1$s";
-    public static final String MESSAGE_DECK_NOT_FOUND = "Deck does not exist in flashnotes";
+
+    private final Logger logger = LogsCenter.getLogger(DeleteDeckCommand.class);
 
     private final Index targetIndex;
+
+
 
 
     /**
@@ -37,6 +45,7 @@ public class DeleteDeckCommand extends Command {
         requireNonNull(model);
 
         List<Deck> lastShownList = model.getFilteredDeckList();
+        logger.info("List of size " + lastShownList.size() + " retrieved");
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
@@ -46,6 +55,7 @@ public class DeleteDeckCommand extends Command {
 
         assert deckToDelete != null : "Deck should exist";
         model.deleteDeck(deckToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_DECK_SUCCESS, deckToDelete.getDeckName()));
     }
 

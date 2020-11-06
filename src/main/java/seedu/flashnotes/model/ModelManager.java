@@ -85,12 +85,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return userPrefs.getReviewCardLimit();
     }
 
     @Override
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         requireNonNull(reviewCardLimit);
         userPrefs.setReviewCardLimit(reviewCardLimit);
     }
@@ -179,7 +179,7 @@ public class ModelManager implements Model {
      * @param reviewScore Integer value of user's review session score.
      */
     @Override
-    public void updateDeckPerformanceScore(Integer reviewScore, String deckName) {
+    public void updateDeckPerformanceScore(Double reviewScore, String deckName) {
         requireNonNull(reviewScore);
         requireNonNull(deckName);
         flashNotes.updateDeckPerformanceScore(reviewScore, deckName);
@@ -201,7 +201,6 @@ public class ModelManager implements Model {
     @Override
     public void addFlashcard(Flashcard flashcard) {
         flashNotes.addFlashcard(flashcard);
-        //updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override
@@ -246,23 +245,47 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Shuffles and trims the list of flashcards to review.
+     * Shuffles list of flashcards to review
      */
-    public void shuffleReviewFlashcards() {
-        // Apply shuffling algorithm
+    private ObservableList<Flashcard> shuffleReviewFlashcards() {
         ObservableList<Flashcard> flashcardsToReviewList = FXCollections.observableArrayList(
                 getFilteredFlashcardList());
         FXCollections.shuffle(flashcardsToReviewList);
+        return flashcardsToReviewList;
+    }
+
+    /**
+     * Trim list of flashcards to review
+     * @param flashcardsToReviewList Shuffled list of flashcards to review
+     * @return Trimmed list of flashcards to review
+     */
+    private ObservableList<Flashcard> trimReviewFlashcards(ObservableList<Flashcard> flashcardsToReviewList) {
+        long reviewCardLimit = userPrefs.getReviewCardLimit();
+        boolean isReviewLimitValid = reviewCardLimit >= 1;
+        boolean isReviewLimitUsed = reviewCardLimit < flashcardsToReviewList.size();
+
+        if (isReviewLimitUsed && isReviewLimitValid) {
+            flashcardsToReviewList = FXCollections.observableArrayList(
+                    flashcardsToReviewList.subList(0, (int) reviewCardLimit));
+        }
+        return flashcardsToReviewList;
+    }
+
+    /**
+     * Shuffles and trims the list of flashcards to review.
+     */
+    @Override
+    public void setUpReviewList() {
+        // Apply shuffling algorithm
+        ObservableList<Flashcard> flashcardsToReviewList = shuffleReviewFlashcards();
 
         // Trim review list using card limit from user prefs
-        Integer reviewCardLimit = userPrefs.getReviewCardLimit();
-        if (reviewCardLimit < flashcardsToReviewList.size() && reviewCardLimit >= 1) {
-            flashcardsToReviewList = FXCollections.observableArrayList(
-                    flashcardsToReviewList.subList(0, reviewCardLimit));
-        }
+        flashcardsToReviewList = trimReviewFlashcards(flashcardsToReviewList);
 
         // Store shuffled and trimmed list into flashcardsToReview list
         this.flashcardsToReview = new FilteredList<>(flashcardsToReviewList);
+
+        // Initialize first flashcard to be reviewed
         setUpFlashcardToReview();
     }
 

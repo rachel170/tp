@@ -18,7 +18,7 @@ activate logic LOGIC_COLOR
 logic -[LOGIC_COLOR]> logic : execute(model)
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : shuffleReviewFlashcards()
+logic -[LOGIC_COLOR]> model : setUpReviewList()
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic

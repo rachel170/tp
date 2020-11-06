@@ -69,18 +69,18 @@ public interface Logic {
     /**
      * Returns the user prefs' review card limit.
      */
-    Integer getReviewCardLimit();
+    long getReviewCardLimit();
 
     /**
      * Set the user prefs' review card limit.
      */
-    void setReviewCardLimit(Integer reviewCardLimit);
+    void setReviewCardLimit(long reviewCardLimit);
 
     /**
      * Update the user's review score for deck used in review.
      * @param reviewScore Integer value of user's review session score.
      */
-    void updateDeckPerformanceScore(Integer reviewScore);
+    void updateDeckPerformanceScore(Double reviewScore);
 
     /**
      * Turn off review mode.
