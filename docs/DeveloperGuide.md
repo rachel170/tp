@@ -116,7 +116,7 @@ The `model`,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteDeck 1")` API call.
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
@@ -981,9 +981,18 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
        
+### Creating a deck
+
+1. Creating a deck.
+
+    1. Prerequisites: User is in Main mode.
+    
+    1. Test case: `addDeck n/Economics` <br>
+        Expected: Creates a new empty deck called 'Economics' and adds it to the list of decks displayed.
+
 ### Editing a deck name
 
-1. Editing a deck name
+1. Editing a deck name.
     
    1. Prerequisites: User is in Main Mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
    
@@ -997,13 +1006,41 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a deck.
 
-   1. Prerequisites: User is in Main Mode and FLashNotes contains at least one deck.
+   1. Prerequisites: User is in Main mode and FlashNotes contains at least one deck.
    
    2. Test case: `deleteDeck 1` <br>
         Expected: First deck is deleted from the list.
    
    3. Test case: `deleteDeck 0` <br>
         Expected: No deck is deleted. Error details shown in the status message. 
+
+### Setting and checking the review card limit
+
+1. Setting the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
+    
+    1. Test case: `setReviewLimit 20` <br>
+       Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
+       
+    1. Test case: `setReviewLimit 0` <br>
+       Expected: The message "Review card limit must be an integer greater than 0 and smaller than 2147483648." should appear in the result display box.
+        
+    1. Test case: `setReviewLimit all` <br>
+       Expected: The message "Review card limit successfully updated! There is now no review limit." should appear in the result display box.
+       
+    1. Test case: `setReviewLimit 20` from the review window <br>
+       Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
+
+1. Checking the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
+    
+    1. Test case: `checkReviewLimit` <br>
+       Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)
+       
+    1. Test case: `checkReviewLimit 7` <br>
+       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: checkReviewLimit" should appear in the result display box.
 
 ### Entering a deck
 
@@ -1019,6 +1056,15 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `enterDeck Singapore Malaysia` <br>
        Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.   
+
+### Listing all flashcards
+1. Shows a list of all flashcards, and enters card mode.
+
+    1. Prerequisites: User is in Home mode.
+    
+    2. Test case: `listAll` <br>
+        Expected: The newly rendered list of flashcards can be seen. The list contains all flashcards currently stored 
+        in FlashNotes irrespective of the deck.
 
 ### Adding a card
 
@@ -1040,20 +1086,54 @@ testers are expected to do more *exploratory* testing.
         The specified card is added to a deck called "Default". 
         The "Default" deck will be created in the Main Mode if the deck does not exists.       
 
+### Editing a card
+
+1. Editing a card while in card mode.
+
+    1. Prerequisites: User is in Card Mode with at least one card in the list.
+    
+    2. Test case: `editCard 2 a/Lee Kuan Yew` <br>
+        Expected: The answer for the second card is changed to 'Lee Kuan Yew'.
+        
+    3. Test case: `editCard 2 q/Who is Singapore's prime minister? a/Lee Hsien Loong` <br>
+        Expected: The question for the second card is changed to 'Who is Singapore's prime minister?' and the answer 
+        is changed to 'Lee Hsien Loong'.
+        
+    4. Test case: `editCard 0 q/Who is Singapore's prime minister?`<br>
+        Expected: No card is edited. Error details shown.
+
 ### Deleting a card
 
-1. Deleting a card while all persons are being shown.
+1. Deleting a card in card mode.
 
-   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   1. Prerequisites: User is in Card Mode with at least one card in the list.
 
    2. Test case: `deleteCard 1`<br>
-      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message.
 
    3. Test case: `deleteCard 0`<br>
-      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No card is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `deleteCard`, `deleteCard x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.          
+      Expected: Similar to previous.   
+      
+### Finding a flashcard
+
+1. Finding a flashcard in Card mode.
+
+    1. Prerequisites: User is in Card mode. 
+    
+    1. Test case: `find history` <br>
+        Expected: The flashcard(s) with questions that contain the word 'history' will be displayed.
+        
+### Listing all flashcards in card mode
+
+1. List flashcards in Card Mode.
+
+    1. Prerequisites: User is in Card Mode. User has successfully executed the find command.
+    
+    1. Test case: `list` <br>
+        Expected: User will go back to the deck of cards they were viewing before they executed the find command.
 
 ### Going back home
 
@@ -1112,34 +1192,6 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `endReview` <br>
        Expected: Review Window closes, and you are returned to the Card Mode you started the review session from.
-
-### Setting and checking the review card limit
-
-1. Setting the maximum number of cards that can be reviewed in a single review session.
-
-    1. Prerequisites: User is in Main Mode or Card Mode.
-    
-    1. Test case: `setReviewLimit 20` <br>
-       Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
-       
-    1. Test case: `setReviewLimit 0` <br>
-       Expected: The message "Review card limit must be an integer greater than 0 and smaller than 2147483648." should appear in the result display box.
-        
-    1. Test case: `setReviewLimit all` <br>
-       Expected: The message "Review card limit successfully updated! There is now no review limit." should appear in the result display box.
-       
-    1. Test case: `setReviewLimit 20` from the review window <br>
-       Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
-
-1. Checking the maximum number of cards that can be reviewed in a single review session.
-
-    1. Prerequisites: User is in Main Mode or Card Mode.
-    
-    1. Test case: `checkReviewLimit` <br>
-       Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)
-       
-    1. Test case: `checkReviewLimit 7` <br>
-       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: checkReviewLimit" should appear in the result display box.
 
 -------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
