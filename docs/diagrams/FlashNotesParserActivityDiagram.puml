@@ -10,7 +10,7 @@ if () then ([in Review Mode])
 else ([else])
     if () then ([in Home Mode])
             :Parses Command in Home Mode;
-        else ([else must be in Card Mode])
+        else ([else])
         :Parses Command in Card Mode;
     endif
 endif

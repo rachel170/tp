@@ -11,7 +11,8 @@ public class DeckCard extends UiPart<Region> {
     private static final String FXML = "DeckCard.fxml";
 
     // Percentage string message
-    private static final String RESULT_STATISTIC_LABEL = "Cards answered correctly on first try (%): ";
+    private static final String RESULT_STATISTIC_LABEL = "Cards answered correctly on first try during last in-deck "
+            + "review session (%): ";
     // No Statistic message
     private static final String NO_RESULT_STATISTIC_LABEL =
             "No statistic available! Conduct a review session for some!";
