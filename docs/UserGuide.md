@@ -450,7 +450,7 @@ Exits FlashNotes.
 Format: `exit`
 
 Outcome Expected:
-1. User enters `exit` command in **Home Mode**. <br>
+1. User enters `exit` command in **Main Mode**. <br>
 ![Exiting FlashNotes](images/UG_ExitCommand.png)
 
 1. FlashNotes closes and saves all current data.
@@ -459,7 +459,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
+* `exit` can be activated from **Main Mode** and **Card Mode**, but not **Review Mode**.
 * No additional inputs should be added behind the `exit` command.
 
 </div>
@@ -620,10 +620,10 @@ Format: `home`
 
 Outcome Expected:
 1. Enter the Home Command into the command bar as per the example.
-![Home Mode](images/home_init.png)
+![Main Mode](images/home_init.png)
 
 1. You should now see the list of orange decks in the home screen.
-![Home Mode](images/home_success.png)
+![Main Mode](images/home_success.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -852,7 +852,7 @@ Of the three types of information, only the calculated percentage will be saved 
 
 To view the statistics of your last review session for any deck, simply navigate back to the **Main Mode** and look under the Deck's name as indicated in the image below.
 
-![Review Statistics In Home Mode](images/UG_ReviewStatisticsInHome.png)
+![Review Statistics In Main Mode](images/UG_ReviewStatisticsInHome.png)
 
 <div markdown="block" class="alert alert-warning">
 

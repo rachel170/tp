@@ -950,8 +950,8 @@ Extensions
 * **Flashcard**: A card with a question and answer.
 * **Deck**: A collection of flashcards.
 * **Main Mode**: A mode which displays a list of decks
-* **Card mode**: A mode which displays a list of cards
-* **Review mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
+* **Card Mode**: A mode which displays a list of cards
+* **Review Mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
 * **Tag**: A note to indicate which deck the card belongs to.
 * **Review card limit**: The maximum number of cards that can be reviewed in a single review session.
 
