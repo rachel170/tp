@@ -942,8 +942,7 @@ Extensions
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Interactions should not take more than 2 seconds.
 5.  The user can directly edit the data file.
-6.  The user can import or export the data of FlashNotes.
-7.  Should be usable by someone not used to CLI.
+6.  Should be usable by someone not used to CLI.
 
 ### Glossary
 
