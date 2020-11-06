@@ -193,7 +193,7 @@ The following general activity diagram summarizes what happens when a user execu
 * Flashnotes also keeps track of whether the user is currently inside review mode.
 * The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
 
-#### Design considerations:
+#### Design Considerations: How to check for invalid commands
 * Alternative 1 (current choice): Checking of commands are done in the logic component.
     * Pros: Model component does not need to keep track and handle invalid inputs by user
     * Cons: Coupling between logic and model is increased
@@ -307,7 +307,7 @@ The following activity diagrams summarizes what happens when a user adds a new c
 The model has the methods `Model#getDefaultDeckName` and `Model#getReservedDeckName` to retrieve the default and reserved deck names. 
 The logic component will reference the these names from the model component during command executions.
 
-##### Design considerations: 
+##### Design Considerations: How to implement showing all cards.
 
 **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
 * Pros:
@@ -324,7 +324,7 @@ The logic component will reference the these names from the model component duri
 
 ### Implementation of Card Mode Features
 
-#### Overview of Card-Mode Features
+#### Overview of Card Mode Features
 
 Card methods that are supported in Card Mode by `FlashNotes`:
 * `FlashNotes#addFlashcard(Flashcard flashcard)`: Adds a flashcard
@@ -346,7 +346,7 @@ The following sequence diagram shows how the `deleteCard` operation works:
 
 ![DeleteCardDiagram](images/DeleteCardSequenceDiagram.png)
 
-##### Design Considerations: Possible Designs
+##### Design Considerations: How to implement Card Mode Commands
 
 **Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
 * Pros:
