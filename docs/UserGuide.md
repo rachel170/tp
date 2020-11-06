@@ -305,7 +305,7 @@ Shows a list of all flashcards, and enters card mode.
 Format: `listAll`
 
 Outcome Expected:
-1. Enter the List Command into the command bar as per the example.
+1. Enter the `listAll` Command into the command bar as per the example.
 ![ListCommand](images/list_init.png)
 
 1. You should see the newly rendered list of flashcards. The list contains all flashcards currently stored in FlashNotes irrespective of the deck.
