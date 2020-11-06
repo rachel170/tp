@@ -112,7 +112,7 @@ public class AddCardCommandTest {
         }
 
         @Override
-        public void shuffleReviewFlashcards() {
+        public void setUpReviewList() {
             throw new AssertionError("This method should not be called.");
         }
 

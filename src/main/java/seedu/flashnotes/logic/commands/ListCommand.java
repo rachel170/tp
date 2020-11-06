@@ -7,6 +7,9 @@ import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
+/**
+ * Lists all the cards in a deck to the user. Only works when the user is already in the deck.
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
