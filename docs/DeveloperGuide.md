@@ -1167,7 +1167,7 @@ abstraction and complexity. In doing so, we encountered some problems with the G
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
 we ended up with a highly effective and user friendly flashcard application.
 
-### Challenge 2: One object-type versus Two object-types with composition relationship
+### Challenge 2: One object type versus Two object types with a perceived composition relationship
 
 At the start of our team project, refactoring AB3 into FlashNotes resulting in the `Person` object changing into 
 the `Flashcard` object. As out project progressed, there was a need to include a second object, which was the `Deck`
@@ -1178,7 +1178,7 @@ deletion of a `Deck` object meant that there was a need to look through all of t
 identify and delete any `Flashcard` object with a `Tag` that marked it as a part of the deleted `Deck`.
 
 Furthermore, editing the name of a `Deck` required us to identify all `Flashcard` objects belonging to that `Deck` before
-editing it `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
+editing its `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
 direct composition between `Deck` and `Flashcard` in our current implementation design.
 
 Finally, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
