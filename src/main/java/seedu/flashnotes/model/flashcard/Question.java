@@ -30,7 +30,10 @@ public class Question {
      * Returns true if a given string is a valid question.
      */
     public static boolean isValidQuestion(String test) {
-        return !test.isBlank() && test.length() <= 140;
+        boolean isQuestionBlank = test.isBlank();
+        boolean isQuestionLengthValid = test.length() <= 140;
+
+        return !isQuestionBlank && isQuestionLengthValid;
     }
 
     @Override

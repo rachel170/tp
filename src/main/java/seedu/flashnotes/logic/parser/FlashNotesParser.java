@@ -162,7 +162,6 @@ public class FlashNotesParser {
                 // If arguments exist, throw ParseException
                 throw new ParseException(String.format(MESSAGE_EXTENDED_COMMAND_ERROR, EndReviewCommand.COMMAND_WORD));
             }
-
             return new EndReviewCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -251,7 +250,6 @@ public class FlashNotesParser {
         case HomeCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD:
             return parseInvalidCommandInHomeMode(commandWord);
-
 
         case AddDeckCommand.COMMAND_WORD:
             return new AddDeckCommandParser().parse(arguments);
@@ -358,6 +356,7 @@ public class FlashNotesParser {
 
     private Command parseCommandInCardMode(
             String commandWord, String arguments, String deckName) throws ParseException {
+
         switch (commandWord) {
         case AddDeckCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_WORD:
@@ -435,23 +434,8 @@ public class FlashNotesParser {
             }
             return new ListCommand();
 
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
-
-    /**
-     * Checks argument String for values.
-     *
-     * @param arguments arguments string from user input
-     * @return true if string is contains anything beside whitespace, false otherwise
-     */
-    private boolean hasArguments(String arguments) {
-        if (!arguments.isBlank()) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -495,4 +479,17 @@ public class FlashNotesParser {
         }
     }
 
+    /**
+     * Checks argument String for values.
+     *
+     * @param arguments arguments string from user input
+     * @return true if string is contains anything beside whitespace, false otherwise
+     */
+    private boolean hasArguments(String arguments) {
+        if (!arguments.isBlank()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

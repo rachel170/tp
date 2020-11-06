@@ -31,9 +31,7 @@ There are a total of 4 sections in this Developer Guide:<br>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
 
-<div markdown="span" class="alert alert-primary">
 
-</div>
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -78,9 +76,9 @@ The Root Node contains the scene, which is composed of UI parts like`CommandBox`
 There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism
 Note that the Review Window is a component of the FlashCardListRoot and not a component of the DeckCardListRoot. As a result, the review window can only be initiated from the FlashCardListRoot.
 
-The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#Implementation-of-UI-(3-Different-Modes))
+The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#implementation-of-ui-3-different-modes)
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -129,7 +127,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
+**API** : 
+[`Storage.java`](https://github.com/AY2021S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/flashnotes/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects and general data within FlashNotes in json format.
@@ -231,7 +230,7 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
     * Pro 2: Also easy to verify correctness of implementation.
   * Cons: 
     * Con 1: Slow to render if there are too many cards to be searched through.
-    * Con 2: Need to create a default card that stores the relevant tags since tags are indicators for the presence of decks, which is unintuitive and unnecessary.
+    * Con 2: May need to create a default card that stores the relevant tags for decks that are empty, which is unintuitive and unnecessary.
     
 Alternative 1 and 2 were the strongest candidates, but alternative 1 won out due to ease of implementation and extensibility. 
 With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
@@ -271,7 +270,7 @@ The following sequence diagram shows how Add Deck operation works:
 ##### Design consideration 1: How add deck command interacts with Model and underlying FlashNotes object
 Our team looked at the 2 different ways addDeck can interact with model-related objects. 
 * **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
-    *Pros:
+    * Pros:
         * Pro 1: This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
         * Pro 2: This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
         * Pro 3: This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
@@ -280,7 +279,7 @@ Our team looked at the 2 different ways addDeck can interact with model-related 
         * Con 1: Some might view that the ModelManager is taking on too much work and turning into a "fat" class
 
 * **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
-    *Pros:
+    * Pros:
         * Pro 1: Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
     * Cons:
         * Con 1: Violates the Law of Demeter.
@@ -292,6 +291,7 @@ Furthermore, the class here may not be considered too heavy with methods since t
 
 #### Listing all flashcards, Reserved Deck Name and Default Deck
 
+The `listAll` command allows Users to enter a list showing all flashcards in FlashNotes.
 As the `listAll` command is available on the home screen, entering the list of all flashcards will be treated as entering a deck.
 
 In order to differentiate the deck that the user is in, the reserved deck name of "list" is used to inform the model that the user is currently looking at the list of all the cards.
@@ -299,7 +299,13 @@ In order to differentiate the deck that the user is in, the reserved deck name o
 However, in order to allow users to perform card-level operations in the reserved deck "list", any cards created will be sent to the "Default" deck.
 Also, to prevent any conflicts with the model, users will not be able to create a deck called "list".
 
-The deck class stores the Reserved Deck Name and Default Deck Name. The logic component will reference the these names from the model component.
+The following activity diagrams summarizes what happens when a user adds a new card:
+
+![AddCardDiagram](images/AddCardListAllDiagram.png)
+
+
+The model has the methods `Model#getDefaultDeckName` and `Model#getReservedDeckName` to retrieve the default and reserved deck names. 
+The logic component will reference the these names from the model component during command executions.
 
 ##### Design considerations: 
 
@@ -330,6 +336,11 @@ These operations are exposed in the Model interface as `Model#addFlashcard(Flash
 Given below is an example usage scenario.
 
 The user executes `deleteCard 2` to delete the card at index 2 from the observed list.
+
+1. the `deleteCard` command will get the card at the index of the currently displayed list.
+1. The `Model#deleteFlashcard(target)` is called.
+1. The `ModelManager` will call `FlashNotes#removeFlashcard(key)`
+1. Then `FlashNotes` will call the `UniqueFlashcardList#remove(toRemove)`, which will remove the flashcard from the list of flashcards.
 
 The following sequence diagram shows how the `deleteCard` operation works:
 
@@ -369,7 +380,7 @@ To support the opening of this review session, we added the following command:
 The following is a sequence diagram that demonstrates how a review command sets up the review session:
 ![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
 
-`ModelManager#shuffleReviewFlashcards()` method sets up the list of flashcards to review inside `Model`.
+`ModelManager#setUpReviewList()` method sets up the list of flashcards to review inside `Model`.
 It duplicates the list of filtered flashcards in the model as of the moment that the review command was
 called, it then shuffles these cards using the `FXCollections.shuffle()` method, and it trims the list of
 flashcards to review according to the review limit set by users.
@@ -481,66 +492,122 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
-### Review Statistics feature
+#### Review Statistics feature
 
-#### Implementation
+FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. 
+In addition to this, as a user wants to be able to see how many cards they got correct after a review session, so that
+they can track their topics' mastery and feel a sense of accomplishment for studying efficiently (user story). Due to
+this user story, FlashNotes will incorporate a review statistics feature to fulfill the user's needs.
 
-FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. To provide more value to the review session, FlashNotes should be able to track the number of cards answered correctly by the user on their first attempt at the question during the review session. This statistical value will be displayed to the user at the end of the review session and saved only when the user ends the review session properly.
+##### Tracking and generation of the review statistics feature
 
-To support this feature, a new command have been added to FlashNotes:
+During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
+first try at the question. As the handling of progress through the review session implementation was done by Sruthi, my
+code is designed to compliment her implementation. This is done through the addition of `IndividualFlashcard::correctAnswers` 
+attribute, which keeps track of the count of questions answered correctly on the first attempt. 
+
+To ensure the variable incrementation is done only if the current flashcard contains a question that the user is attempting
+for the first time in the review session, a check for the `IndividualFlashcard::index` is done to ensure it is within 
+the range of `IndividualFlashcard::numOfFlashcards`.
+
+To ensure the variable incrementation is done only if the current flashcard contains a question that the user answered 
+correctly, a check is done for the `isCorrect` variable to ensure that the current flashcard has been marked as
+correct by the user.
+
+At the end of the review session, FlashNotes will display:
+ * `IndividualFlashcard::correctAnswers` - The total number of questions marked correct on the user's first attempt at it.
+ * `IndividualFlashcard::numOfFlashcards` - The total number of unique questions utilized in the review session.
+ * A calculated percentage value generated from `IndividualFlashcard::correctAnswers` and `IndividualFlashcard::numOfFlashcards`.
+
+The calculated percentage value from a review session will be considered as the 'Review Statistics' in FlashNotes.
+To provide a measure of accuracy, the percentage value will be calculated as a `double` value, which will be rounded off 
+to the nearest 1 decimal place for display or storage purposes.
+
+##### Relationship of review statistics and deck
+
+To further help the user keep track of their topic mastery, FlashNotes will save the calculated percentage from the 
+last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
+under the relevant Deck's name.
+
+Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the `Deck` class implemented 
+by Peng Xiang and Jacob. As a String, it can be easily retrieved and displayed to the user through the UI component.
+As such, only review sessions initiated from an existing deck will be saved to the relevant deck.
+
+In the event that a user initiated a review session for all of FlashNotes' flashcards, the review statistics will only
+be generated and displayed for the user's benefit, but not save to FlashNotes.
+
+##### Extending Storage to include Deck
+
+Seeing as FlashNotes already saves Flashcard data for the user, it seemed reasonable to expand the storage component to 
+save FlashNotes' deck data as well, since it will also allow the user to better track their topic's mastery if they can 
+view their last review session's statistic for the deck whenever they open FlashNotes.
+
+###### Design consideration:
+
+* **Current choice:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
+  * Pros: Partial implementation by teammates already exist.
+  * Pros: Implementation can provide base code for future addition to the `Deck` class.
+  * Cons: Design and implementation for `Deck` and `UniqueDeckList` is not concrete yet. Changes done now may clash with future changes to the classes.
+
+* **Alternative 2:** Store review statistics as an attribute of Tag
+  * Pros: Easier to implement, simply expand tag feature to include review statistics data of the deck that the tag is representing.
+  * Cons: Will result in storing several repetitions of the data since it is an add-on to each instance of a unique tag in the json file. This can needlessly take up more space if there are a huge amount of flashcards and only a few decks.  
+
+##### Returning to Card Mode from Review mode
+
+Upon completing the review session, a new command (`endReview`) was added to FlashNotes to allow the user to return to 
+the main window of FlashNotes that displays the Card Mode they initiated the review session from. This is to allow the 
+user to easily continue using FlashNotes should they wish to leave the Review Mode for any reason.
+
+##### Implementation
+
+To support the above features, the following code changes were added:
+
+A new command have been added to FlashNotes to allow return to Card Mode from Review Mode:
 * `endReview` - A command that closes the review session's window at the end of the review session, and handles the ending process of review session. (Only available in review mode.)
 
 To support the storage of each deck's review statistic, a new class has been added to the Storage component in FlashNotes:
 * `JsonAdaptedDeck` object contain two variable for Deck Storage, `String deckName` to identify the deck, and `String resultStatistics` to contain the deck's review statistics.
 * `JsonAdaptedDeck#updateModel(FlashNotes flashNotes)` is a method used to update the generated model from reading the flashcard data with the deck's data. It depends on `FlashNotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` to update the generated model with the deck data from the save file.
 
-`JsonSerializableFlashNotes` object has been adjusted to depend on a list of `JsonAdaptedDeck` objects to read and write each deck's data to the FlashNotes save file.
+`JsonSerializableFlashNotes` object has been adjusted to depend on a list of `JsonAdaptedDeck` objects to read and write 
+each deck's data to the FlashNotes save file.
 
-Additionally, the following operations have been implemented to support this feature:
+Additionally, the following operations have been implemented to support the storage of result statistics feature:
 * Model component:
     * `FlashNotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` - Updates the reviewStatistics attribute of a specific deck (through deckName) with the given Integer value (reviewScore).
     * `FlashNotes#getUniqueDeckList()` - Return the FlashNotes' model's `UnqiueDeckList`.
     * `UniqueDeckList#findDeck(String deck)` - Returns an existing `Deck` object from its `internalList` with the same `deckName` as the given String input. If no such `Deck` object exist, a `null` object is returned instead.
 * UI component:
-    * `IndividualFlashcard#displayStatistics()` - Calculates the user's review session's score, updates the model with the generated statistics and set display of the end of the review session.
+    * `IndividualFlashcard#displayStatistics()` - Calculates the user's review session's score, updates the model with the generated statistics and update display at the end of the review session.
 
 Further more, the following operations have been adjusted to support the feature:
 * `Storage#saveFlashNotes(ReaOnlyFlashNotes flashNotes)` - This operation, and all methods dependent on it, has been expanded to accept an additional parameter `UniqueDeckList decklist` to facilitate the saving of the deck data in FlashNotes.
 * `FlashNotes#resetData(ReadOnlyFlashNotes newData)` - This operation has been adjusted to include the recreation of the FlashNotes model's deck data read from Storage.
 
-To provide the UI display and changes related to review statistics, the following UI component have received several code additions:
-* `DeckCard` - Changed constructor method to for display of review statistics at the end of a review session.
+To provide the UI display and changes related to review statistics, the following UI component have received a few code additions:
+* `DeckCard` - Changed constructor method to account for display of review statistics of the last review session in that deck.
 * `ReviewWindow#handleExit()` - Adjusted to return to card view upon execution of `endReview` command.
 
-##### Given below is a basic description of the backend process of the feature:
+###### Basic description of the backend process of the end of a review session:
 
 1. User reaches the end of the review session (by correctly answering the last of the questions that has not been answered yet or has been answered wrongly before). 
 
-2. The UI component will calculate the user's score by generating the percentage of cards the user answered correctly on the first try during the session.
+1. The UI component will calculate the user's score by generating the percentage of cards the user answered correctly on the first try during the session.
 
-3. The generated review session statistic is passed to the Model component through the Logic component, where the `FlashNotes` model updates the relevant deck with the generated value.
+1. The generated review session statistic is conveyed to the Model component, where the `FlashNotes` model updates the relevant deck with the generated value.
 
-4. FlashNotes' UI component will display the review statistics generated as part of the end of review session message.
+1. FlashNotes' UI component will display the review statistics generated as part of the end of review session message.
 
-5. User enters `endReview` command to end the review session.
+1. User enters `endReview` command to end the review session.
 
-6. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
+1. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
 
-##### Corresponding sequence diagram for `endReview`:
+###### Corresponding sequence diagram for `endReview`:
 
 The following sequence diagram shows how the endReview command operation works:
 
 ![EndReviewSequenceDiagram](images/EndReviewSequenceDiagram.png)
-
-#### Design consideration:
-
-* **Current choice:** Expand save feature to include decks' data instead of only saving flashcards' data.
-  * Pros: Partial implementation available to build on. Implementation can provide base code for future addition to Deck data that needs to be saved as well.
-  * Cons: Design and implementation for Deck and UniqueDeckList is not a concrete feature yet, changes done now may clash with future expansion of the feature.
-
-* **Alternative 2:** Store review statistics as an attribute of Tag
-  * Pros: Easier to implement, simply expand tag feature to include review statistics data of the deck that the tag is representing.
-  * Cons: Will result in storing several repetitions of the statistics since it is an add-on to each instance of a unique tag in the json file. This can needlessly take up more space if there are a huge amount of flashcards and only a few decks.
 
 
 ### Implementation of Critical Classes:
@@ -581,7 +648,7 @@ The booleans regarding the modes enables FlashNotes to be able to decide which o
 * parseCommandInHomeMode(...)
 * parseCommandInCardMode(...)
 
-Note that the HomeMode here refers to the Main Mode specified in the User Guide, if there are any confusions.
+Note that the Home Mode here refers to the Main Mode specified in the User Guide, if there are any confusions.
 
 ##### Corresponding activity diagram for `FlashNotesParser`:
 
@@ -624,12 +691,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | review a deck                  | test my knowledge about the content of the cards in that deck          |
 | `* * *`  | user                                       | mark a flashcard as right or wrong | keep track of which cards I have already mastered and which cards I still need to review again |
 | `* * *`  | user                                       | see how many cards I got correct after a review session | track my topics mastery and feel a sense of accomplishment for studying efficiently |
-| `* *`    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
+| `* `    | user                                       | hide old cards                 | clear clutter when there are too many cards in the deck                |
 | `*`      | user with many related cards in the app    | nest the card decks by tags    | locate a cards of the same group easily when reviewing                 |
 
 ### Use cases
 
-#### **Use case: UC01 - Create new Deck**
+(For all use cases below, the System is the AddressBook and the Actor is the user, unless specified otherwise)
+
+#### Use case: UC01 - Create new Deck
 
 ##### Precondition: User is in the Home Mode, and is not in review mode.
 
@@ -647,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-##### **Use case: UC02 - Open a Deck**
+##### Use case: UC02 - Open a Deck
 
 ##### Precondition: User is in the Home Mode.
 
@@ -670,7 +739,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-#### **Use case: UC03 - Delete a Deck**
+#### Use case: UC03 - Delete a Deck
 
 ##### Precondition: User is in the Home Mode.
 
@@ -688,7 +757,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use Case ends.   
     
-#### **Use case: UC04 - Rename a Deck**
+#### Use case: UC04 - Rename a Deck
 
 ##### Precondition: User is in the Home mode.
 
@@ -707,7 +776,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use Case ends.    
     
 
-#### **Use case: UC05 - Show all cards**
+#### Use case: UC05 - Show all cards
 
 ##### Precondition: User is in the Home mode.
 
@@ -725,7 +794,7 @@ Extensions
     Use Case ends.
 
 
-#### **Use case: UC06 - Add a card**
+#### Use case: UC06 - Add a card
 
 ##### Precondition: User is in Home Mode.
 
@@ -740,10 +809,11 @@ Extensions
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a.1. FlashNotes shows an error message. <br>
+    * 2a.1. FlashNotes shows an error message.
+    
     Use case resumes at Step 2.
 
-#### **Use case: UC07 - Delete a Card**
+#### Use case: UC07 - Delete a Card
 
 ##### Precondition: User is in the Home Mode, and is not in review mode.
 
@@ -751,7 +821,7 @@ Extensions
 
 1. User opens a deck (UC02).
 1. User requests to delete a card 
-1. FlashNotes deletes teh card.
+1. FlashNotes deletes the card.
 
     Use case ends.
 
@@ -763,7 +833,7 @@ Extensions
     Use case resumes at Step 2.
 
 
-#### **Use case: UC08 - Edit a card**
+#### Use case: UC08 - Edit a card
 
 ##### Precondition: User is in Home Mode.
 
@@ -783,7 +853,7 @@ Extensions
     Use case resumes at step 2.
     
 
-#### **Use case: UC09 - Find keywords in card**
+#### Use case: UC09 - Find keywords in card
 
 ##### Precondition: User is in Home mode.
 
@@ -796,11 +866,11 @@ Extensions
 
 **Extensions**
 * 2a. The keyword does not exist in any card.
-    *2a.1. FlashNotes shows an empty list.
+    * 2a.1. FlashNotes shows an empty list.
     
     Use case ends.
     
-#### **Use case: UC10 - Seeing a list of cards in the deck**
+#### Use case: UC10 - Seeing a list of cards in the deck
 
 #### Precondition: User is in Card mode.
 
@@ -811,7 +881,7 @@ Extensions
 
     Use case ends.
 
-#### **Use case: UC11 - Return to Home mode**
+#### Use case: UC11 - Return to Home mode
 
 ##### Precondition: User is in Card mode.
 
@@ -823,7 +893,7 @@ Extensions
     Use Case ends.
 
 
-#### **Use case: UC12 - Review cards**
+#### Use case: UC12 - Review cards
 
 ##### Precondition: User is in Home Mode.
 
@@ -1128,7 +1198,7 @@ testers are expected to do more *exploratory* testing.
 -------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
-###Challenge 1: UI Modes
+### Challenge 1: UI Modes
 At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
 their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
 separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
@@ -1148,3 +1218,47 @@ them to the review mode. Implementing this required us to redesign the entire UI
 abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
 we ended up with a highly effective and user friendly flashcard application.
+
+### Challenge 2: One object-type versus Two object-types with composition relationship
+
+At the start of our team project, refactoring AB3 into FlashNotes resulting in the `Person` object changing into 
+the `Flashcard` object. As out project progressed, there was a need to include a second object, which was the `Deck`
+object in the Model component of FlashNotes. Our team faced several challenges with our choice to implement the `Deck` class.
+
+Due to the perceived composition relationship between `Deck` and `Flashcard` and the chosen design for `Deck` implementation, 
+deletion of a `Deck` object meant that there was a need to look through all of the `Flashcard` objects in FlashNotes to
+identify and delete any `Flashcard` object with a `Tag` that marked it as a part of the deleted `Deck`.
+
+Furthermore, editing the name of a `Deck` required us to identify all `Flashcard` objects belonging to that `Deck` before
+editing it `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
+direct composition between `Deck` and `Flashcard` in our current implementation design.
+
+Finally, as part of our 'Review Statistics Feature', we wanted to be able to save the data in the `Deck` class as well. 
+To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
+`Deck` class. 
+
+To prevent confusion, there was a need to ensure the implementation saved all the decks' data in FlashNotes
+to the existing save file used for the `Flashcard` data. This was a challenge as not only did we need to implement new 
+methods and classes to facilitate the saving of `Deck` data to the `flashnotes.json` save file, we also had to make 
+adjustments to existing code, so that we will be able accurately read in the newly stored `Deck` data from the save file
+whenever FlashNotes is launched.
+
+### Challenge 3: Increment of the number of accessible features
+
+There are at least 4 accessible commands in each of the three modes of FlashNotes, in comparison to the 7 total commands in AB3.
+ * Main Mode has 10 accessible commands unique to it.
+ * Card Mode has at least 10 accessible commands unique to it.
+ * Review Mode has 4 accessible commands unique to it.
+ 
+Refer to the [User Guide's Command Summary](https://ay2021s1-cs2103t-t15-2.github.io/tp/UserGuide.html#command-summary)
+section for the entire listing of all the commands.
+
+### Achievement of Project
+
+1. User story - Of the 13 [User Stories](###User-stories) listed, we managed to fulfill 12 of them in various ways.
+
+1. Maintain the simplicity and cohesiveness of the features from the original AB3 project.
+
+1. Provided extensive unit and manual testing on the product, making it reliable and efficient for production usage.
+
+

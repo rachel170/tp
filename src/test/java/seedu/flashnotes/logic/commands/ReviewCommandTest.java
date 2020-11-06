@@ -23,7 +23,7 @@ public class ReviewCommandTest {
         CommandResult expectedCommandResult = new CommandResult(ReviewCommand.SHOWING_REVIEW_MESSAGE,
                 false, false, true, false, 0);
         expectedModel.setIsReviewModeTrue();
-        expectedModel.shuffleReviewFlashcards();
+        expectedModel.setUpReviewList();
         ReviewCommand reviewCommand = new ReviewCommand();
         assertEquals(reviewCommand.execute(model), expectedCommandResult);
         assertEquals(model.getFlashcardsToReview().size(), expectedModel.getFlashcardsToReview().size());

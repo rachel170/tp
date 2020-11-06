@@ -42,7 +42,8 @@ public class SetReviewLimitCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (reviewCardLimit < 1 || reviewCardLimit > Integer.MAX_VALUE) {
+        boolean isReviewLimitInvalid = reviewCardLimit < 1 || reviewCardLimit > Integer.MAX_VALUE;
+        if (isReviewLimitInvalid) {
             throw new CommandException(MESSAGE_INVALID_LIMIT);
         }
 

@@ -2,7 +2,6 @@ package seedu.flashnotes.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
 
@@ -23,7 +22,7 @@ public class CheckReviewLimitCommand extends Command {
     public CheckReviewLimitCommand() { }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         long reviewLimit = model.getReviewCardLimit();
 
