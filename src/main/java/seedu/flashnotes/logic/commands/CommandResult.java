@@ -81,12 +81,7 @@ public class CommandResult {
 
     @Override
     public String toString() {
-        return this.feedbackToUser
-                + " " + this.showHelp
-                + " " + this.exit
-                + " " + this.startReview
-                + " " + this.isFlipped
-                + " " + this.isNext;
+        return this.feedbackToUser;
     }
 
     @Override
