@@ -17,6 +17,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Current index is not a non-zero unsigned integer "
             + "(less than 2147483648).";
+    public static final String MESSAGE_INVALID_LIMIT_LARGE = "Current review limit is not a non-zero unsigned integer "
+            + "(less than 2147483648).";
     public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
 
     /**
@@ -91,6 +93,9 @@ public class ParserUtil {
             return Integer.MAX_VALUE;
         } else {
             try {
+                if (!StringUtil.isNonZeroUnsignedInteger(trimmedReviewLimit)) {
+                    throw new ParseException(MESSAGE_INVALID_LIMIT_LARGE);
+                }
                 return (long) Long.parseLong(trimmedReviewLimit);
             } catch (NumberFormatException e) {
                 throw new ParseException(MESSAGE_INVALID_LIMIT);

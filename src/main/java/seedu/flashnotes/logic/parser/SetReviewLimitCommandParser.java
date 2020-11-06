@@ -21,7 +21,8 @@ public class SetReviewLimitCommandParser implements Parser<SetReviewLimitCommand
             return new SetReviewLimitCommand(reviewCardLimit);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetReviewLimitCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetReviewLimitCommand.MESSAGE_USAGE
+                            + "\n" + pe.getMessage()), pe);
         }
     }
 

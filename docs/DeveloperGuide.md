@@ -381,7 +381,7 @@ To support the opening of this review session, we added the following command:
 The following is a sequence diagram that demonstrates how a review command sets up the review session:
 ![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
 
-`ModelManager#shuffleReviewFlashcards()` method sets up the list of flashcards to review inside `Model`.
+`ModelManager#setUpReviewList()` method sets up the list of flashcards to review inside `Model`.
 It duplicates the list of filtered flashcards in the model as of the moment that the review command was
 called, it then shuffles these cards using the `FXCollections.shuffle()` method, and it trims the list of
 flashcards to review according to the review limit set by users.

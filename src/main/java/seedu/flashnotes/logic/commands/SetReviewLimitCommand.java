@@ -18,7 +18,8 @@ public class SetReviewLimitCommand extends Command {
             + "be reviewed per session.\n"
             + "Parameters: NUMBER or STRING\n"
             + "Example: " + COMMAND_WORD + " 20"
-            + " or " + COMMAND_WORD + " all";
+            + " or " + COMMAND_WORD + " all"
+            ;
     public static final String MESSAGE_SUCCESS = "Review card limit successfully updated! "
             + "Review limit is now %d.";
     public static final String MESSAGE_SUCCESS_NO_LIMIT = "Review card limit successfully updated! "
