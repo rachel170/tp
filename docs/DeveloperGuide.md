@@ -492,14 +492,14 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
-#### Review Statistics feature
+#### Review Statistics Feature
 
 FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. 
 In addition to this, as a user wants to be able to see how many cards they got correct after a review session, so that
 they can track their topics' mastery and feel a sense of accomplishment for studying efficiently (user story). Due to
 this user story, FlashNotes will incorporate a review statistics feature to fulfill the user's needs.
 
-##### Tracking and generation of the review statistics feature
+##### Tracking and Generation of the Review Statistics Feature
 
 During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
 first try at the question. As the handling of progress through the review session implementation was done by Sruthi, my
@@ -523,7 +523,7 @@ The calculated percentage value from a review session will be considered as the 
 To provide a measure of accuracy, the percentage value will be calculated as a `double` value, which will be rounded off 
 to the nearest 1 decimal place for display or storage purposes.
 
-##### Relationship of review statistics and deck
+##### Relationship of Review Statistics and Deck
 
 To further help the user keep track of their topic mastery, FlashNotes will save the calculated percentage from the 
 last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
@@ -536,13 +536,13 @@ As such, only review sessions initiated from an existing deck will be saved to t
 In the event that a user initiated a review session for all of FlashNotes' flashcards, the review statistics will only
 be generated and displayed for the user's benefit, but not save to FlashNotes.
 
-##### Extending Storage to include Deck
+##### Extending Storage to Include Deck
 
 Seeing as FlashNotes already saves Flashcard data for the user, it seemed reasonable to expand the storage component to 
 save FlashNotes' deck data as well, since it will also allow the user to better track their topic's mastery if they can 
 view their last review session's statistic for the deck whenever they open FlashNotes.
 
-###### Design consideration:
+###### Design Consideration: Storage Implementation for Deck
 
 * **Current choice:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
   * Pros: Partial implementation by teammates already exist.
@@ -589,7 +589,7 @@ To provide the UI display and changes related to review statistics, the followin
 * `DeckCard` - Changed constructor method to account for display of review statistics of the last review session in that deck.
 * `ReviewWindow#handleExit()` - Adjusted to return to card view upon execution of `endReview` command.
 
-###### Basic description of the backend process of the end of a review session:
+###### Basic Description of the Backend Process of the End of a Review Session:
 
 1. User reaches the end of the review session (by correctly answering the last of the questions that has not been answered yet or has been answered wrongly before). 
 
@@ -603,7 +603,7 @@ To provide the UI display and changes related to review statistics, the followin
 
 1. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
 
-###### Corresponding sequence diagram for `endReview`:
+###### Corresponding Sequence Diagram for `endReview`:
 
 The following sequence diagram shows how the endReview command operation works:
 
