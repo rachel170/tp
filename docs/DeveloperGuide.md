@@ -712,7 +712,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 1a. Deck name already exist.
-    * 1a.1. FlashNotes shows an error message 
+    * 1a1. FlashNotes shows an error message 
     
     Use case ends.
     
@@ -735,7 +735,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
     
 * 2a. Deck is empty.
-    * 2a.1. FlashNotes displays an empty list.
+    * 2a1. FlashNotes displays an empty list.
     
     Use case ends.
     
@@ -753,7 +753,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 2a. The given index is invalid.
-    * 2a.1 FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
 
     Use Case ends.   
     
@@ -771,7 +771,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extension:**
 
 * 2a. User renames deck to the same name as an already existing deck.
-    * 2a.1 FlashNotes shows an error message. 
+    * 2a1. FlashNotes shows an error message. 
     
     Use Case ends.    
     
@@ -800,7 +800,7 @@ Extensions
 
 **MSS**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User adds a card.
 1. FlashNotes adds the card into the current deck.
 
@@ -809,7 +809,7 @@ Extensions
 **Extensions**
 
 * 2a. There is a duplicate card.
-    * 2a.1. FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
     
     Use case resumes at Step 2.
 
@@ -819,7 +819,7 @@ Extensions
 
 **MSS**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User requests to delete a card 
 1. FlashNotes deletes the card.
 
@@ -828,7 +828,7 @@ Extensions
 **Extensions**
     
 * 2a. The given index is invalid.
-    * 2a.1. FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
     
     Use case resumes at Step 2.
 
@@ -839,7 +839,7 @@ Extensions
 
 **MSS**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User requests to edit a specific card in the deck.
 1. FlashNotes edits the card.
 
@@ -848,7 +848,7 @@ Extensions
 **Extensions**
 
 * 2a. The given index is invalid.
-    * 2a.1. FlashNotes shows an error message.
+    * 2a1. FlashNotes shows an error message.
     
     Use case resumes at step 2.
     
@@ -858,7 +858,7 @@ Extensions
 **Precondition**: User is in Home mode.
 
 **MSS**
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User searches for keyword(s) of cards in the deck.
 1. FlashNotes shows the cards that contain the keyword in the question.
 
@@ -866,7 +866,7 @@ Extensions
 
 **Extensions**
 * 2a. The keyword does not exist in any card.
-    * 2a.1. FlashNotes shows an empty list.
+    * 2a1. FlashNotes shows an empty list.
     
     Use case ends.
     
@@ -875,7 +875,7 @@ Extensions
 **Precondition**: User is in Card mode.
 
 **MSS**
-1. User find for cards using keyword(s) (UC09).
+1. User <u>find for cards using keyword(s) (UC09)</u>.
 1. User requests to see a list of cards in the deck again.
 1. FlashNotes shows the list of all cards in the deck again.
 
@@ -899,7 +899,7 @@ Extensions
 
 **MSS:**
 
-1. User opens a deck (UC02).
+1. User <u>opens a deck (UC02)</u>.
 1. User requests to start a review on the cards shown.
 1. FlashNotes starts a review session.
 1. FlashNotes displays a card with only the question to the user.
@@ -916,21 +916,21 @@ Extensions
 **Extension:**
 
 * 7a. User correct remembers the answer of the flashcard.
-    * 7a.1. User marks the card as correct.
-    * 7a.1. FlashNotes shows next card.
+    * 7a1. User marks the card as correct.
+    * 7a2. FlashNotes shows next card.
     
    Use case resumes from Step 4.
 
 * 7b. User unable to remember the correct answer of the flashcard.
-    *7b.1. User marks card as wrong.
-   * 6b.2. FlashNotes adds card back into the lists of card to be reviewed again.
-   * 7b.3. FlashNotes shows the next card.
+   * 7b1. User marks card as wrong.
+   * 7b2. FlashNotes adds card back into the lists of card to be reviewed again.
+   * 7b3. FlashNotes shows the next card.
    
    Use case resumes from Step 4.
 
-* *User ends the review session prematurely.
-    * *a. FlashNotes does not show user the Review statistics.
-    * *b. FlashNotes does not update the Review statistics of the deck reviewed.
+* *a. User ends the review session prematurely.
+    *a1. FlashNotes does not show user the Review statistics.
+    *a2. FlashNotes does not update the Review statistics of the deck reviewed.
     
     Use case resumes from Step 10.
 
