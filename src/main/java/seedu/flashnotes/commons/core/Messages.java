@@ -101,7 +101,8 @@ public class Messages {
     // Other messages
     public static final String MESSAGE_EXTENDED_COMMAND_ERROR = "This command contains more arguments than necessary. "
             + "\nPlease try the command again without any arguments: %1$s";
-    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0.";
+    public static final String MESSAGE_INVALID_LIMIT = "Review card limit must be an integer greater than 0 and smaller"
+            + " than 2147483648.";
     public static final String MESSAGE_NO_CARDS_TO_REVIEW = "Cannot review an empty deck! Add cards using "
             + "'addCard q/QUESTION a/ANSWER' first.";
 

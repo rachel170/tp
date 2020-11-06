@@ -23,7 +23,7 @@ public class CheckReviewLimitCommand extends Command {
     public CheckReviewLimitCommand() { }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         long reviewLimit = model.getReviewCardLimit();
 

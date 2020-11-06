@@ -18,7 +18,7 @@ public class FlipCommandTest {
         model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
 
         CommandResult expectedCommandResult = new CommandResult(FlipCommand.MESSAGE_FLIP_ACKNOWLEDGEMENT,
-                false, false, false, true, 0);
+                false, false, true, true, 0);
 
         Flashcard flashcard = model.getFlashcardBeingReviewed();
 
@@ -33,7 +33,7 @@ public class FlipCommandTest {
         model = new ModelManager(getTypicalFlashNotes(), new UserPrefs());
 
         CommandResult expectedCommandResult = new CommandResult(FlipCommand.MESSAGE_FLIP_ACKNOWLEDGEMENT,
-                false, false, false, true, 0);
+                false, false, true, true, 0);
 
         Flashcard flashcard = model.getFlashcardBeingReviewed();
 

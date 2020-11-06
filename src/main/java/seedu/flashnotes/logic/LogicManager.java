@@ -46,6 +46,7 @@ public class LogicManager implements Logic {
         boolean isReviewMode = model.getIsReviewMode();
         boolean isInDeck = model.getIsInDeck();
         String deckName = model.getCurrentDeckName();
+
         if (deckName == null) {
             deckName = Model.getDefaultDeckName();
         }
@@ -89,6 +90,8 @@ public class LogicManager implements Logic {
     public ObservableList<Deck> getFilteredCardDeckList() {
         return model.getFilteredDeckList();
     };
+
+    // User preferences methods
 
     @Override
     public Path getFlashNotesFilePath() {

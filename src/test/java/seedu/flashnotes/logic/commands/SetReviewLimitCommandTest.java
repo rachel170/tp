@@ -2,10 +2,13 @@ package seedu.flashnotes.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.flashnotes.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashnotes.testutil.TypicalFlashcards.getTypicalFlashNotes;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.flashnotes.commons.core.Messages;
 import seedu.flashnotes.model.Model;
 import seedu.flashnotes.model.ModelManager;
 import seedu.flashnotes.model.UserPrefs;
@@ -20,24 +23,23 @@ public class SetReviewLimitCommandTest {
 
     @Test
     public void execute_validLimit_success() {
-        Integer validLimit = 20;
+        long validLimit = 20;
         SetReviewLimitCommand setReviewLimitCommand = new SetReviewLimitCommand(validLimit);
 
-        String expectedMessage = SetReviewLimitCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(SetReviewLimitCommand.MESSAGE_SUCCESS, validLimit);
 
         ModelManager expectedModel = new ModelManager(model.getFlashNotes(), new UserPrefs());
         expectedModel.setReviewCardLimit(validLimit);
-        //TODO check failure reason
-        //assertCommandSuccess(setReviewLimitCommand, model, expectedMessage, expectedModel);
+
+        assertCommandSuccess(setReviewLimitCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidLimit_throwsCommandException() {
-        Integer invalidLimit = 0;
+        long invalidLimit = 0;
         SetReviewLimitCommand setReviewLimitCommand = new SetReviewLimitCommand(invalidLimit);
 
-        //TODO check failure reason
-        //assertCommandFailure(setReviewLimitCommand, model, Messages.MESSAGE_INVALID_LIMIT);
+        assertCommandFailure(setReviewLimitCommand, model, Messages.MESSAGE_INVALID_LIMIT);
     }
 
     @Test
