@@ -622,8 +622,8 @@ generation, all CommandResult objects contain a string `feedbackToUser` which co
 be shown to the user. This CommandResult object is then passed to UI classes, such as `MainWindow` and `ReviewWindow`. The 
 UI classes will then show this `feedbackToUser` in the `ResultDisplay` box.
 
-Upon execution of the Commands, users might request a change of modes, such as moving from main mode to deck mode, or 
-deck mode to review mode. This information is passed to the UI classes using the `CommandResult` object too. Some commands
+Upon execution of the Commands, users might request a change of modes, such as moving from Main Mode to Card Mode, or 
+Card Mode to Review Mode. This information is passed to the UI classes using the `CommandResult` object too. Some commands
 such as the `enterDeck` or `review` will generate a `CommandResult` object with more arguments such as `showHelp`, `exit`,
 `startReview`. These arguments will be accessed by UI classes using the public getter methods `CommandResult#isShowHelp()`,
 `CommandResult#isExit()` etc. The correct UI screens will be rendered accordingly by respective methods such as 
@@ -648,7 +648,6 @@ The booleans regarding the modes enables FlashNotes to be able to decide which o
 * parseCommandInHomeMode(...)
 * parseCommandInCardMode(...)
 
-Note that the Home Mode here refers to the Main Mode specified in the User Guide, if there are any confusions.
 
 ##### Corresponding activity diagram for `FlashNotesParser`:
 
@@ -700,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ##### Use case: UC01 - Create new Deck
 
-**Precondition**: User is in the Home Mode, and is not in review mode.
+**Precondition**: User is in the Main Mode, and is not in review mode.
 
 **MSS:**
 
@@ -718,7 +717,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 ##### Use case: UC02 - Open a Deck
 
-**Precondition**: User is in the Home Mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS**
 
@@ -741,7 +740,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 ##### Use case: UC03 - Delete a Deck
 
-**Precondition**: User is in the Home Mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS:**
 
@@ -759,7 +758,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 ##### Use case: UC04 - Rename a Deck
 
-**Precondition**: User is in the Home mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS:**
 
@@ -778,7 +777,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ##### Use case: UC05 - Show all cards
 
-**Precondition**: User is in the Home mode.
+**Precondition**: User is in the Main Mode.
 
 **MSS:**
 1. User requests to see all the cards.
@@ -796,7 +795,7 @@ Extensions
 
 ##### Use case: UC06 - Add a card
 
-**Precondition**: User is in Home Mode.
+**Precondition**: User is in Main Mode.
 
 **MSS**
 
@@ -815,7 +814,7 @@ Extensions
 
 ##### Use case: UC07 - Delete a Card
 
-**Precondition**: User is in the Home Mode, and is not in review mode.
+**Precondition**: User is in the Main Mode, and is not in review mode.
 
 **MSS**
 
@@ -835,7 +834,7 @@ Extensions
 
 ##### Use case: UC08 - Edit a card
 
-**Precondition**: User is in Home Mode.
+**Precondition**: User is in Main Mode.
 
 **MSS**
 
@@ -855,7 +854,7 @@ Extensions
 
 ##### Use case: UC09 - Find keywords in card
 
-**Precondition**: User is in Home mode.
+**Precondition**: User is in Main Mode.
 
 **MSS**
 1. User <u>opens a deck (UC02)</u>.
@@ -881,13 +880,13 @@ Extensions
 
     Use case ends.
 
-##### Use case: UC11 - Return to Home mode
+##### Use case: UC11 - Return to Main Mode
 
 **Precondition**: User is in Card mode.
 
 **MSS:**
 
-1. User requests to return to Home mode.
+1. User requests to return to Main Mode.
 1. FlashNotes shows the list of decks to the user.
 
     Use Case ends.
@@ -895,7 +894,7 @@ Extensions
 
 ##### Use case: UC12 - Review cards
 
-**Precondition**: User is in Home Mode.
+**Precondition**: User is in Main Mode.
 
 **MSS:**
 
@@ -950,7 +949,7 @@ Extensions
 * **FlashNotes**: The software that stores flashcards and decks.
 * **Flashcard**: A card with a question and answer.
 * **Deck**: A collection of flashcards.
-* **Home mode**: A mode which displays a list of decks
+* **Main Mode**: A mode which displays a list of decks
 * **Card mode**: A mode which displays a list of cards
 * **Review mode**: The mode in which users can navigate through flashcards to review, and test their knowledge on the content of those cards.
 * **Tag**: A note to indicate which deck the card belongs to.
@@ -986,7 +985,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a deck name
     
-   1. Prerequisites: User is in Home mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
+   1. Prerequisites: User is in Main Mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
    
    1. Test case: `editDeckName 1 n/Econs`<br>
         Expected: The name of deck at Index 1 is changed to Econs.
@@ -998,7 +997,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a deck.
 
-   1. Prerequisites: User is in Home mode and FLashNotes contains at least one deck.
+   1. Prerequisites: User is in Main Mode and FLashNotes contains at least one deck.
    
    2. Test case: `deleteDeck 1` <br>
         Expected: First deck is deleted from the list.
@@ -1039,7 +1038,7 @@ testers are expected to do more *exploratory* testing.
     
         Expected: The flashcard is added to the list of flashcards shown.
         The specified card is added to a deck called "Default". 
-        The "Default" deck will be created in the Home mode if the deck does not exists.       
+        The "Default" deck will be created in the Main Mode if the deck does not exists.       
 
 ### Deleting a card
 
