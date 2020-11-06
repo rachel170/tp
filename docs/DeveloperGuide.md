@@ -928,8 +928,8 @@ Extensions
    Use case resumes from Step 4.
 
 * *a. User ends the review session prematurely.
-    *a1. FlashNotes does not show user the Review statistics.
-    *a2. FlashNotes does not update the Review statistics of the deck reviewed.
+    * *a1. FlashNotes does not show user the Review statistics.
+    * *a2. FlashNotes does not update the Review statistics of the deck reviewed.
     
     Use case resumes from Step 10.
 
