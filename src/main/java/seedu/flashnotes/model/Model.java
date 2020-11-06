@@ -51,12 +51,12 @@ public interface Model {
     /**
      * Returns the user prefs' review card limit.
      */
-    Integer getReviewCardLimit();
+    long getReviewCardLimit();
 
     /**
      * Sets the user prefs' review card limit.
      */
-    void setReviewCardLimit(Integer reviewCardLimit);
+    void setReviewCardLimit(long reviewCardLimit);
 
     /**
      * Replaces flashnotes data with the data in {@code flashNotes}.
@@ -111,6 +111,14 @@ public interface Model {
      */
     void updateFilteredDeckList(Predicate<Deck> predicate);
 
+    static String getDefaultDeckName() {
+        return FlashNotes.getDefaultDeckName();
+    }
+
+    static String getReservedDeckName() {
+        return FlashNotes.getReservedDeckName();
+    }
+
     /**
      * Returns true if a flashcard with the same identity as {@code flashcard} exists in the flashnotes.
      */
@@ -145,21 +153,45 @@ public interface Model {
     /** Returns the modified list of flashcards to be reviewed */
     ObservableList<Flashcard> addFlashcardToReview(Flashcard flashcard);
 
+    /** Updates the flashcard being reviewed in the review mode */
+    public void updateFlashcardBeingReviewed(int result);
+
+    /** Reset flashcard being reviewed back to false */
+    public void resetFlipOfFlashcardBeingReviewed();
+
+    /** Checks whether the flashcard being reviewed is flipped */
+    public boolean getIsFlashcardFlipped();
+
+    /** Gets the flashcard being reviewed in the review mode and returns it. */
+    public Flashcard getFlashcardBeingReviewed();
+
+    /** Flip the flashcard currently being reviewed */
+    public void carryOutFlipCommand();
+
+    /** Marks flashcard being reviewed as correct or wrong */
+    public void markFlashcardBeingReviewed(Flashcard flashcard, int result);
+
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
 
+    boolean getIsReviewMode();
+
+    void setIsReviewModeTrue();
+
+    void setIsReviewModeFalse();
+
     /**
-     * Shuffles the flashcards for the review session.
+     * Sets up the flashcards for the review session.
      */
-    void shuffleReviewFlashcards();
+    void setUpReviewList();
 
     /**
      * Update the user's review score for deck used in review.
      */
-    void updateDeckPerformanceScore(Integer reviewScore, String deckName);
+    void updateDeckPerformanceScore(Double reviewScore, String deckName);
 
     /** Returns an unmodifiable view of the unique deck list */
     UniqueDeckList getUniqueDeckList();

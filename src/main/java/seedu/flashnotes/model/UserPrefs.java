@@ -13,10 +13,10 @@ import seedu.flashnotes.commons.core.GuiSettings;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
-    private static final int DEFAULT_CARD_LIMIT = 0;
+    private static final int DEFAULT_CARD_LIMIT = Integer.MAX_VALUE;
     private GuiSettings guiSettings = new GuiSettings();
     private Path flashNotesFilePath = Paths.get("data" , "flashnotes.json");
-    private Integer reviewCardLimit = DEFAULT_CARD_LIMIT;
+    private long reviewCardLimit = DEFAULT_CARD_LIMIT;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -59,11 +59,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.flashNotesFilePath = flashNotesFilePath;
     }
 
-    public Integer getReviewCardLimit() {
+    public long getReviewCardLimit() {
         return reviewCardLimit;
     }
 
-    public void setReviewCardLimit(Integer reviewCardLimit) {
+    public void setReviewCardLimit(long reviewCardLimit) {
         requireNonNull(reviewCardLimit);
         this.reviewCardLimit = reviewCardLimit;
     }

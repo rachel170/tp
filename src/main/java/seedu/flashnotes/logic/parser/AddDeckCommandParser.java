@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 import seedu.flashnotes.logic.commands.AddDeckCommand;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 import seedu.flashnotes.model.deck.Deck;
-
+/**
+ * Parses input arguments and creates a new AddDeckCommand object
+ */
 public class AddDeckCommandParser implements Parser<AddDeckCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddDeckCommand

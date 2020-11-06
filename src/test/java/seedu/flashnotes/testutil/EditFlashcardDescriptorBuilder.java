@@ -1,6 +1,6 @@
 package seedu.flashnotes.testutil;
 
-import seedu.flashnotes.logic.commands.EditCommand;
+import seedu.flashnotes.logic.commands.EditCardCommand;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
@@ -11,21 +11,21 @@ import seedu.flashnotes.model.tag.Tag;
  */
 public class EditFlashcardDescriptorBuilder {
 
-    private EditCommand.EditFlashcardDescriptor descriptor;
+    private EditCardCommand.EditFlashcardDescriptor descriptor;
 
     public EditFlashcardDescriptorBuilder() {
-        descriptor = new EditCommand.EditFlashcardDescriptor();
+        descriptor = new EditCardCommand.EditFlashcardDescriptor();
     }
 
-    public EditFlashcardDescriptorBuilder(EditCommand.EditFlashcardDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditFlashcardDescriptor(descriptor);
+    public EditFlashcardDescriptorBuilder(EditCardCommand.EditFlashcardDescriptor descriptor) {
+        this.descriptor = new EditCardCommand.EditFlashcardDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditFlashcardDescriptor} with fields containing {@code flashcard}'s details
      */
     public EditFlashcardDescriptorBuilder(Flashcard flashcard) {
-        descriptor = new EditCommand.EditFlashcardDescriptor();
+        descriptor = new EditCardCommand.EditFlashcardDescriptor();
         descriptor.setQuestion(flashcard.getQuestion());
         descriptor.setAnswer(flashcard.getAnswer());
         descriptor.setTag(flashcard.getTag());
@@ -57,7 +57,7 @@ public class EditFlashcardDescriptorBuilder {
         return this;
     }
 
-    public EditCommand.EditFlashcardDescriptor build() {
+    public EditCardCommand.EditFlashcardDescriptor build() {
         return descriptor;
     }
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.flashnotes.model.FlashNotes;
 import seedu.flashnotes.model.ReadOnlyFlashNotes;
+import seedu.flashnotes.model.deck.Deck;
 import seedu.flashnotes.model.flashcard.Answer;
 import seedu.flashnotes.model.flashcard.Flashcard;
 import seedu.flashnotes.model.flashcard.Question;
@@ -18,13 +19,11 @@ public class SampleDataUtil {
     public static Flashcard[] getSampleFlashcards() {
         return new Flashcard[] {
             new Flashcard(new Question("What is the definition of Macroeconomics?"),
-                    new Answer("Macroeconomics is a branch of economics that studies how an overall economy, "
-                            + "the market systems that operate on a large scale, behaves"),
+                    new Answer("Macroeconomics is a branch of economics that studies how an overall economy"),
                     new Tag("Economics")),
             new Flashcard(new Question("What is the definition of Microeconomics?"),
                     new Answer("Microeconomics is a branch of economics that studies the behavior "
-                            + "of individuals and firms in making decisions regarding the allocation "
-                            + "of scarce resources and the interactions among these individuals and firms"),
+                            + "of individuals and firms in making decisions regarding the allocation"),
                     new Tag("Economics")),
             new Flashcard(new Question("When did Singapore gain independence?"),
                     new Answer("1965"), new Tag("Singapore")),
@@ -37,10 +36,19 @@ public class SampleDataUtil {
         };
     }
 
+    public static Deck[] getSampleDecks() {
+        return new Deck[] { new Deck("Economics"), new Deck("Singapore")
+        };
+    }
+
     public static ReadOnlyFlashNotes getSampleFlashNotes() {
         FlashNotes sampleAb = new FlashNotes();
         for (Flashcard sampleFlashcard : getSampleFlashcards()) {
             sampleAb.addFlashcard(sampleFlashcard);
+        }
+
+        for (Deck deck : getSampleDecks()) {
+            sampleAb.addDeck(deck);
         }
         return sampleAb;
     }

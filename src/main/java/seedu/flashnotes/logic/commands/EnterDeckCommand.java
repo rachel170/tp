@@ -11,6 +11,7 @@ import seedu.flashnotes.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all flashcards in flashnotes which has tags matching any of the argument keywords.
+ * Tags of the flashcards correspond to the decks that they are in with a 1-1 relationship.
  * Keyword matching is case sensitive.
  */
 public class EnterDeckCommand extends Command {
@@ -27,7 +28,11 @@ public class EnterDeckCommand extends Command {
 
     private final TagContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a command that shows all cards inside the deck created by the keyword of the predicate
+     */
     public EnterDeckCommand(TagContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
