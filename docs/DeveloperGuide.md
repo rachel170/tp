@@ -97,7 +97,7 @@ The `model`,
 * Stores the Flashnotes data
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes. This list is to show cards in the card page of the Ui.
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
-* Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the home page of the Ui.
+* Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the Main Mode of the Ui.
 * Does not depend on any of the other three components.
 * The Tag of each Flashcard refers to which Deck the Flashcard belongs to.
 * FlashNotes will handle the association between Tag and Deck.
@@ -183,7 +183,7 @@ The following general activity diagram summarizes what happens when a user execu
 ### Handle invalid inputs/commands
 
 #### Deck vs Card related commands
-* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the home screen.
+* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the Main Mode.
 * The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
 * Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
 * The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
@@ -292,7 +292,7 @@ Furthermore, the class here may not be considered too heavy with methods since t
 #### Listing all flashcards, Reserved Deck Name and Default Deck
 
 The `listAll` command allows Users to enter a list showing all flashcards in FlashNotes.
-As the `listAll` command is available on the home screen, entering the list of all flashcards will be treated as entering a deck.
+As the `listAll` command is available on the Main Mode, entering the list of all flashcards will be treated as entering a deck.
 
 In order to differentiate the deck that the user is in, the reserved deck name of "list" is used to inform the model that the user is currently looking at the list of all the cards.
 
@@ -1062,7 +1062,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: User is in card mode.
     
     1. Test case: `home` <br>
-       Expected: The list of orange decks in the home screen can now be seen.
+       Expected: The list of orange decks in the Main Mode can now be seen.
 
 ### Reviewing a deck of cards
 
@@ -1117,7 +1117,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Setting the maximum number of cards that can be reviewed in a single review session.
 
-    1. Prerequisites: User is in Home screen or Card screen.
+    1. Prerequisites: User is in Main Mode or Card Mode.
     
     1. Test case: `setReviewLimit 20` <br>
        Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
@@ -1133,7 +1133,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Checking the maximum number of cards that can be reviewed in a single review session.
 
-    1. Prerequisites: User is in Home screen or Card screen.
+    1. Prerequisites: User is in Main Mode or Card Mode.
     
     1. Test case: `checkReviewLimit` <br>
        Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)

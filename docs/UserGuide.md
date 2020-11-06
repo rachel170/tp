@@ -622,14 +622,14 @@ Outcome Expected:
 1. Enter the Home Command into the command bar as per the example.
 ![Main Mode](images/home_init.png)
 
-1. You should now see the list of orange decks in the home screen.
+1. You should now see the list of orange decks in the Main Mode.
 ![Main Mode](images/home_success.png)
 
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
 
-* It can only be activated from the card screen to navigate back to home.
+* It can only be activated from the card screen to navigate back to Main Mode.
 * No additional inputs should be added behind the home command.
 
 </div>
