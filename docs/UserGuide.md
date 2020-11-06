@@ -229,7 +229,7 @@ Outcome expected:
 * There is a 40 character limit for DECKNAME.
 * Reserved names (such as `list`) can't be used as DECKNAME.
 * If multiple name prefixes are in the command text, only the last one would be selected.
-* If you are in card mode, you need to navigate back to the home screen via the Home command before adding new deck.
+* If you are in card mode, you need to navigate back to the Main Mode via the Home command before adding new deck.
 
 </div>
 
@@ -305,7 +305,7 @@ Shows a list of all flashcards, and enters card mode.
 Format: `listAll`
 
 Outcome Expected:
-1. Enter the List Command into the command bar as per the example.
+1. Enter the `listAll` Command into the command bar as per the example.
 ![ListCommand](images/list_init.png)
 
 1. You should see the newly rendered list of flashcards. The list contains all flashcards currently stored in FlashNotes irrespective of the deck.
@@ -450,7 +450,7 @@ Exits FlashNotes.
 Format: `exit`
 
 Outcome Expected:
-1. User enters `exit` command in **Home Mode**. <br>
+1. User enters `exit` command in **Main Mode**. <br>
 ![Exiting FlashNotes](images/UG_ExitCommand.png)
 
 1. FlashNotes closes and saves all current data.
@@ -459,7 +459,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
+* `exit` can be activated from **Main Mode** and **Card Mode**, but not **Review Mode**.
 * No additional inputs should be added behind the `exit` command.
 
 </div>
@@ -578,9 +578,20 @@ Outcome Expected:
 
 Lists all flashcards in the deck.
 
-Typically used after the `find` command when you want to see all cards in the deck again.
-
 format: `list`
+
+Outcome Expected:
+Shows all flashcards in the deck that the user is in.
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* No additional inputs should be added behind the `listAll` command.
+* Typically used after the `find` command when you want to see all cards in the deck again.
+
+</div>
+
 
 ### Deleting a flashcard : `deleteCard`
 
@@ -620,16 +631,16 @@ Format: `home`
 
 Outcome Expected:
 1. Enter the Home Command into the command bar as per the example.
-![Home Mode](images/home_init.png)
+![Main Mode](images/home_init.png)
 
-1. You should now see the list of orange decks in the home screen.
-![Home Mode](images/home_success.png)
+1. You should now see the list of orange decks in the Main Mode.
+![Main Mode](images/home_success.png)
 
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
 
-* It can only be activated from the card screen to navigate back to home.
+* It can only be activated from the card screen to navigate back to Main Mode.
 * No additional inputs should be added behind the home command.
 
 </div>
@@ -852,7 +863,7 @@ Of the three types of information, only the calculated percentage will be saved 
 
 To view the statistics of your last review session for any deck, simply navigate back to the **Main Mode** and look under the Deck's name as indicated in the image below.
 
-![Review Statistics In Home Mode](images/UG_ReviewStatisticsInHome.png)
+![Review Statistics In Main Mode](images/UG_ReviewStatisticsInHome.png)
 
 <div markdown="block" class="alert alert-warning">
 
