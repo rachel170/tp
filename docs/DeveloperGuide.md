@@ -6,6 +6,24 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+This documentation contains an overview of the structure and implementation of FlashNotes. It is made for 
+developers who wish to maintain, modify or understand the software development behind FlashNotes.
+
+There are a total of 4 sections in this Developer Guide:<br>
+
+* Design: Discusses the high-level design of FlashNotes.
+
+* Links: Consists of links to guides used in Documentation, logging, testing, configuration and dev-ops.
+
+* Implementation: Covers the additional key features and considerations behind each design decision made in 
+    FlashNotes.
+
+* Appendix: Consists of 3 sections which are: Requirement, Manual Testing and Effort. 
+    * Requirement: Covers the product Scope, user stories, use cases, non-functional requirements and glossary.
+    * Manual Testing: Covers how to test each additional feature we added to FlashNotes.
+    * Effort: Covers challenges faced.
+
 ## **Design**
 
 ### Architecture
@@ -298,7 +316,7 @@ The deck class stores the Reserved Deck Name and Default Deck Name. The logic co
     * User will not be able to see a list of all flashcards
 
 
-###Implementation of Card Mode Features
+### Implementation of Card Mode Features
 
 #### Overview of Card-Mode Features
 
@@ -389,24 +407,26 @@ Now, when the user inputs a review limit greater than `Integer.MAX_VALUE`, the p
 #### Design considerations:
 * Alternative 1 (current choice): Save review limit in the user preferences file.
     * Pros: Users would not have to set review limit every time they start up the application.
-    * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in model.
-* Alternative 2: Save review limit internally in Model
+    * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in 
+    model.
+* Alternative 2: Save review limit internally in Model.
     * Pros: Do not have to write into a data file.
     * Cons: Users would have to set review limit every time they start up the application.
 
 ### Flip Card feature
 Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
-see the answer for the question on the flashcard.    
+see the answer for the question on the flashcard. 
 
 #### Implementation
-Users only have to type the `flip` command to flip their flashcard. Users can flip the flashcard as many times as they
+Users only have to type the `f` command to flip their flashcard. Users can flip the flashcard as many times as they 
 would like to in the review mode.
 
-The initial value of `isFlipped` is set to false, so that the review mode is showing the question on the flashcard first.
+The initial value of `isFlipped` is set to false, so that the review mode is showing the question on the flashcard 
+first.
 
 To support the flipping of flashcards, the following commands were added:
-* `flip` - A command that flips the flashcard being reviewed and displays the question or answer depending on the number
- of times the card was flipped.
+* `f` - A command that flips the flashcard currently being reviewed and displays the question or answer depending on 
+the number of times the card had been flipped.
 
 The following is a sequence diagram that demonstrates how a flip command flips a card in the review session:
 ![FlipCommandSequenceDiagram](images/FlipCommandSequenceDiagram.png)
@@ -416,14 +436,14 @@ a function call is made from the `ModelManager#carryOutFlipCommand()` which is c
 when it is created from the `FlashNotesParser`.
 
 #### Design considerations:
-* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been flipped in
-    the review mode.
-    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI
-    * Cons: Increases coupling
+* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model.
+    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    flipped in the review mode.
+    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI.
+    * Cons: Increases coupling.
 * Alternative 2: Implement the boolean isFlipped in the UI part, IndividualFlashcard.
-    * Pros: No need for extra function calls as flipping is directly done in the UI
-    * Cons: Logic is being done in the UI section
+    * Pros: No need for extra function calls as flipping is directly done in the UI.
+    * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
     
 ### Next Card feature
@@ -452,13 +472,13 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
 
 #### Design considerations:
 * Alternative 1 (current choice): Change isCorrect int in the flashcard model
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been reviewed 
-    correctly by the user in the review mode.
-    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI
-    * Cons: Increases coupling
+    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    reviewed correctly by the user in the review mode.
+    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
+    * Cons: Increases coupling.
 * Alternative 2: Implement the int isCorrect in the UI part, IndividualFlashcard.
-    * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI
-    * Cons: Logic is being done in the UI section
+    * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
+    * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
 ### Review Statistics feature
@@ -609,9 +629,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-####**Use case: UC01 - Create new Deck**
+#### **Use case: UC01 - Create new Deck**
 
-#####Precondition: User is in the Home Mode, and is not in review mode.
+##### Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS:**
 
@@ -627,9 +647,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-#####**Use case: UC02 - Open a Deck**
+##### **Use case: UC02 - Open a Deck**
 
-#####Precondition: User is in the Home Mode.
+##### Precondition: User is in the Home Mode.
 
 **MSS**
 
@@ -650,9 +670,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
     
-####**Use case: UC03 - Delete a Deck**
+#### **Use case: UC03 - Delete a Deck**
 
-#####Precondition: User is in the Home Mode.
+##### Precondition: User is in the Home Mode.
 
 **MSS:**
 
@@ -668,9 +688,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use Case ends.   
     
-####**Use case: UC04 - Rename a Deck**
+#### **Use case: UC04 - Rename a Deck**
 
-#####Precondition: User is in the Home mode.
+##### Precondition: User is in the Home mode.
 
 **MSS:**
 
@@ -687,9 +707,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use Case ends.    
     
 
-####**Use case: UC05 - Show all cards**
+#### **Use case: UC05 - Show all cards**
 
-#####Precondition: User is in the Home mode.
+##### Precondition: User is in the Home mode.
 
 **MSS:**
 1. User requests to see all the cards.
@@ -705,9 +725,9 @@ Extensions
     Use Case ends.
 
 
-####**Use case: UC06 - Add a card**
+#### **Use case: UC06 - Add a card**
 
-#####Precondition: User is in Home Mode.
+##### Precondition: User is in Home Mode.
 
 **MSS**
 
@@ -723,9 +743,9 @@ Extensions
     * 2a.1. FlashNotes shows an error message. <br>
     Use case resumes at Step 2.
 
-####**Use case: UC07 - Delete a Card**
+#### **Use case: UC07 - Delete a Card**
 
-#####Precondition: User is in the Home Mode, and is not in review mode.
+##### Precondition: User is in the Home Mode, and is not in review mode.
 
 **MSS**
 
@@ -743,9 +763,9 @@ Extensions
     Use case resumes at Step 2.
 
 
-####**Use case: UC08 - Edit a card**
+#### **Use case: UC08 - Edit a card**
 
-#####Precondition: User is in Home Mode.
+##### Precondition: User is in Home Mode.
 
 **MSS**
 
@@ -763,9 +783,9 @@ Extensions
     Use case resumes at step 2.
     
 
-####**Use case: UC09 - Find keywords in card**
+#### **Use case: UC09 - Find keywords in card**
 
-#####Precondition: User is in Home mode.
+##### Precondition: User is in Home mode.
 
 **MSS**
 1. User opens a deck (UC02).
@@ -780,9 +800,9 @@ Extensions
     
     Use case ends.
     
-####**Use case: UC10 - Seeing a list of cards in the deck**
+#### **Use case: UC10 - Seeing a list of cards in the deck**
 
-####Precondition: User is in Card mode.
+#### Precondition: User is in Card mode.
 
 **MSS**
 1. User find for cards using keyword(s) (UC09).
@@ -791,9 +811,9 @@ Extensions
 
     Use case ends.
 
-####**Use case: UC11 - Return to Home mode**
+#### **Use case: UC11 - Return to Home mode**
 
-#####Precondition: User is in Card mode.
+##### Precondition: User is in Card mode.
 
 **MSS:**
 
@@ -803,9 +823,9 @@ Extensions
     Use Case ends.
 
 
-####**Use case: UC12 - Review cards**
+#### **Use case: UC12 - Review cards**
 
-#####Precondition: User is in Home Mode.
+##### Precondition: User is in Home Mode.
 
 **MSS:**
 
@@ -880,21 +900,61 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-Initial launch
+1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample flashcards. The window size may not be optimum.
 
-Saving window preferences
+1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
+### Editing a deck name
+
+1. Editing a deck name
+    
+   1. Prerequisites: User is in Home mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
+   
+   1. Test case: `editDeckName 1 n/Econs`<br>
+        Expected: The name of deck at Index 1 is changed to Econs.
+        
+   2. Test case: `editDeckName 1 n/Singapore` <br>
+        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singpaore" already exists.
+
+### Deleting a deck
+
+1. Deleting a deck.
+
+   1. Prerequisites: User is in Home mode and FLashNotes contains at least one deck.
+   
+   2. Test case: `deleteDeck 1` <br>
+        Expected: First deck is deleted from the list.
+   
+   3. Test case: `deleteDeck 0` <br>
+        Expected: No deck is deleted. Error details shown in the status message. 
+
+### Entering a deck
+
+1. Entering a deck.
+
+   1. Prerequisites: Flashnotes have decks with names 'Singapore' and 'Malaysia'.
+    
+   2. Test case: `enterDeck Singapore` <br>
+       Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.    
+    
+   3. Test case: `enterDeck singapore` <br>
+       Expected: None of the cards are shown (as the keyword is case-sensitive). 
+
+   4. Test case: `enterDeck Singapore Malaysia` <br>
+       Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.   
 
 ### Adding a card
-1. Adding a card in a normal deck created by user
+
+1. Adding a card in a normal deck created by user.
 
     1. Prerequisites: Enter a deck using the command `enterDeck DECK_NAME`. 
     
@@ -902,80 +962,45 @@ Saving window preferences
     
         Expected: The specified card is added and shown to the user.
         
-1. Adding a card while in the list of all flashcards 
+1. Adding a card while in the list of all flashcards.
     
-    1. Prereuisites: Enter the list of all flashcards using the command `listAll`.
+    1. Prerequisites: Enter the list of all flashcards using the command `listAll`.
     
     2. Test case: `addCard q/question1 a/answer1`
     
         Expected: The flashcard is added to the list of flashcards shown.
         The specified card is added to a deck called "Default". 
-        The "Default" deck will be created in the Home mode if the deck does not exists.
-        
+        The "Default" deck will be created in the Home mode if the deck does not exists.       
 
 ### Deleting a card
 
-Deleting a card while all persons are being shown
+1. Deleting a card while all persons are being shown.
 
    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
-   2. Test case: `delete 1`<br>
+   2. Test case: `deleteCard 1`<br>
       Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `deleteCard 0`<br>
       Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `deleteCard`, `deleteCard x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.          
 
+### Going back home
 
-
-### Entering a deck
-Entering a deck
-
-   1. Prerequisites: Flashnotes have decks with names 'Singapore' and 'Malaysia'
+1. Going back to Main Mode from Card Mode.
     
-   2. Test case: `enterDeck Singapore` <br>
-       Expected: All cards with the tag 'Singapore' will be shown. Cards with tags 'Malaysia' will not be shown.    
+    1. Prerequisites: User is in card mode.
     
-   3. Test case: `enterDeck singapore` <br>
-       Expected: None of the cards are shown (as the keyword is case-sensitive)       
-
-   4. Test case: `enterDeck Singapore Malaysia` <br>
-       Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.
-       
-       
-### Deleting a deck
-Deleting a deck
-
-   1. Prerequisites: User is in Home mode and FLashNotes contains a deck.
-   
-   2. Test case: `deleteDeck 1`
-   
-         Expected: First deck is deleted from the list. 
-   
-   3. Test case: `deleteDeck 0`
-   
-         Expected: No deck is deleted. Error details shown in the status message. 
-       
-### Editing a deck name
-Editing a deck name
-    
-   1. Prerequisites: User is in Home mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
-   
-   1. Test case: `editDeckName 1 n/Econs`
-   
-        Expected: The deck at Index 1 is changed to Econs
-        
-   2. Test case: `editDeckName 1 n/Singapore`
-   
-        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singpaore" already exists.
-        
+    1. Test case: `home` <br>
+       Expected: The list of orange decks in the home screen can now be seen.
 
 ### Reviewing a deck of cards
-1. Opening the review window
 
-    1. Prerequisites: User is in card screen
+1. Opening the review window.
+
+    1. Prerequisites: User is in card screen.
     
     1. Test case: `review` <br>
        Expected: A new window should pop up containing a command box, result display, and the question on the first flashcard.
@@ -983,36 +1008,45 @@ Editing a deck name
     1. Test case: `review 7` <br>
        Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: review" should appear in the result display box.
         
-1. Flipping a card that is being reviewed
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
+1. Flipping a card that is being reviewed.
+
+    1. Prerequisites: User is in review mode, and the review session is still ongoing.
     
-    1. Test case: `flip` when the card is showing the question<br>
-        Expected: The card should be flipped to show the answer for this question <br>
+    1. Test case: `f` when the card is showing the question<br>
+        Expected: The card should be flipped to show the answer for this question.
         
-    1. Test case: `flip` when the card is showing the answer <br>
-        Expected: The card should be flipped to show the question for this answer <br>
+    1. Test case: `f` when the card is showing the answer <br>
+        Expected: The card should be flipped to show the question for this answer.
 
-1. Marking flashcard that is being reviewed as correct
+1. Marking flashcard that is being reviewed as correct.
 
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Prerequisites: User is in review mode, and the review session is still ongoing.
     
     1. Test case: `c` when the card is showing the question<br>
-        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct <br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as correct.
     
     1. Test case: `c` when the card is showing the answer <br>
         Expected: If the card wasn't the last card in the list, it should show the question of the next card and the progress in the progress bar should increase. Otherwise, it should show the review statistics.
 
-1. Marking flashcard that is being reviewed as wrong
+1. Marking flashcard that is being reviewed as wrong.
 
-    1. Prerequisites: User is in review mode, and the review session is still ongoing
+    1. Prerequisites: User is in review mode, and the review session is still ongoing.
     
     1. Test case: `w` when the card is showing the question<br>
-        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong <br>
+        Expected: Error Message to indicate that the card should be flipped first before it can be marked as wrong.
     
     1. Test case: `w` when the card is showing the answer <br>
         Expected: It should show the question of the next card and the progress bar should still have the same progress.
+        
+1. Ending a review session.
+
+    1. Prerequisites: User is in review mode.
+    
+    1. Test case: `endReview` <br>
+       Expected: Review Window closes, and you are returned to the Card Mode you started the review session from.
 
 ### Setting and checking the review card limit
+
 1. Setting the maximum number of cards that can be reviewed in a single review session.
 
     1. Prerequisites: User is in Home screen or Card screen.
