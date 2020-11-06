@@ -27,11 +27,10 @@ There are a total of 4 sections in this Developer Guide:<br>
 ## **Design**
 
 ### Architecture
-![ArchitectureDiagram](images/ArchitectureDiagram.png)
+
+<img src="images/ArchitectureDiagram.png" width="450" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
-
-
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -59,7 +58,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck n/Singapore`.
 
-![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagramUpdated.png)
+![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 
 The sections below give more details of each component.
 
@@ -99,8 +98,8 @@ The `model`,
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
 * Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the Main Mode of the Ui.
 * Does not depend on any of the other three components.
-* The Tag of each Flashcard refers to which Deck the Flashcard belongs to.
-* FlashNotes will handle the association between Tag and Deck.
+* The `Tag` of each Flashcard refers to which `Deck` the `Flashcard` belongs to.
+* FlashNotes will handle the association between `Tag` and `Deck`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -151,14 +150,13 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 --------------------------------------------------------------------------------------------------------------------
 
 ## Implementation
-
 ### Implementation of UI (3 Different Modes)
 
 Both of the root nodes represent the types of scenes available to the main window:
-* FlashCardListRoot contains FlashCardListPanel which will display a list of flashcards available to the user.
-* DeckCardListRoot contains DeckCardListPanel which will display a list of decks available to the user.
+* `FlashCardListRoot` contains `FlashCardListPanel` which will display a list of flashcards available to the user.
+* `DeckCardListRoot` contains `DeckCardListPanel` which will display a list of decks available to the user.
 
-The reasoning for splitting out the two different types of scenes is to allow the MainWindow to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
+The reasoning for splitting out the two different types of scenes is to allow the Main Window to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
 This provides better cohesion and utilizes the single responsibility principle as the classes are individually responsible for a smaller part of the UI rendered. It also improves the extensibility for the future if more modes and screens are to be added to the product.
 
 Similarly, we also chose to separate the review mode from the Main and Card mode. However, we decided to open a new 
@@ -183,22 +181,23 @@ The following general activity diagram summarizes what happens when a user execu
 ### Handle invalid inputs/commands
 
 #### Deck vs Card related commands
-* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the Main Mode.
-* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
-* Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
-* The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
+* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the Main mode.
+* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, clear) when user is inside a deck.
+* FlashNotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
+* The Parser will block these commands, taking arguments passed from Logic, which checks the state of FlashNotes through the model.
 
 #### Review related commands
-* The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
-* Flashnotes also keeps track of whether the user is currently inside review mode.
+* The system only allows review-related commands (e.g. f, c, w, endReview)
+* FlashNotes also keeps track of whether the user is currently inside review mode.
 * The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
 
-#### Design Considerations: How to check for invalid commands
-* Alternative 1 (current choice): Checking of commands are done in the logic component.
+<<<<<<< HEAD
+#### Design considerations: How to check for invalid commands
+* **Alternative 1 (current choice):** Checking of commands are done in the logic component.
     * Pros: Model component does not need to keep track and handle invalid inputs by user
     * Cons: Coupling between logic and model is increased
-* Alternative 2: Checking of commands are done in the model component.
-    * Pros; Reduced coupling
+* **Alternative 2:** Checking of commands are done in the model component.
+    * Pros: Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
 
 ### Implementation of Main Mode
@@ -239,9 +238,9 @@ With alternative 1, it saves more space, and the performance difference is negli
 
 `FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
 
-* `Flashnotes#addDeck()`  —  Add a new Deck with a unique deck name.
+* `FlashNotes#addDeck()`  —  Add a new Deck with a unique deck name.
 
-`Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
+`Model` interface depends on  `FlashNotes#addDeck()` to support functionality of `Model#addDeck()`.
 
 ##### Given below is an example usage scenario.
 
@@ -362,7 +361,7 @@ The following sequence diagram shows how the `deleteCard` operation works:
 
 
 
-### Review Mode 
+### Implementation of Review Mode features 
 Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
 
 #### Opening the review mode
@@ -415,20 +414,20 @@ Now, when the user inputs a review limit greater than `Integer.MAX_VALUE`, the p
 `ParseException` telling users that their review limit is out of range, instead of telling users that the command format is invalid. 
 
 
-#### Design considerations:
-* Alternative 1 (current choice): Save review limit in the user preferences file.
+##### Design Considerations: Where to save the review limit
+* **Alternative 1 (current choice):** Save review limit in the user preferences file.
     * Pros: Users would not have to set review limit every time they start up the application.
     * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in 
     model.
-* Alternative 2: Save review limit internally in Model.
+* **Alternative 2:** Save review limit internally in `Model`.
     * Pros: Do not have to write into a data file.
     * Cons: Users would have to set review limit every time they start up the application.
 
-### Flip Card feature
+#### Flip Card feature
 Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
 see the answer for the question on the flashcard. 
 
-#### Implementation
+##### Implementation
 Users only have to type the `f` command to flip their flashcard. Users can flip the flashcard as many times as they 
 would like to in the review mode.
 
@@ -446,22 +445,22 @@ This feature is implemented by adding an isFlipped boolean in the `Model` of the
 a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `FlipCommand#execute()` 
 when it is created from the `FlashNotesParser`.
 
-#### Design considerations:
-* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model.
+##### Design Considerations:
+* **Alternative 1 (current choice):** Change `isFlipped` boolean in the flashcard model.
     * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     flipped in the review mode.
     * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI.
     * Cons: Increases coupling.
-* Alternative 2: Implement the boolean isFlipped in the UI part, IndividualFlashcard.
+* **Alternative 2:** Implement the boolean `isFlipped` in the UI part, `IndividualFlashcard`.
     * Pros: No need for extra function calls as flipping is directly done in the UI.
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
     
-### Next Card feature
+#### Next Card feature
 Our FlashNotes application allows users to go to the next card to review once they are done reviewing the current 
 flashcard.    
 
-#### Implementation
+##### Implementation
 Users only have to type the `c` or `w` command to see the next flashcard where `c` means that they managed to review
 the flashcard correctly and `w` means that they got the question wrong. These commands will only work after the user
 sees the answer of the flashcard currently being reviewed which is noted by whether the flashcard has been flipped or
@@ -481,13 +480,13 @@ This feature is implemented by adding an isCorrect int in the `Model` of the `Fl
 a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
 `CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
 
-#### Design considerations:
-* Alternative 1 (current choice): Change isCorrect int in the flashcard model
+##### Design considerations:
+* **Alternative 1 (current choice):** Change isCorrect int in the flashcard model
     * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     reviewed correctly by the user in the review mode.
     * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
     * Cons: Increases coupling.
-* Alternative 2: Implement the int isCorrect in the UI part, IndividualFlashcard.
+* **Alternative 2:** Implement the int isCorrect in the UI part, IndividualFlashcard.
     * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
@@ -630,6 +629,7 @@ such as the `enterDeck` or `review` will generate a `CommandResult` object with 
 `DeckCardListRoot#handleExit()`, `ReviewWindow#handleHelp()` etc.
 
 The following class diagram shows how the UI classes are related to the commandResult class, and their relevant methods.
+
 ![UiCommandResultClassDiagram](images/UiCommandResultClassDiagram.png)
 
 #### Implementation of FlashNotesParser
@@ -1202,20 +1202,22 @@ their details. When doing our flashcard application, we thought that users shoul
 separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
 with finding a good way to allow users to perform all these actions using the single interface that came with AB3. 
 
-The easiest method we explored to achieve this was to modify the "list" command to let users view their flashcards in specific 
+The easiest method we explored to achieve this was to modify the `list` command to let users view their flashcards in specific 
 decks, and show the cards one by one when users want to review them. However, we were not satisfied with the visual effect of 
 this solution. We wanted to let users differentiate their interactions when making/editing the decks and flashcards, and when 
 reviewing flashcards more clearly.
 
 The next method we explored required far more effort but was worth it in the end. We decided to implement 3 different interfaces 
-for our application,  the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
+for our application, the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
 In the main mode, the different decks would be displayed to the users. Users can then make new decks or edit current decks in 
 this mode. They can also choose a specific deck to open and see the cards it contains. This brings users into the Card mode, 
 where they can make new flashcards or edit current cards. They can also review their cards by using the review command that brings 
-them to the review mode. Implementing this required us to redesign the entire UI component into something with more layers of 
+them to the review mode. 
+
+Implementing this required us to redesign the entire UI component into something with more layers of 
 abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
-we ended up with a highly effective and user friendly flashcard application.
+we ended up with a highly effective and user-friendly flashcard application.
 
 ### Challenge 2: One object-type versus Two object-types with composition relationship
 
