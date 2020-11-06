@@ -491,19 +491,19 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
-#### Review Statistics feature
+#### Review Statistics Feature
 
 FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. 
 In addition to this, as a user wants to be able to see how many cards they got correct after a review session, so that
 they can track their topics' mastery and feel a sense of accomplishment for studying efficiently (user story). Due to
 this user story, FlashNotes will incorporate a review statistics feature to fulfill the user's needs.
 
-##### Tracking and generation of the review statistics feature
+##### Tracking and Generation of the Review Statistics Feature
 
 During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
-first try at the question. As the handling of progress through the review session implementation was done by Sruthi, my
-code is designed to compliment her implementation. This is done through the addition of `IndividualFlashcard::correctAnswers` 
-attribute, which keeps track of the count of questions answered correctly on the first attempt. 
+first try at the question. In order to compliment the implementation of Review Mode, my implementation made use of the 
+addition of `IndividualFlashcard::correctAnswers` attribute to keep track of the count of questions answered 
+correctly on the first attempt. 
 
 To ensure the variable incrementation is done only if the current flashcard contains a question that the user is attempting
 for the first time in the review session, a check for the `IndividualFlashcard::index` is done to ensure it is within 
@@ -522,26 +522,26 @@ The calculated percentage value from a review session will be considered as the 
 To provide a measure of accuracy, the percentage value will be calculated as a `double` value, which will be rounded off 
 to the nearest 1 decimal place for display or storage purposes.
 
-##### Relationship of review statistics and deck
+##### Relationship of Review Statistics and Deck
 
 To further help the user keep track of their topic mastery, FlashNotes will save the calculated percentage from the 
 last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
 under the relevant Deck's name.
 
-Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the `Deck` class implemented 
-by Peng Xiang and Jacob. As a String, it can be easily retrieved and displayed to the user through the UI component.
+Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the current `Deck` class 
+design implementation. As a String, it can be easily retrieved and displayed to the user through the UI component.
 As such, only review sessions initiated from an existing deck will be saved to the relevant deck.
 
 In the event that a user initiated a review session for all of FlashNotes' flashcards, the review statistics will only
 be generated and displayed for the user's benefit, but not save to FlashNotes.
 
-##### Extending Storage to include Deck
+##### Extending Storage to Include Deck
 
 Seeing as FlashNotes already saves Flashcard data for the user, it seemed reasonable to expand the storage component to 
 save FlashNotes' deck data as well, since it will also allow the user to better track their topic's mastery if they can 
 view their last review session's statistic for the deck whenever they open FlashNotes.
 
-###### Design consideration:
+###### Design Consideration: Storage Implementation for Deck
 
 * **Current choice:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
   * Pros: Partial implementation by teammates already exist.
@@ -588,7 +588,7 @@ To provide the UI display and changes related to review statistics, the followin
 * `DeckCard` - Changed constructor method to account for display of review statistics of the last review session in that deck.
 * `ReviewWindow#handleExit()` - Adjusted to return to card view upon execution of `endReview` command.
 
-###### Basic description of the backend process of the end of a review session:
+###### Basic Description of the Backend Process of the End of a Review Session:
 
 1. User reaches the end of the review session (by correctly answering the last of the questions that has not been answered yet or has been answered wrongly before). 
 
@@ -602,7 +602,7 @@ To provide the UI display and changes related to review statistics, the followin
 
 1. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
 
-###### Corresponding sequence diagram for `endReview`:
+###### Corresponding Sequence Diagram for `endReview`:
 
 The following sequence diagram shows how the endReview command operation works:
 
@@ -1219,7 +1219,7 @@ abstraction and complexity. In doing so, we encountered some problems with the G
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
 we ended up with a highly effective and user-friendly flashcard application.
 
-### Challenge 2: One object-type versus Two object-types with composition relationship
+### Challenge 2: One object type versus Two object types with a perceived composition relationship
 
 At the start of our team project, refactoring AB3 into FlashNotes resulting in the `Person` object changing into 
 the `Flashcard` object. As out project progressed, there was a need to include a second object, which was the `Deck`
@@ -1230,10 +1230,10 @@ deletion of a `Deck` object meant that there was a need to look through all of t
 identify and delete any `Flashcard` object with a `Tag` that marked it as a part of the deleted `Deck`.
 
 Furthermore, editing the name of a `Deck` required us to identify all `Flashcard` objects belonging to that `Deck` before
-editing it `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
+editing its `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
 direct composition between `Deck` and `Flashcard` in our current implementation design.
 
-Finally, as part of our 'Review Statistics Feature', we wanted to be able to save the data in the `Deck` class as well. 
+Finally, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
 To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
 `Deck` class. 
 
@@ -1255,7 +1255,8 @@ section for the entire listing of all the commands.
 
 ### Achievement of Project
 
-1. User story - Of the 13 [User Stories](###User-stories) listed, we managed to fulfill 12 of them in various ways.
+1. User story - Of the 13 [User Stories](https://ay2021s1-cs2103t-t15-2.github.io/tp/DeveloperGuide.html#user-stories) 
+listed, we managed to fulfill 12 of them in various ways.
 
 1. Maintain the simplicity and cohesiveness of the features from the original AB3 project.
 
