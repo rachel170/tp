@@ -10,6 +10,9 @@ import seedu.flashnotes.commons.core.LogsCenter;
 import seedu.flashnotes.logic.Logic;
 import seedu.flashnotes.model.flashcard.Flashcard;
 
+/**
+ * The UI component that is responsible for showing the flashcard being reviewed.
+ */
 public class IndividualFlashcard extends UiPart<Region> {
     private static final String FXML = "IndividualFlashcard.fxml";
     private final Logger logger = LogsCenter.getLogger(IndividualFlashcard.class);

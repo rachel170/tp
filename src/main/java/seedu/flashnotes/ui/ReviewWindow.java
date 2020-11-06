@@ -16,7 +16,7 @@ import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.logic.parser.exceptions.ParseException;
 
 /**
- * Controller for a help page
+ * Controller for a review page
  */
 public class ReviewWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ReviewWindow.class);
@@ -110,7 +110,7 @@ public class ReviewWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the review window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();

@@ -81,7 +81,12 @@ public class CommandResult {
 
     @Override
     public String toString() {
-        return this.feedbackToUser;
+        return this.feedbackToUser
+                + " " + this.showHelp
+                + " " + this.exit
+                + " " + this.startReview
+                + " " + this.isFlipped
+                + " " + this.isNext;
     }
 
     @Override
@@ -98,7 +103,10 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && startReview == otherCommandResult.startReview
+                && isFlipped == otherCommandResult.isFlipped
+                && isNext == otherCommandResult.isNext;
     }
 
     @Override

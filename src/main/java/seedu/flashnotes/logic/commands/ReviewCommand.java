@@ -5,7 +5,7 @@ import seedu.flashnotes.logic.commands.exceptions.CommandException;
 import seedu.flashnotes.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Starts a review session.
  */
 public class ReviewCommand extends Command {
 
@@ -23,7 +23,7 @@ public class ReviewCommand extends Command {
         if (isReviewListEmpty) {
             throw new CommandException(Messages.MESSAGE_NO_CARDS_TO_REVIEW);
         }
-        model.shuffleReviewFlashcards();
+        model.setUpReviewList();
         model.setIsReviewModeTrue();
         return new CommandResult(SHOWING_REVIEW_MESSAGE, false, false, true, false, 0);
     }

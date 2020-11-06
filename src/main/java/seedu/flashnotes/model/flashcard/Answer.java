@@ -29,7 +29,10 @@ public class Answer {
      * Returns true if a given string is a valid answer.
      */
     public static boolean isValidAnswer(String test) {
-        return !test.isBlank() && test.length() <= 140;
+        boolean isAnswerBlank = test.isBlank();
+        boolean isAnswerLengthValid = test.length() <= 140;
+
+        return !isAnswerBlank && isAnswerLengthValid;
     }
 
     @Override
