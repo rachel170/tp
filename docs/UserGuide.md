@@ -705,13 +705,13 @@ Outcome Expected:
 1. Type `f` into the command box and enter. <br>
 ![Type Flip Command](images/flipCommandStep2.png)
 
-1. The result after flip command has been executed. The Answer to the question can now be seen. <br>
+1. The result after flip command has been executed. The answer to the question can now be seen. <br>
 ![Result of Flip Command](images/flipCommandStep3.png)
 
 1. Type `f` into the command box again and enter to flip the card again. <br>
 ![Type Flip Command](images/flipCommandStep4.png)
 
-1. The result after flip command has been executed. The Question is now visible instead of the answer. <br>
+1. The result after flip command has been executed. The question is now visible instead of the answer. <br>
 ![Result of Flip Command](images/flipCommandStep5.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -910,18 +910,15 @@ ensure none of your data is lost, do not delete the data folder.
 Sorry but no. There is no such functionality at this point in time.
 <br><br>
 </details>
+<br>
 
 <details>
 <summary>What should I do when I get a 'Java Quit unexpectedly' error. (For Mac Users)</summary>
 <br>
 
-![Figure 1: Mac error](images/macError.png)<br>
-
 Open System Preferences in you computer,  click on ‘Security & Privacy’ and then proceed to click on Privacy Tab and 
-the ‘Input Monitoring’ section. Enable java to monitor input from your keyboard even while using other apps as shown 
-in the image below.
+the ‘Input Monitoring’ section. Enable java to monitor input from your keyboard even while using other apps.
 
-![Figure 2: Mac users System Preferences](images/systemPreference.png)<br>
 <br><br>
 </details>
 
