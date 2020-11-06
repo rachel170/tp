@@ -23,7 +23,7 @@ public class SetReviewLimitCommandTest {
 
     @Test
     public void execute_validLimit_success() {
-        Integer validLimit = 20;
+        long validLimit = 20;
         SetReviewLimitCommand setReviewLimitCommand = new SetReviewLimitCommand(validLimit);
 
         String expectedMessage = String.format(SetReviewLimitCommand.MESSAGE_SUCCESS, validLimit);
@@ -36,7 +36,7 @@ public class SetReviewLimitCommandTest {
 
     @Test
     public void execute_invalidLimit_throwsCommandException() {
-        Integer invalidLimit = 0;
+        long invalidLimit = 0;
         SetReviewLimitCommand setReviewLimitCommand = new SetReviewLimitCommand(invalidLimit);
 
         assertCommandFailure(setReviewLimitCommand, model, Messages.MESSAGE_INVALID_LIMIT);
