@@ -22,9 +22,12 @@ public class ListAllCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+
         model.setIsInDeckTrue();
         model.setCurrentDeckName(DECK_NAME);
+
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS,
                         model.getFilteredFlashcardList().size()));
