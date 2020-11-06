@@ -444,7 +444,7 @@ This feature is implemented by adding an isFlipped boolean in the `Model` of the
 a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `FlipCommand#execute()` 
 when it is created from the `FlashNotesParser`.
 
-##### Design Considerations:
+##### Design Considerations: Flip Card Implementation
 * **Alternative 1 (current choice):** Change `isFlipped` boolean in the flashcard model.
     * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     flipped in the review mode.
@@ -479,7 +479,7 @@ This feature is implemented by adding an isCorrect int in the `Model` of the `Fl
 a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
 `CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
 
-##### Design considerations:
+##### Design Considerations: Next Card Implementation
 * **Alternative 1 (current choice):** Change isCorrect int in the flashcard model
     * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     reviewed correctly by the user in the review mode.
