@@ -55,8 +55,14 @@ class JsonAdaptedDeck {
         try {
             // Check to make sure result statistics can be converted to Double
             double statistic = Double.parseDouble(resultStatistic);
-            // Update the created Deck object with the retrieved result statistics
-            theDeck.setResultStatistics(String.format("%.1f", statistic));
+            // Check to make sure that statistic is a valid value
+            if (statistic >= 0.0 && statistic <= 100.0) {
+                // Update the created Deck object with the retrieved result statistics
+                theDeck.setResultStatistics(String.format("%.1f", statistic));
+            } else {
+                // Throw an exception
+                throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
+            }
         } catch (NumberFormatException nfe) {
             // If exception is found, throw IVE
             throw new IllegalValueException(Deck.MESSAGE_CONSTRAINTS_STATISTIC);
