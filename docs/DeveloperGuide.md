@@ -20,18 +20,17 @@ There are a total of 4 sections in this Developer Guide:<br>
     FlashNotes.
 
 * Appendix: Consists of 3 sections which are: Requirement, Manual Testing and Effort. 
-    * Requirement: Covers the product Scope, user stories, use cases, non-functional requirements and glossary.
+    * Requirement: Covers the product scope, user stories, use cases, non-functional requirements and glossary.
     * Manual Testing: Covers how to test each additional feature we added to FlashNotes.
     * Effort: Covers challenges faced.
 
 ## **Design**
 
 ### Architecture
-![ArchitectureDiagram](images/ArchitectureDiagram.png)
+
+<img src="images/ArchitectureDiagram.png" width="450" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
-
-
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/flashnotes/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -59,7 +58,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addDeck n/Singapore`.
 
-![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagramUpdated.png)
+![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 
 The sections below give more details of each component.
 
@@ -100,8 +99,8 @@ The `model`,
 * Exposes an unmodifiable `ObservableList<Flashcard>` that can be 'observed'. This list is to show the cards that are being reviewed in the review page of the Ui.
 * Exposes an unmodifiable `ObservableList<Deck>` that can be 'observed'. This list shows the list of decks in the Main Mode of the Ui.
 * Does not depend on any of the other three components.
-* The Tag of each Flashcard refers to which Deck the Flashcard belongs to.
-* FlashNotes will handle the association between Tag and Deck.
+* The `Tag` of each Flashcard refers to which `Deck` the `Flashcard` belongs to.
+* FlashNotes will handle the association between `Tag` and `Deck`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,7 +117,7 @@ The `model`,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("deleteDeck 1")` API call.
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
@@ -152,14 +151,13 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 --------------------------------------------------------------------------------------------------------------------
 
 ## Implementation
-
 ### Implementation of UI (3 Different Modes)
 
 Both of the root nodes represent the types of scenes available to the main window:
-* FlashCardListRoot contains FlashCardListPanel which will display a list of flashcards available to the user.
-* DeckCardListRoot contains DeckCardListPanel which will display a list of decks available to the user.
+* `FlashCardListRoot` contains `FlashCardListPanel` which will display a list of flashcards available to the user.
+* `DeckCardListRoot` contains `DeckCardListPanel` which will display a list of decks available to the user.
 
-The reasoning for splitting out the two different types of scenes is to allow the MainWindow to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
+The reasoning for splitting out the two different types of scenes is to allow the Main Window to solely perform the function of the stage, while having the root nodes handle the logic related to the individual scenes and their components.
 This provides better cohesion and utilizes the single responsibility principle as the classes are individually responsible for a smaller part of the UI rendered. It also improves the extensibility for the future if more modes and screens are to be added to the product.
 
 Similarly, we also chose to separate the review mode from the Main and Card mode. However, we decided to open a new 
@@ -184,22 +182,22 @@ The following general activity diagram summarizes what happens when a user execu
 ### Handle invalid inputs/commands
 
 #### Deck vs Card related commands
-* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the Main Mode.
-* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, list, clear) when user is inside a deck.
-* Flashnotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
-* The Parser will block these commands, taking arguments passed from Logic, which checks the state of Flashnotes through the model.
+* The system disables card-related commands (e.g. addCard, deleteCard, editCard, review, find) when user is at the Main mode.
+* The system disables deck-related commands (e.g. addDeck, deleteDeck, enterDeck, clear) when user is inside a deck.
+* FlashNotes keeps track of whether the user is currently inside a deck, and the name of the deck that the user is currently in.
+* The Parser will block these commands, taking arguments passed from Logic, which checks the state of FlashNotes through the model.
 
 #### Review related commands
-* The system only allows review-related commands (e.g. flip, correct, wrong, endReview)
-* Flashnotes also keeps track of whether the user is currently inside review mode.
+* The system only allows review-related commands (e.g. f, c, w, endReview)
+* FlashNotes also keeps track of whether the user is currently inside review mode.
 * The Parser (logic) will check if the user is in review mode through the model, and disables certain commands if the user is currently in a review session.
 
-#### Design Considerations: How to check for invalid commands
-* Alternative 1 (current choice): Checking of commands are done in the logic component.
+#### Design considerations: How to check for invalid commands
+* **Alternative 1 (current choice):** Checking of commands are done in the logic component.
     * Pros: Model component does not need to keep track and handle invalid inputs by user
     * Cons: Coupling between logic and model is increased
-* Alternative 2: Checking of commands are done in the model component.
-    * Pros; Reduced coupling
+* **Alternative 2:** Checking of commands are done in the model component.
+    * Pros: Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
 
 ### Implementation of Main Mode
@@ -236,9 +234,9 @@ With alternative 1, it saves more space, and the performance difference is negli
 
 `FlashNotes` supports the creation of new Decks. It extends `ReadOnlyFlashNotes`, which stores internally as an `UniqueDeckList` and a `UniqueCardList`. Additionally, it implements the following operations:
 
-* `Flashnotes#addDeck()`  —  Add a new Deck with a unique deck name.
+* `FlashNotes#addDeck()`  —  Add a new Deck with a unique deck name.
 
-`Model` interface depends on  `Flashnotes#addDeck()` to support functionality of `Model#addDeck()`.
+`Model` interface depends on  `FlashNotes#addDeck()` to support functionality of `Model#addDeck()`.
 
 ##### Given below is an example usage scenario.
 
@@ -357,7 +355,7 @@ The following sequence diagram shows how the `deleteCard` operation works:
 
 
 
-### Review Mode 
+### Implementation of Review Mode features 
 Our FlashNotes application allows users to test their knowledge and mastery of flashcards through a review session.
 
 #### Opening the review mode
@@ -410,20 +408,20 @@ Now, when the user inputs a review limit greater than `Integer.MAX_VALUE`, the p
 `ParseException` telling users that their review limit is out of range, instead of telling users that the command format is invalid. 
 
 
-#### Design considerations:
-* Alternative 1 (current choice): Save review limit in the user preferences file.
+##### Design Considerations: Where to save the review limit
+* **Alternative 1 (current choice):** Save review limit in the user preferences file.
     * Pros: Users would not have to set review limit every time they start up the application.
     * Cons: We have to write to the data file `preferences.json` instead of simply saving the limit as a variable in 
     model.
-* Alternative 2: Save review limit internally in Model.
+* **Alternative 2:** Save review limit internally in `Model`.
     * Pros: Do not have to write into a data file.
     * Cons: Users would have to set review limit every time they start up the application.
 
-### Flip Card feature
+#### Flip Card feature
 Our FlashNotes application allows users to flip the cards they are currently reviewing in the review mode to
 see the answer for the question on the flashcard. 
 
-#### Implementation
+##### Implementation
 Users only have to type the `f` command to flip their flashcard. Users can flip the flashcard as many times as they 
 would like to in the review mode.
 
@@ -441,22 +439,22 @@ This feature is implemented by adding an isFlipped boolean in the `Model` of the
 a function call is made from the `ModelManager#carryOutFlipCommand()` which is called by the `FlipCommand#execute()` 
 when it is created from the `FlashNotesParser`.
 
-#### Design considerations:
-* Alternative 1 (current choice): Change isFlipped boolean in the flashcard model.
+##### Design Considerations: Flip Card Implementation
+* **Alternative 1 (current choice):** Change `isFlipped` boolean in the flashcard model.
     * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     flipped in the review mode.
     * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI.
     * Cons: Increases coupling.
-* Alternative 2: Implement the boolean isFlipped in the UI part, IndividualFlashcard.
+* **Alternative 2:** Implement the boolean `isFlipped` in the UI part, `IndividualFlashcard`.
     * Pros: No need for extra function calls as flipping is directly done in the UI.
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
     
-### Next Card feature
+#### Next Card feature
 Our FlashNotes application allows users to go to the next card to review once they are done reviewing the current 
 flashcard.    
 
-#### Implementation
+##### Implementation
 Users only have to type the `c` or `w` command to see the next flashcard where `c` means that they managed to review
 the flashcard correctly and `w` means that they got the question wrong. These commands will only work after the user
 sees the answer of the flashcard currently being reviewed which is noted by whether the flashcard has been flipped or
@@ -476,30 +474,30 @@ This feature is implemented by adding an isCorrect int in the `Model` of the `Fl
 a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
 `CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
 
-#### Design considerations:
-* Alternative 1 (current choice): Change isCorrect int in the flashcard model
+##### Design Considerations: Next Card Implementation
+* **Alternative 1 (current choice):** Change isCorrect int in the flashcard model
     * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     reviewed correctly by the user in the review mode.
     * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
     * Cons: Increases coupling.
-* Alternative 2: Implement the int isCorrect in the UI part, IndividualFlashcard.
+* **Alternative 2:** Implement the int isCorrect in the UI part, IndividualFlashcard.
     * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
     * Cons: Logic is being done in the UI section.
     * Cons: Hard to test using testcases. Have to manually test.
 
-#### Review Statistics feature
+#### Review Statistics Feature
 
 FlashNotes application supports testing of the user's knowledge of the flashcards through a review session. 
 In addition to this, as a user wants to be able to see how many cards they got correct after a review session, so that
 they can track their topics' mastery and feel a sense of accomplishment for studying efficiently (user story). Due to
 this user story, FlashNotes will incorporate a review statistics feature to fulfill the user's needs.
 
-##### Tracking and generation of the review statistics feature
+##### Tracking and Generation of the Review Statistics Feature
 
 During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
-first try at the question. As the handling of progress through the review session implementation was done by Sruthi, my
-code is designed to compliment her implementation. This is done through the addition of `IndividualFlashcard::correctAnswers` 
-attribute, which keeps track of the count of questions answered correctly on the first attempt. 
+first try at the question. In order to compliment the implementation of Review Mode, my implementation made use of the 
+addition of `IndividualFlashcard::correctAnswers` attribute to keep track of the count of questions answered 
+correctly on the first attempt. 
 
 To ensure the variable incrementation is done only if the current flashcard contains a question that the user is attempting
 for the first time in the review session, a check for the `IndividualFlashcard::index` is done to ensure it is within 
@@ -518,28 +516,28 @@ The calculated percentage value from a review session will be considered as the 
 To provide a measure of accuracy, the percentage value will be calculated as a `double` value, which will be rounded off 
 to the nearest 1 decimal place for display or storage purposes.
 
-##### Relationship of review statistics and deck
+##### Relationship of Review Statistics and Deck
 
 To further help the user keep track of their topic mastery, FlashNotes will save the calculated percentage from the 
 last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
 under the relevant Deck's name.
 
-Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the `Deck` class implemented 
-by Peng Xiang and Jacob. As a String, it can be easily retrieved and displayed to the user through the UI component.
+Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the current `Deck` class 
+design implementation. As a String, it can be easily retrieved and displayed to the user through the UI component.
 As such, only review sessions initiated from an existing deck will be saved to the relevant deck.
 
 In the event that a user initiated a review session for all of FlashNotes' flashcards, the review statistics will only
 be generated and displayed for the user's benefit, but not save to FlashNotes.
 
-##### Extending Storage to include Deck
+##### Extending Storage to Include Deck
 
 Seeing as FlashNotes already saves Flashcard data for the user, it seemed reasonable to expand the storage component to 
 save FlashNotes' deck data as well, since it will also allow the user to better track their topic's mastery if they can 
 view their last review session's statistic for the deck whenever they open FlashNotes.
 
-###### Design consideration:
+###### Design Consideration: Storage Implementation for Deck
 
-* **Current choice:** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
+* **Alternative 1 (current choice):** Expand the current Storage implementation to include `Deck` data instead of only saving `Flashcard` data.
   * Pros: Partial implementation by teammates already exist.
   * Pros: Implementation can provide base code for future addition to the `Deck` class.
   * Cons: Design and implementation for `Deck` and `UniqueDeckList` is not concrete yet. Changes done now may clash with future changes to the classes.
@@ -584,7 +582,7 @@ To provide the UI display and changes related to review statistics, the followin
 * `DeckCard` - Changed constructor method to account for display of review statistics of the last review session in that deck.
 * `ReviewWindow#handleExit()` - Adjusted to return to card view upon execution of `endReview` command.
 
-###### Basic description of the backend process of the end of a review session:
+###### Basic Description of the Backend Process of the End of a Review Session:
 
 1. User reaches the end of the review session (by correctly answering the last of the questions that has not been answered yet or has been answered wrongly before). 
 
@@ -598,7 +596,7 @@ To provide the UI display and changes related to review statistics, the followin
 
 1. The processing of the `endReview` command through the Parser component will lead to the command execution in Logic component and trigger the save function of FlashNotes, thus updating FlashNote's json file with the new review session statistic for the deck.
 
-###### Corresponding sequence diagram for `endReview`:
+###### Corresponding Sequence Diagram for `endReview`:
 
 The following sequence diagram shows how the endReview command operation works:
 
@@ -625,6 +623,7 @@ such as the `enterDeck` or `review` will generate a `CommandResult` object with 
 `DeckCardListRoot#handleExit()`, `ReviewWindow#handleHelp()` etc.
 
 The following class diagram shows how the UI classes are related to the commandResult class, and their relevant methods.
+
 ![UiCommandResultClassDiagram](images/UiCommandResultClassDiagram.png)
 
 #### Implementation of FlashNotesParser
@@ -976,9 +975,18 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
        
+### Creating a deck
+
+1. Creating a deck.
+
+    1. Prerequisites: User is in Main mode.
+    
+    1. Test case: `addDeck n/Economics` <br>
+        Expected: Creates a new empty deck called 'Economics' and adds it to the list of decks displayed.
+
 ### Editing a deck name
 
-1. Editing a deck name
+1. Editing a deck name.
     
    1. Prerequisites: User is in Main Mode and FlashNotes contains a deck called "Economics" at index 1 and a deck called "Singapore.
    
@@ -992,13 +1000,41 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a deck.
 
-   1. Prerequisites: User is in Main Mode and FLashNotes contains at least one deck.
+   1. Prerequisites: User is in Main mode and FlashNotes contains at least one deck.
    
    2. Test case: `deleteDeck 1` <br>
         Expected: First deck is deleted from the list.
    
    3. Test case: `deleteDeck 0` <br>
         Expected: No deck is deleted. Error details shown in the status message. 
+
+### Setting and checking the review card limit
+
+1. Setting the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
+    
+    1. Test case: `setReviewLimit 20` <br>
+       Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
+       
+    1. Test case: `setReviewLimit 0` <br>
+       Expected: The message "Review card limit must be an integer greater than 0 and smaller than 2147483648." should appear in the result display box.
+        
+    1. Test case: `setReviewLimit all` <br>
+       Expected: The message "Review card limit successfully updated! There is now no review limit." should appear in the result display box.
+       
+    1. Test case: `setReviewLimit 20` from the review window <br>
+       Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
+
+1. Checking the maximum number of cards that can be reviewed in a single review session.
+
+    1. Prerequisites: User is in Home screen or Card screen.
+    
+    1. Test case: `checkReviewLimit` <br>
+       Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)
+       
+    1. Test case: `checkReviewLimit 7` <br>
+       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: checkReviewLimit" should appear in the result display box.
 
 ### Entering a deck
 
@@ -1014,6 +1050,15 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `enterDeck Singapore Malaysia` <br>
        Expected: No cards are shown as there is no deck with a name 'Singapore Malaysia'.   
+
+### Listing all flashcards
+1. Shows a list of all flashcards, and enters card mode.
+
+    1. Prerequisites: User is in Home mode.
+    
+    2. Test case: `listAll` <br>
+        Expected: The newly rendered list of flashcards can be seen. The list contains all flashcards currently stored 
+        in FlashNotes irrespective of the deck.
 
 ### Adding a card
 
@@ -1035,20 +1080,54 @@ testers are expected to do more *exploratory* testing.
         The specified card is added to a deck called "Default". 
         The "Default" deck will be created in the Main Mode if the deck does not exists.       
 
+### Editing a card
+
+1. Editing a card while in card mode.
+
+    1. Prerequisites: User is in Card Mode with at least one card in the list.
+    
+    2. Test case: `editCard 2 a/Lee Kuan Yew` <br>
+        Expected: The answer for the second card is changed to 'Lee Kuan Yew'.
+        
+    3. Test case: `editCard 2 q/Who is Singapore's prime minister? a/Lee Hsien Loong` <br>
+        Expected: The question for the second card is changed to 'Who is Singapore's prime minister?' and the answer 
+        is changed to 'Lee Hsien Loong'.
+        
+    4. Test case: `editCard 0 q/Who is Singapore's prime minister?`<br>
+        Expected: No card is edited. Error details shown.
+
 ### Deleting a card
 
-1. Deleting a card while all persons are being shown.
+1. Deleting a card in card mode.
 
-   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   1. Prerequisites: User is in Card Mode with at least one card in the list.
 
    2. Test case: `deleteCard 1`<br>
-      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message.
 
    3. Test case: `deleteCard 0`<br>
-      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No card is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `deleteCard`, `deleteCard x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.          
+      Expected: Similar to previous.   
+      
+### Finding a flashcard
+
+1. Finding a flashcard in Card mode.
+
+    1. Prerequisites: User is in Card mode. 
+    
+    1. Test case: `find history` <br>
+        Expected: The flashcard(s) with questions that contain the word 'history' will be displayed.
+        
+### Listing all flashcards in card mode
+
+1. List flashcards in Card Mode.
+
+    1. Prerequisites: User is in Card Mode. User has successfully executed the find command.
+    
+    1. Test case: `list` <br>
+        Expected: User will go back to the deck of cards they were viewing before they executed the find command.
 
 ### Going back home
 
@@ -1108,34 +1187,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `endReview` <br>
        Expected: Review Window closes, and you are returned to the Card Mode you started the review session from.
 
-### Setting and checking the review card limit
-
-1. Setting the maximum number of cards that can be reviewed in a single review session.
-
-    1. Prerequisites: User is in Main Mode or Card Mode.
-    
-    1. Test case: `setReviewLimit 20` <br>
-       Expected: The message "Review card limit successfully updated! Review limit is now 20." should appear in the result display box.
-       
-    1. Test case: `setReviewLimit 0` <br>
-       Expected: The message "Review card limit must be an integer greater than 0 and smaller than 2147483648." should appear in the result display box.
-        
-    1. Test case: `setReviewLimit all` <br>
-       Expected: The message "Review card limit successfully updated! There is now no review limit." should appear in the result display box.
-       
-    1. Test case: `setReviewLimit 20` from the review window <br>
-       Expected: The message "This command is not available in review mode. Please exit the review mode by typing 'endReview' and try again." should appear in the result display box.
-
-1. Checking the maximum number of cards that can be reviewed in a single review session.
-
-    1. Prerequisites: User is in Main Mode or Card Mode.
-    
-    1. Test case: `checkReviewLimit` <br>
-       Expected: The message "Review card limit is 20!" should appear in the result display box. (assuming review limit is 20)
-       
-    1. Test case: `checkReviewLimit 7` <br>
-       Expected: The message "This command contains more arguments than necessary. Please try the command again without any arguments: checkReviewLimit" should appear in the result display box.
-
 -------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
@@ -1145,22 +1196,24 @@ their details. When doing our flashcard application, we thought that users shoul
 separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
 with finding a good way to allow users to perform all these actions using the single interface that came with AB3. 
 
-The easiest method we explored to achieve this was to modify the "list" command to let users view their flashcards in specific 
+The easiest method we explored to achieve this was to modify the `list` command to let users view their flashcards in specific 
 decks, and show the cards one by one when users want to review them. However, we were not satisfied with the visual effect of 
 this solution. We wanted to let users differentiate their interactions when making/editing the decks and flashcards, and when 
 reviewing flashcards more clearly.
 
 The next method we explored required far more effort but was worth it in the end. We decided to implement 3 different interfaces 
-for our application,  the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
+for our application, the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
 In the main mode, the different decks would be displayed to the users. Users can then make new decks or edit current decks in 
 this mode. They can also choose a specific deck to open and see the cards it contains. This brings users into the Card mode, 
 where they can make new flashcards or edit current cards. They can also review their cards by using the review command that brings 
-them to the review mode. Implementing this required us to redesign the entire UI component into something with more layers of 
+them to the review mode. 
+
+Implementing this required us to redesign the entire UI component into something with more layers of 
 abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
-we ended up with a highly effective and user friendly flashcard application.
+we ended up with a highly effective and user-friendly flashcard application.
 
-### Challenge 2: One object-type versus Two object-types with composition relationship
+### Challenge 2: One object type versus Two object types with a perceived composition relationship
 
 At the start of our team project, refactoring AB3 into FlashNotes resulting in the `Person` object changing into 
 the `Flashcard` object. As out project progressed, there was a need to include a second object, which was the `Deck`
@@ -1171,10 +1224,10 @@ deletion of a `Deck` object meant that there was a need to look through all of t
 identify and delete any `Flashcard` object with a `Tag` that marked it as a part of the deleted `Deck`.
 
 Furthermore, editing the name of a `Deck` required us to identify all `Flashcard` objects belonging to that `Deck` before
-editing it `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
+editing its `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
 direct composition between `Deck` and `Flashcard` in our current implementation design.
 
-Finally, as part of our 'Review Statistics Feature', we wanted to be able to save the data in the `Deck` class as well. 
+Finally, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
 To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
 `Deck` class. 
 
@@ -1196,7 +1249,8 @@ section for the entire listing of all the commands.
 
 ### Achievement of Project
 
-1. User story - Of the 13 [User Stories](###User-stories) listed, we managed to fulfill 12 of them in various ways.
+1. User story - Of the 13 [User Stories](https://ay2021s1-cs2103t-t15-2.github.io/tp/DeveloperGuide.html#user-stories) 
+listed, we managed to fulfill 12 of them in various ways.
 
 1. Maintain the simplicity and cohesiveness of the features from the original AB3 project.
 
