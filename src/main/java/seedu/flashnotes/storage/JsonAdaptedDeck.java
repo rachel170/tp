@@ -54,7 +54,7 @@ class JsonAdaptedDeck {
         }
 
         // If still default value
-        if (resultStatistic.equals("-1")) {
+        if (resultStatistic.equals("-1.0")) {
             // Update the created Deck object with the default value
             theDeck.setResultStatistics(resultStatistic);
         } else {
