@@ -11,12 +11,12 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 Given below are my contributions to the project.
 
 * **New Feature 1**: Implemented a new type of object named Decks.
-  * What it does: Enables the application to store a different type of object
-  * Justification: Implementing Decks is vital to ensuring that flashcards can be organised according to themes and topics for revision purposes. It also enables the tracking of revision statistics on the deck level, which is crucial in any flashcard application.
-  * Highlights: This enhancement affects existing and future commands as many actions revolves around the Deck object type. It required an in-depth analysis of design alternatives to weigh the tradeoff between the value and the speed of development. 
-  
+    * What it does: Enables the application to store a different type of object
+    * Justification: Implementing Decks is vital to ensuring that flashcards can be organised according to themes and topics for revision purposes. It also enables the tracking of revision statistics on the deck level, which is crucial in any flashcard application.
+    * Highlights: This enhancement affects existing and future commands as many actions revolves around the Deck object type. It required an in-depth analysis of design alternatives to weigh the tradeoff between the value and the speed of development. 
+    
     Implementation in particular was challenging because creating a new object affects all components from UI to Model to even storage. I handled everything end to end, including UI, business logic and data management, excluding the saving and reading of data. The JSON formatting of Deck was done by my teammate Rachel.
-  * Credits: Jackson Json was used in the process of storing all objects in FlashNotes
+    * Credits: Jackson Json was used in the process of storing all objects in FlashNotes
   
 * **New Feature 2**: Added the ability to add new Decks via addDeck Command.
   
