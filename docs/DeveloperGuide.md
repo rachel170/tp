@@ -6,7 +6,7 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
+## **Introduction**
 This documentation contains an overview of the structure and implementation of FlashNotes. It is made for 
 developers who wish to maintain, modify or understand the software development behind FlashNotes.
 
@@ -162,7 +162,7 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 
 <div style="page-break-after: always;"></div>
 
-## Implementation
+## **Implementation**
 ### Implementation of UI (3 Different Modes)
 
 Both of the root nodes represent the types of scenes available to the main window:

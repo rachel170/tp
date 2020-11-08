@@ -20,14 +20,14 @@ To get started, head over to the [Quick Start](#quick-start) section.
 
 To see the summary of all our commands, go to the [Command Summary](#command-summary) section.
 
-Here's the Table of Contents(Under Details) for a brief overview of our User Guide, or for you to quickly access other sections of our User Guide.
+Here's the Table of Contents for a brief overview of our User Guide, or for you to quickly access other sections of our User Guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
-<details markdown="block">
-- Table of Contents
+
+* Table of Contents
 {:toc}
-</details>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -892,49 +892,38 @@ To view the statistics of your last review session for any deck, simply navigate
 
 ## FAQ
 
-<details>
-<summary>How do I transfer my data to another Computer?</summary>
+How do I transfer my data to another Computer?
 <br>
 Install the app in the other computer and overwrite the data file with the file that contains the 
 data of your previous FlashNotes home folder.
 <br><br>
-</details>
 <br>
 
-<details>
-<summary>What should I do if I have problems launching the application?</summary>
+What should I do if I have problems launching the application?
 <br>
 Ensure that Java 11 has been installed on your computer, and that you have the most recent version of the application.
 <br><br>
-</details>
 <br>
 
-<details>
-<summary>When I exit the program, will all my new flashcards and updates be saved?</summary>
+When I exit the program, will all my new flashcards and updates be saved?
 <br>
 Yes! Whatever changes that have been made while the application was running will be saved in the data folder. To 
 ensure none of your data is lost, do not delete the data folder.
 <br><br>
-</details>
 <br>
 
-<details>
-<summary>Is it possible to restore a deck that I just deleted?</summary>
+Is it possible to restore a deck that I just deleted?
 <br>
 Sorry but no. There is no such functionality at this point in time.
 <br><br>
-</details>
 <br>
 
-<details>
-<summary>What should I do when I get a 'Java Quit unexpectedly' error. (For Mac Users)</summary>
+What should I do when I get a 'Java Quit unexpectedly' error. (For Mac Users)
 <br>
-
 Open System Preferences in you computer,  click on ‘Security & Privacy’ and then proceed to click on Privacy Tab and 
 the ‘Input Monitoring’ section. Enable java to monitor input from your keyboard even while using other apps.
-
 <br><br>
-</details>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
