@@ -19,11 +19,11 @@ public class SampleDataUtil {
     public static Flashcard[] getSampleFlashcards() {
         return new Flashcard[] {
             new Flashcard(new Question("What is the definition of Macroeconomics?"),
-                    new Answer("concerned with large-scale or general economic factors, "
+                    new Answer("It is concerned with large-scale or general economic factors, "
                             + "such as interest rates and national productivity."),
                     new Tag("Economics")),
             new Flashcard(new Question("What is the definition of Microeconomics?"),
-                    new Answer("concerned with single factors and the effects of individual decisions."),
+                    new Answer("It is concerned with single factors and the effects of individual decisions."),
                     new Tag("Economics")),
             new Flashcard(new Question("When did Singapore gain independence?"),
                     new Answer("1965"), new Tag("Singapore")),
