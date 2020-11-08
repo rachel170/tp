@@ -587,7 +587,7 @@ Shows all flashcards in the deck that the user is in.
 
 :warning: Things to note:
 
-* No additional inputs should be added behind the `listAll` command.
+* No additional inputs should be added behind the `list` command.
 * Typically used after the `find` command when you want to see all cards in the deck again.
 
 </div>
