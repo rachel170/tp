@@ -308,16 +308,12 @@ The logic component will reference the these names from the model component duri
 ##### Design Considerations: How to implement showing all cards.
 
 **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
-* Pros:
-    * User has increased flexibility
-* Cons:
-    * Need to check for reserved deck name 
+* Pros: User has increased flexibility
+* Cons: Need to check for reserved deck name 
     
 **Alternative 2:** Prevent users to list all flashcards or add flashcards in this list**
-* Pros:
-    * System does not have to check and reserve a deck name
-* Cons:
-    * User will not be able to see a list of all flashcards
+* Pros: System does not have to check and reserve a deck name
+* Cons: User will not be able to see a list of all flashcards
 
 
 ### Implementation of Card Mode Features
@@ -347,16 +343,12 @@ The following sequence diagram shows how the `deleteCard` operation works:
 ##### Design Considerations: How to implement Card Mode Commands
 
 **Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
-* Pros:
-    * Easy to implement as all logic is implemented in FlashNotes.
-* Cons:
-    * Deck class does not know when the flashcards are modified.
+* Pros: Easy to implement as all logic is implemented in FlashNotes.
+* Cons: Deck class does not know when the flashcards are modified.
     
 **Alternative 2:** Implement logic of card-level operations in Deck
-* Pros:
-    * Deck can modify its own cards.
-* Cons:
-    * Need to redesign Flashcard list to be a composition of Deck.
+* Pros: Deck can modify its own cards.
+* Cons: Need to redesign Flashcard list to be a composition of Deck.
 
 
 
@@ -446,14 +438,16 @@ when it is created from the `FlashNotesParser`.
 
 ##### Design Considerations: Flip Card Implementation
 * **Alternative 1 (current choice):** Change `isFlipped` boolean in the flashcard model.
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    * Pros: 
+        * Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     flipped in the review mode.
-    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI.
+        * Ensures that the logic of flipping of flashcard isn't done in the UI.
     * Cons: Increases coupling.
 * **Alternative 2:** Implement the boolean `isFlipped` in the UI part, `IndividualFlashcard`.
     * Pros: No need for extra function calls as flipping is directly done in the UI.
-    * Cons: Logic is being done in the UI section.
-    * Cons: Hard to test using testcases. Have to manually test.
+    * Cons:
+        * Logic is being done in the UI section.
+        * Hard to test using testcases. Have to manually test.
     
 #### Next Card feature
 Our FlashNotes application allows users to go to the next card to review once they are done reviewing the current 
@@ -481,14 +475,16 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
 
 ##### Design Considerations: Next Card Implementation
 * **Alternative 1 (current choice):** Change isCorrect int in the flashcard model
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    * Pros: 
+        * Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     reviewed correctly by the user in the review mode.
-    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
+        * Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
     * Cons: Increases coupling.
 * **Alternative 2:** Implement the int isCorrect in the UI part, IndividualFlashcard.
     * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
-    * Cons: Logic is being done in the UI section.
-    * Cons: Hard to test using testcases. Have to manually test.
+    * Cons: 
+        * Logic is being done in the UI section.
+        * Hard to test using testcases. Have to manually test.
 
 #### Review Statistics Feature
 
@@ -999,7 +995,7 @@ testers are expected to do more *exploratory* testing.
         Expected: The name of deck at Index 1 is changed to Econs.
         
    2. Test case: `editDeckName 1 n/Singapore` <br>
-        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singpaore" already exists.
+        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singapore" already exists.
 
 ### Deleting a deck
 
@@ -1197,26 +1193,26 @@ testers are expected to do more *exploratory* testing.
 
 ### Challenge 1: UI Modes
 At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
-their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
-separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
+their details. When developing our flashcard application, we thought that **users should be able to separate their flashcards into
+separate decks**, and also to **review their flashcards in a different place** from where they make/edit their flashcards. We struggled
 with finding a good way to allow users to perform all these actions using the single interface that came with AB3. 
 
 The easiest method we explored to achieve this was to modify the `list` command to let users view their flashcards in specific 
 decks, and show the cards one by one when users want to review them. However, we were not satisfied with the visual effect of 
-this solution. We wanted to let users differentiate their interactions when making/editing the decks and flashcards, and when 
-reviewing flashcards more clearly.
+this solution. We wanted to let users **differentiate their interactions when making/editing the decks and flashcards, and when 
+reviewing flashcards more clearly**.
 
-The next method we explored required far more effort but was worth it in the end. We decided to implement 3 different interfaces 
-for our application, the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
+The next method we explored required far more effort but was worth it in the end. We **decided to implement 3 different interfaces** 
+for our application, the *Main* mode, the *Card* mode, and the *Review* mode. **Different commands are allowed** in the different modes. 
 In the main mode, the different decks would be displayed to the users. Users can then make new decks or edit current decks in 
 this mode. They can also choose a specific deck to open and see the cards it contains. This brings users into the Card mode, 
 where they can make new flashcards or edit current cards. They can also review their cards by using the review command that brings 
 them to the review mode. 
 
-Implementing this required us to redesign the entire UI component into something with more layers of 
+Implementing this required us to **redesign the entire UI component** into something with more layers of 
 abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
-we ended up with a highly effective and user-friendly flashcard application.
+we ended up with a **highly effective and user-friendly** flashcard application.
 
 ### Challenge 2: One object type versus Two object types with a perceived composition relationship
 
