@@ -468,18 +468,7 @@ This feature is implemented by adding an isCorrect int in the `Model` of the `Fl
 a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
 `CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
 
-##### Design Considerations: Next Card Implementation
-* **Alternative 1 (current choice):** Change isCorrect int in the flashcard model
-    * Pros: 
-        * Only need the instance of the flashcard to update or check whether the particular flashcard has been 
-    reviewed correctly by the user in the review mode.
-        * Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
-    * Cons: Increases coupling.
-* **Alternative 2:** Implement the int isCorrect in the UI part, IndividualFlashcard.
-    * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
-    * Cons: 
-        * Logic is being done in the UI section.
-        * Hard to test using testcases. Have to manually test.
+Design Considerations for Next Card Implementation is similar to that of Flip Card feature.
 
 #### Review Statistics Feature
 
