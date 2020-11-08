@@ -70,7 +70,7 @@ public class TypicalFlashcards {
         return ab;
     }
 
-    private static List<Deck> getTypicalDecks() {
+    public static List<Deck> getTypicalDecks() {
         Deck friends = new Deck ("friends");
         friends.setResultStatistics("3.3");
         Deck oweMoney = new Deck ("owesMoney");
