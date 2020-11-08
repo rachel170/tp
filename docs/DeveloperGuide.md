@@ -283,7 +283,7 @@ Our team looked at the 2 different ways in which Add Deck Command can interact w
         * This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
         * Consistency of implementation with the other commands in FlashNotes architecture makes it easier for developers to trace and worth the slight increment in abstraction.
     * Cons:
-        * Some might view that the ModelManager is taking on too much work and turning into a "fat" class
+        * Some might view that the ModelManager is taking on too many methods
 
 * **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
     * Pros:
