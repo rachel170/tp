@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("deleteDeck nameOfDeck")
+[-> LogicManager : execute("deleteDeck 1")
 activate LogicManager
 
-LogicManager -> FlashNotesParser : parseCommand("deleteDeck nameOfDeck")
+LogicManager -> FlashNotesParser : parseCommand("deleteDeck 1")
 activate FlashNotesParser
 
 create DeleteDeckCommandParser
@@ -26,7 +26,7 @@ activate DeleteDeckCommandParser
 DeleteDeckCommandParser --> FlashNotesParser
 deactivate DeleteDeckCommandParser
 
-FlashNotesParser -> DeleteDeckCommandParser : parse("nameOfDeck")
+FlashNotesParser -> DeleteDeckCommandParser : parse("1")
 activate DeleteDeckCommandParser
 
 create DeleteDeckCommand
@@ -48,7 +48,7 @@ deactivate FlashNotesParser
 LogicManager -> DeleteDeckCommand : execute()
 activate DeleteDeckCommand
 
-DeleteDeckCommand -> Model : deleteDeck("nameOfDeck")
+DeleteDeckCommand -> Model : deleteDeck("1")
 activate Model
 
 Model --> DeleteDeckCommand
