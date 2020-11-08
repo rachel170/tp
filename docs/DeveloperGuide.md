@@ -200,7 +200,7 @@ The following general activity diagram summarizes what happens when a user execu
     * Pros: Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
 
-### Implementation of Main Mode
+### Implementation of Main Mode features
 
 #### 3 possible designs for Decks in Main Mode
 
@@ -211,7 +211,7 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
     * Initialization of flashcard list and deck list is very fast using the stored data.
     * No need to store duplicate cards if one card belongs to more than 1 deck, thus saving space
   * Cons: 
-    * When retrieving cards belonging to a certain deck, it may take a long while to filter the relevant cards if the list of cards become huge
+    * When retrieving cards belonging to a certain deck, it may take a long while to filter the relevant cards if the total list of cards become huge
 
 * **Alternative 2:** Store Flashcards within the deck.
   * Pros: 
@@ -263,10 +263,10 @@ The following sequence diagram shows how Add Deck operation works:
 </div>
 
 ##### Design Consideration: How Add Deck Command interacts with Model and underlying FlashNotes object
-Our team looked at the 2 different ways addDeck can interact with model-related objects. 
+Our team looked at the 2 different ways in which Add Deck Command can interact with model-related objects. 
 * **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
     * Pros:
-        * This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
+        * This also increases maintainability as Add Deck Command only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
         * This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
         * Consistency of implementation with the other commands in FlashNotes architecture makes it easier for developers to trace and worth the slight increment in abstraction.
     * Cons:
