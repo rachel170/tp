@@ -330,8 +330,6 @@ The logic component will reference the these names from the model component duri
 
 ### Implementation of Card Mode Features
 
-#### Overview of Card Mode Features
-
 Card methods that are supported in Card Mode by `FlashNotes`:
 * `FlashNotes#addFlashcard(Flashcard flashcard)`: Adds a flashcard
 * `FlashNotes#removeFlashcard(Flashcard key)`: Deletes a flashcard
