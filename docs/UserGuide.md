@@ -35,11 +35,11 @@ Here's the Table of Contents(Under Details) for a brief overview of our User Gui
 
 ## Glossary
 
-* Flashcard: A flashcard shows a question and the answer to the question.
-* Decks: A deck will contain flashcards.
-* Index: The number at the start of each deck or flashcard.
-* Review: A mode where only the question of the flashcard is shown; the answer will be hidden from you.
-* Prefix: A reserved word that needs to be placed before your inputs to indicate the start of your input.
+* **Flashcard**: A flashcard shows a question and the answer to the question.
+* **Decks**: A deck will contain flashcards.
+* **Index**: The number at the start of each deck or flashcard.
+* **Review**: A mode where only the question of the flashcard is shown; the answer will be hidden from you.
+* **Prefix**: A reserved word that needs to be placed before your inputs to indicate the start of your input.
 * :information_source:: Additional info
 * :warning:: Warning
 
@@ -111,7 +111,6 @@ Users can:
 
 1. Double-click the file to start the app. A view similar to the one below should appear in a few seconds. Note how FlashNotes contains some sample data after initial launch.<br>
    ![Figure 2: Initial View with GUI Details](images/UG_GUIDetails.png)<br>
-   _Figure 2A: Initial View of FlashNotes with GUI component labels._
    
    * **Command Box**: Where you input commands for FlashNotes.
    
@@ -146,7 +145,7 @@ Users can:
    Our provided sample data is not accurate nor necessary to the application. As such, you can easily delete the sample data in the following way:
    
    * Usage of the `clear` command.<br>
-     Clears all flashcard and deck data currently in FlashNotes. Refer under **Main Mode Features** for further details about the command.
+     Clears all flashcard and deck data currently in FlashNotes. Refer to [Main Mode Features](#main-mode-features) for further details about the command.
      
 </div>
 
@@ -162,7 +161,7 @@ Users can:
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the inputs to be supplied by you.<br>
-  e.g. in `addCard q/QUESTION`, `QUESTION` is an input which can be used as `add q/What is the question?`.
+  e.g. in `addCard q/QUESTION a/ANSWER`, `QUESTION` is an input which can be `What is the question?`.
 
 * Inputs can be in any order.<br>
   e.g. if the command specifies `q/QUESTION a/ANSWER`, `a/ANSWER q/QUESTION` is also acceptable.
@@ -232,12 +231,12 @@ Outcome expected:
 
 :warning: Things to note:
 
-* The deck name is case-sensitive. e.g. future search queries of `GET1025` will not match `get1025`
-* If there is a deck that has the same existing case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
-* There is a 40 character limit for DECKNAME.
-* Reserved names (such as `list`) can't be used as DECKNAME.
+* The deck name is **case-sensitive**. e.g. `GET1025` will not match `get1025`
+* If there is a deck that has the **same existing** case-sensitive name, the deck will not be created because it would be considered a duplicate deck by the system.
+* There is a **40 character limit** for `DECKNAME`.
+* Reserved names (such as `list`) can't be used as `DECKNAME`.
 * If multiple name prefixes are in the command text, only the last one would be selected.
-* If you are in card mode, you need to navigate back to the Main Mode via the Home command before adding new deck.
+* If you are in *Card* mode, you need to navigate back to the *Main* Mode via the Home command before adding new deck.
 
 </div>
 
@@ -369,13 +368,13 @@ After reviewing the 3rd flashcard, you should have reached the end of the review
 
 :warning: Things to note:
 
-* The review limit can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
+* The review limit can be an **integer greater than 0 and smaller than 2147483648**. The program doesn't handle any
 review limit greater than 2147483647.
-* The review limit can be the string `all`. (case insensitive)
+* The review limit can be the string `all`. (case-insensitive)
 * Note that when the review limit is set to `all`, the review limit is maximum number of cards you can review.
 (Which is 2147483647 cards)
-* This review card limit applies to all decks once it is set. 
-* This review card limit is remembered by the program. (You do not have to set the card limit 
+* This review card limit **applies to all decks** once it is set. 
+* This review card limit is **remembered by the program**. (You do not have to set the card limit 
 again after he/she closes and reopens the application)
 * This command be used in both the *Main* and *Card* modes.
 
@@ -403,8 +402,8 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* This review card limit applies to all decks. 
-* This review card limit is remembered by the program. (You do not have to set the card limit 
+* This review card limit **applies to all decks**. 
+* This review card limit is **remembered by the program**. (You do not have to set the card limit 
 again after he/she closes and reopens the application)
 * This command be used in both the *Main* and *Card* modes.
 
@@ -458,7 +457,7 @@ Exits FlashNotes.
 Format: `exit`
 
 Outcome Expected:
-1. User enters `exit` command in **Main Mode**. <br>
+1. User enters `exit` command in *Main* Mode. <br>
 ![Exiting FlashNotes](images/UG_ExitCommand.png)
 
 1. FlashNotes closes and saves all current data.
@@ -467,7 +466,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* `exit` can be activated from **Main Mode** and **Card Mode**, but not **Review Mode**.
+* `exit` can be activated from *Main* Mode and *Card* Mode, but not *Review* Mode.
 * No additional inputs should be added behind the `exit` command.
 
 </div>
@@ -476,9 +475,9 @@ Outcome Expected:
 
 FlashNotes saves its data into hard disk automatically after every command,  so there is no need to save its data manually.
 
-The data of FlashNotes is contained in the `flashnotes.json` file. This save file can be found in the `data` folder contained inside of the _home folder_ that you installed FlashNotes into.
+The data of FlashNotes is contained in the `flashnotes.json` file. This saved file can be found in the `data` folder contained inside of the folder that you installed FlashNotes into.
 
-For further details on how to transfer FlashNotes data, please refer to the **FAQ** section.
+For further details on how to transfer FlashNotes data, please refer to the [FAQ](#faq) section.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -578,8 +577,8 @@ Outcome Expected:
 :warning: Things to note:
 
 * The search is **case-insensitive**. e.g `test` will match `Test`
-* **Only full phrases will** be matched e.g. `Art` will not match `Artifact`
-* Find command only searches keywords from the questions, since the purpose of using flashcards is to self test.
+* **Only full phrases will be matched** e.g. `Art` will not match `Artifact`
+* Find command only **searches keywords from the questions**, since the purpose of using flashcards is to self test.
 * Flashcards matching at least one keyword will be returned. (e.g. `Conflict Resolution` will return `Handling Conflict`, `Resolution`)
 
 </div>
@@ -650,7 +649,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* It can only be activated from the card screen to navigate back to Main Mode.
+* It can only be activated from the *Card* mode to navigate back to *Main* Mode.
 * No additional inputs should be added behind the home command.
 
 </div>
@@ -676,12 +675,13 @@ review window is closed.
 
 :warning: Things to note:
 
-* This command is only valid in the **Card** mode.
-* The cards to be reviewed is determined by the list of cards currently displayed in the **Card** screen.
-Eg. If there were originally 10 cards in the deck, and you use the `find` command to search for specific cards. 
+* This command is only valid in the *Card* mode.
+* The cards to be reviewed is determined by the list of cards currently displayed in the *Card* mode.
+(Eg. If there were originally 10 cards in the deck, and you use the `find` command to search for specific cards. 
 If only 1 card matches your search query, and you use the `review` command, only that 1 card will be reviewed.
-To review all the 10 cards in the deck, you can use the `list` command to display all cards in the **Card** screen
-again before using the `review` command.
+To review all the 10 cards in the deck, you can use the `list` command to display all cards in the *Card* mode
+again before using the `review` command.)
+* You should not be able to maximize the review window.
 
 </div>
 
@@ -840,7 +840,7 @@ flip back to the answer again before they can mark the flashcard as wrong.
 
 ### End current review session: `endReview`
 
-Ends the current review session and returns you to the **Card Mode** that the review session started from.
+Ends the current review session and returns you to the *Card* Mode that the review session started from.
 
 Format: `endReview`
 
@@ -848,14 +848,14 @@ Outcome Expected: <br>
 1. User has reached the end of the review session and entered the `endReview` command. <br>
 ![End of Review Window](images/UG_ReviewStatistics.png)
 
-1. Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
+1. Review Window closes, and you are returned to the *Card Mode* you started the review session from. <br>
 ![Return to Main Window](images/UG_ReturnToCardMode.png)
 
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
 
-* `endReview` can only be activated from the Review Window to return to the **Card Mode** you started the review session from.
+* `endReview` can only be activated from the Review Window to return to the *Card* Mode you started the review session from.
 * No additional inputs should be added behind the `endReview` command.
 
 </div>
@@ -869,7 +869,7 @@ At the end of a review session, FlashNotes will calculate your score for the ses
 As shown in the above image, the Review Window will display the following information:
  * The **total number of questions** you undertook in the review session.
  * The **number of questions marked as correct during your first attempt** at the question.
- * The calculated **percentage of questions answered correctly on your first attempt** rounded to 1 decimal place.
+ * The calculated **percentage of questions answered correctly on your first attempt**, a numeric value between 0 and 100, rounded to 1 decimal place.
 
 Of the three types of information, only the calculated percentage will be saved by FlashNotes. This is so that you can track your revision progress for any deck that you conduct a review session in.
 
@@ -895,7 +895,7 @@ To view the statistics of your last review session for any deck, simply navigate
 <details>
 <summary>How do I transfer my data to another Computer?</summary>
 <br>
-Install the app in the other computer and overwrite the empty data file it creates with the file that contains the 
+Install the app in the other computer and overwrite the data file with the file that contains the 
 data of your previous FlashNotes home folder.
 <br><br>
 </details>
@@ -950,7 +950,7 @@ Action | Format, Examples
 **Open Deck** | `Format: enterDeck DECKNAME` <br> e.g., `enterDeck Default`
 **Delete Deck** | `Format: deleteDeck INDEX`<br> e.g., `deleteDeck 1`
 **Edit Deck Name** | `Format: editDeckName INDEX n/NEWDECKNAME`<br> e.g., `editDeckName 1 n/History`
-**ListAll** | `listAll`
+**List All** | `listAll`
 **Help** | `help`
 **Clear** | `clear`
 **Set Review Limit** | `setReviewLimit LIMIT` <br> e.g., `setReviewLimit 30`, `setReviewLimit all`

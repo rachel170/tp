@@ -1,0 +1,18 @@
+{
+  "flashcards": [ {
+    "question": "What is an invalid Deck?",
+    "answer": "One with a reserved deck name.",
+    "tag": "default"
+  }, {
+    "question": "valid question",
+    "answer": "valid answer",
+    "tag": "valid tag"
+  } ],
+  "decks": [ {
+    "deckName": "valid tag",
+    "resultStatistic": "-1.0"
+  }, {
+    "deckName": "list",
+    "resultStatistic": "-1.0"
+  }]
+}
