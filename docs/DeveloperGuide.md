@@ -491,22 +491,22 @@ this user story, FlashNotes will incorporate a review statistics feature to fulf
 ##### Tracking and Generation of the Review Statistics Feature
 
 During a review session, FlashNotes will keep track of the number of questions the user answered correctly on their 
-first try at the question. In order to compliment the implementation of Review Mode, my implementation made use of the 
-addition of `IndividualFlashcard::correctAnswers` attribute to keep track of the count of questions answered 
+first try at the question. In order to compliment the implementation of Review Mode, the implementation made use of the 
+addition of `correctAnswers` attribute in `IndividualFlashcard` to keep track of the count of questions answered 
 correctly on the first attempt. 
 
 To ensure the variable incrementation is done only if the current flashcard contains a question that the user is attempting
-for the first time in the review session, a check for the `IndividualFlashcard::index` is done to ensure it is within 
-the range of `IndividualFlashcard::numOfFlashcards`.
+for the first time in the review session, a check in `IndividualFlashcard` for the `index` is done to ensure it is within 
+the range of `numOfFlashcards`.
 
 To ensure the variable incrementation is done only if the current flashcard contains a question that the user answered 
 correctly, a check is done for the `isCorrect` variable to ensure that the current flashcard has been marked as
 correct by the user.
 
 At the end of the review session, FlashNotes will display:
- * `IndividualFlashcard::correctAnswers` - The total number of questions marked correct on the user's first attempt at it.
- * `IndividualFlashcard::numOfFlashcards` - The total number of unique questions utilized in the review session.
- * A calculated percentage value generated from `IndividualFlashcard::correctAnswers` and `IndividualFlashcard::numOfFlashcards`.
+ * `correctAnswers` - The total number of questions marked correct on the user's first attempt at it.
+ * `numOfFlashcards` - The total number of unique questions utilized in the review session.
+ * A calculated percentage value generated from `correctAnswers` and `numOfFlashcards`.
 
 The calculated percentage value from a review session will be considered as the 'Review Statistics' in FlashNotes.
 To provide a measure of accuracy, the percentage value will be calculated as a `double` value, which will be rounded off 
@@ -518,7 +518,7 @@ To further help the user keep track of their topic mastery, FlashNotes will save
 last review session initiated in the deck to the `Deck` class, which will be displayed in the Main Mode of FlashNotes, 
 under the relevant Deck's name.
 
-Review Statistics will be saved as the `Deck::resultStatistics` attribute as a String in the current `Deck` class 
+Review Statistics will be saved as the `resultStatistics` attribute as a String in the current `Deck` class 
 design implementation. As a String, it can be easily retrieved and displayed to the user through the UI component.
 As such, only review sessions initiated from an existing deck will be saved to the relevant deck.
 
