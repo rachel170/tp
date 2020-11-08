@@ -73,6 +73,7 @@ The UI consists of a `MainWindow` which acts as a stage, and the `MainWindow` th
 The Root Node contains the scene, which is composed of UI parts like`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 There are 2 different types of implementations available for the root node. One of them is the FlashCardListRoot, and the other is the DeckCardListRoot. Both classes implement RootNode interface so that the MainWindow object can access both through polymorphism.
+
 Note that the Review Window is a component of the FlashCardListRoot and not a component of the DeckCardListRoot. As a result, the review window can only be initiated from the FlashCardListRoot.
 
 The 2 of the 3 different modes mentioned in the user guide corresponds to the 2 implementations of root node. The last one corresponds to the Review window in terms of UI display. More info can be found at [Implementation of UI.](#implementation-of-ui-3-different-modes)
@@ -199,7 +200,7 @@ The following general activity diagram summarizes what happens when a user execu
     * Pros: Reduced coupling
     * Cons: Model has to handle commands, reducing cohesion.
 
-### Implementation of Main Mode
+### Implementation of Main Mode features
 
 #### 3 possible designs for Decks in Main Mode
 
@@ -208,16 +209,13 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
 * **Alternative 1 (current choice):** List of Decks and list of flashcards stored independently
   * Pros:
     * Initialization of flashcard list and deck list is very fast using the stored data.
-    * Easy to improve into a many to many type relationship in the future between deck and cards by using database functions.
-    * Reduce space needed for storing new flashcards and decks.
-    * Increase ease of implementation of future deck related commands by isolating the relevant object types by list
+    * No need to store duplicate cards if one card belongs to more than 1 deck, thus saving space
   * Cons: 
-    * May have performance issues if trying to find a large number cards contained by the deck at once. However, the effect of this is minimal since at any point in the current FlashNotes implementation, as for all screens the maximum number of cards visible are only 4.
+    * When retrieving cards belonging to a certain deck, it may take a long while to filter the relevant cards if the total list of cards become huge
 
 * **Alternative 2:** Store Flashcards within the deck.
   * Pros: 
-    * Performance will be better than searching through all current flashcards to find the relevant cards to be initialized in the deck.
-    * Easy to verify correctness of implementation.
+    * Speed of retrieving cards belonging to a deck would be faster than in alternative 1
   * Cons:
     * Requires an overhaul of the code base and all references of flashcards.
     * If a card needs to belong to more than 1 deck, then duplicate cards need to be created for that purpose. This results in unnecessary space wasted.
@@ -225,13 +223,12 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
 * **Alternative 3:** Decks to be read from the flashcards' tags and updated whenever a new flashcard has been created with a new tag
   * Pros: 
     * Easy to implement by transforming AB3.
-    * Also easy to verify correctness of implementation.
   * Cons: 
     * Slow to render if there are too many cards to be searched through.
     * May need to create a default card that stores the relevant tags for decks that are empty, which is unintuitive and unnecessary.
     
 Alternative 1 and 2 were the strongest candidates, but alternative 1 won out due to ease of implementation and extensibility. 
-With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list given that the number of cards are not likely to scale too quickly for our target audience. On top of that, the team is possibly planning to enable flashcards and decks to have a many-many type relationship via database functions in the future implementations and alternative 1 is well suited for that database migration in the future.
+With alternative 1, it saves more space, and the performance difference is negligible when trying to filter the flashcard list since the UI only needs to render 4 cards at any point in time.
 
 #### Adding a new Deck feature
 
@@ -251,8 +248,8 @@ Step 3. The user is now able to see the new `Deck1` added.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** <br>
 
-* If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
-* The AddDeckCommandParser has been removed from the sequence diagram to simplify the diagram.
+If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList. 
+Also, AddDeckCommandParser has been removed from the sequence diagram below to simplify the diagram.
 </div>
 
 ##### Corresponding sequence diagram for `addDeck` command:
@@ -266,13 +263,12 @@ The following sequence diagram shows how Add Deck operation works:
 </div>
 
 ##### Design Consideration: How Add Deck Command interacts with Model and underlying FlashNotes object
-Our team looked at the 2 different ways addDeck can interact with model-related objects. 
+Our team looked at the 2 different ways in which Add Deck Command can interact with model-related objects. 
 * **Alternative 1 (current choice):** Add Deck command interacts with the Model and not directly with model’s internal components such as FlashNotes and user prefs.
     * Pros:
-        * This obeys the Law of Demeter which stresses for components to avoid interacting directly with internal components of other objects.
-        * This also increases maintainability as AddDeckCommand only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
+        * This also increases maintainability as Add Deck Command only has to be concerned with the methods that Model provides and not the other implementation details should they be subjected to change.
         * This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
-        * Consistency of implementation with the other commands in FlashNotes makes it easy for developers to trace and worth the slight increment in abstraction.
+        * Consistency of implementation with the other commands in FlashNotes architecture makes it easier for developers to trace and worth the slight increment in abstraction.
     * Cons:
         * Some might view that the ModelManager is taking on too much work and turning into a "fat" class
 
@@ -280,7 +276,6 @@ Our team looked at the 2 different ways addDeck can interact with model-related 
     * Pros:
         * Flashnotes already directly provides the method, hence by reducing the number of function calls, the program may run marginally faster.
     * Cons:
-        * Violates the Law of Demeter.
         * Separation of concern principle would be violated. More than 1 object (ModelManager and FlashNotes) are able to interact with commands directly.
         * Increases the number of dependencies on underlying FlashNotes objects and other objects contained in Model, hence reducing testability and maintainability.
 
@@ -308,16 +303,12 @@ The logic component will reference the these names from the model component duri
 ##### Design Considerations: How to implement showing all cards.
 
 **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
-* Pros:
-    * User has increased flexibility
-* Cons:
-    * Need to check for reserved deck name 
+* Pros: User has increased flexibility
+* Cons: Need to check for reserved deck name 
     
 **Alternative 2:** Prevent users to list all flashcards or add flashcards in this list**
-* Pros:
-    * System does not have to check and reserve a deck name
-* Cons:
-    * User will not be able to see a list of all flashcards
+* Pros: System does not have to check and reserve a deck name
+* Cons: User will not be able to see a list of all flashcards
 
 
 ### Implementation of Card Mode Features
@@ -347,16 +338,12 @@ The following sequence diagram shows how the `deleteCard` operation works:
 ##### Design Considerations: How to implement Card Mode Commands
 
 **Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
-* Pros:
-    * Easy to implement as all logic is implemented in FlashNotes.
-* Cons:
-    * Deck class does not know when the flashcards are modified.
+* Pros: Easy to implement as all logic is implemented in FlashNotes.
+* Cons: Deck class does not know when the flashcards are modified.
     
 **Alternative 2:** Implement logic of card-level operations in Deck
-* Pros:
-    * Deck can modify its own cards.
-* Cons:
-    * Need to redesign Flashcard list to be a composition of Deck.
+* Pros: Deck can modify its own cards.
+* Cons: Need to redesign Flashcard list to be a composition of Deck.
 
 
 
@@ -446,14 +433,16 @@ when it is created from the `FlashNotesParser`.
 
 ##### Design Considerations: Flip Card Implementation
 * **Alternative 1 (current choice):** Change `isFlipped` boolean in the flashcard model.
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    * Pros: 
+        * Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     flipped in the review mode.
-    * Pros: Ensures that the logic of flipping of flashcard isn't done in the UI.
+        * Ensures that the logic of flipping of flashcard isn't done in the UI.
     * Cons: Increases coupling.
 * **Alternative 2:** Implement the boolean `isFlipped` in the UI part, `IndividualFlashcard`.
     * Pros: No need for extra function calls as flipping is directly done in the UI.
-    * Cons: Logic is being done in the UI section.
-    * Cons: Hard to test using testcases. Have to manually test.
+    * Cons:
+        * Logic is being done in the UI section.
+        * Hard to test using testcases. Have to manually test.
     
 #### Next Card feature
 Our FlashNotes application allows users to go to the next card to review once they are done reviewing the current 
@@ -481,14 +470,16 @@ a function call is made from the `ModelManager#markFlashcardBeingReviewed(int re
 
 ##### Design Considerations: Next Card Implementation
 * **Alternative 1 (current choice):** Change isCorrect int in the flashcard model
-    * Pros: Only need the instance of the flashcard to update or check whether the particular flashcard has been 
+    * Pros: 
+        * Only need the instance of the flashcard to update or check whether the particular flashcard has been 
     reviewed correctly by the user in the review mode.
-    * Pros: Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
+        * Ensures that the logic of marking the result of user's review of flashcard isn't done in the UI.
     * Cons: Increases coupling.
 * **Alternative 2:** Implement the int isCorrect in the UI part, IndividualFlashcard.
     * Pros: No need for extra function calls as marking the result of the review can be directly done in the UI.
-    * Cons: Logic is being done in the UI section.
-    * Cons: Hard to test using testcases. Have to manually test.
+    * Cons: 
+        * Logic is being done in the UI section.
+        * Hard to test using testcases. Have to manually test.
 
 #### Review Statistics Feature
 
@@ -999,7 +990,7 @@ testers are expected to do more *exploratory* testing.
         Expected: The name of deck at Index 1 is changed to Econs.
         
    2. Test case: `editDeckName 1 n/Singapore` <br>
-        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singpaore" already exists.
+        Expected: Deck name at index 1 is not changed. Error message is shown that the deck "Singapore" already exists.
 
 ### Deleting a deck
 
@@ -1197,26 +1188,26 @@ testers are expected to do more *exploratory* testing.
 
 ### Challenge 1: UI Modes
 At first, the AddressBook3 (AB3) only had 1 interface for users, which is the Main Window that shows a list of people and 
-their details. When doing our flashcard application, we thought that users should be able to separate their flashcards into
-separate decks, and also to review their flashcards in a different place from where they make/edit their flashcards. We struggled
+their details. When developing our flashcard application, we thought that **users should be able to separate their flashcards into
+separate decks**, and also to **review their flashcards in a different place** from where they make/edit their flashcards. We struggled
 with finding a good way to allow users to perform all these actions using the single interface that came with AB3. 
 
 The easiest method we explored to achieve this was to modify the `list` command to let users view their flashcards in specific 
 decks, and show the cards one by one when users want to review them. However, we were not satisfied with the visual effect of 
-this solution. We wanted to let users differentiate their interactions when making/editing the decks and flashcards, and when 
-reviewing flashcards more clearly.
+this solution. We wanted to let users **differentiate their interactions when making/editing the decks and flashcards, and when 
+reviewing flashcards more clearly**.
 
-The next method we explored required far more effort but was worth it in the end. We decided to implement 3 different interfaces 
-for our application, the Main mode, the Card mode, and the Review mode. Different commands are allowed in the different modes. 
+The next method we explored required far more effort but was worth it in the end. We **decided to implement 3 different interfaces** 
+for our application, the *Main* mode, the *Card* mode, and the *Review* mode. **Different commands are allowed** in the different modes. 
 In the main mode, the different decks would be displayed to the users. Users can then make new decks or edit current decks in 
 this mode. They can also choose a specific deck to open and see the cards it contains. This brings users into the Card mode, 
 where they can make new flashcards or edit current cards. They can also review their cards by using the review command that brings 
 them to the review mode. 
 
-Implementing this required us to redesign the entire UI component into something with more layers of 
+Implementing this required us to **redesign the entire UI component** into something with more layers of 
 abstraction and complexity. In doing so, we encountered some problems with the GUI settings not being saved properly and also 
 sizing issues with different windows on different operating systems. However, we managed to resolve them in the and ultimately, 
-we ended up with a highly effective and user-friendly flashcard application.
+we ended up with a **highly effective and user-friendly** flashcard application.
 
 ### Challenge 2: One object type versus Two object types with a perceived composition relationship
 
