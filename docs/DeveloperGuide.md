@@ -232,7 +232,7 @@ In the planning phrase, our team came up with 3 possible alternatives for how we
     * Requires an overhaul of the code base and all references of flashcards.
     * If a card needs to belong to more than 1 deck, then duplicate cards need to be created for that purpose. This results in unnecessary space wasted.
 
-* **Alternative 3:** Decks to be read from the flashcards' tags and updated whenever a new flashcard has been created with a new tag
+* **Alternative 3:** Use tag object in individual flashcards to directly represent deck objects
   * Pros: 
     * Easy to implement by transforming AB3.
   * Cons: 
