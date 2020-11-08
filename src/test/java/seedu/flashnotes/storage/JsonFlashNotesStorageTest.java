@@ -59,6 +59,11 @@ public class JsonFlashNotesStorageTest {
     }
 
     @Test
+    public void readFlashNotes_invalidDeckFlashNotes_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readFlashNotes("invalidDeck.json"));
+    }
+
+    @Test
     public void readFlashNotes_invalidAndValidFlashcardFlashNotes_throwDataConversionException() {
         assertThrows(DataConversionException
                 .class, () -> readFlashNotes("invalidAndValidFlashcard.json"));
