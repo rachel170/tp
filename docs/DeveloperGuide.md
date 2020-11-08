@@ -314,7 +314,7 @@ The logic component will reference the these names from the model component duri
 * Cons:
     * Need to check for reserved deck name 
     
-**Alternative 2:** Prevent users to list all flashcards or add flashcards in this list**
+**Alternative 2:** Prevent users to list all flashcards or add flashcards in this list
 * Pros:
     * System does not have to check and reserve a deck name
 * Cons:
@@ -344,6 +344,13 @@ The user executes `deleteCard 2` to delete the card at index 2 from the observed
 The following sequence diagram shows how the `deleteCard` operation works:
 
 ![DeleteCardDiagram](images/DeleteCardSequenceDiagram.png)
+
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The lifeline for `deleteCardCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 ##### Design Considerations: How to implement Card Mode Commands
 

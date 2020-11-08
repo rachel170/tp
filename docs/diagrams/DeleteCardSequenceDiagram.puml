@@ -37,7 +37,6 @@ activate Model
 Model -> FlashNotes : removeFlashcard(key)
 activate FlashNotes
 
-FlashNotes -> FlashNotes : remove(key)
 FlashNotes --> Model :
 deactivate FlashNotes
 
