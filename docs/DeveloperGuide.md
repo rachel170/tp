@@ -557,14 +557,14 @@ A new command have been added to FlashNotes to allow return to Card Mode from Re
 
 To support the storage of each deck's review statistic, a new class has been added to the Storage component in FlashNotes:
 * `JsonAdaptedDeck` object contain two variable for Deck Storage, `String deckName` to identify the deck, and `String resultStatistics` to contain the deck's review statistics.
-* `JsonAdaptedDeck#updateModel(FlashNotes flashNotes)` is a method used to update the generated model from reading the flashcard data with the deck's data. It depends on `FlashNotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` to update the generated model with the deck data from the save file.
+* `JsonAdaptedDeck#updateModel(FlashNotes flashNotes)` is a method used to update the generated model from reading the flashcard data with the deck's data. It depends on `FlashNotes#updateDeckPerformanceScore(Double reviewScore, String deckName)` to update the generated model with the deck data from the save file.
 
 `JsonSerializableFlashNotes` object has been adjusted to depend on a list of `JsonAdaptedDeck` objects to read and write 
 each deck's data to the FlashNotes save file.
 
 Additionally, the following operations have been implemented to support the storage of result statistics feature:
 * Model component:
-    * `FlashNotes#updateDeckPerformanceScore(Integer reviewScore, String deckName)` - Updates the reviewStatistics attribute of a specific deck (through deckName) with the given Integer value (reviewScore).
+    * `FlashNotes#updateDeckPerformanceScore(Double reviewScore, String deckName)` - Updates the reviewStatistics attribute of a specific deck (through `deckName`) with the given Double value (`reviewScore`).
     * `FlashNotes#getUniqueDeckList()` - Return the FlashNotes' model's `UnqiueDeckList`.
     * `UniqueDeckList#findDeck(String deck)` - Returns an existing `Deck` object from its `internalList` with the same `deckName` as the given String input. If no such `Deck` object exist, a `null` object is returned instead.
 * UI component:
