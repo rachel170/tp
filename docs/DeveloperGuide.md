@@ -1217,8 +1217,8 @@ object in the Model component of FlashNotes. Our team faced several challenges w
 
 Due to the perceived composition relationship between `Deck` and `Flashcard` and the chosen design for `Deck` implementation, 
 commands that result in the change of a `Deck` object (e.g. editting deck name or deleting a deck) meant that there was 
-a need to look through all of the `Flashcard` objects in FlashNotes to carry out necessary changes to its `Tag` depending
-on the command issued.
+a need to look through all of the `Flashcard` objects in FlashNotes to carry out the necessary changes regarding the `Deck`
+object depending on the command issued.
 
 On top of that, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
 To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
