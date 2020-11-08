@@ -385,6 +385,7 @@ To support the opening of this review session, we added the following command:
 * `review` - A command that sets up the list of flashcards to review and opens a new review window displaying those cards.
 
 The following is a sequence diagram that demonstrates how a review command sets up the review session:
+
 ![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
 
 `ModelManager#setUpReviewList()` method sets up the list of flashcards to review inside `Model`.
