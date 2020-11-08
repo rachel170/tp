@@ -31,6 +31,8 @@ Here's the Table of Contents(Under Details) for a brief overview of our User Gui
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 
 * Flashcard: A flashcard shows a question and the answer to the question.
@@ -85,6 +87,8 @@ Users can:
 ![Review Mode GUI Breakdown](images/ReviewMode_GUIBreakdown.png)
 <br>
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -149,6 +153,8 @@ Users can:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Explanation of Command Formats used in features
 
 <div markdown="block" class="alert alert-info">
@@ -165,6 +171,8 @@ Users can:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Main Mode Features
 <div markdown="block" class="alert alert-info">
@@ -475,6 +483,8 @@ For further details on how to transfer FlashNotes data, please refer to the **FA
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Card Mode Features
 <div markdown="block" class="alert alert-info">
 
@@ -677,6 +687,8 @@ again before using the `review` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Review Mode Features
 <div markdown="block" class="alert alert-info">
 
@@ -876,6 +888,8 @@ To view the statistics of your last review session for any deck, simply navigate
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 <details>
@@ -923,6 +937,8 @@ the ‘Input Monitoring’ section. Enable java to monitor input from your keybo
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 

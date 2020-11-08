@@ -24,6 +24,8 @@ There are a total of 4 sections in this Developer Guide:<br>
     * Manual Testing: Covers how to test each additional feature we added to FlashNotes.
     * Effort: Covers challenges faced.
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -62,6 +64,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -85,6 +89,8 @@ The `UI` component,
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 
+<div style="page-break-after: always;"></div>
+
 ### Model Component
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -102,6 +108,8 @@ The `model`,
 * FlashNotes will handle the association between `Tag` and `Deck`.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -121,6 +129,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -148,6 +158,8 @@ Classes used by multiple components are in the `seedu.flashnotes.commons` packag
 * [Configuration guide](Configuration.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Implementation
 ### Implementation of UI (3 Different Modes)
@@ -308,17 +320,17 @@ The logic component will reference the these names from the model component duri
 
 ##### Design Considerations: How to implement showing all cards.
 
-**Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
-* Pros:
-    * User has increased flexibility
-* Cons:
-    * Need to check for reserved deck name 
+ * **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
+    * Pros: User has increased flexibility of adding cards
+    * Cons: The system needs to check for reserved deck name 
     
-**Alternative 2:** Prevent users to list all flashcards or add flashcards in this list
-* Pros:
-    * System does not have to check and reserve a deck name
-* Cons:
-    * User will not be able to see a list of all flashcards
+* **Alternative 2:** Prevent users to list all flashcards
+    * Pros: The system does not have to check and reserve a deck name or use a default deck name
+    * Cons: User will not be able to see a list of all flashcards in FlashNotes
+    
+* **Alternative 3:** Prevent users from adding flashcards while viewing all flashcards
+    * Pros: The system does not have to check and reserve a deck name or use a default deck name
+    * Cons: Will have to implement extra logic to block the card level commands while the user is viewing all flashcards
 
 
 ### Implementation of Card Mode Features
@@ -354,17 +366,13 @@ The following sequence diagram shows how the `deleteCard` operation works:
 
 ##### Design Considerations: How to implement Card Mode Commands
 
-**Alternative 1 (current choice):** Implement logic of card-level operations in FlashNotes
-* Pros:
-    * Easy to implement as all logic is implemented in FlashNotes.
-* Cons:
-    * Deck class does not know when the flashcards are modified.
+* **Alternative 1 (current choice):** Implement logic of card-level commands in FlashNotes
+    * Pros: Easy to implement as all logic for card-level commands is implemented in FlashNotes.
+    * Cons: Deck class does not know when the flashcards are modified.
     
-**Alternative 2:** Implement logic of card-level operations in Deck
-* Pros:
-    * Deck can modify its own cards.
-* Cons:
-    * Need to redesign Flashcard list to be a composition of Deck.
+* **Alternative 2:** Implement logic of card-level operations in Deck
+    * Pros: Deck can modify its own list of flashcards.
+    * Cons: Need to redesign the list of flashcards to be a composition of Deck.
 
 
 
@@ -663,6 +671,8 @@ The following activity diagram shows how the FlashNotesParser works:
 ![FlashNotesParserSequenceDiagram](images/FlashNotesParserActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -964,6 +974,8 @@ Extensions
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1201,6 +1213,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Review Window closes, and you are returned to the Card Mode you started the review session from.
 
 -------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 
 ### Challenge 1: UI Modes
