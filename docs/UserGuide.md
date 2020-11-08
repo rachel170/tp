@@ -229,7 +229,7 @@ Outcome expected:
 * There is a 40 character limit for DECKNAME.
 * Reserved names (such as `list`) can't be used as DECKNAME.
 * If multiple name prefixes are in the command text, only the last one would be selected.
-* If you are in card mode, you need to navigate back to the home screen via the Home command before adding new deck.
+* If you are in card mode, you need to navigate back to the Main Mode via the Home command before adding new deck.
 
 </div>
 
@@ -305,7 +305,7 @@ Shows a list of all flashcards, and enters card mode.
 Format: `listAll`
 
 Outcome Expected:
-1. Enter the List Command into the command bar as per the example.
+1. Enter the `listAll` Command into the command bar as per the example.
 ![ListCommand](images/list_init.png)
 
 1. You should see the newly rendered list of flashcards. The list contains all flashcards currently stored in FlashNotes irrespective of the deck.
@@ -341,19 +341,19 @@ Examples:
 
 
 Outcome Expected:
-1. Enter the `setReviewLimit` command with the `REVIEW_LIMIT` you want into the command box as shown. 
+1. Enter the `setReviewLimit` command with the review limit you want into the command box as shown. 
 ![Set Review Limit Before Main](images/setReviewLimit3Before_Main.png)
 
 1. When successful, the following success message will be displayed.
 ![Set Review Limit After Main](images/setReviewLimit3After_Main.png)
 
-1. You can check that the review_limit is indeed 3 by entering the commands
+1. You can check that the review limit is indeed 3 by entering the commands
 `enterDeck Singapore` (which contains 4 flashcards in total) and type `review`.
 (3 flashcards will be chosen randomly from the deck of 4 cards) Use the `f` and `c` commands to review the flashcards. 
 After reviewing the 3rd flashcard, you should have reached the end of the review session as shown below.
 ![Set Review Limit After](images/setReviewLimit3ReviewAfter.png)
 
-1. When an invalid `REVIEW_LIMIT` is entered, the following error message will be displayed.
+1. When an invalid review limit is entered, the following error message will be displayed.
 ![Set Review Limit Error Main](images/SetReviewLimitError_Main.png)
 
 
@@ -361,10 +361,10 @@ After reviewing the 3rd flashcard, you should have reached the end of the review
 
 :warning: Things to note:
 
-* `REVIEW_LIMIT` can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
+* The review limit can be an integer greater than 0 and smaller than 2147483648. The program doesn't handle any
 review limit greater than 2147483647.
-* `REVIEW_LIMIT` can be the string `all`. (case insensitive)
-* Note that when the `REVIEW_LIMIT` is set to `all`, the `REVIEW_LIMIT` is maximum number of cards you can review.
+* The review limit can be the string `all`. (case insensitive)
+* Note that when the review limit is set to `all`, the review limit is maximum number of cards you can review.
 (Which is 2147483647 cards)
 * This review card limit applies to all decks once it is set. 
 * This review card limit is remembered by the program. (You do not have to set the card limit 
@@ -450,7 +450,7 @@ Exits FlashNotes.
 Format: `exit`
 
 Outcome Expected:
-1. User enters `exit` command in **Home Mode**. <br>
+1. User enters `exit` command in **Main Mode**. <br>
 ![Exiting FlashNotes](images/UG_ExitCommand.png)
 
 1. FlashNotes closes and saves all current data.
@@ -459,7 +459,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* `exit` can be activated from **Home Mode** and **Card Mode**, but not **Review Mode**.
+* `exit` can be activated from **Main Mode** and **Card Mode**, but not **Review Mode**.
 * No additional inputs should be added behind the `exit` command.
 
 </div>
@@ -578,9 +578,20 @@ Outcome Expected:
 
 Lists all flashcards in the deck.
 
-Typically used after the `find` command when you want to see all cards in the deck again.
-
 format: `list`
+
+Outcome Expected:
+Shows all flashcards in the deck that the user is in.
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Things to note:
+
+* No additional inputs should be added behind the `listAll` command.
+* Typically used after the `find` command when you want to see all cards in the deck again.
+
+</div>
+
 
 ### Deleting a flashcard : `deleteCard`
 
@@ -620,16 +631,16 @@ Format: `home`
 
 Outcome Expected:
 1. Enter the Home Command into the command bar as per the example.
-![Home Mode](images/home_init.png)
+![Main Mode](images/home_init.png)
 
-1. You should now see the list of orange decks in the home screen.
-![Home Mode](images/home_success.png)
+1. You should now see the list of orange decks in the Main Mode.
+![Main Mode](images/home_success.png)
 
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
 
-* It can only be activated from the card screen to navigate back to home.
+* It can only be activated from the card screen to navigate back to Main Mode.
 * No additional inputs should be added behind the home command.
 
 </div>
@@ -694,13 +705,13 @@ Outcome Expected:
 1. Type `f` into the command box and enter. <br>
 ![Type Flip Command](images/flipCommandStep2.png)
 
-1. The result after flip command has been executed. The Answer to the question can now be seen. <br>
+1. The result after flip command has been executed. The answer to the question can now be seen. <br>
 ![Result of Flip Command](images/flipCommandStep3.png)
 
 1. Type `f` into the command box again and enter to flip the card again. <br>
 ![Type Flip Command](images/flipCommandStep4.png)
 
-1. The result after flip command has been executed. The Question is now visible instead of the answer. <br>
+1. The result after flip command has been executed. The question is now visible instead of the answer. <br>
 ![Result of Flip Command](images/flipCommandStep5.png)
 
 <div markdown="block" class="alert alert-warning">
@@ -823,7 +834,7 @@ Format: `endReview`
 
 Outcome Expected: <br>
 1. User has reached the end of the review session and entered the `endReview` command. <br>
-![End of Review Window](images/UG_EndOfReview.png)
+![End of Review Window](images/UG_ReviewStatistics.png)
 
 1. Review Window closes, and you are returned to the **Card Mode** you started the review session from. <br>
 ![Return to Main Window](images/UG_ReturnToCardMode.png)
@@ -852,14 +863,14 @@ Of the three types of information, only the calculated percentage will be saved 
 
 To view the statistics of your last review session for any deck, simply navigate back to the **Main Mode** and look under the Deck's name as indicated in the image below.
 
-![Review Statistics In Home Mode](images/UG_ReviewStatisticsInHome.png)
+![Review Statistics In Main Mode](images/UG_ReviewStatisticsInHome.png)
 
 <div markdown="block" class="alert alert-warning">
 
 :warning: Things to note:
 
 * FlashNotes will calculate and save your review statistics only if you have marked all the questions in the review session as correct. Exiting or ending the review session early will not generate or save the result statistics of the incomplete review session.
-* Regarding the review statistics of any review session started after the usage of the `list` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
+* Regarding the review statistics of any review session started after the usage of the `listAll` command in **Main Mode** (or in other words: any review sessions started with all the cards in FlashNotes), the review statistics for such review sessions will still be generated and displayed, but it will not be saved by FlashNotes.
 
 </div>
 
@@ -899,18 +910,15 @@ ensure none of your data is lost, do not delete the data folder.
 Sorry but no. There is no such functionality at this point in time.
 <br><br>
 </details>
+<br>
 
 <details>
 <summary>What should I do when I get a 'Java Quit unexpectedly' error. (For Mac Users)</summary>
 <br>
 
-![Figure 1: Mac error](images/macError.png)<br>
-
 Open System Preferences in you computer,  click on ‘Security & Privacy’ and then proceed to click on Privacy Tab and 
-the ‘Input Monitoring’ section. Enable java to monitor input from your keyboard even while using other apps as shown 
-in the image below.
+the ‘Input Monitoring’ section. Enable java to monitor input from your keyboard even while using other apps.
 
-![Figure 2: Mac users System Preferences](images/systemPreference.png)<br>
 <br><br>
 </details>
 
