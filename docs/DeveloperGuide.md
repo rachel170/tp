@@ -766,7 +766,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension:**
 
-* 2a. The given index is invalid.
+* 2a. Deck does not exist in FlashNotes.
     * 2a1. FlashNotes shows an error message.
 
     Use Case ends.   
@@ -841,7 +841,7 @@ Extensions
 
 **Extensions**
     
-* 2a. The given index is invalid.
+* 2a. Card does not exist in FlashNotes.
     * 2a1. FlashNotes shows an error message.
     
     Use case resumes at Step 2.
@@ -861,7 +861,7 @@ Extensions
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. Card does not exist in FlashNotes.
     * 2a1. FlashNotes shows an error message.
     
     Use case resumes at step 2.
@@ -995,8 +995,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file. <br>
+        Expected: The most recent window size and location is retained.
        
 ### Creating a deck
 
@@ -1089,16 +1089,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Enter a deck using the command `enterDeck DECK_NAME`. 
     
-    2. Test case: `addCard q/question1 a/answer1`
-    
+    2. Test case: `addCard q/question1 a/answer1` <br>
         Expected: The specified card is added and shown to the user.
         
 1. Adding a card while in the list of all flashcards.
     
     1. Prerequisites: Enter the list of all flashcards using the command `listAll`.
     
-    2. Test case: `addCard q/question1 a/answer1`
-    
+    2. Test case: `addCard q/question1 a/answer1` <br>
         Expected: The flashcard is added to the list of flashcards shown.
         The specified card is added to a deck called "Default". 
         The "Default" deck will be created in the Main Mode if the deck does not exists.       
