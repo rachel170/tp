@@ -249,10 +249,11 @@ Step 2. The user executes `addDeck n/Deck1` command to add a new Deck in the Fla
 
 Step 3. The user is now able to see the new `Deck1` added.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** <br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
 
 * If the deck already exists (duplicate deck name), it will throw a `DuplicateDeckException`, so the newly created deck will not be saved into the `FlashNotes`. The implementation details are in UniqueDeckList.
 * The AddDeckCommandParser has been removed from the sequence diagram to simplify the diagram.
+
 </div>
 
 ##### Corresponding sequence diagram for `addDeck` command:
