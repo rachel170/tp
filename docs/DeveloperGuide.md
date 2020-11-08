@@ -405,7 +405,7 @@ The initial value for the review limit is set to `Integer.MAX_VALUE` in `prefere
 set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
 session. 
 
-The valid range of integer inputs for this command is any integer more than 1 however, as we thought it wouldn't 
+The valid range of integer inputs for this command is any integer more than 0. However, as we thought it wouldn't 
 make sense on the user's end to set 0 or negative values as the review limit.
 
 The following is an activity diagram showing how the set review command is intended to be used
