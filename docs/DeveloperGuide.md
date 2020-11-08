@@ -283,7 +283,7 @@ Our team looked at the 2 different ways in which Add Deck Command can interact w
         * This follows the Facade Pattern where the ModelManager acts as the Facade class to the underlying internal Flashnotes object and all other related data components.
         * Consistency of implementation with the other commands in FlashNotes architecture makes it easier for developers to trace and worth the slight increment in abstraction.
     * Cons:
-        * Some might view that the ModelManager is taking on too much work and turning into a "fat" class
+        * Some might view that the ModelManager is taking on too many methods
 
 * **Alternative 2:** Add Deck command interacts with the underlying FlashNotes object directly.
     * Pros:
@@ -385,6 +385,7 @@ To support the opening of this review session, we added the following command:
 * `review` - A command that sets up the list of flashcards to review and opens a new review window displaying those cards.
 
 The following is a sequence diagram that demonstrates how a review command sets up the review session:
+
 ![ReviewSequenceDiagram](images/ReviewSequenceDiagram.png)
 
 `ModelManager#setUpReviewList()` method sets up the list of flashcards to review inside `Model`.
@@ -404,7 +405,7 @@ The initial value for the review limit is set to `Integer.MAX_VALUE` in `prefere
 set a review limit and hence the program will allow users to review all their flashcards in a certain deck at each review
 session. 
 
-The valid range of integer inputs for this command is any integer more than 1 however, as we thought it wouldn't 
+The valid range of integer inputs for this command is any integer more than 0. However, as we thought it wouldn't 
 make sense on the user's end to set 0 or negative values as the review limit.
 
 The following is an activity diagram showing how the set review command is intended to be used
