@@ -320,7 +320,7 @@ The logic component will reference the these names from the model component duri
 
 ##### Design Considerations: How to implement showing all cards.
 
- * **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
+* **Alternative 1 (current choice):** Allow users to list all flashcards and add flashcards while in this list
     * Pros: User has increased flexibility of adding cards
     * Cons: The system needs to check for reserved deck name 
     
