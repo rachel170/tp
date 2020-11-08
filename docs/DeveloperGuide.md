@@ -1216,14 +1216,11 @@ the `Flashcard` object. As out project progressed, there was a need to include a
 object in the Model component of FlashNotes. Our team faced several challenges with our choice to implement the `Deck` class.
 
 Due to the perceived composition relationship between `Deck` and `Flashcard` and the chosen design for `Deck` implementation, 
-deletion of a `Deck` object meant that there was a need to look through all of the `Flashcard` objects in FlashNotes to
-identify and delete any `Flashcard` object with a `Tag` that marked it as a part of the deleted `Deck`.
+commands that result in the change of a `Deck` object (e.g. editting deck name or deleting a deck) meant that there was 
+a need to look through all of the `Flashcard` objects in FlashNotes to carry out necessary changes to its `Tag` depending
+on the command issued.
 
-Furthermore, editing the name of a `Deck` required us to identify all `Flashcard` objects belonging to that `Deck` before
-editing its `Tag` to the new name of the `Deck` as well. This was due to our implementation choice, as there was no 
-direct composition between `Deck` and `Flashcard` in our current implementation design.
-
-Finally, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
+On top of that, as part of our **Review Statistics Feature**, we wanted to be able to save the data in the `Deck` class as well. 
 To support this, we had to expand the old Storage implementation from AB3 to include the addition of the data in the
 `Deck` class. 
 
