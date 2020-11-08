@@ -468,7 +468,7 @@ This feature is implemented by adding an isCorrect int in the `Model` of the `Fl
 a function call is made from the `ModelManager#markFlashcardBeingReviewed(int result)` which is a call from 
 `CorrectCommand#execute()` or `WrongCommand#execute()` when it is created by the `FlashNotesParser`.
 
-Design Considerations for Next Card Implementation is similar to that of Flip Card feature.
+Design Considerations for Next Card Implementation are similar to that of Flip Card feature.
 
 #### Review Statistics Feature
 
