@@ -197,7 +197,7 @@ Outcome expected:
 :warning: Things to note:
 
 * The deck name entered is **case-sensitive**. e.g. `GET1025` will not match `get1025`
-* only **full phrases** will be matched with the relevant decks e.g. `GE` will not match `GET1025`
+* Only **full phrases** will be matched with the relevant decks e.g. `GE` will not match `GET1025`
 
 </div>
 
@@ -259,9 +259,9 @@ Outcome Expected:
 :warning: Things to note:
 
 * Edits the deck at the specified `INDEX`
-* The index refers to the index number shown in the currently displayed list of flashcards
+* The index refers to the index number shown in the currently displayed list of decks.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The `NEWDECKNAME` is case-sensitive
+* The `NEWDECKNAME` is case-sensitive.
 * The `NEWDECKNAME` should not be a name that already exists as a deck.
 
 </div>
@@ -293,7 +293,7 @@ Outcome Expected:
 :warning: Things to note:
 
 * Deletes the deck at the specified `INDEX`
-* The index refers to the index number shown in the currently displayed list of flashcards
+* The index refers to the index number shown in the currently displayed list of decks.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
@@ -437,7 +437,7 @@ Outcome Expected:
 
 :warning: Things to note:
 
-* All cards and decks will be cleared, including any revision history.
+* All cards and decks will be cleared.
 * No additional inputs should be added behind the clear command.
 * There is no undo command available in the system presently. Hence, the clear command is irreversible.
 </div>
@@ -948,7 +948,7 @@ Action | Format, Examples
 **Add Card** | `Format: addCard q/QUESTION a/ANSWER `
 **Delete Card** | `deleteCard INDEX`<br> e.g., `deleteCard 3`
 **Edit Card** | `editCard INDEX [q/QUESTION] [a/ANSWER] [t/TAG]`<br> e.g.,`editCard 2 q/What is the real question? a/This is a real question.`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find President`
 **List** | `list`
 **Help** | `help`
 **Home** | `home`
